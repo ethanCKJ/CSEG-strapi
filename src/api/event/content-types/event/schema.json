@@ -1,0 +1,81 @@
+{
+  "kind": "collectionType",
+  "collectionName": "events",
+  "info": {
+    "singularName": "event",
+    "pluralName": "events",
+    "displayName": "Event"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "eventDate": {
+      "type": "date",
+      "required": true
+    },
+    "eventStartTime": {
+      "type": "time",
+      "required": true
+    },
+    "eventEndTime": {
+      "type": "time",
+      "required": true
+    },
+    "location": {
+      "type": "string",
+      "required": true
+    },
+    "speaker": {
+      "type": "string",
+      "required": true
+    },
+    "summary": {
+      "type": "text",
+      "maxLength": 250
+    },
+    "eventPage": {
+      "type": "blocks",
+      "required": true
+    },
+    "event_type": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::event-type.event-type",
+      "inversedBy": "events"
+    },
+    "event_tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::event-tag.event-tag",
+      "mappedBy": "events"
+    },
+    "publicEvent": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "open_to": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::member-type.member-type",
+      "conditions": {
+        "visible": {
+          "!=": [
+            {
+              "var": "publicEvent"
+            },
+            true
+          ]
+        }
+      },
+      "inversedBy": "events"
+    }
+  }
+}

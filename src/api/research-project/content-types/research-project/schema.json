@@ -1,0 +1,78 @@
+{
+  "kind": "collectionType",
+  "collectionName": "research_projects",
+  "info": {
+    "singularName": "research-project",
+    "pluralName": "research-projects",
+    "displayName": "ResearchProject"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "shortSummary": {
+      "type": "text",
+      "maxLength": 250
+    },
+    "longSummaryOnLearnMore": {
+      "type": "text",
+      "maxLength": 1000,
+      "required": true
+    },
+    "primaryInvestigator": {
+      "type": "string",
+      "required": true
+    },
+    "coInvestigator": {
+      "type": "string",
+      "required": false
+    },
+    "projectPageCoverImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "projectPageContent": {
+      "type": "blocks",
+      "required": true
+    },
+    "projectStartDate": {
+      "type": "date",
+      "required": true
+    },
+    "ongoingProject": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "projectEndDate": {
+      "type": "date",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "ongoingProject"
+            },
+            false
+          ]
+        }
+      },
+      "required": true
+    },
+    "primaryInvestigatorEmail": {
+      "type": "string",
+      "required": true
+    },
+    "coInvestigatorEmail": {
+      "type": "string"
+    }
+  }
+}
