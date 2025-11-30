@@ -48,7 +48,8 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::event-type.event-type",
-      "inversedBy": "events"
+      "inversedBy": "events",
+      "required": true
     },
     "event_tags": {
       "type": "relation",
@@ -75,7 +76,8 @@
           ]
         }
       },
-      "inversedBy": "events"
+      "inversedBy": "events",
+      "required": true
     }
   }
 }
