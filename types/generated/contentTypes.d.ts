@@ -433,7 +433,7 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
 export interface ApiEventTagEventTag extends Struct.CollectionTypeSchema {
   collectionName: 'event_tags';
   info: {
-    displayName: 'EventTag';
+    displayName: 'Topic';
     pluralName: 'event-tags';
     singularName: 'event-tag';
   };
@@ -454,6 +454,10 @@ export interface ApiEventTagEventTag extends Struct.CollectionTypeSchema {
       'api::event-tag.event-tag'
     > &
       Schema.Attribute.Private;
+    publications: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::publication.publication'
+    >;
     publishedAt: Schema.Attribute.DateTime;
     tagName: Schema.Attribute.String &
       Schema.Attribute.Required &
@@ -531,24 +535,34 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::event.event'> &
       Schema.Attribute.Private;
-    location: Schema.Attribute.String & Schema.Attribute.Required;
+    location: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
     open_to: Schema.Attribute.Relation<
       'manyToMany',
       'api::member-type.member-type'
-    > &
-      Schema.Attribute.Required;
+    >;
     publicEvent: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<false>;
     publishedAt: Schema.Attribute.DateTime;
-    speaker: Schema.Attribute.String & Schema.Attribute.Required;
+    speaker: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
     summary: Schema.Attribute.Text &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 250;
       }>;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
-      Schema.Attribute.Unique;
+      Schema.Attribute.Unique &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -640,32 +654,56 @@ export interface ApiMemberApplicationMemberApplication
     singularName: 'member-application';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
-    aboutYou: Schema.Attribute.Text;
-    affiliations: Schema.Attribute.String;
-    approved: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    aboutYou: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 2000;
+      }>;
+    affiliations: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
+    applicationStatus: Schema.Attribute.Enumeration<
+      ['pending', 'approved', 'rejected']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<'pending'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    email: Schema.Attribute.Email & Schema.Attribute.Required;
-    fullName: Schema.Attribute.String & Schema.Attribute.Required;
+    email: Schema.Attribute.Email &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
+    fullName: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::member-application.member-application'
     > &
       Schema.Attribute.Private;
-    preferredName: Schema.Attribute.String;
+    preferredName: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
     publishedAt: Schema.Attribute.DateTime;
-    topics: Schema.Attribute.Text & Schema.Attribute.Required;
+    topics: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 2000;
+      }>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    willingnessToVolunteer: Schema.Attribute.Enumeration<
-      ['yes-internally', 'yes-externally', 'no']
-    >;
   };
 }
 
@@ -703,6 +741,51 @@ export interface ApiMemberTypeMemberType extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiPublicationPublication extends Struct.CollectionTypeSchema {
+  collectionName: 'publications';
+  info: {
+    displayName: 'Publication';
+    pluralName: 'publications';
+    singularName: 'publication';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    author: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 150;
+      }>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    linkToPublication: Schema.Attribute.String &
+      Schema.Attribute.Unique &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::publication.publication'
+    > &
+      Schema.Attribute.Private;
+    publicationDate: Schema.Attribute.Date & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 300;
+      }>;
+    topics: Schema.Attribute.Relation<'manyToMany', 'api::event-tag.event-tag'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiResearchProjectResearchProject
   extends Struct.CollectionTypeSchema {
   collectionName: 'research_projects';
@@ -715,7 +798,10 @@ export interface ApiResearchProjectResearchProject
     draftAndPublish: true;
   };
   attributes: {
-    coInvestigator: Schema.Attribute.String;
+    coInvestigator: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
     coInvestigatorEmail: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -726,15 +812,14 @@ export interface ApiResearchProjectResearchProject
       'api::research-project.research-project'
     > &
       Schema.Attribute.Private;
-    longSummaryOnLearnMore: Schema.Attribute.Text &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 1000;
-      }>;
     ongoingProject: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<false>;
-    primaryInvestigator: Schema.Attribute.String & Schema.Attribute.Required;
+    primaryInvestigator: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
     primaryInvestigatorEmail: Schema.Attribute.String &
       Schema.Attribute.Required;
     projectEndDate: Schema.Attribute.Date & Schema.Attribute.Required;
@@ -742,13 +827,17 @@ export interface ApiResearchProjectResearchProject
     projectPageCoverImage: Schema.Attribute.Media<'images'>;
     projectStartDate: Schema.Attribute.Date & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    shortSummary: Schema.Attribute.Text &
+    summary: Schema.Attribute.Text &
+      Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
-        maxLength: 250;
+        maxLength: 1200;
       }>;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
-      Schema.Attribute.Unique;
+      Schema.Attribute.Unique &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1272,6 +1361,7 @@ declare module '@strapi/strapi' {
       'api::home-page.home-page': ApiHomePageHomePage;
       'api::member-application.member-application': ApiMemberApplicationMemberApplication;
       'api::member-type.member-type': ApiMemberTypeMemberType;
+      'api::publication.publication': ApiPublicationPublication;
       'api::research-project.research-project': ApiResearchProjectResearchProject;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

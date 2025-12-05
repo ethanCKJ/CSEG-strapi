@@ -7,43 +7,49 @@
     "displayName": "MemberApplication"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
     "fullName": {
       "type": "string",
+      "maxLength": 100,
       "required": true
     },
     "preferredName": {
       "type": "string",
+      "maxLength": 100,
       "required": false
     },
     "affiliations": {
-      "type": "string"
+      "type": "string",
+      "maxLength": 200
     },
     "email": {
       "type": "email",
-      "required": true
+      "required": true,
+      "maxLength": 100
     },
     "aboutYou": {
-      "type": "text"
+      "type": "text",
+      "maxLength": 2000,
+      "required": true
     },
     "topics": {
       "type": "text",
+      "maxLength": 2000,
       "required": true
     },
-    "willingnessToVolunteer": {
+    "applicationStatus": {
       "type": "enumeration",
+      "private": true,
+      "required": true,
+      "default": "pending",
       "enum": [
-        "yes-internally",
-        "yes-externally",
-        "no"
+        "pending",
+        "approved",
+        "rejected"
       ]
-    },
-    "approved": {
-      "type": "boolean",
-      "default": false
     }
   }
 }

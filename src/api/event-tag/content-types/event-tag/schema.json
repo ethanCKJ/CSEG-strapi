@@ -4,7 +4,7 @@
   "info": {
     "singularName": "event-tag",
     "pluralName": "event-tags",
-    "displayName": "EventTag"
+    "displayName": "Topic"
   },
   "options": {
     "draftAndPublish": true
@@ -27,6 +27,12 @@
       "type": "text",
       "private": true,
       "required": true
+    },
+    "publications": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::publication.publication",
+      "mappedBy": "topics"
     }
   }
 }

@@ -13,6 +13,7 @@
   "attributes": {
     "title": {
       "type": "string",
+      "maxLength": 200,
       "required": true,
       "unique": true
     },
@@ -30,10 +31,12 @@
     },
     "location": {
       "type": "string",
+      "maxLength": 200,
       "required": true
     },
     "speaker": {
       "type": "string",
+      "maxLength": 200,
       "required": true
     },
     "summary": {
@@ -76,8 +79,7 @@
           ]
         }
       },
-      "inversedBy": "events",
-      "required": true
+      "inversedBy": "events"
     }
   }
 }

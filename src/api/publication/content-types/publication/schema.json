@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "publications",
+  "info": {
+    "singularName": "publication",
+    "pluralName": "publications",
+    "displayName": "Publication"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "maxLength": 300,
+      "required": true,
+      "unique": true
+    },
+    "author": {
+      "type": "string",
+      "maxLength": 150,
+      "required": true
+    },
+    "publicationDate": {
+      "type": "date",
+      "required": true
+    },
+    "topics": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::event-tag.event-tag",
+      "inversedBy": "publications"
+    },
+    "linkToPublication": {
+      "type": "string",
+      "maxLength": 200,
+      "unique": true
+    }
+  }
+}

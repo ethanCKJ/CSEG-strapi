@@ -13,24 +13,23 @@
   "attributes": {
     "title": {
       "type": "string",
+      "maxLength": 200,
       "required": true,
       "unique": true
     },
-    "shortSummary": {
+    "summary": {
       "type": "text",
-      "maxLength": 250
-    },
-    "longSummaryOnLearnMore": {
-      "type": "text",
-      "maxLength": 1000,
+      "maxLength": 1200,
       "required": true
     },
     "primaryInvestigator": {
       "type": "string",
+      "maxLength": 100,
       "required": true
     },
     "coInvestigator": {
       "type": "string",
+      "maxLength": 200,
       "required": false
     },
     "projectPageCoverImage": {
