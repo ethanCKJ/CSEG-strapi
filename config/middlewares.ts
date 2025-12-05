@@ -35,6 +35,7 @@ module.exports = [
         '*.trycloudflare.com',
         'http://localhost:3000',
         'http://localhost:1337',
+        'https://cseg-frontend.vercel.app',
       ],
       credentials: true,
     },
