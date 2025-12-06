@@ -30,14 +30,23 @@ module.exports = [
   {
     name: 'strapi::cors',
     config: {
-      enabled: true,
-      origin: [
-        '*.trycloudflare.com',
-        'http://localhost:3000',
-        'http://localhost:1337',
-        'https://cseg-frontend.vercel.app',
-      ],
-      credentials: true,
+      origin: (ctx) => {
+        const origin = ctx.request.header.origin;
+
+        // Check if origin matches your Vercel pattern
+        if (
+            origin === 'http://localhost:3000' ||
+            origin === 'https://cseg-frontend.vercel.app' ||
+            (origin && origin.match(/^https:\/\/cseg-frontend.*\.vercel\.app$/))
+        ) {
+          return origin; // Allow this origin
+        }
+
+        return ''; // Deny CORS
+      },
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
+      headers: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
+      keepHeaderOnError: true,
     },
   },
   'strapi::poweredBy',
