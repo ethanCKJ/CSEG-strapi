@@ -52,7 +52,7 @@
       "relation": "manyToOne",
       "target": "api::event-type.event-type",
       "inversedBy": "events",
-      "required": true
+      "required":true
     },
     "event_tags": {
       "type": "relation",
