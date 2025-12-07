@@ -530,7 +530,9 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required;
     eventDate: Schema.Attribute.Date & Schema.Attribute.Required;
     eventEndTime: Schema.Attribute.Time & Schema.Attribute.Required;
-    eventPage: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    eventPage: Schema.Attribute.Blocks &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'## Event Overview\n\n[Brief description]\n\n## When & Where\n\n**Date:** [TBD]\n**Time:** [TBD]'>;
     eventStartTime: Schema.Attribute.Time & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::event.event'> &
