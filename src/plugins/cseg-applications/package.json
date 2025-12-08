@@ -1,0 +1,25 @@
+{
+  "name": "cseg-applications",
+  "version": "1.0.0",
+  "description": "CSEG membership application management",
+  "strapi": {
+    "kind": "plugin",
+    "name": "cseg-applications",
+    "displayName": "CSEG Applications",
+    "description": "Manage CSEG membership applications"
+  },
+  "dependencies": {
+    "@strapi/design-system": "^2.0.1",
+    "@strapi/icons": "^2.0.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "styled-components": "^6.1.19"
+  },
+  "peerDependencies": {
+    "@strapi/strapi": "^5.0.0"
+  },
+  "author": {
+    "name": "Ethan Cheam Kai Jun"
+  },
+  "license": "MIT"
+}
