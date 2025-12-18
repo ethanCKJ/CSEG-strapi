@@ -16,7 +16,8 @@
 /*  background-color: rgba(47, 111, 237, 0.12);*/
 /*}*/
 
-html body div#strapi nav {
-  background-color: #2e3440 !important;
-  width: 200px !important;
+@media(min-width: 1080px) {
+  html body div#strapi nav {
+    width: 240px !important; /* Keep it expanded */
+  }
 }
