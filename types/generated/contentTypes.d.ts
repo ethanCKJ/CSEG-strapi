@@ -1331,6 +1331,9 @@ export interface PluginUsersPermissionsUser
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    TestEnumeration: Schema.Attribute.Enumeration<
+      ['item1', 'item2', 'item3', 'item4', 'item5', 'item6']
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

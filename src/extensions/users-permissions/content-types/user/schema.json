@@ -68,6 +68,17 @@
     },
     "MD": {
       "type": "richtext"
+    },
+    "TestEnumeration": {
+      "type": "enumeration",
+      "enum": [
+        "item1",
+        "item2",
+        "item3",
+        "item4",
+        "item5",
+        "item6"
+      ]
     }
   }
 }

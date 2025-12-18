@@ -1,7 +1,9 @@
 import type { StrapiApp } from '@strapi/strapi/admin';
+import './overrides.css'
 
 export default {
   config: {
+
     locales: [
       // 'ar',
       // 'fr',
@@ -31,7 +33,9 @@ export default {
       // 'zh',
     ],
   },
+  // This does not print but it may get called.
   bootstrap(app: StrapiApp) {
-    console.log(app);
+
+    console.log('bootstrapping in src/admin/app.tsx',app);
   },
 };

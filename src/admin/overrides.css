@@ -1,0 +1,22 @@
+/* src/admin/overrides.css */
+
+/* Sidebar container (Strapi admin uses an aside for the main nav) */
+/*aside[aria-label='Main navigation'] {*/
+/*  width: 280px;*/
+/*}*/
+
+/*!* Nav links spacing *!*/
+/*aside[aria-label='Main navigation'] a {*/
+/*  padding: 10px 12px;*/
+/*  border-radius: 10px;*/
+/*}*/
+
+/*!* Hover state *!*/
+/*aside[aria-label='Main navigation'] a:hover {*/
+/*  background-color: rgba(47, 111, 237, 0.12);*/
+/*}*/
+
+html body div#strapi nav {
+  background-color: #2e3440 !important;
+  width: 200px !important;
+}
