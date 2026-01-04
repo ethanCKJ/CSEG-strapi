@@ -19,5 +19,6 @@
 @media(min-width: 1080px) {
   html body div#strapi nav {
     width: 240px !important; /* Keep it expanded */
+    /*align-items: start !important;*/
   }
 }

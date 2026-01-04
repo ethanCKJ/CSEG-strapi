@@ -1,5 +1,5 @@
 'use strict';
-import { Walk } from '@strapi/icons';
+import {IconWithText} from "./icon-with-text";
 
 const pluginId = 'cseg-applications';
 
@@ -10,14 +10,13 @@ export default {
     // Add menu link
     app.addMenuLink({
       to: `/plugins/${pluginId}`,
-      icon: Walk,
+      icon: IconWithText,
       intlLabel: {
         id: `${pluginId}.plugin.name`,
-        defaultMessage: 'New Member Applications',
+        defaultMessage: 'New member application',
       },
       Component: async () => {
-        const component = await import('./admin/src/pages/HomePage.tsx');
-        return component;
+        return await import('./admin/src/pages/HomePage.tsx');
       },
       permissions: [],
     });

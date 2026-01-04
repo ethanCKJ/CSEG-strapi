@@ -35,7 +35,6 @@ export default {
   },
   // This does not print but it may get called.
   bootstrap(app: StrapiApp) {
-
     console.log('bootstrapping in src/admin/app.tsx',app);
   },
 };
