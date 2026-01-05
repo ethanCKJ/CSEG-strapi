@@ -1,0 +1,10 @@
+{
+  "extends": "./content-manager/admin/tsconfig.json",
+  "compilerOptions": {
+    "jsx": "react"
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ]
+}
