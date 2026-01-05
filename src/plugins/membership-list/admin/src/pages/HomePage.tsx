@@ -1,7 +1,7 @@
 import {Main, Typography} from '@strapi/design-system';
 import { useIntl } from 'react-intl';
 import {Page, useRBAC} from '@strapi/admin/strapi-admin'
-import {ListViewPage, DocumentRBAC, ProtectedListViewPage} from '@internal/shared';
+import {ListViewPage} from "@internal/shared2"
 import * as React from "react";
 
 
@@ -40,6 +40,7 @@ const HomePage = () => {
       {/*<DocumentRBAC permissions={permissions} model={model}>*/}
       {/*  <ListViewPage />*/}
       {/*</DocumentRBAC>*/}
+      <ListViewPage/>
 
 
     </Main>
