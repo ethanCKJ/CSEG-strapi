@@ -35,6 +35,18 @@ export default {
       // 'zh',
     ],
   },
+  register(app: StrapiApp) {
+    const indexRoute = app.router.routes.find(({index}) => index);
+    if (!indexRoute){
+      throw new Error("Unable to find index page");
+    }
+    indexRoute.lazy = async () => {
+      const {CustomDashboard} = await import(
+          './CustomDashboard'
+          );
+      return {Component: CustomDashboard}
+    }
+  },
   // This does not print but it may get called.
   bootstrap(app: StrapiApp) {
     console.error('bootstrapping in src/admin/app.tsx',app.store);
@@ -58,16 +70,16 @@ export default {
       return false;
     }
 
-    for (const href of iconsToHide){
-      if (!tryHideIcon(href)){
-        const observer = new MutationObserver(() => {
-          if (tryHideIcon(href)){
-            observer.disconnect();
-          }
-        })
-        observer.observe(document.body, {childList:true, subtree:true});
-        setTimeout(() => observer.disconnect(), 10_000);
-      }
-    }
+    // for (const href of iconsToHide){
+    //   if (!tryHideIcon(href)){
+    //     const observer = new MutationObserver(() => {
+    //       if (tryHideIcon(href)){
+    //         observer.disconnect();
+    //       }
+    //     })
+    //     observer.observe(document.body, {childList:true, subtree:true});
+    //     setTimeout(() => observer.disconnect(), 10_000);
+    //   }
+    // }
   },
 };

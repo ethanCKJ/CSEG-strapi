@@ -23,3 +23,12 @@
   }
 }
 
+a[href="/admin/content-manager"] {
+  display: none;
+}
+a[href="/admin/plugins/cloud"] {
+  display: none;
+}
+a[href="/admin/settings"] {
+  display: none;
+}
