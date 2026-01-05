@@ -1,7 +1,8 @@
 import {Main, Typography} from '@strapi/design-system';
 import { useIntl } from 'react-intl';
-import {useRBAC} from '@strapi/admin/strapi-admin'
-import { ListViewPage, DocumentRBAC } from '@internal/shared';
+import {Page, useRBAC} from '@strapi/admin/strapi-admin'
+import {ListViewPage, DocumentRBAC, ProtectedListViewPage} from '@internal/shared';
+import * as React from "react";
 
 
 const HomePage = () => {
@@ -15,23 +16,31 @@ const HomePage = () => {
   ];
   const model ='api::event.event'
   // Fetch permissions for the Event model
-  const {
-    permissions = [],
-    isLoading,
-    error,
-  } = useRBAC(
-    PERMISSIONS.map((action) => ({
-      action,
-      subject: model,
-    }))
-  );
+  // const {
+  //   permissions = [],
+  //   isLoading,
+  //   error,
+  // } = useRBAC(
+  //   PERMISSIONS.map((action) => ({
+  //     action,
+  //     subject: model,
+  //   }))
+  // );
+  // if (isLoading) {
+  //   return <Page.Loading />;
+  // }
+  //
+  // if (error) {
+  //   return <Page.Error />;
+  // }
 
   return (
     <Main padding={8}>
-      <Typography variant={"alpha"}>Membership list</Typography>
-      <DocumentRBAC permissions={permissions} model={model}>
-        <ListViewPage />
-      </DocumentRBAC>
+      <Typography variant={"alpha"}>Membership listFOOBuzz</Typography>
+      {/*<DocumentRBAC permissions={permissions} model={model}>*/}
+      {/*  <ListViewPage />*/}
+      {/*</DocumentRBAC>*/}
+
 
     </Main>
   );
