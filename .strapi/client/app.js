@@ -5,6 +5,7 @@
 import strapiCloud from "@strapi/plugin-cloud/strapi-admin";
 import usersPermissions from "@strapi/plugin-users-permissions/strapi-admin";
 import csegApplications from "../../src/plugins/cseg-applications/strapi-admin";
+import membershipList from "../../src/plugins/membership-list/./dist/admin/index.mjs";
 import { renderAdmin } from "@strapi/strapi/admin";
 
 import customisations from "../../src/admin/app.tsx";
@@ -16,5 +17,6 @@ renderAdmin(document.getElementById("strapi"), {
     "strapi-cloud": strapiCloud,
     "users-permissions": usersPermissions,
     "cseg-applications": csegApplications,
+    "membership-list": membershipList,
   },
 });

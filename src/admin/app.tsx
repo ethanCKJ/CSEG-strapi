@@ -42,7 +42,7 @@ export default {
     }
     indexRoute.lazy = async () => {
       const {CustomDashboard} = await import(
-          './CustomDashboard'
+          './extensions/CustomDashboard'
           );
       return {Component: CustomDashboard}
     }
