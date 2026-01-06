@@ -32,8 +32,8 @@
   },
   "dependencies": {
     "@internal/shared2": "file:../shared2",
-    "@strapi/design-system": "^2.0.0-rc.30",
-    "@strapi/icons": "^2.0.0-rc.30",
+    "@strapi/design-system": "2.0.1",
+    "@strapi/icons": "2.0.1",
     "react-intl": "^8.0.10"
   },
   "devDependencies": {
