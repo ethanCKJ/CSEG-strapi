@@ -16,8 +16,8 @@ import { type UseDocument } from '../../../hooks/useDocument';
 import { useDocumentContext } from '../../../hooks/useDocumentContext';
 import { useDocumentLayout } from '../../../hooks/useDocumentLayout';
 import { useLazyComponents } from '../../../hooks/useLazyComponents';
-import { useHasInputPopoverParent } from '../../../preview/components/InputPopover';
-import { usePreviewInputManager } from '../../../preview/hooks/usePreviewInputManager';
+// import { useHasInputPopoverParent } from '../../../preview/components/InputPopover';
+// import { usePreviewInputManager } from '../../../preview/hooks/usePreviewInputManager';
 
 import { BlocksInput } from './FormInputs/BlocksInput/BlocksInput';
 import { ComponentInput } from './FormInputs/Component/Input';
@@ -59,7 +59,9 @@ const BaseInputRenderer = ({
     document.schema?.kind === 'collectionType' ? 'collection-types' : 'single-types';
 
   const isInDynamicZone = useDynamicZone('isInDynamicZone', (state) => state.isInDynamicZone);
-  const isInPreviewPopover = useHasInputPopoverParent();
+  const isInPreviewPopover = false;
+  // const isInPreviewPopover = useHasInputPopoverParent();
+
   const shouldIgnorePermissions = isInDynamicZone || isInPreviewPopover;
 
   const isFormDisabled = useForm('InputRenderer', (state) => state.disabled);
@@ -77,9 +79,9 @@ const BaseInputRenderer = ({
   const readableFields = idToCheck ? canReadFields : canCreateFields;
 
   // Everything preview related
-  const previewProps = usePreviewInputManager(inputProps.name, inputProps.attribute);
-  const props = { ...inputProps, ...previewProps };
-
+  // const previewProps = usePreviewInputManager(inputProps.name, inputProps.attribute);
+  // const props = { ...inputProps, ...previewProps };
+  const props = inputProps;
   /**
    * Component fields are always readable and editable,
    * however the fields within them may not be.
@@ -134,7 +136,7 @@ const BaseInputRenderer = ({
       <FormInputRenderer
         key={`input-${props.name}-${localeKey}`}
         {...props}
-        {...previewProps}
+        // {...previewProps}
         hint={hint}
         // @ts-expect-error – this workaround lets us display that the custom field is missing.
         type={props.attribute.customField}
@@ -240,7 +242,7 @@ const BaseInputRenderer = ({
         <FormInputRenderer
           key={`input-${props.name}-${localeKey}`}
           {...props}
-          {...previewProps}
+          // {...previewProps}
           hint={hint}
           options={props.attribute.enum.map((value) => ({ value }))}
           // @ts-expect-error – Temp workaround so we don't forget custom-fields don't work!
@@ -255,7 +257,7 @@ const BaseInputRenderer = ({
         <FormInputRenderer
           key={`input-${props.name}-${localeKey}`}
           {...restProps}
-          {...previewProps}
+          // {...previewProps}
           hint={hint}
           // @ts-expect-error – Temp workaround so we don't forget custom-fields don't work!
           type={props.customField ? 'custom-field' : props.type}

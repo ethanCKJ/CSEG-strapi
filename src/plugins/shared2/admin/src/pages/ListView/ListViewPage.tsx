@@ -1,9 +1,17 @@
 import React, {useMemo} from "react";
-import {useQueryParams, useNotification, useAPIErrorHandler} from "@strapi/admin/strapi-admin";
+import {
+  useQueryParams,
+  useNotification,
+  useAPIErrorHandler,
+  Page,
+  useTable,
+  Table,
+  BackButton, SearchInput
+} from "@strapi/admin/strapi-admin";
 import {buildValidParams} from "../../utils/api";
 import {useGetAllDocumentsQuery} from "../../services/documents";
 import {getTranslation} from "../../utils/translations";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, Link as ReactRouterLink, useParams} from "react-router-dom";
 import { useIntl } from 'react-intl';
 import {stringify} from "qs";
 import {ListFieldLayout} from "@strapi/content-manager/strapi-admin";
@@ -11,6 +19,19 @@ import {convertListLayoutToFieldLayouts, useDocumentLayout} from "../../hooks/us
 import {useDoc} from "../../hooks/useDocument";
 import {usePrev} from "../../hooks/usePrev";
 import {isEqual} from "lodash";
+import {Modules} from "@strapi/types";
+import {styled} from "styled-components";
+import { Layouts } from "@strapi/admin/strapi-admin";
+import { BulkActionsRenderer } from "./components/BulkActions/Actions";
+import {Box, Button, ButtonProps, EmptyStateLayout, Flex, Typography} from '@strapi/design-system';
+import {Plus, WarningCircle} from '@strapi/icons';
+import {ViewSettingsMenu} from "./components/ViewSettingsMenu";
+import {Filters} from "./components/Filters";
+import {EmptyDocuments} from "@strapi/icons/symbols";
+
+const LayoutsHeaderCustom = styled(Layouts.Header)`
+  overflow-wrap: anywhere;
+`;
 
 export const ListViewPage = () => {
   const {toggleNotification} = useNotification();
@@ -150,5 +171,152 @@ export const ListViewPage = () => {
   }
   console.log('data', data, 'error', error, 'isLoading', isLoading);
 
+  const contentTypeTitle = schema?.info.displayName
+      ? formatMessage({ id: schema.info.displayName, defaultMessage: schema.info.displayName })
+      : formatMessage({
+        id: 'content-manager.containers.untitled',
+        defaultMessage: 'Untitled',
+      });
+
+  const handleRowClick = (id: Modules.Documents.ID) => () => {
+    navigate({
+      pathname: id.toString(),
+      search: stringify({ plugins: query.plugins }),
+    });
+  };
+  if (!isLoading && results.length === 0) {
+    return (
+        <>
+          <Page.Main>
+            <Page.Title>{`${contentTypeTitle}`}</Page.Title>
+            <LayoutsHeaderCustom
+                primaryAction={
+                  <CreateButton />
+                }
+                subtitle={formatMessage(
+                    {
+                      id: getTranslation('pages.ListView.header-subtitle'),
+                      defaultMessage:
+                          '{number, plural, =0 {# entries} one {# entry} other {# entries}} found',
+                    },
+                    { number: pagination?.total }
+                )}
+                title={contentTypeTitle}
+                navigationAction={<BackButton />}
+            />
+            <Layouts.Action
+                endActions={
+                  <>
+                    {/*<InjectionZone area="listView.actions" />*/}
+                    <ViewSettingsMenu
+                        setHeaders={handleSetHeaders}
+                        resetHeaders={() => setDisplayedHeaders(list.layout)}
+                        headers={displayedHeaders.map((header) => header.name)}
+                    />
+                  </>
+                }
+                startActions={
+                  <>
+                    {list.settings.searchable && (
+                        <SearchInput
+                            label={formatMessage(
+                                { id: 'app.component.search.label', defaultMessage: 'Search for {target}' },
+                                { target: contentTypeTitle }
+                            )}
+                            placeholder={formatMessage({
+                              id: 'global.search',
+                              defaultMessage: 'Search',
+                            })}
+                            trackedEvent="didSearch"
+                        />
+                    )}
+                    {list.settings.filterable && schema ? <Filters schema={schema} /> : null}
+                  </>
+                }
+            />
+            <Layouts.Content>
+              <Box background="neutral0" shadow="filterShadow" hasRadius>
+                <EmptyStateLayout
+                    action={<CreateButton variant="secondary" />}
+                    content={formatMessage({
+                      id: 'app.components.EmptyStateLayout.content-document',
+                      defaultMessage: 'No content found',
+                    })}
+                    hasRadius
+                    icon={<EmptyDocuments width="16rem" />}
+                />
+              </Box>
+            </Layouts.Content>
+          </Page.Main>
+        </>
+    );
+  }
+
   return (<div>List View Page</div>);
 }
+
+
+const ActionsCell = styled(Table.Cell)`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+/* -------------------------------------------------------------------------------------------------
+ * TableActionsBar
+ * -----------------------------------------------------------------------------------------------*/
+
+const TableActionsBar = () => {
+  const selectRow = useTable('TableActionsBar', (state) => state.selectRow);
+  const [{ query }] = useQueryParams<{ plugins: { i18n: { locale: string } } }>();
+  const locale = query?.plugins?.i18n?.locale;
+  const prevLocale = usePrev(locale);
+
+  // TODO: find a better way to reset the selected rows when the locale changes across all the app
+  React.useEffect(() => {
+    if (prevLocale !== locale) {
+      selectRow([]);
+    }
+  }, [selectRow, prevLocale, locale]);
+
+  return (
+      <Table.ActionBar>
+        <BulkActionsRenderer />
+      </Table.ActionBar>
+  );
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * CreateButton
+ * -----------------------------------------------------------------------------------------------*/
+
+interface CreateButtonProps extends Pick<ButtonProps, 'variant'> {}
+
+const CreateButton = ({ variant }: CreateButtonProps) => {
+  const { formatMessage } = useIntl();
+
+  const [{ query }] = useQueryParams<{ plugins: object }>();
+
+  return (
+      <Button
+          variant={variant}
+          tag={ReactRouterLink}
+          // onClick={() => {
+          //   trackUsage('willCreateEntry', { status: 'draft' });
+          // }}
+          startIcon={<Plus />}
+          style={{ textDecoration: 'none' }}
+          to={{
+            pathname: 'create',
+            search: stringify({ plugins: query.plugins }),
+          }}
+          minWidth="max-content"
+          marginLeft={2}
+      >
+        {formatMessage({
+          id: getTranslation('HeaderLayout.button.label-add-entry'),
+          defaultMessage: 'Create new entry',
+        })}
+      </Button>
+  );
+};
+

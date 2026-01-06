@@ -12,7 +12,7 @@ import { useIntl, type MessageDescriptor } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 
 import { useRelationModal } from '../pages/EditView/components/FormInputs/Relations/RelationModal';
-import { usePreviewContext } from '../preview/pages/Preview';
+// import { usePreviewContext } from '../preview/pages/Preview';
 import {
   useAutoCloneDocumentMutation,
   useCloneDocumentMutation,
@@ -204,9 +204,10 @@ const useDocumentActions: UseDocumentActions = () => {
   const isAiAvailable = useAIAvailability();
 
   // Get metadata from context providers for tracking purposes
-  const previewContext = usePreviewContext('useDocumentActions', () => true, false);
+  // const previewContext = usePreviewContext('useDocumentActions', () => true, false);
   const relationContext = useRelationModal('useDocumentActions', () => true, false);
-  const fromPreview = previewContext != undefined;
+  // const fromPreview = previewContext != undefined;
+  const fromPreview = undefined;
   const fromRelationModal = relationContext != undefined;
 
   const [deleteDocument, { isLoading: isDeleting }] = useDeleteDocumentMutation();

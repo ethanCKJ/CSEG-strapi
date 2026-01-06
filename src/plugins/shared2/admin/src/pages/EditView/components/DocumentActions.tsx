@@ -37,7 +37,7 @@ import { useDocumentRBAC } from '../../../features/DocumentRBAC';
 import { useDoc, useDocument } from '../../../hooks/useDocument';
 import { useDocumentActions } from '../../../hooks/useDocumentActions';
 import { useDocumentContext } from '../../../hooks/useDocumentContext';
-import { usePreviewContext } from '../../../preview/pages/Preview';
+// import { usePreviewContext } from '../../../preview/pages/Preview';
 import { CLONE_PATH, LIST_PATH } from '../../../router';
 import {
   useGetDraftRelationCountQuery,
@@ -593,7 +593,8 @@ const PublishAction: DocumentActionComponent = ({
     ({ canPublish, canReadFields }) => ({ canPublish, canReadFields })
   );
   const { publish, isLoading } = useDocumentActions();
-  const onPreview = usePreviewContext('UpdateAction', (state) => state.onPreview, false);
+  // const onPreview = usePreviewContext('UpdateAction', (state) => state.onPreview, false);
+  const onPreview = undefined; // Skipping preview context for now
   const [
     countDraftRelations,
     { isLoading: isLoadingDraftRelations, isError: isErrorDraftRelations },
@@ -901,9 +902,9 @@ const PublishAction: DocumentActionComponent = ({
       }
     } finally {
       setSubmitting(false);
-      if (onPreview) {
-        onPreview();
-      }
+      // if (onPreview) {
+      //   onPreview();
+      // }
     }
   };
 
@@ -1020,7 +1021,8 @@ const UpdateAction: DocumentActionComponent = ({
     currentDocument: { components },
   } = useDocumentContext('UpdateAction');
   const [{ rawQuery }] = useQueryParams();
-  const onPreview = usePreviewContext('UpdateAction', (state) => state.onPreview, false);
+  // const onPreview = usePreviewContext('UpdateAction', (state) => state.onPreview, false);
+  const onPreview = false;
   const { getInitialFormValues } = useDoc();
 
   const isSubmitting = useForm('UpdateAction', ({ isSubmitting }) => isSubmitting);
@@ -1246,9 +1248,9 @@ const UpdateAction: DocumentActionComponent = ({
         payload: [GUIDED_TOUR_REQUIRED_ACTIONS.contentManager.createContent],
       });
       setSubmitting(false);
-      if (onPreview) {
-        onPreview();
-      }
+      // if (onPreview) {
+      //   onPreview();
+      // }
     }
   };
 
