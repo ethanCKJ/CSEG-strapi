@@ -12,10 +12,16 @@ export default {
         id: `${PLUGIN_ID}.plugin.name`,
         defaultMessage: PLUGIN_ID,
       },
-      Component: async () => {
+    });
+
+    app.router.addRoute({
+      path: `plugins/${PLUGIN_ID}/*`,
+      lazy: async () => {
         const { App } = await import('./pages/App');
 
-        return App;
+        return {
+          Component: App,
+        };
       },
     });
 

@@ -57,7 +57,7 @@ const Panels = () => {
       <DescriptionComponentRenderer
         props={props}
         descriptions={(
-          plugins['content-manager'].apis as ContentManagerPlugin['config']['apis']
+          plugins['custom-content-manager'].apis as ContentManagerPlugin['config']['apis']
         ).getEditViewSidePanels()}
       >
         {(panels) =>

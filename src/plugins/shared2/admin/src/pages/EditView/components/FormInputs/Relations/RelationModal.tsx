@@ -658,7 +658,7 @@ const RelationModalForm = () => {
             <DescriptionComponentRenderer
               props={props}
               descriptions={(
-                plugins['content-manager'].apis as ContentManagerPlugin['config']['apis']
+                plugins['custom-content-manager'].apis as ContentManagerPlugin['config']['apis']
               ).getDocumentActions('relation-modal')}
             >
               {(actions) => {

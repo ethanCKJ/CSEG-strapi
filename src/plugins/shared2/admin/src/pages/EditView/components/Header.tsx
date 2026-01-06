@@ -208,7 +208,7 @@ const HeaderToolbar = () => {
           collectionType,
         }}
         descriptions={(
-          plugins['content-manager'].apis as ContentManagerPlugin['config']['apis']
+          plugins['custom-content-manager'].apis as ContentManagerPlugin['config']['apis']
         ).getDocumentActions('header')}
       >
         {(actions) => {

@@ -1,4 +1,8 @@
 export default () => ({
+  'shared2': {
+    enabled: true,
+    resolve: './src/plugins/shared2',
+  },
   'cseg-applications': {
     enabled: true,
     resolve: './src/plugins/cseg-applications',

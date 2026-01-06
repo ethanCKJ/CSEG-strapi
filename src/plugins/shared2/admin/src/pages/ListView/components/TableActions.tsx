@@ -6,22 +6,17 @@ import {
   useStrapiApp,
   useQueryParams,
 } from '@strapi/admin/strapi-admin';
-import { Button, LinkButton, Modal } from '@strapi/design-system';
-import { Duplicate, Pencil } from '@strapi/icons';
+import { Pencil } from '@strapi/icons';
 import { stringify } from 'qs';
 import { useIntl } from 'react-intl';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 import { useDocumentRBAC } from '../../../features/DocumentRBAC';
 import { Document, useDoc } from '../../../hooks/useDocument';
-import { useDocumentActions } from '../../../hooks/useDocumentActions';
-import { isBaseQueryError } from '../../../utils/api';
 import { DocumentActionsMenu } from '../../EditView/components/DocumentActions';
+import { DEFAULT_HEADER_ACTIONS } from '../../EditView/components/Header';
 
-import { AutoCloneFailureModalBody } from './AutoCloneFailureModal';
-
-import type { ProhibitedCloningField } from '../../../../../shared/contracts/collection-types';
 import type {
   ContentManagerPlugin,
   DocumentActionComponent,
@@ -49,10 +44,16 @@ const TableActions = ({ document }: TableActionsProps) => {
     document,
   };
 
+  // Safety check: if plugins is not available, return null or show fallback
+  if (!plugins || !plugins['custom-content-manager']) {
+    console.error('Custom Content Manager plugin not available in context');
+    return null;
+  }
+
   return (
     <DescriptionComponentRenderer
       props={props}
-      descriptions={(plugins['content-manager'].apis as ContentManagerPlugin['config']['apis'])
+      descriptions={(plugins['custom-content-manager'].apis as ContentManagerPlugin['config']['apis'])
         .getDocumentActions('table-row')
         // We explicitly remove the PublishAction from description so we never render it and we don't make unnecessary requests.
         .filter((action) => action.name !== 'PublishAction')}
@@ -137,122 +138,9 @@ const StyledPencil = styled(Pencil)`
   }
 `;
 
-const CloneAction: DocumentActionComponent = ({ model, documentId }) => {
-  const navigate = useNavigate();
-  const { formatMessage } = useIntl();
-  const { canCreate } = useDocumentRBAC('CloneAction', ({ canCreate }) => ({ canCreate }));
-  const { toggleNotification } = useNotification();
-  const { autoClone } = useDocumentActions();
-  const [prohibitedFields, setProhibitedFields] = React.useState<ProhibitedCloningField[]>([]);
-  const [{ query }] = useQueryParams<{ plugins?: Record<string, any> }>();
+// Extract DeleteAction from DEFAULT_HEADER_ACTIONS
+const DeleteAction = DEFAULT_HEADER_ACTIONS.find(action => action.type === 'delete')!;
 
-  return {
-    disabled: !canCreate,
-    icon: <StyledDuplicate />,
-    label: formatMessage({
-      id: 'content-manager.actions.clone.label',
-      defaultMessage: 'Duplicate',
-    }),
-    position: 'table-row',
-    onClick: async () => {
-      if (!documentId) {
-        console.error(
-          "You're trying to clone a document in the table without an id, this is likely a bug with Strapi. Please open an issue."
-        );
-
-        toggleNotification({
-          message: formatMessage({
-            id: 'content-manager.actions.clone.error',
-            defaultMessage: 'An error occurred while trying to clone the document.',
-          }),
-          type: 'danger',
-        });
-
-        return;
-      }
-
-      const res = await autoClone({
-        model,
-        sourceId: documentId,
-        locale: query.plugins?.i18n?.locale,
-      });
-
-      if ('data' in res) {
-        navigate({
-          pathname: res.data.documentId,
-          search: stringify({
-            plugins: query.plugins,
-          }),
-        });
-
-        /**
-         * We return true because we don't need to show a modal anymore.
-         */
-        return true;
-      }
-
-      if (
-        isBaseQueryError(res.error) &&
-        res.error.details &&
-        typeof res.error.details === 'object' &&
-        'prohibitedFields' in res.error.details &&
-        Array.isArray(res.error.details.prohibitedFields)
-      ) {
-        const prohibitedFields = res.error.details.prohibitedFields as ProhibitedCloningField[];
-
-        setProhibitedFields(prohibitedFields);
-      }
-    },
-    dialog: {
-      type: 'modal',
-      title: formatMessage({
-        id: 'content-manager.containers.list.autoCloneModal.header',
-        defaultMessage: 'Duplicate',
-      }),
-      content: <AutoCloneFailureModalBody prohibitedFields={prohibitedFields} />,
-      footer: ({ onClose }) => {
-        return (
-          <Modal.Footer>
-            <Button onClick={onClose} variant="tertiary">
-              {formatMessage({
-                id: 'cancel',
-                defaultMessage: 'Cancel',
-              })}
-            </Button>
-            <LinkButton
-              tag={NavLink}
-              to={{
-                pathname: `clone/${documentId}`,
-                search: stringify({
-                  plugins: query.plugins,
-                }),
-              }}
-            >
-              {formatMessage({
-                id: 'content-manager.containers.list.autoCloneModal.create',
-                defaultMessage: 'Create',
-              })}
-            </LinkButton>
-          </Modal.Footer>
-        );
-      },
-    },
-  };
-};
-
-CloneAction.type = 'clone';
-CloneAction.position = 'table-row';
-
-/**
- * Because the icon system is completely broken, we have to do
- * this to remove the fill from the cog.
- */
-const StyledDuplicate = styled(Duplicate)`
-  path {
-    fill: currentColor;
-  }
-`;
-
-const DEFAULT_TABLE_ROW_ACTIONS = [EditAction, CloneAction];
+const DEFAULT_TABLE_ROW_ACTIONS = [EditAction, DeleteAction];
 
 export { TableActions, DEFAULT_TABLE_ROW_ACTIONS };

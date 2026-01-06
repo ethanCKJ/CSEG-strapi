@@ -203,7 +203,7 @@ class ContentManagerPlugin {
   get config() {
     return {
       id: PLUGIN_ID,
-      name: 'Content Manager',
+      name: 'Custom Content Manager',
       // injectionZones: INJECTION_ZONES,
       apis: {
         addBulkAction: this.addBulkAction.bind(this),

@@ -1,4 +1,4 @@
-const PLUGIN_ID = 'content-manager';
+const PLUGIN_ID = 'custom-content-manager';
 
 const PERMISSIONS = [
   'plugin::content-manager.explorer.create',
