@@ -7,17 +7,37 @@ import {useNavigate} from "react-router-dom";
 import { useIntl } from 'react-intl';
 import {stringify} from "qs";
 import {ListFieldLayout} from "@strapi/content-manager/strapi-admin";
-import {useDocumentLayout} from "../../hooks/useDocumentLayout";
+import {convertListLayoutToFieldLayouts, useDocumentLayout} from "../../hooks/useDocumentLayout";
 import {useDoc} from "../../hooks/useDocument";
+import {usePrev} from "../../hooks/usePrev";
+import {isEqual} from "lodash";
 
 export const ListViewPage = () => {
   const {toggleNotification} = useNotification();
   const { _unstableFormatAPIError: formatAPIError } = useAPIErrorHandler(getTranslation);
   const navigate = useNavigate();
   const { formatMessage } = useIntl();
-  const [displayedHeaders, setDisplayedHeaders] = React.useState<ListFieldLayout[]>([]);
   const {collectionType, model, schema} = useDoc();
   const { list } = useDocumentLayout(model);
+
+  const [displayedHeaders, setDisplayedHeaders] = React.useState<ListFieldLayout[]>([]);
+
+  const listLayout = usePrev(list.layout);
+  React.useEffect(() => {
+    /**
+     * ONLY update the displayedHeaders if the document
+     * layout has actually changed in value.
+     */
+    if (!isEqual(listLayout, list.layout)) {
+      setDisplayedHeaders(list.layout);
+    }
+  }, [list.layout, listLayout]);
+
+  const handleSetHeaders = (headers: string[]) => {
+    setDisplayedHeaders(
+        convertListLayoutToFieldLayouts(headers, schema!.attributes, list.metadatas)
+    );
+  };
 
   const [{ query }] = useQueryParams<{
     plugins?: Record<string, unknown>;
