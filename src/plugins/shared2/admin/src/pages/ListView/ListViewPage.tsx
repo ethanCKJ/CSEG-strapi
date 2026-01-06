@@ -30,9 +30,12 @@ import {
   DesignSystemProvider,
   EmptyStateLayout,
   Flex,
-  Typography
+  Tooltip,
+  Typography,
+    IconButton,
+
 } from '@strapi/design-system';
-import {Plus, WarningCircle} from '@strapi/icons';
+import {Plus, Trash, WarningCircle} from '@strapi/icons';
 import {ViewSettingsMenu} from "./components/ViewSettingsMenu";
 import {Filters} from "./components/Filters";
 import {EmptyDocuments} from "@strapi/icons/symbols";
@@ -56,6 +59,15 @@ const ListViewPage = () => {
   const { list } = useDocumentLayout(model);
 
   const [displayedHeaders, setDisplayedHeaders] = React.useState<ListFieldLayout[]>([]);
+  if (true){
+    return (
+        <Tooltip label="Delete all items">
+      <IconButton withTooltip={false} label="delete">
+        <Trash />
+      </IconButton>
+    </Tooltip>
+    )
+  }
 
   const listLayout = usePrev(list.layout);
   React.useEffect(() => {

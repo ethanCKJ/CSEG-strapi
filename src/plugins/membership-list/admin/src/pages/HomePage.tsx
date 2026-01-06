@@ -4,7 +4,8 @@ import {Layouts} from '@strapi/admin/strapi-admin';
 
 import {DesignSystemProvider, darkTheme, IconButton, Tooltip} from "@strapi/design-system";
 import {Trash} from "@strapi/icons";
-import {ListViewPageWrapped} from "@internal/shared2/admin/src/pages/ListViewPageWrapped";
+
+import {ListViewPageWrapped} from "@internal/shared2";
 
 const HomePage = () => {
   return (
