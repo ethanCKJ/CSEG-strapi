@@ -1,17 +1,23 @@
 import {ListViewPage} from "@internal/shared2"
 import * as React from "react";
-import { Layouts } from '@strapi/admin/strapi-admin';
+import {Layouts} from '@strapi/admin/strapi-admin';
 
-import {DesignSystemProvider} from "@strapi/design-system";
+import {DesignSystemProvider, darkTheme, IconButton, Tooltip} from "@strapi/design-system";
+import {Trash} from "@strapi/icons";
 
 const HomePage = () => {
   return (
-    <Layouts.Root>
+
+    <DesignSystemProvider theme={darkTheme} locale="en-GB">
       <div>Hello</div>
-        {/*<DesignSystemProvider>*/}
-        {/*  <ListViewPage/>*/}
-        {/*</DesignSystemProvider>*/}
-    </Layouts.Root>
+      {/*<ListViewPage/>*/}
+      <Tooltip label="Delete all items">
+        <IconButton withTooltip={false} label="delete">
+          <Trash />
+        </IconButton>
+      </Tooltip>
+    </DesignSystemProvider>
+
   );
 };
 
