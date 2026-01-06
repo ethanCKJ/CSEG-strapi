@@ -22,7 +22,9 @@ export default {
         return {
           Component: App,
         };
+        // const { Layout } = await import('./layout');
       },
+
     });
 
     app.registerPlugin({
