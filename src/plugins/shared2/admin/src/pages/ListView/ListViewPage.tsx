@@ -517,7 +517,7 @@ const ProtectedListViewPage = () => {
         subject: "api::event.event",
       }))
   );
-  console.log("After useRBAC is FINE, slug:", slug, "permissions:", permissions, "isLoading:", isLoading, "error:", error);
+  console.log('protected list view permissions', permissions, 'loading', isLoading, 'error', error, 'slug', slug);
 
   if (isLoading) {
     return <Page.Loading/>;
@@ -526,7 +526,7 @@ const ProtectedListViewPage = () => {
   if (error || !slug) {
     return <Page.Error/>;
   }
-  console.log('protected list view permissions', permissions);
+  console.log("After useRBAC is FINE, slug:", slug, "permissions:", permissions, "isLoading:", isLoading, "error:", error);
 
   return (
         <Page.Protect permissions={permissions}>
