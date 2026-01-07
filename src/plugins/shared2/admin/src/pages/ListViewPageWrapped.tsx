@@ -1,12 +1,9 @@
-import {ListViewPage} from "./ListView/ListViewPage";
-import {DesignSystemProvider} from "@strapi/design-system";
 import {ProtectedListViewPage} from "./ListView/ListViewPage";
 
 const ListViewPageWrapped = () => {
-  return (<DesignSystemProvider>
-    <ProtectedListViewPage/>
-
-  </DesignSystemProvider>);
+  // Don't wrap with DesignSystemProvider - it breaks Strapi admin context
+  // The DesignSystemProvider is already provided by Strapi admin
+  return <ProtectedListViewPage/>;
 }
 
 export {ListViewPageWrapped}

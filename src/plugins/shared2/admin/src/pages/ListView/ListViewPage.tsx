@@ -514,6 +514,12 @@ const ProtectedListViewPage = () => {
   if (error || !slug) {
     return <Page.Error/>;
   }
+  //
+  // return (
+  //   <Page.Main>
+  //     cheese
+  //   </Page.Main>
+  // )
 
   return (
         <Page.Protect permissions={permissions}>
