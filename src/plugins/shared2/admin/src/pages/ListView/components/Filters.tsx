@@ -49,14 +49,15 @@ const FiltersImpl = ({ disabled, schema }: FiltersProps) => {
   const allPermissions = useAuth('FiltersImpl', (state) => state.permissions);
   const [{ query }] = useQueryParams<Filters.Query>();
   const { schemas } = useContentTypeSchema();
-
-  const canReadAdminUsers = React.useMemo(
-    () =>
-      allPermissions.filter(
-        (permission) => permission.action === 'admin::users.read' && permission.subject === null
-      ).length > 0,
-    [allPermissions]
-  );
+  // TODO: Check for errors
+  const canReadAdminUsers = false;
+  // const canReadAdminUsers = React.useMemo(
+  //   () =>
+  //     allPermissions.filter(
+  //       (permission) => permission.action === 'admin::users.read' && permission.subject === null
+  //     ).length > 0,
+  //   [allPermissions]
+  // );
 
   const selectedUserIds = (query?.filters?.$and ?? []).reduce<string[]>((acc, filter) => {
     const [key, value] = Object.entries(filter)[0];
