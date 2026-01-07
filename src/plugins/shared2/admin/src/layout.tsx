@@ -19,7 +19,7 @@ import { getTranslation } from './utils/translations';
  * -----------------------------------------------------------------------------------------------*/
 
 const Layout = () => {
-  const contentTypeMatch = useMatch('/content-manager/:kind/:uid/*');
+  const contentTypeMatch = useMatch('/custom-content-manager/:kind/:uid/*');
   const isMobile = useIsMobile();
 
   const { isLoading, collectionTypeLinks, models, singleTypeLinks } = useContentManagerInitData();
@@ -51,7 +51,7 @@ const Layout = () => {
   if (
     authorisedModels.length === 0 &&
     supportedModelsToDisplay.length > 0 &&
-    pathname !== '/content-manager/403'
+    pathname !== '/custom-content-manager/403'
   ) {
     return <Navigate to="/403" />;
   }
