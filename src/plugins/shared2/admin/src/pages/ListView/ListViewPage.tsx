@@ -496,6 +496,17 @@ const ProtectedListViewPage = () => {
   const {slug = ''} = useParams<{
     slug: string;
   }>();
+  console.log("Before useRBAC, slug:", slug);
+  // const {
+  //   permissions = [],
+  //   isLoading,
+  //   error,
+  // } = useRBAC(
+  //     PERMISSIONS.map((action) => ({
+  //       action,
+  //       subject: slug,
+  //     }))
+  // );
   const {
     permissions = [],
     isLoading,
@@ -503,9 +514,10 @@ const ProtectedListViewPage = () => {
   } = useRBAC(
       PERMISSIONS.map((action) => ({
         action,
-        subject: slug,
+        subject: "api::event.event",
       }))
   );
+  console.log("After useRBAC is FINE, slug:", slug, "permissions:", permissions, "isLoading:", isLoading, "error:", error);
 
   if (isLoading) {
     return <Page.Loading/>;
@@ -514,12 +526,7 @@ const ProtectedListViewPage = () => {
   if (error || !slug) {
     return <Page.Error/>;
   }
-  //
-  // return (
-  //   <Page.Main>
-  //     cheese
-  //   </Page.Main>
-  // )
+  console.log('protected list view permissions', permissions);
 
   return (
         <Page.Protect permissions={permissions}>
