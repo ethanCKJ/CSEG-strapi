@@ -1,0 +1,7 @@
+Error name
+`Tooltip` must be used within `TooltipProvider`
+
+Known facts
+1. In the Strapi design system the Tooltip component must be wrapped with DesignSystemProvider. See https://github.com/strapi/design-system/issues/1887
+2. This code correctly renders the tooltip
+src/plugins/membership-list/admin/src/pages/HomePage.tsx
