@@ -10,5 +10,9 @@ export default () => ({
   'membership-list':{
     enabled: true,
     resolve: './src/plugins/membership-list',
+  },
+  'tester-plugin':{
+    enabled: true,
+    resolve: './src/plugins/tester-plugin',
   }
 });
