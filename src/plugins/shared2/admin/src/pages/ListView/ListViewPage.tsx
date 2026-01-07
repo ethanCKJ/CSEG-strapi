@@ -58,15 +58,13 @@ const ListViewPage = () => {
   const { list } = useDocumentLayout(model);
 
   const [displayedHeaders, setDisplayedHeaders] = React.useState<ListFieldLayout[]>([]);
-  // if (true){
-  //   return (
-  //       <Tooltip label="Delete all items">
-  //     <IconButton withTooltip={false} label="delete">
-  //       <Trash />
-  //     </IconButton>
-  //   </Tooltip>
-  //   )
-  // }
+  if (true){
+    return (
+        <Tooltip label="Delete all items">
+          <div>Hover over me</div>
+        </Tooltip>
+    )
+  }
 
   const listLayout = usePrev(list.layout);
   React.useEffect(() => {
