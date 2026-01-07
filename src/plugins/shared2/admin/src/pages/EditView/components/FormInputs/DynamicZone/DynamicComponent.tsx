@@ -127,6 +127,7 @@ const DynamicComponent = ({
   const accordionActions = disabled ? null : (
     <>
       <IconButton
+        withTooltip={false}
         variant="ghost"
         label={formatMessage(
           {
@@ -141,6 +142,7 @@ const DynamicComponent = ({
       </IconButton>
       {isDesktop && (
         <IconButton
+          withTooltip={false}
           variant="ghost"
           onClick={(e) => e.stopPropagation()}
           data-handler-id={handlerId}
@@ -157,6 +159,7 @@ const DynamicComponent = ({
       <Menu.Root>
         <Menu.Trigger size="S" endIcon={null} paddingLeft={0} paddingRight={0}>
           <IconButton
+            withTooltip={false}
             variant="ghost"
             label={formatMessage({
               id: getTranslation('components.DynamicZone.more-actions'),

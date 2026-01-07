@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Avatar, Flex, Tooltip, Typography, TypographyComponent } from '@strapi/design-system';
+import { Avatar, Flex, /* Tooltip, */ Typography, TypographyComponent } from '@strapi/design-system';
 import { styled } from 'styled-components';
 
 import { prefixFileUrlWithBackendUrl } from '../../../../utils/urls';
@@ -50,11 +50,11 @@ const MediaSingle = ({ url, mime, alternativeText, name, ext, formats }: MediaSi
   const fileName = name.length > 100 ? `${name.substring(0, 100)}...` : name;
 
   return (
-    <Tooltip label={fileName}>
+    // <Tooltip label={fileName}>
       <span>
         <FileWrapper>{fileExtension}</FileWrapper>
       </span>
-    </Tooltip>
+    // </Tooltip>
   );
 };
 

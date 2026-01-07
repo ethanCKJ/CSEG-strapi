@@ -3,7 +3,7 @@ import * as React from 'react';
 import * as Toolbar from '@radix-ui/react-toolbar';
 import {
   Flex,
-  Tooltip,
+  // Tooltip,
   SingleSelect,
   SingleSelectOption,
   Box,
@@ -127,7 +127,7 @@ const ToolbarButton = ({
   const enabledColor = isActive ? 'primary600' : 'neutral600';
 
   return (
-    <Tooltip label={labelMessage}>
+    // <Tooltip label={labelMessage}>
       <Toolbar.ToggleItem
         value={name}
         data-state={isActive ? 'on' : 'off'}
@@ -154,7 +154,7 @@ const ToolbarButton = ({
           <Icon fill={disabled ? 'neutral300' : enabledColor} />
         </FlexButton>
       </Toolbar.ToggleItem>
-    </Tooltip>
+    // </Tooltip>
   );
 };
 

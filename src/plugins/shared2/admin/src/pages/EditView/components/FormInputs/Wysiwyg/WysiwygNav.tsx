@@ -103,6 +103,7 @@ const WysiwygNav = ({
       toolbar: (
         <IconButtonGroup>
           <IconButton
+            withTooltip={false}
             disabled={isDisabled}
             onClick={() => handleActionClick('Bold', editorRef)}
             label={formatMessage({
@@ -117,6 +118,7 @@ const WysiwygNav = ({
             <Bold />
           </IconButton>
           <IconButton
+            withTooltip={false}
             disabled={isDisabled}
             onClick={() => handleActionClick('Italic', editorRef)}
             label={formatMessage({
@@ -131,6 +133,7 @@ const WysiwygNav = ({
             <Italic />
           </IconButton>
           <IconButton
+            withTooltip={false}
             disabled={isDisabled}
             onClick={() => handleActionClick('Underline', editorRef)}
             label={formatMessage({
@@ -145,6 +148,7 @@ const WysiwygNav = ({
             <Underline />
           </IconButton>
           <IconButton
+            withTooltip={false}
             disabled={isDisabled}
             onClick={() => handleActionClick('Strikethrough', editorRef)}
             label={formatMessage({
@@ -219,6 +223,7 @@ const WysiwygNav = ({
       toolbar: (
         <IconButtonGroup>
           <IconButton
+            withTooltip={false}
             disabled={isDisabled}
             onClick={() => handleActionClick('BulletList', editorRef)}
             label={formatMessage({
@@ -233,6 +238,7 @@ const WysiwygNav = ({
             <BulletList />
           </IconButton>
           <IconButton
+            withTooltip={false}
             disabled={isDisabled}
             onClick={() => handleActionClick('NumberList', editorRef)}
             label={formatMessage({
@@ -283,6 +289,7 @@ const WysiwygNav = ({
       toolbar: (
         <IconButtonGroup>
           <IconButton
+            withTooltip={false}
             disabled={isDisabled}
             onClick={() => handleActionClick('Code', editorRef)}
             label={formatMessage({
@@ -297,6 +304,7 @@ const WysiwygNav = ({
             <Code />
           </IconButton>
           <IconButton
+            withTooltip={false}
             disabled={isDisabled}
             onClick={() => {
               onToggleMediaLib();
@@ -313,6 +321,7 @@ const WysiwygNav = ({
             <Image />
           </IconButton>
           <IconButton
+            withTooltip={false}
             disabled={isDisabled}
             onClick={() => handleActionClick('Link', editorRef)}
             label={formatMessage({
@@ -327,6 +336,7 @@ const WysiwygNav = ({
             <Link />
           </IconButton>
           <IconButton
+            withTooltip={false}
             disabled={isDisabled}
             onClick={() => handleActionClick('Quote', editorRef)}
             label={formatMessage({

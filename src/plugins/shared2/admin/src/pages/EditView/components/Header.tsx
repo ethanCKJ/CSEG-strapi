@@ -442,6 +442,7 @@ const HeaderActions = ({ actions }: HeaderActionsProps) => {
           return (
             <React.Fragment key={action.id}>
               <IconButton
+                withTooltip={false}
                 disabled={action.disabled}
                 label={action.label}
                 size="S"

@@ -7,7 +7,7 @@ import {
   useField,
   Form,
 } from '@strapi/admin/strapi-admin';
-import { Alert, Box, Field, Flex, Link, Tooltip, Typography } from '@strapi/design-system';
+import { Alert, Box, Field, Flex, Link, /* Tooltip, */ Typography } from '@strapi/design-system';
 import { useIntl } from 'react-intl';
 import { NavLink } from 'react-router-dom';
 import { styled } from 'styled-components';
@@ -126,7 +126,7 @@ const CustomRelationInput = (props: RelationsFieldProps) => {
                 justifyContent="space-between"
               >
                 <Box minWidth={0} paddingTop={1} paddingBottom={1} paddingRight={4}>
-                  <Tooltip label={label}>
+                  {/* <Tooltip label={label}> */}
                     {isAdminUserRelation ? (
                       <Typography>{label}</Typography>
                     ) : (
@@ -134,7 +134,7 @@ const CustomRelationInput = (props: RelationsFieldProps) => {
                         {label}
                       </LinkEllipsis>
                     )}
-                  </Tooltip>
+                  {/* </Tooltip> */}
                 </Box>
                 <DocumentStatus status={relationData.status as string} />
               </Flex>

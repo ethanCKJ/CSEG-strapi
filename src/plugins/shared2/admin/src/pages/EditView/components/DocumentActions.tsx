@@ -20,7 +20,7 @@ import {
   VisuallyHidden,
   Menu,
   ButtonProps,
-  Tooltip,
+  // Tooltip,
 } from '@strapi/design-system';
 import { Cross, More, WarningCircle } from '@strapi/icons';
 import mapValues from 'lodash/fp/mapValues';
@@ -181,19 +181,19 @@ const DocumentActions = ({ actions }: DocumentActionsProps) => {
 
   const addHintTooltip = (action: Action, children: React.ReactNode) => {
     return !action.disabled ? (
-      <Tooltip
-        label={formatMessage(
-          {
-            id: 'content-manager.containers.EditView.saveHint',
-            defaultMessage: 'Ctrl / Cmd + Enter to {action}',
-          },
-          {
-            action: action.label,
-          }
-        )}
-      >
+      // <Tooltip
+      //   label={formatMessage(
+      //     {
+      //       id: 'content-manager.containers.EditView.saveHint',
+      //       defaultMessage: 'Ctrl / Cmd + Enter to {action}',
+      //     },
+      //     {
+      //       action: action.label,
+      //     }
+      //   )}
+      // >
         <Flex width="100%">{children}</Flex>
-      </Tooltip>
+      // </Tooltip>
     ) : (
       children
     );

@@ -14,7 +14,7 @@ import {
   IconButton,
   Loader,
   Modal,
-  Tooltip,
+  // Tooltip,
   Typography,
   TypographyComponent,
   RawTable,
@@ -125,11 +125,11 @@ const EntryValidationText = ({ validationErrors, status }: EntryValidationTextPr
     return (
       <Flex gap={2}>
         <CrossCircle fill="danger600" />
-        <Tooltip label={validationErrorsMessages}>
+        {/* <Tooltip label={validationErrorsMessages}> */}
           <TypographyMaxWidth textColor="danger600" variant="omega" fontWeight="bold" ellipsis>
             {validationErrorsMessages}
           </TypographyMaxWidth>
-        </Tooltip>
+        {/* </Tooltip> */}
       </Flex>
     );
   }
@@ -257,6 +257,7 @@ const SelectedEntriesTableContent = ({
             <Table.Cell>
               <Flex>
                 <IconButton
+                  withTooltip={false}
                   tag={Link}
                   to={{
                     pathname: `${pathname}/${row.documentId}`,

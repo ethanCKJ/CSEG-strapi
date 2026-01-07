@@ -37,6 +37,7 @@ const ViewSettingsMenu = (props: ViewSettingsMenuProps) => {
     <Popover.Root>
       <Popover.Trigger>
         <IconButton
+          withTooltip={false}
           label={formatMessage({
             id: 'components.ViewSettings.tooltip',
             defaultMessage: 'View Settings',

@@ -29,7 +29,7 @@ import {
   ButtonProps, darkTheme,
   EmptyStateLayout,
   Flex,
-  Tooltip,
+  // Tooltip,
   Typography,
   IconButton, DesignSystemProvider,
 
@@ -516,7 +516,6 @@ const ProtectedListViewPage = () => {
   }
 
   return (
-      <DesignSystemProvider>
         <Page.Protect permissions={permissions}>
           {({permissions}) => (
               <DocumentRBAC permissions={permissions}>
@@ -524,7 +523,6 @@ const ProtectedListViewPage = () => {
               </DocumentRBAC>
           )}
         </Page.Protect>
-      </DesignSystemProvider>
   );
 };
 

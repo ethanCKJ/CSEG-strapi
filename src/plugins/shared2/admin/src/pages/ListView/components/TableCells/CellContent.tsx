@@ -1,4 +1,4 @@
-import { Tooltip, Typography } from '@strapi/design-system';
+import { /* Tooltip, */ Typography } from '@strapi/design-system';
 import isEmpty from 'lodash/isEmpty';
 
 import { CellValue } from './CellValue';
@@ -52,11 +52,11 @@ const CellContent = ({ content, mainField, attribute, rowId, name }: CellContent
 
     case 'string':
       return (
-        <Tooltip label={content}>
+        // <Tooltip label={content}>
           <Typography maxWidth="30rem" ellipsis textColor="neutral800">
             <CellValue type={attribute.type} value={content} />
           </Typography>
-        </Tooltip>
+        // </Tooltip>
       );
 
     default:
