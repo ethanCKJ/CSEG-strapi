@@ -1,4 +1,4 @@
-import { Badge, /* Tooltip, */ Typography, Menu } from '@strapi/design-system';
+import { Badge,  Tooltip,  Typography, Menu } from '@strapi/design-system';
 import { useIntl } from 'react-intl';
 import { styled } from 'styled-components';
 
@@ -21,11 +21,11 @@ const SingleComponent = ({ content, mainField }: SingleComponentProps) => {
   }
 
   return (
-    // <Tooltip label={content[mainField.name]}>
+    <Tooltip label={content[mainField.name]}>
       <Typography maxWidth="25rem" textColor="neutral800" ellipsis>
         <CellValue type={mainField.type} value={content[mainField.name]} />
       </Typography>
-    // </Tooltip>
+    </Tooltip>
   );
 };
 

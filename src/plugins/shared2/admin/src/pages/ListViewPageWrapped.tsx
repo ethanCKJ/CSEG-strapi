@@ -4,7 +4,6 @@ import {ProtectedListViewPage} from "./ListView/ListViewPage";
 
 const ListViewPageWrapped = () => {
   return (<DesignSystemProvider>
-    {/*<ListViewPage/>*/}
     <ProtectedListViewPage/>
 
   </DesignSystemProvider>);
