@@ -1,10 +1,7 @@
-import type { Plugin } from '@strapi/types';
-import history from './history';
-// import preview from './preview';
+import type { Core } from '@strapi/strapi';
 
-const register: Plugin.LoadedPlugin['register'] = async ({ strapi }) => {
-  await history.register?.({ strapi });
-  // await preview.register?.({ strapi });
+const register = ({ strapi }: { strapi: Core.Strapi }) => {
+  // register phase
 };
 
 export default register;

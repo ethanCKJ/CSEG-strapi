@@ -251,7 +251,7 @@ const useDoc = () => {
   const params = React.useMemo(() => buildValidParams(query), [query]);
 
   if (!collectionType) {
-    throw new Error('Could not find collectionType in url params');
+  throw new Error('Could not find collectionType in url params');
   }
 
   if (!slug) {

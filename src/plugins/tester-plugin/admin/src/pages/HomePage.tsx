@@ -1,4 +1,4 @@
-import {Main, Button} from '@strapi/design-system';
+import {Main, Button, Tooltip} from '@strapi/design-system';
 import { useIntl } from 'react-intl';
 import { useState } from 'react';
 import {Page, useRBAC } from '@strapi/strapi/admin';
@@ -16,7 +16,7 @@ const HomePage = () => {
   }
   console.log('Allowed Actions:', allowedActions);
   return (
-    <Main>
+    <Page.Main>
       <h1>Welcome to {formatMessage({ id: getTranslation('plugin.name') })}</h1>
       <div>Counter: {count}</div>
       <Button
@@ -25,7 +25,7 @@ const HomePage = () => {
       >
         Increment
       </Button>
-    </Main>
+    </Page.Main>
   );
 };
 

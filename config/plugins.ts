@@ -1,5 +1,5 @@
 export default () => ({
-  'shared2': {
+  'custom-content-manager': {
     enabled: true,
     resolve: './src/plugins/shared2',
   },

@@ -1,8 +1,7 @@
-import type { Plugin } from '@strapi/types';
-import history from './history';
+import type { Core } from '@strapi/strapi';
 
-const destroy: Plugin.LoadedPlugin['destroy'] = async ({ strapi }) => {
-  await history.destroy?.({ strapi });
+const destroy = ({ strapi }: { strapi: Core.Strapi }) => {
+  // destroy phase
 };
 
 export default destroy;
