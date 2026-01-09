@@ -47,13 +47,13 @@ import { useGetAllDocumentsQuery } from '../../services/documents';
 import { buildValidParams } from '../../utils/api';
 import { getTranslation } from '../../utils/translations';
 import { getDisplayName } from '../../utils/users';
-// import { DocumentStatus } from '../EditView/components/DocumentStatus';
-//
-// import { BulkActionsRenderer } from './components/BulkActions/Actions';
-// import { Filters } from './components/Filters';
-// import { TableActions } from './components/TableActions';
-// import { CellContent } from './components/TableCells/CellContent';
-// import { ViewSettingsMenu } from './components/ViewSettingsMenu';
+import { DocumentStatus } from '../EditView/components/DocumentStatus';
+
+import { BulkActionsRenderer } from './components/BulkActions/Actions';
+import { Filters } from './components/Filters';
+import { TableActions } from './components/TableActions';
+import { CellContent } from './components/TableCells/CellContent';
+import { ViewSettingsMenu } from './components/ViewSettingsMenu';
 
 import type { Modules } from '@strapi/types';
 
@@ -67,19 +67,14 @@ const LayoutsHeaderCustom = styled(Layouts.Header)`
 `;
 
 const ListViewPage = () => {
-
+  const { trackUsage } = useTracking();
   const navigate = useNavigate();
   const { formatMessage } = useIntl();
   const { toggleNotification } = useNotification();
   const { _unstableFormatAPIError: formatAPIError } = useAPIErrorHandler(getTranslation);
   // TODO: Replace useDoc with custom router.
   const { collectionType, model, schema } = useDoc();
-  console.log("ListViewPage collectionType:", collectionType, "model:", model, "schema:", schema);
-  return (<div>Hello from the listviewpage</div>)
   const { list } = useDocumentLayout(model);
-
-
-
 
   const [displayedHeaders, setDisplayedHeaders] = React.useState<ListFieldLayout[]>([]);
 
@@ -173,7 +168,7 @@ const ListViewPage = () => {
       const translation =
         typeof header.label === 'string'
           ? {
-              id: `content-manager.content-types.${model}.${header.name}`,
+              id: `custom-content-manager2.content-types.${model}.${header.name}`,
               defaultMessage: header.label,
             }
           : header.label;
@@ -221,7 +216,7 @@ const ListViewPage = () => {
   const contentTypeTitle = schema?.info.displayName
     ? formatMessage({ id: schema.info.displayName, defaultMessage: schema.info.displayName })
     : formatMessage({
-        id: 'content-manager.containers.untitled',
+        id: 'custom-content-manager2.containers.untitled',
         defaultMessage: 'Untitled',
       });
 
@@ -529,17 +524,33 @@ const ProtectedListViewPage = () => {
   const { slug = '' } = useParams<{
     slug: string;
   }>();
+  const {
+    permissions = [],
+    isLoading,
+    error,
+  } = useRBAC(
+    PERMISSIONS.map((action) => ({
+      action,
+      subject: slug,
+    }))
+  );
 
-  // ⚠️ PERMISSIONS BYPASSED - Skip permission checks
-  if (!slug) {
+  if (isLoading) {
+    return <Page.Loading />;
+  }
+
+  if (error || !slug) {
     return <Page.Error />;
   }
-  console.log("ProtectedListViewPage before return")
 
   return (
-      <ListViewPage />
-    // <DocumentRBAC permissions={null}>
-    // </DocumentRBAC>
+    <Page.Protect permissions={permissions}>
+      {({ permissions }) => (
+        <DocumentRBAC permissions={permissions}>
+          <ListViewPage />
+        </DocumentRBAC>
+      )}
+    </Page.Protect>
   );
 };
 

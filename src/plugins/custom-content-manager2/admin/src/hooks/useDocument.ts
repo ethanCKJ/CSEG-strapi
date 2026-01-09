@@ -1,4 +1,4 @@
-/** *
+/**
  * This hook doesn't use a context provider because we fetch directly from the server,
  * this sounds expensive but actually, it's really not. Because we have redux-toolkit-query
  * being a cache layer so if nothing invalidates the cache, we don't fetch again.
@@ -45,17 +45,13 @@ type Document = FindOne.Response['data'];
 
 type Schema = ContentType;
 
-/**
- * Return type of the useDocument hook
- */
 type UseDocument = (
   args: UseDocumentArgs,
   opts?: UseDocumentOpts
 ) => {
   /**
    * These are the schemas of the components used in the content type, organised
-   * by their uid. Note a component in this context is not a React component, but
-   * a group of Strapi fields. See custom component in the content-type builder.
+   * by their uid.
    */
   components: ComponentsDictionary;
   document?: Document;
@@ -63,7 +59,6 @@ type UseDocument = (
   isLoading: boolean;
   /**
    * This is the schema of the content type, it is not the same as the layout.
-   * See https://docs.strapi.io/cms/backend-customization/models#model-schema
    */
   schema?: Schema;
   schemas?: Schema[];
@@ -87,13 +82,12 @@ type UseDocument = (
 /**
  * @alpha
  * @public
- * @description Returns a single document based on the model, collection type & id passed as arguments.
- * Also extracts its schema from the redux cache to be used for creating a validation schema. This
- * interacts with the backend.
+ * @description Returns a document based on the model, collection type & id passed as arguments.
+ * Also extracts its schema from the redux cache to be used for creating a validation schema.
  * @example
  * ```tsx
  * const { id, model, collectionType } = useParams<{ id: string; model: string; collectionType: string }>();
- * // e.g. id = wtzl0pl13ylgzcpkr8sen509, model = api:event.event, collectionType = collection-types
+ *
  * if(!model || !collectionType) return null;
  *
  * const { document, isLoading, validate } = useDocument({ documentId: id, model, collectionType, params: { locale: 'en-GB' } })
@@ -150,7 +144,7 @@ const useDocument: UseDocument = (args, opts) => {
 
     // Otherwise, use a fallback
     return formatMessage({
-      id: 'content-manager.containers.untitled',
+      id: 'custom-content-manager2.containers.untitled',
       defaultMessage: 'Untitled',
     });
   };
@@ -243,10 +237,8 @@ const useDocument: UseDocument = (args, opts) => {
  * -----------------------------------------------------------------------------------------------*/
 
 /**
- * @internal this hook uses the router to extract the model, collection type & id from a url following
- * the structure /custom-content-manager3/:collectionType/:model/:id
- * This does not interact with the backend.
- * See admin/router.tsx
+ * @internal this hook uses the router to extract the model, collection type & id from the url.
+ * therefore, it shouldn't be used outside of the custom-content-manager2 because it won't work as intended.
  */
 const useDoc = () => {
   const { id, slug, collectionType, origin } = useParams<{
