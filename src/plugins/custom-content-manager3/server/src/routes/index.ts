@@ -1,11 +1,10 @@
-import admin from './admin';
-import history from '../history';
-import preview from '../preview';
-import homepage from '../homepage';
+import contentAPIRoutes from './content-api';
 
-export default {
-  admin,
-  ...(history.routes ? history.routes : {}),
-  ...(preview.routes ? preview.routes : {}),
-  ...homepage.routes,
+const routes = {
+  'content-api': {
+    type: 'content-api',
+    routes: contentAPIRoutes,
+  },
 };
+
+export default routes;
