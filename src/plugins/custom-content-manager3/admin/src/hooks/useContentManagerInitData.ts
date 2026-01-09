@@ -13,6 +13,7 @@ import { useIntl } from 'react-intl';
 
 import { COLLECTION_TYPES, SINGLE_TYPES } from '../constants/collections';
 import { HOOKS } from '../constants/hooks';
+import { PLUGIN_ID } from '../pluginId';
 import { AppState, setInitialData } from '../modules/app';
 import { useTypedDispatch, useTypedSelector } from '../modules/hooks';
 import { useGetAllContentTypeSettingsQuery } from '../services/contentTypes';
@@ -46,6 +47,7 @@ const useContentManagerInitData = (): AppState => {
     'useContentManagerInitData',
     (state) => state.runHookWaterfall
   );
+  console.log("file: useContentManagerInitData.ts:94 ~ useContentManagerInitData ~ runHookWaterfall:", runHookWaterfall)
   const { notifyStatus } = useNotifyAT();
   const { formatMessage } = useIntl();
   const { _unstableFormatAPIError: formatAPIError } = useAPIErrorHandler(getTranslation);
@@ -53,9 +55,10 @@ const useContentManagerInitData = (): AppState => {
     'useContentManagerInitData',
     (state) => state.checkUserHasPermissions
   );
+  console.log("file: useContentManagerInitData.ts:102 ~ useContentManagerInitData ~ checkUserHasPermissions:", checkUserHasPermissions)
 
-  const state = useTypedSelector((state) => state['content-manager'].app);
-
+  const state = useTypedSelector((state) => (state as any)[PLUGIN_ID].app);
+  console.log("file: useContentManagerInitData.ts:106 ~ useContentManagerInitData ~ state:", state)
   const initialDataQuery = useGetInitialDataQuery(undefined, {
     /**
      * TODO: remove this when the CTB has been refactored to use redux-toolkit-query

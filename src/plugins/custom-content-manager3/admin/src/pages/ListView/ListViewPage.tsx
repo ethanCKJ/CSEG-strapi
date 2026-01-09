@@ -73,10 +73,10 @@ const ListViewPage = () => {
   const { toggleNotification } = useNotification();
   const { _unstableFormatAPIError: formatAPIError } = useAPIErrorHandler(getTranslation);
   // TODO: Replace useDoc with custom router.
+  return (<div>Hello from the listviewpage</div>)
   const { collectionType, model, schema } = useDoc();
   const { list } = useDocumentLayout(model);
 
-  return (<div>Hello from the listviewpage</div>)
 
 
 
@@ -533,11 +533,12 @@ const ProtectedListViewPage = () => {
   if (!slug) {
     return <Page.Error />;
   }
+  console.log("ProtectedListViewPage before return")
 
   return (
-    <DocumentRBAC permissions={null}>
       <ListViewPage />
-    </DocumentRBAC>
+    // <DocumentRBAC permissions={null}>
+    // </DocumentRBAC>
   );
 };
 

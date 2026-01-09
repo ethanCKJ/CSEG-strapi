@@ -13,6 +13,7 @@ import { LeftMenu } from './components/LeftMenu';
 import { ItemTypes } from './constants/dragAndDrop';
 import { useContentManagerInitData } from './hooks/useContentManagerInitData';
 import { getTranslation } from './utils/translations';
+import {ContentType} from "../../shared/contracts/content-types";
 
 /* -------------------------------------------------------------------------------------------------
  * Layout
@@ -22,10 +23,16 @@ const Layout = () => {
   const contentTypeMatch = useMatch('/custom-content-manager3/:kind/:uid/*');
   const isMobile = useIsMobile();
 
-  const { isLoading, collectionTypeLinks, models, singleTypeLinks } = useContentManagerInitData();
-  const authorisedModels = [...collectionTypeLinks, ...singleTypeLinks].sort((a, b) =>
-    a.title.localeCompare(b.title)
-  );
+  // const { isLoading, collectionTypeLinks, models, singleTypeLinks } = useContentManagerInitData();
+  // const authorisedModels = [...collectionTypeLinks, ...singleTypeLinks].sort((a, b) =>
+  //   a.title.localeCompare(b.title)
+  // );
+  // console.log("In Layout: authorisedModels =", authorisedModels, "loading =", isLoading);
+  // TODO: Use real data
+  const isLoading = false;
+  const models = [1,2,3,4,5]
+  const authorisedModels= [1,2,3,4,5]
+
 
   const { pathname } = useLocation();
   const { formatMessage } = useIntl();
@@ -45,7 +52,8 @@ const Layout = () => {
   }
 
   // Array of models that are displayed in the content manager
-  const supportedModelsToDisplay = models.filter(({ isDisplayed }) => isDisplayed);
+  // const supportedModelsToDisplay = models.filter(({ isDisplayed }) => isDisplayed);
+  const supportedModelsToDisplay = models;
 
   // Redirect the user to the 403 page
   if (
