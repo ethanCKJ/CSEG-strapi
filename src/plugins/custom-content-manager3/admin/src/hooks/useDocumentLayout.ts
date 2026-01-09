@@ -126,6 +126,9 @@ const DEFAULT_SETTINGS = {
  *
  * If the fetch fails, it will display a notification to the user.
  *
+ * (Student) I removed the runHookWaterfall for the edit layout since I will remove the edit layout feature
+ * from the custom-content-manager plugin.
+ *
  * @example
  * ```tsx
  * const { model } = useParams<{ model: string }>();
@@ -138,7 +141,6 @@ const DEFAULT_SETTINGS = {
 const useDocumentLayout: UseDocumentLayout = (model) => {
   const { schema, components } = useDocument({ model, collectionType: '' }, { skip: true });
   const [{ query }] = useQueryParams();
-  const runHookWaterfall = useStrapiApp('useDocumentLayout', (state) => state.runHookWaterfall);
   const { toggleNotification } = useNotification();
   const { _unstableFormatAPIError: formatAPIError } = useAPIErrorHandler();
   const { isLoading: isLoadingSchemas, schemas } = useContentTypeSchema();
@@ -186,19 +188,10 @@ const useDocumentLayout: UseDocumentLayout = (model) => {
         } as ListLayout);
   }, [data, isLoading, schemas, schema, components]);
 
-  const { layout: edit } = React.useMemo(
-    () =>
-      runHookWaterfall(HOOKS.MUTATE_EDIT_VIEW_LAYOUT, {
-        layout: editLayout,
-        query,
-      }),
-    [editLayout, query, runHookWaterfall]
-  );
-
   return {
     error,
     isLoading,
-    edit,
+    edit: editLayout,
     list: listLayout,
   } satisfies ReturnType<UseDocumentLayout>;
 };

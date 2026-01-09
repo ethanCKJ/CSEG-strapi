@@ -75,8 +75,9 @@ const ListViewPage = () => {
   // TODO: Replace useDoc with custom router.
   const { collectionType, model, schema } = useDoc();
   console.log("ListViewPage collectionType:", collectionType, "model:", model, "schema:", schema);
-  return (<div>Hello from the listviewpage</div>)
   const { list } = useDocumentLayout(model);
+  console.log("ListViewPage list layout:", list);
+  return (<div>Hello from the listviewpage</div>)
 
 
 
