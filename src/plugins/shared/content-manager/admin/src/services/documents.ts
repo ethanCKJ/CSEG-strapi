@@ -53,29 +53,6 @@ const documentApi = contentManagerApi.injectEndpoints({
         ];
       },
     }),
-    cloneDocument: builder.mutation<
-      Clone.Response,
-      Clone.Params & {
-        data: Clone.Request['body'];
-        params?: Clone.Request['query'];
-      }
-    >({
-      query: ({ model, sourceId, data, params }) => ({
-        url: `/content-manager/collection-types/${model}/clone/${sourceId}`,
-        method: 'POST',
-        data,
-        config: {
-          params,
-        },
-      }),
-      invalidatesTags: (_result, _error, { model }) => [
-        { type: 'Document', id: `${model}_LIST` },
-        { type: 'UidAvailability', id: model },
-        'RecentDocumentList',
-        'CountDocuments',
-        'UpcomingReleasesList',
-      ],
-    }),
     /**
      * Creates a new collection-type document. This should ONLY be used for collection-types.
      * single-types should always be using `updateDocument` since they always exist.
