@@ -15,7 +15,7 @@ import {
   Layouts,
   useTable,
   tours,
-} from '@strapi/admin/strapi-admin';
+} from '@strapi/strapi/admin';
 import {
   Button,
   Flex,
