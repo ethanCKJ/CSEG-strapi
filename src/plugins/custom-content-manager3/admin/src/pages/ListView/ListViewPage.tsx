@@ -22,7 +22,7 @@ import {
   Typography,
   ButtonProps,
   Box,
-  EmptyStateLayout,
+  EmptyStateLayout, DesignSystemProvider,
 } from '@strapi/design-system';
 import { Plus } from '@strapi/icons';
 import { EmptyDocuments } from '@strapi/icons/symbols';
@@ -56,6 +56,8 @@ import { getDisplayName } from '../../utils/users';
 // import { ViewSettingsMenu } from './components/ViewSettingsMenu';
 
 import type { Modules } from '@strapi/types';
+import {ViewSettingsMenu} from "./components/ViewSettingsMenu";
+import { Filters } from "./components/Filters";
 
 const { INJECT_COLUMN_IN_TABLE } = HOOKS;
 
@@ -156,7 +158,6 @@ const ListViewPage = () => {
 
   const runHookWaterfall = useStrapiApp('ListViewPage', (state) => state.runHookWaterfall);
   console.log("ListViewPage runHookWaterfall:", runHookWaterfall);
-  return (<div>Hello from the listviewpage</div>)
   /**
    * Run the waterfall and then inject our additional table headers.
    */
@@ -187,7 +188,7 @@ const ListViewPage = () => {
         name: `${header.name}${header.mainField?.name ? `.${header.mainField.name}` : ''}`,
       };
     });
-
+    // The draft and publish status column.
     if (schema?.options?.draftAndPublish) {
       formattedHeaders.push({
         attribute: {
@@ -212,6 +213,8 @@ const ListViewPage = () => {
     schema?.options?.draftAndPublish,
     model,
   ]);
+  console.log("ListViewPage tableHeaders:", tableHeaders);
+
 
   if (isFetching) {
     return <Page.Loading />;
@@ -227,31 +230,24 @@ const ListViewPage = () => {
         id: 'content-manager.containers.untitled',
         defaultMessage: 'Untitled',
       });
+  console.log("ListViewPage contentTypeTitle:", contentTypeTitle);
 
   const handleRowClick = (id: Modules.Documents.ID) => () => {
-    trackUsage('willEditEntryFromList');
     navigate({
       pathname: id.toString(),
       search: stringify({ plugins: query.plugins }),
     });
   };
+  // return (<div>Debuigger</div>)
 
-  if (!isFetching && results.length === 0) {
+  if (!isFetching && results.length !== 0) {
     return (
       <>
-        <tours.contentManager.Introduction>
-          {/* Invisible Anchor */}
-          <Box />
-        </tours.contentManager.Introduction>
         <Page.Main>
           <Page.Title>{`${contentTypeTitle}`}</Page.Title>
           <LayoutsHeaderCustom
             primaryAction={
-              canCreate ? (
-                <tours.contentManager.CreateNewEntry>
                   <CreateButton />
-                </tours.contentManager.CreateNewEntry>
-              ) : null
             }
             subtitle={formatMessage(
               {
@@ -271,6 +267,7 @@ const ListViewPage = () => {
                 <ViewSettingsMenu
                   setHeaders={handleSetHeaders}
                   resetHeaders={() => setDisplayedHeaders(list.layout)}
+
                   headers={displayedHeaders.map((header) => header.name)}
                 />
               </>
@@ -311,7 +308,7 @@ const ListViewPage = () => {
       </>
     );
   }
-
+  return (<div>Hello from the listviewpage</div>)
   return (
     <>
       <tours.contentManager.Introduction>
@@ -497,16 +494,12 @@ interface CreateButtonProps extends Pick<ButtonProps, 'variant'> {}
 
 const CreateButton = ({ variant }: CreateButtonProps) => {
   const { formatMessage } = useIntl();
-  const { trackUsage } = useTracking();
   const [{ query }] = useQueryParams<{ plugins: object }>();
 
   return (
     <Button
       variant={variant}
       tag={ReactRouterLink}
-      onClick={() => {
-        trackUsage('willCreateEntry', { status: 'draft' });
-      }}
       startIcon={<Plus />}
       style={{ textDecoration: 'none' }}
       to={{
@@ -540,7 +533,9 @@ const ProtectedListViewPage = () => {
   console.log("ProtectedListViewPage before return")
 
   return (
+    <DesignSystemProvider>
       <ListViewPage />
+    </DesignSystemProvider>
     // <DocumentRBAC permissions={null}>
     // </DocumentRBAC>
   );
