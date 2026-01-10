@@ -25,30 +25,30 @@ export default {
     })
 
     app.addMenuLink({
-      to: PLUGIN_ID,
+      to: `plugins/${PLUGIN_ID}`,
       icon: Bell,
       intlLabel: {
         id: `${PLUGIN_ID}.plugin.name`,
         defaultMessage: PLUGIN_ID,
       },
-      // Component: async () => {
-      //   const { App } = await import('./pages/App');
-      //
-      //   return App;
-      // },
-    });
+      Component: async () => {
+        const { App } = await import('./pages/App');
 
-    app.router.addRoute({
-      path: 'custom-content-manager3/*',
-      lazy: async () => {
-        const { Layout } = await import('./layout');
-
-        return {
-          Component: Layout,
-        };
+        return App;
       },
-      children: routes,
     });
+
+    // app.router.addRoute({
+    //   path: 'custom-content-manager3/*',
+    //   lazy: async () => {
+    //     const { Layout } = await import('./layout');
+    //
+    //     return {
+    //       Component: Layout,
+    //     };
+    //   },
+    //   children: routes,
+    // });
 
     app.registerPlugin(cm.config);
   },
