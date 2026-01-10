@@ -1,4 +1,4 @@
-import { createRulesEngine } from '@strapi/admin/strapi-admin';
+import { createRulesEngine } from '@strapi/strapi/admin';
 import { generateNKeysBetween } from 'fractional-indexing';
 import pipe from 'lodash/fp/pipe';
 

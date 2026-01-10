@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { createContext, useNotification } from '@strapi/admin/strapi-admin';
+import { createContext, useNotification } from '@strapi/strapi/admin';
 import { Box, Popover } from '@strapi/design-system';
 import { useIntl } from 'react-intl';
 

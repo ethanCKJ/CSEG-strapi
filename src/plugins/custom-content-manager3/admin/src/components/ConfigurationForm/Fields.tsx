@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useDroppable, DndContext, UniqueIdentifier, DragOverlay } from '@dnd-kit/core';
 import { arraySwap, SortableContext, useSortable, rectSwappingStrategy } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { useField, useForm, useIsDesktop } from '@strapi/admin/strapi-admin';
+import { useField, useForm, useIsDesktop } from '@strapi/strapi/admin';
 import {
   Modal,
   Box,

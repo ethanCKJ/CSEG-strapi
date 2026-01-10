@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { useField } from '@strapi/admin/strapi-admin';
+import { useField } from '@strapi/strapi/admin';
 import { Schema } from '@strapi/types';
 
 import { useHasInputPopoverParent } from '../components/InputPopover';

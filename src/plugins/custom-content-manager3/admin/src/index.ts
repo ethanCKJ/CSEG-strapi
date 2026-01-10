@@ -12,7 +12,7 @@ import { previewAdmin } from './preview';
 import { routes } from './router';
 import { prefixPluginTranslations } from './utils/translations';
 
-import type { WidgetArgs } from '@strapi/admin/strapi-admin';
+import type { WidgetArgs } from '@strapi/strapi/admin';
 
 import 'prismjs';
 import {ContentManagerPlugin} from "./content-manager";

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Widget, useTracking, useGetCountDocumentsQuery } from '@strapi/admin/strapi-admin';
+import { Widget, useTracking, useGetCountDocumentsQuery } from '@strapi/strapi/admin';
 import {
   Box,
   Flex,

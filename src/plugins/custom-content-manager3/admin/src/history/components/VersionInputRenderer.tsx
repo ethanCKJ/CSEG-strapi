@@ -6,7 +6,7 @@ import {
   InputRenderer as FormInputRenderer,
   useField,
   Form,
-} from '@strapi/admin/strapi-admin';
+} from '@strapi/strapi/admin';
 import { Alert, Box, Field, Flex, Link, Tooltip, Typography } from '@strapi/design-system';
 import { useIntl } from 'react-intl';
 import { NavLink } from 'react-router-dom';

@@ -1,4 +1,4 @@
-import { translatedErrors } from '@strapi/admin/strapi-admin';
+import { translatedErrors } from '@strapi/strapi/admin';
 import pipe from 'lodash/fp/pipe';
 import * as yup from 'yup';
 

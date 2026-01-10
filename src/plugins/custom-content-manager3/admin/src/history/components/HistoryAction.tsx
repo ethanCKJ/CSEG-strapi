@@ -1,4 +1,4 @@
-import { useQueryParams, useTracking } from '@strapi/admin/strapi-admin';
+import { useQueryParams, useTracking } from '@strapi/strapi/admin';
 import { ClockCounterClockwise } from '@strapi/icons';
 import { stringify } from 'qs';
 import { useIntl } from 'react-intl';

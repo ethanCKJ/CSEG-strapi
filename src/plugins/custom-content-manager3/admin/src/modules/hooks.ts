@@ -3,7 +3,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 import { State } from './reducers';
 
-import type { Store } from '@strapi/admin/strapi-admin';
+import type { Store } from '@strapi/strapi/admin';
 
 type RootState = ReturnType<Store['getState']> & {
   ['content-manager']: State;

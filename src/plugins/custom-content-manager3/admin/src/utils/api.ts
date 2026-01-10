@@ -1,5 +1,5 @@
 import { SerializedError } from '@reduxjs/toolkit';
-import { ApiError, type UnknownApiError } from '@strapi/admin/strapi-admin';
+import { ApiError, type UnknownApiError } from '@strapi/strapi/admin';
 
 interface Query {
   plugins?: Record<string, unknown>;

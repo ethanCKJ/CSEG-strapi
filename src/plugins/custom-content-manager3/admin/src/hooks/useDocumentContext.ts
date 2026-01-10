@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { useQueryParams } from '@strapi/admin/strapi-admin';
+import { useQueryParams } from '@strapi/strapi/admin';
 
 import { useDoc, useDocument, type UseDocument } from '../hooks/useDocument';
 import { useRelationModal } from '../pages/EditView/components/FormInputs/Relations/RelationModal';

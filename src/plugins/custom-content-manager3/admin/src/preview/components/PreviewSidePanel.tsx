@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { useQueryParams, useTracking, useForm } from '@strapi/admin/strapi-admin';
+import { useQueryParams, useTracking, useForm } from '@strapi/strapi/admin';
 import { Box, Button, Tooltip, type TooltipProps } from '@strapi/design-system';
 import { stringify } from 'qs';
 import { useIntl } from 'react-intl';

@@ -1,4 +1,4 @@
-import type { SanitizedAdminUser } from '@strapi/admin/strapi-admin';
+import type { SanitizedAdminUser } from '@strapi/strapi/admin';
 
 /**
  * Retrieves the display name of an admin panel user

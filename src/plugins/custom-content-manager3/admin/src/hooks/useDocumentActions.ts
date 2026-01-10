@@ -6,8 +6,8 @@ import {
   useTracking,
   type TrackingEvent,
   useAPIErrorHandler,
-} from '@strapi/admin/strapi-admin';
-import { useGetAIFeatureConfigQuery, useAIAvailability } from '@strapi/admin/strapi-admin/ee';
+} from '@strapi/strapi/admin';
+import { useGetAIFeatureConfigQuery, useAIAvailability } from '@strapi/strapi/admin/ee';
 import { useIntl, type MessageDescriptor } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 

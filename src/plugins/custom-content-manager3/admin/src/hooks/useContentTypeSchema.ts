@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { useNotification, useAPIErrorHandler } from '@strapi/admin/strapi-admin';
+import { useNotification, useAPIErrorHandler } from '@strapi/strapi/admin';
 
 import { useGetInitialDataQuery } from '../services/init';
 

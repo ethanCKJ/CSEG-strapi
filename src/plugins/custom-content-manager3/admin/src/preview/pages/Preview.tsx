@@ -8,7 +8,7 @@ import {
   Form as FormContext,
   type FieldContentSourceMap,
   useNotification,
-} from '@strapi/admin/strapi-admin';
+} from '@strapi/strapi/admin';
 import {
   Box,
   Flex,

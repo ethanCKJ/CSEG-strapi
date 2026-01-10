@@ -1,4 +1,4 @@
-import { NotificationConfig } from '@strapi/admin/strapi-admin';
+import { NotificationConfig } from '@strapi/strapi/admin';
 import { MessageDescriptor } from 'react-intl';
 
 import { previewScript } from './previewScript';

@@ -4,7 +4,7 @@ import {
   Form,
   InputProps,
   useField,
-} from '@strapi/admin/strapi-admin';
+} from '@strapi/strapi/admin';
 import { Button, Flex, Grid, Modal } from '@strapi/design-system';
 import { useIntl } from 'react-intl';
 import * as yup from 'yup';

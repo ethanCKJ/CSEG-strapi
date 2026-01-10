@@ -13,7 +13,7 @@ import {
   FormErrors,
   getYupValidationErrors,
   useForm,
-} from '@strapi/admin/strapi-admin';
+} from '@strapi/strapi/admin';
 import { useIntl } from 'react-intl';
 import { useParams } from 'react-router-dom';
 import { ValidationError } from 'yup';

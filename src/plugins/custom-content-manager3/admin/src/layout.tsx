@@ -1,7 +1,7 @@
 /* eslint-disable check-file/filename-naming-convention */
 import * as React from 'react';
 
-import { Page, Layouts, SubNav, useIsMobile } from '@strapi/admin/strapi-admin';
+import { Page, Layouts, SubNav, useIsMobile } from '@strapi/strapi/admin';
 import { useIntl } from 'react-intl';
 import { Navigate, Outlet, useLocation, useMatch } from 'react-router-dom';
 

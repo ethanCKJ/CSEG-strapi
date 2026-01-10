@@ -7,7 +7,7 @@ import {
   createContext,
   Page,
   useQueryParams,
-} from '@strapi/admin/strapi-admin';
+} from '@strapi/strapi/admin';
 import { useParams } from 'react-router-dom';
 
 import type { Schema } from '@strapi/types';

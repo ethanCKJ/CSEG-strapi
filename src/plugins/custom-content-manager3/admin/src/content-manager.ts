@@ -19,7 +19,7 @@ import { PLUGIN_ID } from './constants/plugin';
 
 import type { Document } from './hooks/useDocument';
 import type { DocumentMetadata } from '../../shared/contracts/collection-types';
-import type { DescriptionComponent, PluginConfig } from '@strapi/admin/strapi-admin';
+import type { DescriptionComponent, PluginConfig } from '@strapi/strapi/admin';
 
 /* -------------------------------------------------------------------------------------------------
  * Configuration Types

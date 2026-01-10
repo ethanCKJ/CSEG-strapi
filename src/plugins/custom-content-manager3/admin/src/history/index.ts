@@ -4,7 +4,7 @@ import { type ContentManagerPlugin } from '../content-manager';
 
 import { HistoryAction } from './components/HistoryAction';
 
-import type { StrapiApp } from '@strapi/admin/strapi-admin';
+import type { StrapiApp } from '@strapi/strapi/admin';
 import type { Plugin } from '@strapi/types';
 
 const historyAdmin: Partial<Plugin.Config.AdminInput> = {

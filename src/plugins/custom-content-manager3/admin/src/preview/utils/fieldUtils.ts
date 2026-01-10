@@ -1,4 +1,4 @@
-import { type FieldContentSourceMap } from '@strapi/admin/strapi-admin';
+import { type FieldContentSourceMap } from '@strapi/strapi/admin';
 
 import type { PREVIEW_ERROR_MESSAGES } from './constants';
 import type { PreviewContextValue } from '../pages/Preview';

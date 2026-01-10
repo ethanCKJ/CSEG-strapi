@@ -7,7 +7,7 @@ import {
   InputRenderer,
   BackButton,
   Layouts,
-} from '@strapi/admin/strapi-admin';
+} from '@strapi/strapi/admin';
 import { Button, Divider, Flex, Grid, Main, Typography } from '@strapi/design-system';
 import { generateNKeysBetween } from 'fractional-indexing';
 import pipe from 'lodash/fp/pipe';

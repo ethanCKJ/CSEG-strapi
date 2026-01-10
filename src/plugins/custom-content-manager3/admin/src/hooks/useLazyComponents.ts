@@ -1,6 +1,6 @@
 import { ComponentType, useCallback, useEffect, useState } from 'react';
 
-import { StrapiAppContextValue, useStrapiApp } from '@strapi/admin/strapi-admin';
+import { StrapiAppContextValue, useStrapiApp } from '@strapi/strapi/admin';
 
 const componentStore = new Map<string, ComponentType | undefined>();
 

@@ -8,7 +8,7 @@ import {
   useRBAC,
   Layouts,
   GradientBadge,
-} from '@strapi/admin/strapi-admin';
+} from '@strapi/strapi/admin';
 import { Button, Typography, Flex, Link, Dialog } from '@strapi/design-system';
 import { ArrowLeft, WarningCircle } from '@strapi/icons';
 import { stringify } from 'qs';

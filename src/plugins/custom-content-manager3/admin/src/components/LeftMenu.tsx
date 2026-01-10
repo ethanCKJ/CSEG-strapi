@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { useQueryParams, SubNav } from '@strapi/admin/strapi-admin';
+import { useQueryParams, SubNav } from '@strapi/strapi/admin';
 import { Flex, Searchbar, useCollator, useFilter, Divider, Loader } from '@strapi/design-system';
 import { parse, stringify } from 'qs';
 import { useIntl } from 'react-intl';

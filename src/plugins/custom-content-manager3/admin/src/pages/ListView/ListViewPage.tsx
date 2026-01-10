@@ -533,9 +533,7 @@ const ProtectedListViewPage = () => {
   console.log("ProtectedListViewPage before return")
 
   return (
-    <DesignSystemProvider>
       <ListViewPage />
-    </DesignSystemProvider>
     // <DocumentRBAC permissions={null}>
     // </DocumentRBAC>
   );
