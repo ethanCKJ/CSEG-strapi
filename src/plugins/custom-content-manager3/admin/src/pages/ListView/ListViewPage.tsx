@@ -8,7 +8,6 @@ import {
   BackButton,
   useNotification,
   useStrapiApp,
-
   useAPIErrorHandler,
   useQueryParams,
   useRBAC,
@@ -195,10 +194,7 @@ const ListViewPage = () => {
           type: 'custom',
         },
         name: 'status',
-        label: formatMessage({
-          id: getTranslation(`containers.list.table-headers.status`),
-          defaultMessage: 'status',
-        }),
+        label: 'status',
         searchable: false,
         sortable: false,
       } satisfies ListFieldLayout);
@@ -224,12 +220,7 @@ const ListViewPage = () => {
     return <Page.Error />;
   }
 
-  const contentTypeTitle = schema?.info.displayName
-    ? formatMessage({ id: schema.info.displayName, defaultMessage: schema.info.displayName })
-    : formatMessage({
-        id: 'content-manager.containers.untitled',
-        defaultMessage: 'Untitled',
-      });
+  const contentTypeTitle = schema?.info.displayName ?  schema.info.displayName : 'Untitled'
   console.log("ListViewPage contentTypeTitle:", contentTypeTitle);
 
   const handleRowClick = (id: Modules.Documents.ID) => () => {
@@ -239,28 +230,31 @@ const ListViewPage = () => {
     });
   };
   // return (<div>Debuigger</div>)
+  // MAke !== to ===
 
   if (!isFetching && results.length !== 0) {
     return (
       <>
         <Page.Main>
           <Page.Title>{`${contentTypeTitle}`}</Page.Title>
-          <LayoutsHeaderCustom
-            primaryAction={
-                  <CreateButton />
-            }
-            subtitle={formatMessage(
-              {
-                id: getTranslation('pages.ListView.header-subtitle'),
-                defaultMessage:
-                  '{number, plural, =0 {# entries} one {# entry} other {# entries}} found',
-              },
-              { number: pagination?.total }
-            )}
-            title={contentTypeTitle}
-            navigationAction={<BackButton />}
-          />
+          <Flex paddingLeft={10} paddingBottom={4} paddingTop={4} direction="column" alignItems="start">
+            <Typography variant={"alpha"}>{`${contentTypeTitle}`}</Typography>
+            <Typography variant={"omega"}>{`${pagination?.total} found`}</Typography>
+          </Flex>
           <Layouts.Action
+            startActions={
+              <>
+                <CreateButton variant={"primary"} contentTypeTitle={contentTypeTitle}/>
+                {list.settings.searchable && (
+                  <SearchInput
+                    label={`Search for ${contentTypeTitle}`}
+                    placeholder='Search'
+                    trackedEvent="didSearch"
+                  />
+                )}
+                {list.settings.filterable && schema ? <Filters schema={schema} /> : null}
+              </>
+            }
             endActions={
               <>
                 <InjectionZone area="listView.actions" />
@@ -272,33 +266,12 @@ const ListViewPage = () => {
                 />
               </>
             }
-            startActions={
-              <>
-                {list.settings.searchable && (
-                  <SearchInput
-                    label={formatMessage(
-                      { id: 'app.component.search.label', defaultMessage: 'Search for {target}' },
-                      { target: contentTypeTitle }
-                    )}
-                    placeholder={formatMessage({
-                      id: 'global.search',
-                      defaultMessage: 'Search',
-                    })}
-                    trackedEvent="didSearch"
-                  />
-                )}
-                {list.settings.filterable && schema ? <Filters schema={schema} /> : null}
-              </>
-            }
           />
           <Layouts.Content>
             <Box background="neutral0" shadow="filterShadow" hasRadius>
               <EmptyStateLayout
-                action={canCreate ? <CreateButton variant="secondary" /> : null}
-                content={formatMessage({
-                  id: 'app.components.EmptyStateLayout.content-document',
-                  defaultMessage: 'No content found',
-                })}
+                action={canCreate ? <CreateButton variant="secondary" contentTypeTitle={contentTypeTitle} /> : null}
+                content='No content found'
                 hasRadius
                 icon={<EmptyDocuments width="16rem" />}
               />
@@ -325,14 +298,7 @@ const ListViewPage = () => {
               </tours.contentManager.CreateNewEntry>
             ) : null
           }
-          subtitle={formatMessage(
-            {
-              id: getTranslation('pages.ListView.header-subtitle'),
-              defaultMessage:
-                '{number, plural, =0 {# entries} one {# entry} other {# entries}} found',
-            },
-            { number: pagination?.total }
-          )}
+          subtitle={`{number, plural, =0 {# entries} one {# entry} other {# entries}} found`.replace('{number}', pagination?.total)}
           title={contentTypeTitle}
           navigationAction={<BackButton />}
         />
@@ -352,14 +318,8 @@ const ListViewPage = () => {
               {list.settings.searchable && (
                 <SearchInput
                   disabled={results.length === 0}
-                  label={formatMessage(
-                    { id: 'app.component.search.label', defaultMessage: 'Search for {target}' },
-                    { target: contentTypeTitle }
-                  )}
-                  placeholder={formatMessage({
-                    id: 'global.search',
-                    defaultMessage: 'Search',
-                  })}
+                  label={`Search for ${contentTypeTitle}`}
+                  placeholder='Search'
                   trackedEvent="didSearch"
                 />
               )}
@@ -445,7 +405,6 @@ const ListViewPage = () => {
             </Table.Root>
             <Pagination.Root
               {...pagination}
-              onPageSizeChange={() => trackUsage('willChangeNumberOfEntriesPerPage')}
             >
               <Pagination.PageSize />
               <Pagination.Links />
@@ -490,10 +449,11 @@ const TableActionsBar = () => {
  * CreateButton
  * -----------------------------------------------------------------------------------------------*/
 
-interface CreateButtonProps extends Pick<ButtonProps, 'variant'> {}
+interface CreateButtonProps extends Pick<ButtonProps, 'variant'> {
+  contentTypeTitle?: string;
+}
 
-const CreateButton = ({ variant }: CreateButtonProps) => {
-  const { formatMessage } = useIntl();
+const CreateButton = ({ variant, contentTypeTitle }: CreateButtonProps) => {
   const [{ query }] = useQueryParams<{ plugins: object }>();
 
   return (
@@ -509,10 +469,7 @@ const CreateButton = ({ variant }: CreateButtonProps) => {
       minWidth="max-content"
       marginLeft={2}
     >
-      {formatMessage({
-        id: getTranslation('HeaderLayout.button.label-add-entry'),
-        defaultMessage: 'Create new entry',
-      })}
+      {`Create new ${contentTypeTitle || 'entry'}`}
     </Button>
   );
 };
