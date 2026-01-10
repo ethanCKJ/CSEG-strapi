@@ -1,7 +1,14 @@
 import {Main, Button, Tooltip} from '@strapi/design-system';
 import { useIntl } from 'react-intl';
 import { useState } from 'react';
-import {Page, useRBAC } from '@strapi/strapi/admin';
+import { useRBAC, Page, useStrapiApp } from '@strapi/strapi/admin';
+
+// import {
+//   useNotification,
+//   useStrapiApp,
+//   useAPIErrorHandler,
+//   useQueryParams,
+// } from '@strapi/admin/strapi-admin';
 
 import pluginPermissions from '../permissions.js';
 import { getTranslation } from '../utils/getTranslation';
@@ -11,13 +18,16 @@ const HomePage = () => {
   const [count, setCount] = useState(0);
   const { isLoading, allowedActions } = useRBAC(pluginPermissions);
 
+  const state = useStrapiApp("HomePage", (state) => state);
+  console.log('Strapi App State:', state);
+
   if (isLoading){
     return <Page.Loading></Page.Loading>
   }
   console.log('Allowed Actions:', allowedActions);
   return (
     <Page.Main>
-      <h1>Welcome to {formatMessage({ id: getTranslation('plugin.name') })}</h1>
+      <h1>Welcome to 1 {formatMessage({ id: getTranslation('plugin.name') })}</h1>
       <div>Counter: {count}</div>
       <Button
         onClick={() => setCount(count + 1)}

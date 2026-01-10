@@ -8,7 +8,7 @@ import {
   BackButton,
   useNotification,
   useStrapiApp,
-  useTracking,
+
   useAPIErrorHandler,
   useQueryParams,
   useRBAC,
@@ -77,19 +77,18 @@ const ListViewPage = () => {
   console.log("ListViewPage collectionType:", collectionType, "model:", model, "schema:", schema);
   const { list } = useDocumentLayout(model);
   console.log("ListViewPage list layout:", list);
-  return (<div>Hello from the listviewpage</div>)
-
-
-
 
   const [displayedHeaders, setDisplayedHeaders] = React.useState<ListFieldLayout[]>([]);
 
   const listLayout = usePrev(list.layout);
-  // OOh, using useEffect to chain non side-effect events.
+
   React.useEffect(() => {
     /**
      * ONLY update the displayedHeaders if the document
-     * layout has actually changed in value.
+     * layout from backend has actually changed in value.
+     *
+     * This is a performance optimization to prevent unnecessary
+     * displayedHeaders updates.
      */
     if (!isEqual(listLayout, list.layout)) {
       setDisplayedHeaders(list.layout);
@@ -101,6 +100,7 @@ const ListViewPage = () => {
       convertListLayoutToFieldLayouts(headers, schema!.attributes, list.metadatas)
     );
   };
+
 
   const [{ query }] = useQueryParams<{
     plugins?: Record<string, unknown>;
@@ -121,6 +121,7 @@ const ListViewPage = () => {
     model,
     params,
   });
+  console.log("ListViewPage data:", data, "error:", error, "isFetching:", isFetching);
 
   /**
    * If the API returns an error, display a notification
@@ -150,11 +151,12 @@ const ListViewPage = () => {
     }
   }, [pagination, formatMessage, query, navigate]);
 
-  const { canCreate } = useDocumentRBAC('ListViewPage', ({ canCreate }) => ({
-    canCreate,
-  }));
 
-  const runHookWaterfall = useStrapiApp('ListViewPage', ({ runHookWaterfall }) => runHookWaterfall);
+  const canCreate = true;
+
+  const runHookWaterfall = useStrapiApp('ListViewPage', (state) => state.runHookWaterfall);
+  console.log("ListViewPage runHookWaterfall:", runHookWaterfall);
+  return (<div>Hello from the listviewpage</div>)
   /**
    * Run the waterfall and then inject our additional table headers.
    */
