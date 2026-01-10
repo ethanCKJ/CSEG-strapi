@@ -30,7 +30,7 @@ import isEqual from 'lodash/isEqual';
 import { stringify } from 'qs';
 import { useIntl } from 'react-intl';
 import { useNavigate, Link as ReactRouterLink, useParams } from 'react-router-dom';
-import { styled } from 'styled-components';
+import { styled, useTheme } from 'styled-components';
 
 import { InjectionZone } from '../../components/InjectionZone';
 import { HOOKS } from '../../constants/hooks';
@@ -522,6 +522,7 @@ const CreateButton = ({ variant }: CreateButtonProps) => {
  * -----------------------------------------------------------------------------------------------*/
 
 const ProtectedListViewPage = () => {
+
   const { slug = '' } = useParams<{
     slug: string;
   }>();
