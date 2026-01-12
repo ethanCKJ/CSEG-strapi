@@ -58,6 +58,7 @@ import type { Modules } from '@strapi/types';
 import {ViewSettingsMenu} from "./components/ViewSettingsMenu";
 import { Filters } from "./components/Filters";
 import {ContentType} from "../../../../shared/contracts/content-types";
+import {DocumentStatus} from "../EditView/components/DocumentStatus";
 
 const { INJECT_COLUMN_IN_TABLE } = HOOKS;
 
@@ -342,7 +343,7 @@ const ListViewPage = () => {
         <Layouts.Content>
           <Flex gap={4} direction="column" alignItems="stretch">
             <Table.Root rows={results} headers={tableHeaders} isLoading={isFetching}>
-              <TableActionsBar />
+              {/*<TableActionsBar />*/}
               <Table.Content>
                 <Table.Head>
                   <Table.HeaderCheckboxCell />
@@ -353,64 +354,63 @@ const ListViewPage = () => {
                 <Table.Loading />
                 <Table.Empty action={<CreateButton variant="secondary" contentTypeTitle={contentTypeTitle} />} />
                 <Table.Body>
-                  <div>sdafsdfadsf</div>
-                  {/*{results.map((row) => {*/}
-                  {/*  return (*/}
-                  {/*    <Table.Row*/}
-                  {/*      cursor="pointer"*/}
-                  {/*      key={row.id}*/}
-                  {/*      onClick={handleRowClick(row.documentId)}*/}
-                  {/*    >*/}
-                  {/*      <Table.CheckboxCell id={row.id} />*/}
-                  {/*      {tableHeaders.map(({ cellFormatter, ...header }) => {*/}
-                  {/*        if (header.name === 'status') {*/}
-                  {/*          const { status } = row;*/}
+                  {results.map((row) => {
+                    return (
+                      <Table.Row
+                        cursor="pointer"
+                        key={row.id}
+                        onClick={handleRowClick(row.documentId)}
+                      >
+                        <Table.CheckboxCell id={row.id} />
+                        {tableHeaders.map(({ cellFormatter, ...header }) => {
+                          if (header.name === 'status') {
+                            const { status } = row;
 
-                  {/*          return (*/}
-                  {/*            <Table.Cell key={header.name}>*/}
-                  {/*              <DocumentStatus status={status} maxWidth={'min-content'} />*/}
-                  {/*            </Table.Cell>*/}
-                  {/*          );*/}
-                  {/*        }*/}
-                  {/*        if (['createdBy', 'updatedBy'].includes(header.name.split('.')[0])) {*/}
-                  {/*          // Display the users full name*/}
-                  {/*          // Some entries doesn't have a user assigned as creator/updater (ex: entries created through content API)*/}
-                  {/*          // In this case, we display a dash*/}
-                  {/*          return (*/}
-                  {/*            <Table.Cell key={header.name}>*/}
-                  {/*              <Typography textColor="neutral800">*/}
-                  {/*                {row[header.name.split('.')[0]]*/}
-                  {/*                  ? getDisplayName(row[header.name.split('.')[0]])*/}
-                  {/*                  : '-'}*/}
-                  {/*              </Typography>*/}
-                  {/*            </Table.Cell>*/}
-                  {/*          );*/}
-                  {/*        }*/}
-                  {/*        if (typeof cellFormatter === 'function') {*/}
-                  {/*          return (*/}
-                  {/*            <Table.Cell key={header.name}>*/}
-                  {/*              /!* @ts-expect-error – TODO: fix this TS error *!/*/}
-                  {/*              {cellFormatter(row, header, { collectionType, model })}*/}
-                  {/*            </Table.Cell>*/}
-                  {/*          );*/}
-                  {/*        }*/}
-                  {/*        return (*/}
-                  {/*          <Table.Cell key={header.name}>*/}
-                  {/*            <CellContent*/}
-                  {/*              content={row[header.name.split('.')[0]]}*/}
-                  {/*              rowId={row.documentId}*/}
-                  {/*              {...header}*/}
-                  {/*            />*/}
-                  {/*          </Table.Cell>*/}
-                  {/*        );*/}
-                  {/*      })}*/}
-                  {/*      /!* we stop propagation here to allow the menu to trigger it's events without triggering the row redirect *!/*/}
-                  {/*      <ActionsCell onClick={(e) => e.stopPropagation()}>*/}
-                  {/*        <TableActions document={row} />*/}
-                  {/*      </ActionsCell>*/}
-                  {/*    </Table.Row>*/}
-                  {/*  );*/}
-                  {/*})}*/}
+                            return (
+                              <Table.Cell key={header.name}>
+                                <DocumentStatus status={status} maxWidth={'min-content'} />
+                              </Table.Cell>
+                            );
+                          }
+                          if (['createdBy', 'updatedBy'].includes(header.name.split('.')[0])) {
+                            // Display the users full name
+                            // Some entries doesn't have a user assigned as creator/updater (ex: entries created through content API)
+                            // In this case, we display a dash
+                            return (
+                              <Table.Cell key={header.name}>
+                                <Typography textColor="neutral800">
+                                  {row[header.name.split('.')[0]]
+                                    ? getDisplayName(row[header.name.split('.')[0]])
+                                    : '-'}
+                                </Typography>
+                              </Table.Cell>
+                            );
+                          }
+                          if (typeof cellFormatter === 'function') {
+                            return (
+                              <Table.Cell key={header.name}>
+                                {/* @ts-expect-error – TODO: fix this TS error */}
+                                {cellFormatter(row, header, { collectionType, model })}
+                              </Table.Cell>
+                            );
+                          }
+                          return (
+                            <Table.Cell key={header.name}>
+                              <CellContent
+                                content={row[header.name.split('.')[0]]}
+                                rowId={row.documentId}
+                                {...header}
+                              />
+                            </Table.Cell>
+                          );
+                        })}
+                        {/* we stop propagation here to allow the menu to trigger it's events without triggering the row redirect */}
+                        <ActionsCell onClick={(e) => e.stopPropagation()}>
+                          <TableActions document={row} />
+                        </ActionsCell>
+                      </Table.Row>
+                    );
+                  })}
                 </Table.Body>
               </Table.Content>
             </Table.Root>
