@@ -528,7 +528,6 @@ const DocumentActionModal = ({
     if (onClose) {
       onClose();
     }
-
     onModalClose();
   };
 

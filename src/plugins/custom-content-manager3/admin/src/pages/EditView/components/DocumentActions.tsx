@@ -393,7 +393,7 @@ const DocumentActionsMenu = ({
             formatMessage({
               id: 'content-manager.containers.edit.panels.default.more-actions',
               defaultMessage: 'More document actions',
-            })}
+            })}jj
         </VisuallyHidden>
       </Menu.Trigger>
       <Menu.Content maxHeight={undefined} popoverPlacement="bottom-end">

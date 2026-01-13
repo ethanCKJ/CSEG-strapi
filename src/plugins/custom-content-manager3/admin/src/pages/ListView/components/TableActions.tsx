@@ -6,8 +6,8 @@ import {
   useStrapiApp,
   useQueryParams,
 } from '@strapi/strapi/admin';
-import { Button, LinkButton, Modal } from '@strapi/design-system';
-import { Duplicate, Pencil } from '@strapi/icons';
+import {Button, IconButton, LinkButton, MenuItem, Modal, SimpleMenu} from '@strapi/design-system';
+import {Duplicate, More, Pencil} from '@strapi/icons';
 import { stringify } from 'qs';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
@@ -26,6 +26,10 @@ import type {
   DocumentActionComponent,
   DocumentActionProps,
 } from '../../../content-manager';
+import {DeleteButton} from "../../../action-buttons/DeleteButton";
+import { Menu } from "@strapi/design-system";
+import {useDeleteAction} from "../../../hooks/useDeleteAction";
+import {DocumentActionConfirmDialog} from "../../../action-buttons/ActionHelper";
 
 /* -------------------------------------------------------------------------------------------------
  * TableActions
@@ -38,6 +42,7 @@ interface TableActionsProps {
 const TableActions = ({ document }: TableActionsProps) => {
   const { model, collectionType } = useDoc();
   const plugins = useStrapiApp('TableActions', (state) => state.plugins);
+  const [isOpen, setIsOpen] = React.useState(false);
 
   const props: DocumentActionProps = {
     activeTab: null,
@@ -46,30 +51,47 @@ const TableActions = ({ document }: TableActionsProps) => {
     collectionType,
     document,
   };
+  const {deleteLabel, deleteIcon, closeDeleteDialog, openDeleteDialog, deleteDialogContent, isDeleteDialogOpen, isDeleting, handleDelete} = useDeleteAction(document.documentId, model, collectionType);
 
   return (
-    <DescriptionComponentRenderer
-      props={props}
-      descriptions={(plugins['content-manager'].apis as ContentManagerPlugin['config']['apis'])
-        .getDocumentActions('table-row')
-        // We explicitly remove the PublishAction from description so we never render it and we don't make unnecessary requests.
-        .filter((action) => action.name !== 'PublishAction')}
-    >
-      {(actions) => {
-        const tableRowActions = actions.filter((action) => {
-          const positions = Array.isArray(action.position) ? action.position : [action.position];
-          return positions.includes('table-row');
-        });
-
-        return (
-          <DocumentActionsMenu
-            actions={tableRowActions}
-            label="Row actions"
-            variant="ghost"
-          />
-        );
-      }}
-    </DescriptionComponentRenderer>
+    // <SimpleMenu tag={IconButton} icon={<More/>}>
+    //   <MenuItem><DeleteButton documentId={document.documentId} model={model} collectionType={collectionType}/></MenuItem>
+    //   <MenuItem><DeleteButton documentId={document.documentId} model={model} collectionType={collectionType}/></MenuItem>
+    // </SimpleMenu>
+    <Menu.Root>
+      <Menu.Trigger
+        size="S"
+        endIcon={null}
+        paddingTop="4px"
+        paddingLeft="7px"
+        paddingRight="7px"
+      >
+        <More aria-hidden focusable={false} />
+      </Menu.Trigger>
+      {/*<Menu.Content maxHeight={undefined} popoverPlacement="bottom-end">*/}
+      {/*      <Menu.Item*/}
+      {/*        display="block"*/}
+      {/*        onSelect={openDeleteDialog}*/}
+      {/*      >*/}
+      {/*        {deleteLabel}*/}
+      {/*      </Menu.Item>*/}
+      {/*</Menu.Content>*/}
+      <Menu.Content maxHeight={undefined} popoverPlacement="bottom-end">
+            <Menu.Item
+              display="block"
+            >
+              {deleteLabel}
+            </Menu.Item>
+        <Menu.Item
+              display="block"
+            >
+              {deleteLabel}
+            </Menu.Item>
+      </Menu.Content>
+      {/*<Menu.Content>*/}
+      {/*  <DocumentActionConfirmDialog title={"Confirmation"} onClose={closeDeleteDialog} isOpen={isDeleteDialogOpen} onConfirm={handleDelete} content={deleteDialogContent}/>*/}
+      {/*</Menu.Content>*/}
+    </Menu.Root>
   );
 };
 
