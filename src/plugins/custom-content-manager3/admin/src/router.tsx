@@ -57,9 +57,9 @@ const CollectionTypePages = () => {
 };
 
 const CLONE_RELATIVE_PATH = ':collectionType/:slug/clone/:origin';
-const CLONE_PATH = `/custom-content-manager3/${CLONE_RELATIVE_PATH}`;
+const CLONE_PATH = `plugins/custom-content-manager3/${CLONE_RELATIVE_PATH}`;
 const LIST_RELATIVE_PATH = ':collectionType/:slug';
-const LIST_PATH = `/custom-content-manager3/collection-types/:slug`;
+const LIST_PATH = `plugins/custom-content-manager3/collection-types/:slug`;
 
 const routes: PathRouteProps[] = [
   {

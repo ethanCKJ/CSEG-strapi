@@ -68,29 +68,15 @@ const TableActions = ({ document }: TableActionsProps) => {
       >
         <More aria-hidden focusable={false} />
       </Menu.Trigger>
-      {/*<Menu.Content maxHeight={undefined} popoverPlacement="bottom-end">*/}
-      {/*      <Menu.Item*/}
-      {/*        display="block"*/}
-      {/*        onSelect={openDeleteDialog}*/}
-      {/*      >*/}
-      {/*        {deleteLabel}*/}
-      {/*      </Menu.Item>*/}
-      {/*</Menu.Content>*/}
       <Menu.Content maxHeight={undefined} popoverPlacement="bottom-end">
             <Menu.Item
               display="block"
-            >
-              {deleteLabel}
-            </Menu.Item>
-        <Menu.Item
-              display="block"
+              onSelect={openDeleteDialog}
             >
               {deleteLabel}
             </Menu.Item>
       </Menu.Content>
-      {/*<Menu.Content>*/}
-      {/*  <DocumentActionConfirmDialog title={"Confirmation"} onClose={closeDeleteDialog} isOpen={isDeleteDialogOpen} onConfirm={handleDelete} content={deleteDialogContent}/>*/}
-      {/*</Menu.Content>*/}
+        <DocumentActionConfirmDialog title={"Confirmation"} onClose={closeDeleteDialog} isOpen={isDeleteDialogOpen} onConfirm={handleDelete} content={deleteDialogContent}/>
     </Menu.Root>
   );
 };
