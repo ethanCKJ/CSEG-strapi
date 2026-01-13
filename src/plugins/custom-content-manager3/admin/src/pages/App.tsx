@@ -1,9 +1,11 @@
 import { Page} from '@strapi/strapi/admin';
 import {Routes, Route, useParams} from 'react-router-dom';
-
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import { HomePage } from './HomePage';
 import {ProtectedListViewPage} from "./ListView/ListViewPage";
+import {ProtectedEditViewPage} from "./EditView/EditViewPage";
 import {COLLECTION_TYPES, SINGLE_TYPES} from "../constants/collections";
 import { DesignSystemProvider, darkTheme } from "@strapi/design-system";
 
@@ -26,17 +28,17 @@ const CollectionTypePages = () => {
 }
 
 const App = () => {
-
-
   return (
-    <DesignSystemProvider theme={darkTheme} locale="en-GB">
-      <Routes>
-        <Route index element={<HomePage/>}/>
-        <Route path={"/:collectionType/:slug"} element={<CollectionTypePages/>}/>
-        <Route path="*" element={<Page.Error/>}/>
-      </Routes>
-
-    </DesignSystemProvider>
+    <DndProvider backend={HTML5Backend}>
+      <DesignSystemProvider theme={darkTheme} locale="en-GB">
+        <Routes>
+          <Route index element={<HomePage/>}/>
+          <Route path={"/:collectionType/:slug"} element={<CollectionTypePages/>}/>
+          <Route path={"/:collectionType/:slug/:id"} element={<ProtectedEditViewPage/>}/>
+          <Route path="*" element={<Page.Error/>}/>
+        </Routes>
+      </DesignSystemProvider>
+    </DndProvider>
 
   );
 };
