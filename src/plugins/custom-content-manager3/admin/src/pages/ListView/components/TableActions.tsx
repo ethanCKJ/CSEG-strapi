@@ -30,6 +30,7 @@ import {DeleteButton} from "../../../action-buttons/DeleteButton";
 import { Menu } from "@strapi/design-system";
 import {useDeleteAction} from "../../../hooks/useDeleteAction";
 import {DocumentActionConfirmDialog} from "../../../action-buttons/ActionHelper";
+import {useEditAction} from "../../../hooks/useEditAction";
 
 /* -------------------------------------------------------------------------------------------------
  * TableActions
@@ -41,23 +42,9 @@ interface TableActionsProps {
 
 const TableActions = ({ document }: TableActionsProps) => {
   const { model, collectionType } = useDoc();
-  const plugins = useStrapiApp('TableActions', (state) => state.plugins);
-  const [isOpen, setIsOpen] = React.useState(false);
-
-  const props: DocumentActionProps = {
-    activeTab: null,
-    model,
-    documentId: document.documentId,
-    collectionType,
-    document,
-  };
-  const {deleteLabel, deleteIcon, closeDeleteDialog, openDeleteDialog, deleteDialogContent, isDeleteDialogOpen, isDeleting, handleDelete} = useDeleteAction(document.documentId, model, collectionType);
-
+  const {deleteLabel, deleteIcon, closeDeleteDialog, openDeleteDialog, deleteDialogContent, isDeleteDialogOpen, handleDelete, deleteVariant} = useDeleteAction(document.documentId, model, collectionType);
+  const {editIcon, editLabel, handleEdit} = useEditAction(document.documentId);
   return (
-    // <SimpleMenu tag={IconButton} icon={<More/>}>
-    //   <MenuItem><DeleteButton documentId={document.documentId} model={model} collectionType={collectionType}/></MenuItem>
-    //   <MenuItem><DeleteButton documentId={document.documentId} model={model} collectionType={collectionType}/></MenuItem>
-    // </SimpleMenu>
     <Menu.Root>
       <Menu.Trigger
         size="S"
@@ -72,8 +59,17 @@ const TableActions = ({ document }: TableActionsProps) => {
             <Menu.Item
               display="block"
               onSelect={openDeleteDialog}
+              startIcon={deleteIcon}
+              variant={deleteVariant}
             >
               {deleteLabel}
+            </Menu.Item>
+        <Menu.Item
+              display="block"
+              onSelect={handleEdit}
+              startIcon={editIcon}
+            >
+              {editLabel}
             </Menu.Item>
       </Menu.Content>
         <DocumentActionConfirmDialog title={"Confirmation"} onClose={closeDeleteDialog} isOpen={isDeleteDialogOpen} onConfirm={handleDelete} content={deleteDialogContent}/>
