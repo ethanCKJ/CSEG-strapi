@@ -5,7 +5,6 @@
 import strapiCloud from "@strapi/plugin-cloud/strapi-admin";
 import usersPermissions from "@strapi/plugin-users-permissions/strapi-admin";
 import customContentManager3 from "../../src/plugins/custom-content-manager3/./dist/admin/index.mjs";
-import csegApplications from "../../src/plugins/cseg-applications/strapi-admin";
 import membershipList from "../../src/plugins/membership-list/./dist/admin/index.mjs";
 import testerPlugin from "../../src/plugins/tester-plugin/./dist/admin/index.mjs";
 import { renderAdmin } from "@strapi/strapi/admin";
@@ -19,7 +18,6 @@ renderAdmin(document.getElementById("strapi"), {
     "strapi-cloud": strapiCloud,
     "users-permissions": usersPermissions,
     "custom-content-manager3": customContentManager3,
-    "cseg-applications": csegApplications,
     "membership-list": membershipList,
     "tester-plugin": testerPlugin,
   },
