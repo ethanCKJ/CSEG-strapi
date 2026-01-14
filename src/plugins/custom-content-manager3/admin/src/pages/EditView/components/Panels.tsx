@@ -170,7 +170,7 @@ const CustomPanel = () => {
         {/* Button bar */}
         <Grid.Root gap={4} width="100%">
           <Grid.Item col={3}>
-            <PublishButton documentId={documentId} activeTab={status} model={model} collectionType={collectionType} meta={meta}/>
+            <PublishButton documentId={documentId} activeTab={status} model={model} collectionType={collectionType} meta={meta} document={document}/>
           </Grid.Item>
           <Grid.Item col={3}>
             <UpdateButton activeTab={status} documentId={documentId} model={model} collectionType={collectionType}  />

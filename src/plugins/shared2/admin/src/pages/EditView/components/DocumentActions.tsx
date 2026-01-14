@@ -689,7 +689,7 @@ const PublishAction: DocumentActionComponent = ({
       });
     };
 
-    if (!documentId || modified) {
+    if (!documentId || modified)  {
       traverseAndExtract(formValues);
       setLocalCountOfDraftRelations(localDraftRelations.size);
     }

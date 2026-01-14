@@ -13,9 +13,19 @@ import {SINGLE_TYPES} from "../constants/collections";
 import {isBaseQueryError} from "../utils/api";
 import {transformData} from "../utils/actions";
 import {DocumentMetadata} from "../../../shared/contracts/collection-types";
+import React from "react";
 
 type ActiveTabType = 'draft' | 'published'
 
+/**
+ * Functionality for publishing a new or modified document.
+ * @param activeTab
+ * @param documentId
+ * @param model
+ * @param collectionType
+ * @param meta
+ * @param document - undefined IFF creating a new document
+ */
 const usePublishAction = (activeTab: ActiveTabType, documentId: string, model: string, collectionType: string, meta: DocumentMetadata | undefined, document: Document
 ) => {
   const {
@@ -34,15 +44,17 @@ const usePublishAction = (activeTab: ActiveTabType, documentId: string, model: s
 
   const [{rawQuery}] = useQueryParams();
 
-  const modified = useForm('PublishAction', ({modified}) => modified);
-  const setSubmitting = useForm('PublishAction', ({setSubmitting}) => setSubmitting);
-  const isSubmitting = useForm('PublishAction', ({isSubmitting}) => isSubmitting);
-  const validate = useForm('PublishAction', (state) => state.validate);
-  const setErrors = useForm('PublishAction', (state) => state.setErrors);
-  const formValues = useForm('PublishAction', ({values}) => values);
-  const resetForm = useForm('PublishAction', ({resetForm}) => resetForm);
+  const modified = useForm('usePublishAction', ({modified}) => modified);
+  const setSubmitting = useForm('usePublishAction', ({setSubmitting}) => setSubmitting);
+  const isSubmitting = useForm('usePublishAction', ({isSubmitting}) => isSubmitting);
+  const validate = useForm('usePublishAction', (state) => state.validate);
+  const setErrors = useForm('usePublishAction', (state) => state.setErrors);
+  const formValues = useForm('usePublishAction', ({values}) => values);
+  const resetForm = useForm('usePublishAction', ({resetForm}) => resetForm);
 
   const idToPublish = currentDocumentMeta.documentId || id;
+
+
 
   const isDocumentPublished =
     (document?.[PUBLISHED_AT_ATTRIBUTE_NAME] ||
@@ -64,7 +76,7 @@ const usePublishAction = (activeTab: ActiveTabType, documentId: string, model: s
         status: 'published',
       });
       if (errors) {
-        console.log('Form validation error:', errors)
+        console.error('Form validation error:', errors)
         toggleNotification({
           type: 'danger',
           message: 'Please fix the form validation errors found before saving.',
