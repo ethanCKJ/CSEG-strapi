@@ -24,6 +24,10 @@ import type {
 import {PublishButton} from "../../../action-buttons/PublishButton";
 import { Grid } from "@strapi/design-system";
 import {UpdateButton} from "../../../action-buttons/UpdateButton";
+import { SimpleMenu } from "@strapi/design-system";
+import { MenuItem } from "@strapi/design-system";
+import {useDeleteAction} from "../../../hooks/useDeleteAction";
+import {DocumentActionConfirmDialog} from "../../../action-buttons/ActionHelper";
 
 interface PanelDescription {
   title: string;
@@ -136,6 +140,7 @@ const CustomPanel = () => {
     },
   ] = useQueryParams<{ status: 'draft' | 'published' }>();
   const { model, id: documentId, document, meta, collectionType } = useDoc();
+  const deleteAction = useDeleteAction(documentId, model, collectionType);
   // const plugins = useStrapiApp('ActionsPanel', (state) => state.plugins);
 
   // const props = {
@@ -147,9 +152,7 @@ const CustomPanel = () => {
   //   collectionType,
   // } satisfies DocumentActionProps;
   return (
-    <Flex direction="column" alignItems="stretch" gap={2}>
       <Flex
-
         aria-labelledby="additional-information"
         background="neutral0"
         borderColor="neutral150"
@@ -163,22 +166,23 @@ const CustomPanel = () => {
         direction="column"
         justifyContent="stretch"
         alignItems="flex-start"
+        marginBottom={8}
       >
-        <Typography tag="h2" variant="sigma" textTransform="uppercase" textColor="neutral600">
+        <Typography tag="h2" variant="sigma" textTransform="uppercase">
           Actions
         </Typography>
         {/* Button bar */}
-        <Grid.Root gap={4} width="100%">
-          <Grid.Item col={3}>
-            <PublishButton documentId={documentId} activeTab={status} model={model} collectionType={collectionType} meta={meta} document={document}/>
-          </Grid.Item>
-          <Grid.Item col={3}>
-            <UpdateButton activeTab={status} documentId={documentId} model={model} collectionType={collectionType}  />
-          </Grid.Item>
-        </Grid.Root>
-
+        <Flex alignItems="center" width="100%" gap={8}>
+          <Flex gap={2} justifyContent="center" alignItems="center" width={"50%"}>
+          <PublishButton documentId={documentId} activeTab={status} model={model} collectionType={collectionType} meta={meta} document={document}/>
+          <UpdateButton activeTab={status} documentId={documentId} model={model} collectionType={collectionType}  />
+          </Flex>
+          <SimpleMenu label={"More actions"} variant={"tertiary"} >
+            <MenuItem onSelect={deleteAction.openDeleteDialog} variant={deleteAction.deleteVariant} startIcon={deleteAction.deleteIcon}>{deleteAction.deleteLabel}</MenuItem>
+          </SimpleMenu>
+        </Flex>
+        <DocumentActionConfirmDialog title={"Confirmation"} onClose={deleteAction.closeDeleteDialog} onConfirm={deleteAction.handleDelete} isOpen={deleteAction.isDeleteDialogOpen} content={deleteAction.deleteDialogContent} key={"delete"}/>
       </Flex>
-    </Flex>
   );
 
 }
