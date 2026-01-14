@@ -1,5 +1,4 @@
 import {useNavigate} from "react-router-dom";
-import {useNotification} from "@strapi/strapi/admin";
 import {styled} from "styled-components";
 import {Pencil} from "@strapi/icons";
 
@@ -13,8 +12,13 @@ const StyledPencil = styled(Pencil)`
   }
 `;
 
+export type typeEditActionResult = {
+  editLabel: string;
+  editIcon: React.ReactNode;
+  handleEdit: () => void;
+};
 
-const useEditAction = (documentId: string) => {
+const useEditAction = (documentId: string): typeEditActionResult => {
   const navigate = useNavigate();
   return {
     editLabel: 'Edit',

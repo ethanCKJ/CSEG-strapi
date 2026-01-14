@@ -27,7 +27,7 @@ import { createYupSchema } from '../../utils/validation';
 import { Blocker } from './components/Blocker';
 import { FormLayout } from './components/FormLayout';
 import { Header } from './components/Header';
-import { Panels } from './components/Panels';
+import {CustomPanel, Panels} from './components/Panels';
 import { handleInvisibleAttributes } from './utils/data';
 
 /* -------------------------------------------------------------------------------------------------
@@ -79,7 +79,6 @@ const EditViewPage = () => {
     }
   });
 
-  const isLoadingActionsRBAC = useDocumentRBAC('EditViewPage', (state) => state.isLoading);
 
   const isSingleType = collectionType === SINGLE_TYPES;
 
@@ -101,7 +100,7 @@ const EditViewPage = () => {
 
   const { isLazyLoading } = useLazyComponents([]);
 
-  const isLoading = isLoadingActionsRBAC || isLoadingDocument || isLoadingLayout || isLazyLoading;
+  const isLoading = isLoadingDocument || isLoadingLayout || isLazyLoading;
 
   const initialValues = getInitialFormValues(isCreatingDocument);
 
@@ -131,12 +130,6 @@ const EditViewPage = () => {
   return (
     <Main paddingLeft={RESPONSIVE_DEFAULT_SPACING} paddingRight={RESPONSIVE_DEFAULT_SPACING}>
       <Page.Title>{pageTitle}</Page.Title>
-      {isSingleType && (
-        <tours.contentManager.Introduction>
-          {/* Invisible Anchor */}
-          <Box />
-        </tours.contentManager.Introduction>
-      )}
       <Form
         disabled={hasDraftAndPublished && status === 'published'}
         initialValues={initialValues}
@@ -204,17 +197,14 @@ const EditViewPage = () => {
             >
               <Grid.Item col={9} xs={12} direction="column" alignItems="stretch">
                 <Tabs.Content value="draft">
-                  <tours.contentManager.Fields>
-                    <Box />
-                  </tours.contentManager.Fields>
                   <FormLayout layout={layout} document={doc} />
                 </Tabs.Content>
                 <Tabs.Content value="published">
                   <FormLayout layout={layout} document={doc} />
                 </Tabs.Content>
               </Grid.Item>
-              <Grid.Item col={3} xs={12} direction="column" alignItems="stretch">
-                <Panels />
+              <Grid.Item col={9} xs={12} direction="column" alignItems="stretch">
+                <CustomPanel/>
               </Grid.Item>
             </Grid.Root>
           </Tabs.Root>
@@ -268,15 +258,12 @@ const ProtectedEditViewPage = () => {
     slug: string;
   }>();
 
-  // ⚠️ PERMISSIONS BYPASSED - Skip permission checks
   if (!slug) {
     return <Page.Error />;
   }
 
   return (
-    <DocumentRBAC permissions={null}>
-      <EditViewPage />
-    </DocumentRBAC>
+    <EditViewPage />
   );
 };
 

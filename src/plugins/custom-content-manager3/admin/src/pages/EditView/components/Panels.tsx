@@ -21,69 +21,25 @@ import type {
   PanelComponent,
   PanelComponentProps,
 } from '../../../content-manager';
+import {PublishButton} from "../../../action-buttons/PublishButton";
+import { Grid } from "@strapi/design-system";
+import {UpdateButton} from "../../../action-buttons/UpdateButton";
 
 interface PanelDescription {
   title: string;
   content: React.ReactNode;
 }
 
-/* -------------------------------------------------------------------------------------------------
- * Panels
- * -----------------------------------------------------------------------------------------------*/
 
-const Panels = () => {
-  const isCloning = useMatch(CLONE_PATH) !== null;
-  const [
-    {
-      query: { status },
-    },
-  ] = useQueryParams<{ status: 'draft' | 'published' }>({
-    status: 'draft',
-  });
-  const { model, id, document, meta, collectionType } = useDoc();
-  const plugins = useStrapiApp('Panels', (state) => state.plugins);
-
-  const props = {
-    activeTab: status,
-    model,
-    documentId: id,
-    document: isCloning ? undefined : document,
-    meta: isCloning ? undefined : meta,
-    collectionType,
-  } satisfies PanelComponentProps;
-
-  return (
-    <Flex direction="column" alignItems="stretch" gap={2}>
-      <DescriptionComponentRenderer
-        props={props}
-        descriptions={(
-          plugins['content-manager'].apis as ContentManagerPlugin['config']['apis']
-        ).getEditViewSidePanels()}
-      >
-        {(panels) =>
-          panels.map(({ content, id, ...description }) => (
-            <Panel key={id} {...description}>
-              {content}
-            </Panel>
-          ))
-        }
-      </DescriptionComponentRenderer>
-    </Flex>
-  );
-};
 
 /* -------------------------------------------------------------------------------------------------
  * Default Action Panels (CE)
  * -----------------------------------------------------------------------------------------------*/
 
 const ActionsPanel: PanelComponent = () => {
-  const { formatMessage } = useIntl();
-
+  console.log("In ActionsPanel");
   return {
-    title: formatMessage({
-      id: 'content-manager.containers.edit.panels.default.title',
-      defaultMessage: 'Entry',
-    }),
+    title: 'Entry',
     content: <ActionsPanelContent />,
   };
 };
@@ -91,34 +47,28 @@ const ActionsPanel: PanelComponent = () => {
 ActionsPanel.type = 'actions';
 
 const ActionsPanelContent = () => {
-  const isCloning = useMatch(CLONE_PATH) !== null;
+
   const [
     {
       query: { status = 'draft' },
     },
   ] = useQueryParams<{ status: 'draft' | 'published' }>();
   const { model, id, document, meta, collectionType } = useDoc();
-  const plugins = useStrapiApp('ActionsPanel', (state) => state.plugins);
+  // const plugins = useStrapiApp('ActionsPanel', (state) => state.plugins);
 
   const props = {
     activeTab: status,
     model,
     documentId: id,
-    document: isCloning ? undefined : document,
-    meta: isCloning ? undefined : meta,
+    document: document,
+    meta: meta,
     collectionType,
   } satisfies DocumentActionProps;
 
   return (
-    <Flex direction="column" gap={2} width="100%">
-      <DescriptionComponentRenderer
-        props={props}
-        descriptions={(
-          plugins['content-manager'].apis as ContentManagerPlugin['config']['apis']
-        ).getDocumentActions('panel')}
-      >
-        {(actions) => <DocumentActions actions={actions} />}
-      </DescriptionComponentRenderer>
+    <Flex direction="column" gap={2} width="100%" alignItems="stretch">
+      <PublishButton {...props}/>
+      <div>HASDFASDFAfd</div>
       <InjectionZone area="editView.right-links" slug={model} />
     </Flex>
   );
@@ -159,5 +109,79 @@ const Panel = React.forwardRef<any, PanelProps>(({ children, title }, ref) => {
   );
 });
 
-export { Panels, ActionsPanel };
+/* -------------------------------------------------------------------------------------------------
+ * Panels
+ * -----------------------------------------------------------------------------------------------*/
+/**
+ * Side panel of the EditViewPage
+ * @constructor
+ */
+const Panels = () => {
+  const description = {
+    title: "Entry"
+  }
+  return (
+    <Flex direction="column" alignItems="stretch" gap={2}>
+      <Panel {...description}>
+        <ActionsPanelContent />
+      </Panel>
+    </Flex>
+  );
+};
+
+const CustomPanel = () => {
+  const [
+    {
+      query: { status = 'draft' },
+    },
+  ] = useQueryParams<{ status: 'draft' | 'published' }>();
+  const { model, id: documentId, document, meta, collectionType } = useDoc();
+  // const plugins = useStrapiApp('ActionsPanel', (state) => state.plugins);
+
+  // const props = {
+  //   activeTab: status,
+  //   model,
+  //   documentId: id,
+  //   document: document,
+  //   meta: meta,
+  //   collectionType,
+  // } satisfies DocumentActionProps;
+  return (
+    <Flex direction="column" alignItems="stretch" gap={2}>
+      <Flex
+
+        aria-labelledby="additional-information"
+        background="neutral0"
+        borderColor="neutral150"
+        hasRadius
+        paddingBottom={4}
+        paddingLeft={4}
+        paddingRight={4}
+        paddingTop={4}
+        shadow="tableShadow"
+        gap={3}
+        direction="column"
+        justifyContent="stretch"
+        alignItems="flex-start"
+      >
+        <Typography tag="h2" variant="sigma" textTransform="uppercase" textColor="neutral600">
+          Actions
+        </Typography>
+        {/* Button bar */}
+        <Grid.Root gap={4} width="100%">
+          <Grid.Item col={3}>
+            <PublishButton documentId={documentId} activeTab={status} model={model} collectionType={collectionType} meta={meta}/>
+          </Grid.Item>
+          <Grid.Item col={3}>
+            <UpdateButton activeTab={status} documentId={documentId} model={model} collectionType={collectionType}  />
+          </Grid.Item>
+        </Grid.Root>
+
+      </Flex>
+    </Flex>
+  );
+
+}
+
+export { Panels, ActionsPanel, CustomPanel };
 export type { PanelDescription };
