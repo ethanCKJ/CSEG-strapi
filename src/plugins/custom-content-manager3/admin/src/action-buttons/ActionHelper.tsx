@@ -4,7 +4,7 @@ import {Button, Dialog, Modal} from "@strapi/design-system";
 type ButtonComponentProps = React.ComponentProps<typeof Button>;
 
 interface DocumentActionConfirmDialogProps {
-  title: string;
+  title?: string;
   content?: React.ReactNode;
   variant?: ButtonComponentProps['variant'];
   onConfirm?: () => void | Promise<void>;
@@ -21,7 +21,7 @@ const DocumentActionConfirmDialog = ({
                                               onClose,
                                               onCancel,
                                               onConfirm,
-                                              title,
+                                              title = 'Confirmation',
                                               content,
                                               isOpen,
                                               variant = 'secondary',

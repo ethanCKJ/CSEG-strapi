@@ -29,6 +29,7 @@ import { MenuItem } from "@strapi/design-system";
 import {useDeleteAction} from "../../../hooks/useDeleteAction";
 import {DocumentActionConfirmDialog} from "../../../action-buttons/ActionHelper";
 import {useUnpublishAction} from "../../../hooks/useUnpublishAction";
+import {useDiscardAction} from "../../../hooks/useDiscardAction";
 
 interface PanelDescription {
   title: string;
@@ -145,6 +146,7 @@ const CustomPanel = () => {
   // TODO: Standardise whether we want common action input-output or each action has its own types for input-output. Leaning towards second approach as that is what DocumentActions.tsx uses
   const deleteAction = useDeleteAction(documentId, model, collectionType);
   const unpublishAction = useUnpublishAction(status, collectionType, model, document, documentId);
+  const discardAction = useDiscardAction(status, collectionType, model, document, documentId);
 
   if (!deleteAction) {
     console.error('useDeleteAction returned null');
@@ -179,11 +181,13 @@ const CustomPanel = () => {
           </Flex>
           <SimpleMenu label={"More actions"} variant={"tertiary"} >
             <MenuItem onSelect={deleteAction.dialog?.open} variant={deleteAction.variant} startIcon={deleteAction.icon}>{deleteAction.label}</MenuItem>
-            <MenuItem onSelect={unpublishAction.dialog?.open}  startIcon={unpublishAction.icon}>{unpublishAction.label}</MenuItem>
+            {unpublishAction && <MenuItem onSelect={unpublishAction.dialog?.open}  startIcon={unpublishAction.icon}>{unpublishAction.label}</MenuItem>}
+            {discardAction && <MenuItem onSelect={discardAction.dialog?.open} variant={discardAction.variant} startIcon={discardAction.icon}>{discardAction.label}</MenuItem>}
           </SimpleMenu>
         </Flex>
         <DocumentActionConfirmDialog title={"Confirmation"} onClose={deleteAction.dialog.close} onConfirm={deleteAction.onClick} isOpen={deleteAction.dialog.isOpen} content={deleteAction.dialog.content} key={"delete"}/>
         <DocumentActionConfirmDialog title={"Confirmation"} onClose={unpublishAction.dialog.close} onConfirm={unpublishAction.onClick} isOpen={unpublishAction.dialog.isOpen} content={unpublishAction.dialog.content} key={"unpublish"}/>
+        {discardAction && <DocumentActionConfirmDialog title={discardAction.dialog?.title} onClose={discardAction.dialog.close} onConfirm={discardAction.onClick} isOpen={discardAction.dialog?.isOpen} content={discardAction.dialog?.content} key={"discard"}/> }
       </Flex>
   );
 

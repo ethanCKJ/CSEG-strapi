@@ -129,6 +129,7 @@ const useDeleteAction = (
       open: openDeleteDialog,
       close: closeDeleteDialog,
       content: deleteDialogContent,
+      title: 'Confirmation',
     },
   };
 };
