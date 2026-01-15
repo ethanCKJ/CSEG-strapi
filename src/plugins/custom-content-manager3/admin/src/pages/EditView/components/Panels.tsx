@@ -186,8 +186,8 @@ const CustomPanel = () => {
           </SimpleMenu>
         </Flex>
         <DocumentActionConfirmDialog title={"Confirmation"} onClose={deleteAction.dialog.close} onConfirm={deleteAction.onClick} isOpen={deleteAction.dialog.isOpen} content={deleteAction.dialog.content} key={"delete"}/>
-        <DocumentActionConfirmDialog title={"Confirmation"} onClose={unpublishAction.dialog.close} onConfirm={unpublishAction.onClick} isOpen={unpublishAction.dialog.isOpen} content={unpublishAction.dialog.content} key={"unpublish"}/>
-        {discardAction && <DocumentActionConfirmDialog title={discardAction.dialog?.title} onClose={discardAction.dialog.close} onConfirm={discardAction.onClick} isOpen={discardAction.dialog?.isOpen} content={discardAction.dialog?.content} key={"discard"}/> }
+        {unpublishAction &&  <DocumentActionConfirmDialog title={"Confirmation"} onClose={unpublishAction.dialog.close} onConfirm={unpublishAction.onClick} isOpen={unpublishAction.dialog.isOpen} content={unpublishAction.dialog.content} key={"unpublish"}/> }
+        {discardAction && <DocumentActionConfirmDialog title={discardAction.dialog?.title} onClose={discardAction.dialog?.close} onConfirm={discardAction.onClick} isOpen={discardAction.dialog?.isOpen} content={discardAction.dialog?.content} key={"discard"}/> }
       </Flex>
   );
 

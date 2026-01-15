@@ -25,7 +25,7 @@ const CollectionTypePages = () => {
   return collectionType === COLLECTION_TYPES ? (
     <ProtectedListViewPage />
   ) : (
-    <div>The Edit View Page should be here</div>
+    <ProtectedEditViewPage/>
   );
 }
 
