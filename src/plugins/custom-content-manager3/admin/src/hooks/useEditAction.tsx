@@ -1,6 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import {styled} from "styled-components";
 import {Pencil} from "@strapi/icons";
+import { ActionHookResult } from './types';
 
 /**
  * Because the icon system is completely broken, we have to do
@@ -12,18 +13,12 @@ const StyledPencil = styled(Pencil)`
   }
 `;
 
-export type typeEditActionResult = {
-  editLabel: string;
-  editIcon: React.ReactNode;
-  handleEdit: () => void;
-};
-
-const useEditAction = (documentId: string): typeEditActionResult => {
+const useEditAction = (documentId: string): ActionHookResult => {
   const navigate = useNavigate();
   return {
-    editLabel: 'Edit',
-    editIcon: <StyledPencil/>,
-    handleEdit: () => {
+    label: 'Edit',
+    icon: <StyledPencil/>,
+    onClick: () => {
       if (!documentId) {
         console.error(
           "You're trying to edit a document without an id, this is likely a bug with Strapi. Please open an issue."
@@ -32,7 +27,9 @@ const useEditAction = (documentId: string): typeEditActionResult => {
       navigate({
         pathname: documentId,
       })
-    }
+    },
+    loading: false,
+    disabled: false,
   }
 }
 

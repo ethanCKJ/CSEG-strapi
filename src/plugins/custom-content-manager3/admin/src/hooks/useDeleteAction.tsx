@@ -6,31 +6,7 @@ import { Flex, Typography } from '@strapi/design-system';
 import { useDocumentActions } from './useDocumentActions';
 import { LIST_PATH } from '../router';
 import { SINGLE_TYPES } from '../constants/collections';
-
-/**
- * Return type for useDeleteAction hook
- * Provides everything needed to render a delete button and confirmation dialog
- */
-type DeleteActionResult = {
-  // Button properties
-  deleteLabel: string;
-  deleteIcon: React.ReactNode;
-  deleteVariant: 'danger';
-
-  // State
-  isDeleting: boolean;
-  isDeleteDialogOpen: boolean;
-
-  // Dialog control
-  openDeleteDialog: () => void;
-  closeDeleteDialog: () => void;
-
-  // Action handler
-  handleDelete: () => Promise<void>;
-
-  // Dialog content
-  deleteDialogContent: React.ReactNode;
-};
+import { ActionHookResult } from './types';
 
 /**
  * Hook for delete action with confirmation dialog
@@ -47,30 +23,30 @@ type DeleteActionResult = {
  * const deleteAction = useDeleteAction(documentId, model, collectionType);
  *
  * // Use in a button
- * <Button onClick={deleteAction.openDeleteDialog} variant={deleteAction.deleteVariant}>
- *   {deleteAction.deleteLabel}
+ * <Button onClick={deleteAction.dialog.open} variant={deleteAction.variant}>
+ *   {deleteAction.label}
  * </Button>
  *
  * // Or in a menu
- * <Menu.Item onSelect={deleteAction.openDeleteDialog}>
- *   {deleteAction.deleteLabel}
+ * <Menu.Item onSelect={deleteAction.dialog.open}>
+ *   {deleteAction.label}
  * </Menu.Item>
  *
  * // Render the dialog
  * <DocumentActionConfirmDialog
- *   isOpen={deleteAction.isDeleteDialogOpen}
- *   onClose={deleteAction.closeDeleteDialog}
- *   onConfirm={deleteAction.handleDelete}
- *   content={deleteAction.deleteDialogContent}
- *   variant={deleteAction.deleteVariant}
+ *   isOpen={deleteAction.dialog.isOpen}
+ *   onClose={deleteAction.dialog.close}
+ *   onConfirm={deleteAction.onClick}
+ *   content={deleteAction.dialog.content}
+ *   variant={deleteAction.variant}
  * />
  * ```
  */
 const useDeleteAction = (
-  documentId: string,
+  documentId: string | undefined,
   model: string,
   collectionType: string
-): DeleteActionResult => {
+): ActionHookResult => {
   const navigate = useNavigate();
   const listViewPathMatch = useMatch(LIST_PATH);
   const { delete: deleteAction, isLoading } = useDocumentActions();
@@ -142,15 +118,18 @@ const useDeleteAction = (
 
 
   return {
-    deleteLabel: 'Delete item',
-    deleteIcon: <Trash/>,
-    deleteVariant: 'danger',
-    isDeleting: isLoading,
-    isDeleteDialogOpen,
-    openDeleteDialog,
-    closeDeleteDialog,
-    handleDelete,
-    deleteDialogContent,
+    label: 'Delete item',
+    onClick: handleDelete,
+    loading: isLoading,
+    disabled: false,
+    icon: <Trash/>,
+    variant: 'danger',
+    dialog: {
+      isOpen: isDeleteDialogOpen,
+      open: openDeleteDialog,
+      close: closeDeleteDialog,
+      content: deleteDialogContent,
+    },
   };
 };
 

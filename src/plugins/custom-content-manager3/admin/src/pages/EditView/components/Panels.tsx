@@ -28,6 +28,7 @@ import { SimpleMenu } from "@strapi/design-system";
 import { MenuItem } from "@strapi/design-system";
 import {useDeleteAction} from "../../../hooks/useDeleteAction";
 import {DocumentActionConfirmDialog} from "../../../action-buttons/ActionHelper";
+import {useUnpublishAction} from "../../../hooks/useUnpublishAction";
 
 interface PanelDescription {
   title: string;
@@ -140,17 +141,16 @@ const CustomPanel = () => {
     },
   ] = useQueryParams<{ status: 'draft' | 'published' }>();
   const { model, id: documentId, document, meta, collectionType } = useDoc();
+  console.log("In CustomPanel with documentId:", documentId, document);
+  // TODO: Standardise whether we want common action input-output or each action has its own types for input-output. Leaning towards second approach as that is what DocumentActions.tsx uses
   const deleteAction = useDeleteAction(documentId, model, collectionType);
-  // const plugins = useStrapiApp('ActionsPanel', (state) => state.plugins);
+  const unpublishAction = useUnpublishAction(status, collectionType, model, document, documentId);
 
-  // const props = {
-  //   activeTab: status,
-  //   model,
-  //   documentId: id,
-  //   document: document,
-  //   meta: meta,
-  //   collectionType,
-  // } satisfies DocumentActionProps;
+  if (!deleteAction) {
+    console.error('useDeleteAction returned null');
+    return null;
+  }
+
   return (
       <Flex
         aria-labelledby="additional-information"
@@ -178,10 +178,12 @@ const CustomPanel = () => {
           <UpdateButton activeTab={status} documentId={documentId} model={model} collectionType={collectionType}  />
           </Flex>
           <SimpleMenu label={"More actions"} variant={"tertiary"} >
-            <MenuItem onSelect={deleteAction.openDeleteDialog} variant={deleteAction.deleteVariant} startIcon={deleteAction.deleteIcon}>{deleteAction.deleteLabel}</MenuItem>
+            <MenuItem onSelect={deleteAction.dialog?.open} variant={deleteAction.variant} startIcon={deleteAction.icon}>{deleteAction.label}</MenuItem>
+            <MenuItem onSelect={unpublishAction.dialog?.open}  startIcon={unpublishAction.icon}>{unpublishAction.label}</MenuItem>
           </SimpleMenu>
         </Flex>
-        <DocumentActionConfirmDialog title={"Confirmation"} onClose={deleteAction.closeDeleteDialog} onConfirm={deleteAction.handleDelete} isOpen={deleteAction.isDeleteDialogOpen} content={deleteAction.deleteDialogContent} key={"delete"}/>
+        <DocumentActionConfirmDialog title={"Confirmation"} onClose={deleteAction.dialog.close} onConfirm={deleteAction.onClick} isOpen={deleteAction.dialog.isOpen} content={deleteAction.dialog.content} key={"delete"}/>
+        <DocumentActionConfirmDialog title={"Confirmation"} onClose={unpublishAction.dialog.close} onConfirm={unpublishAction.onClick} isOpen={unpublishAction.dialog.isOpen} content={unpublishAction.dialog.content} key={"unpublish"}/>
       </Flex>
   );
 

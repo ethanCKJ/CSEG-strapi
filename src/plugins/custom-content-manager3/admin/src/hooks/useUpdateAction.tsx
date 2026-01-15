@@ -13,6 +13,7 @@ import { SINGLE_TYPES } from '../constants/collections';
 import { handleInvisibleAttributes } from '../pages/EditView/utils/data';
 import { isBaseQueryError } from '../utils/api';
 import { transformData } from '../utils/actions';
+import { ActionHookResult } from './types';
 
 type ActiveTabType = 'draft' | 'published';
 
@@ -31,11 +32,11 @@ type ActiveTabType = 'draft' | 'published';
  * const updateAction = useUpdateAction('draft', documentId, model, collectionType);
  *
  * <Button
- *   onClick={updateAction.handleUpdate}
- *   disabled={updateAction.isUpdateDisabled}
- *   loading={updateAction.isUpdating}
+ *   onClick={updateAction.onClick}
+ *   disabled={updateAction.disabled}
+ *   loading={updateAction.loading}
  * >
- *   {updateAction.updateLabel}
+ *   {updateAction.label}
  * </Button>
  * ```
  */
@@ -44,7 +45,7 @@ const useUpdateAction = (
   documentId: string,
   model: string,
   collectionType: string
-) => {
+): ActionHookResult => {
   const navigate = useNavigate();
   const { toggleNotification } = useNotification();
   const { _unstableFormatValidationErrors: formatValidationErrors } = useAPIErrorHandler();
@@ -153,11 +154,11 @@ const useUpdateAction = (
   };
 
   return {
-    isUpdating: isLoading,
-    isUpdateDisabled: isSubmitting || !modified || activeTab === 'published',
-    updateLabel: 'Save draft',
-    updateVariant: 'tertiary',
-    handleUpdate,
+    label: 'Save draft',
+    onClick: handleUpdate,
+    loading: isLoading,
+    disabled: isSubmitting || !modified || activeTab === 'published',
+    variant: 'tertiary',
   };
 };
 

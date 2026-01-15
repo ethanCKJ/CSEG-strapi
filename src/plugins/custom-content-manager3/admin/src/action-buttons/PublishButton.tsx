@@ -15,21 +15,34 @@ type PublishButtonProps = {
 
 
 const PublishButton = ({ documentId, model, collectionType, meta, document, activeTab }: PublishButtonProps) => {
-  const nonNullActiveTab = activeTab ?? 'draft';
-  const publishAction = usePublishAction(nonNullActiveTab, documentId, model, collectionType, meta, document);
+  const publishAction = usePublishAction({
+    activeTab: activeTab ?? 'draft',
+    documentId,
+    model,
+    collectionType,
+    meta,
+    document,
+  });
+
+  if (!publishAction) {
+    console.error('usePublishAction returned null');
+    return null;
+  }
+
   return (
     <Button
       flex="auto"
-      startIcon={null}
-      onClick={publishAction?.handlePublish}
+      startIcon={publishAction.icon}
+      onClick={publishAction.onClick}
       justifyContent="center"
       paddingTop="7px"
       paddingBottom="7px"
-      loading={publishAction?.isPublishing}
+      loading={publishAction.loading}
       type="button"
-      disabled={publishAction?.isPublishDisabled}
+      disabled={publishAction.disabled}
+      variant={publishAction.variant}
     >
-      {publishAction?.publishLabel}
+      {publishAction.label}
     </Button>
     )
 }

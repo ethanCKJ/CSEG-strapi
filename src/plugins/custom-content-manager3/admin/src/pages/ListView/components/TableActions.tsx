@@ -42,8 +42,19 @@ interface TableActionsProps {
 
 const TableActions = ({ document }: TableActionsProps) => {
   const { model, collectionType } = useDoc();
-  const {deleteLabel, deleteIcon, closeDeleteDialog, openDeleteDialog, deleteDialogContent, isDeleteDialogOpen, handleDelete, deleteVariant} = useDeleteAction(document.documentId, model, collectionType);
-  const {editIcon, editLabel, handleEdit} = useEditAction(document.documentId);
+  const deleteAction = useDeleteAction(document.documentId, model, collectionType);
+  const editAction = useEditAction(document.documentId);
+
+  if (!deleteAction) {
+    console.error('useDeleteAction returned null');
+    return null;
+  }
+
+  if (!editAction) {
+    console.error('useEditAction returned null');
+    return null;
+  }
+
   return (
     <Menu.Root>
       <Menu.Trigger
@@ -58,21 +69,21 @@ const TableActions = ({ document }: TableActionsProps) => {
       <Menu.Content maxHeight={undefined} popoverPlacement="bottom-end">
             <Menu.Item
               display="block"
-              onSelect={openDeleteDialog}
-              startIcon={deleteIcon}
-              variant={deleteVariant}
+              onSelect={deleteAction.dialog.open}
+              startIcon={deleteAction.icon}
+              variant={deleteAction.variant}
             >
-              {deleteLabel}
+              {deleteAction.label}
             </Menu.Item>
         <Menu.Item
               display="block"
-              onSelect={handleEdit}
-              startIcon={editIcon}
+              onSelect={editAction.onClick}
+              startIcon={editAction.icon}
             >
-              {editLabel}
+              {editAction.label}
             </Menu.Item>
       </Menu.Content>
-        <DocumentActionConfirmDialog title={"Confirmation"} onClose={closeDeleteDialog} isOpen={isDeleteDialogOpen} onConfirm={handleDelete} content={deleteDialogContent}/>
+        <DocumentActionConfirmDialog title={"Confirmation"} onClose={deleteAction.dialog.close} isOpen={deleteAction.dialog.isOpen} onConfirm={deleteAction.onClick} content={deleteAction.dialog.content}/>
     </Menu.Root>
   );
 };

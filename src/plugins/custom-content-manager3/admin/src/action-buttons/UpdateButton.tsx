@@ -4,7 +4,7 @@ import { useUpdateAction } from '../hooks/useUpdateAction';
 
 type UpdateButtonProps = {
   activeTab: 'draft' | 'published' | null;
-  documentId: string;
+  documentId?: string;
   model: string;
   collectionType: string;
 };
@@ -18,20 +18,25 @@ const UpdateButton = ({ activeTab, documentId, model, collectionType }: UpdateBu
   const nonNullActiveTab = activeTab ?? 'draft';
   const updateAction = useUpdateAction(nonNullActiveTab, documentId, model, collectionType);
 
+  if (!updateAction) {
+    console.error('useUpdateAction returned null');
+    return null;
+  }
+
   return (
     <Button
       flex="auto"
-      startIcon={null}
-      onClick={updateAction.handleUpdate}
+      startIcon={updateAction.icon}
+      onClick={updateAction.onClick}
       justifyContent="center"
-      variant={updateAction.updateVariant}
+      variant={updateAction.variant}
       paddingTop="7px"
       paddingBottom="7px"
-      loading={updateAction.isUpdating}
+      loading={updateAction.loading}
       type="button"
-      disabled={updateAction.isUpdateDisabled}
+      disabled={updateAction.disabled}
     >
-      {updateAction.updateLabel}
+      {updateAction.label}
     </Button>
   );
 };

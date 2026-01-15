@@ -1,4 +1,3 @@
-import { SerializedError } from '@reduxjs/toolkit';
 import { ApiError, type UnknownApiError } from '@strapi/strapi/admin';
 
 interface Query {
@@ -37,8 +36,17 @@ const buildValidParams = <TQuery extends Query>(query: TQuery): TransformedQuery
 
 type BaseQueryError = ApiError | UnknownApiError;
 
-const isBaseQueryError = (error: BaseQueryError | SerializedError): error is BaseQueryError => {
-  return error.name !== undefined;
+// Accept `unknown` here so the guard works on any value (e.g. RTK SerializedError,
+// network errors, or arbitrary unknowns). Perform a safe runtime check for a
+// string `name` property to narrow to `BaseQueryError`.
+const isBaseQueryError = (error: unknown): error is BaseQueryError => {
+  return (
+    typeof error === 'object' &&
+    error !== null &&
+    // use 'in' to check for presence, then confirm it's a string
+    'name' in error &&
+    typeof (error as { name?: unknown }).name === 'string'
+  );
 };
 
 export { isBaseQueryError, buildValidParams };

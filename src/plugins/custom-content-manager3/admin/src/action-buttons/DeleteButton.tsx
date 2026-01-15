@@ -16,30 +16,35 @@ type DeleteButtonProps = {
 const DeleteButton = ({ documentId, model, collectionType }: DeleteButtonProps) => {
   const deleteAction = useDeleteAction(documentId, model, collectionType);
 
+  if (!deleteAction) {
+    console.error('useDeleteAction returned null');
+    return null;
+  }
+
   return (
     <>
       <Button
         flex="auto"
-        startIcon={deleteAction.deleteIcon}
-        onClick={deleteAction.openDeleteDialog}
+        startIcon={deleteAction.icon}
+        onClick={deleteAction.dialog.open}
         justifyContent="center"
-        variant={deleteAction.deleteVariant}
+        variant={deleteAction.variant}
         paddingTop="7px"
         paddingBottom="7px"
-        loading={deleteAction.isDeleting}
+        loading={deleteAction.loading}
         type="button"
       >
-        {deleteAction.deleteLabel}
+        {deleteAction.label}
       </Button>
 
       <DocumentActionConfirmDialog
-        isOpen={deleteAction.isDeleteDialogOpen}
+        isOpen={deleteAction.dialog.isOpen}
         title="Confirmation"
-        content={deleteAction.deleteDialogContent}
-        variant={deleteAction.deleteVariant}
-        onConfirm={deleteAction.handleDelete}
-        onClose={deleteAction.closeDeleteDialog}
-        loading={deleteAction.isDeleting}
+        content={deleteAction.dialog.content}
+        variant={deleteAction.variant}
+        onConfirm={deleteAction.onClick}
+        onClose={deleteAction.dialog.close}
+        loading={deleteAction.loading}
       />
     </>
   );

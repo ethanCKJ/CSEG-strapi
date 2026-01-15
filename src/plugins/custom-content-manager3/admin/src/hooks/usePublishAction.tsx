@@ -1,5 +1,5 @@
 import {useDocumentContext} from "./useDocumentContext";
-import {Document, useDoc} from "./useDocument";
+import {useDoc} from "./useDocument";
 import {useMatch, useNavigate, useParams} from "react-router-dom";
 import {useAPIErrorHandler, useForm, useNotification, useQueryParams} from "@strapi/strapi/admin";
 
@@ -12,22 +12,20 @@ import {handleInvisibleAttributes} from "../pages/EditView/utils/data";
 import {SINGLE_TYPES} from "../constants/collections";
 import {isBaseQueryError} from "../utils/api";
 import {transformData} from "../utils/actions";
-import {DocumentMetadata} from "../../../shared/contracts/collection-types";
 import React from "react";
-
-type ActiveTabType = 'draft' | 'published'
+import { ActionHookResult, ActionHookProps } from './types';
 
 /**
  * Functionality for publishing a new or modified document.
- * @param activeTab
- * @param documentId
- * @param model
- * @param collectionType
- * @param meta
- * @param document - undefined IFF creating a new document
  */
-const usePublishAction = (activeTab: ActiveTabType, documentId: string, model: string, collectionType: string, meta: DocumentMetadata | undefined, document: Document
-) => {
+const usePublishAction = ({
+  activeTab,
+  documentId,
+  model,
+  collectionType,
+  meta,
+  document
+}: ActionHookProps): ActionHookResult | null => {
   const {
     currentDocument: {schema, components},
     currentDocumentMeta
@@ -35,8 +33,6 @@ const usePublishAction = (activeTab: ActiveTabType, documentId: string, model: s
   const navigate = useNavigate();
   const {toggleNotification} = useNotification();
   const {_unstableFormatValidationErrors: formatValidationErrors} = useAPIErrorHandler();
-  const isListView = useMatch(LIST_PATH) !== null;
-  const isCloning = useMatch(CLONE_PATH) !== null;
   const {id} = useParams();
 
   const {publish, isLoading} = useDocumentActions();
@@ -130,16 +126,17 @@ const usePublishAction = (activeTab: ActiveTabType, documentId: string, model: s
       return null;
     }
     return {
-      isPublishing: isLoading,
-      isPublishDisabled:
+      label: 'Publish',
+      onClick: async () => {
+        await performPublish();
+      },
+      loading: isLoading,
+      disabled:
         isSubmitting ||
         activeTab === 'published' ||
         (!modified && isDocumentPublished) ||
         (!modified && !document?.documentId),
-      publishLabel: 'Publish',
-      handlePublish: async () => {
-        await performPublish();
-      },
+      variant: 'default',
     }
   }
 
