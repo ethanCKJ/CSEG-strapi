@@ -691,6 +691,11 @@ export interface ApiMemberApplicationMemberApplication
       'api::member-application.member-application'
     > &
       Schema.Attribute.Private;
+    member_type: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::member-type.member-type'
+    > &
+      Schema.Attribute.Private;
     preferredName: Schema.Attribute.String &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 100;
@@ -735,6 +740,61 @@ export interface ApiMemberTypeMemberType extends Struct.CollectionTypeSchema {
         maxLength: 30;
       }>;
     publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiMemberMember extends Struct.CollectionTypeSchema {
+  collectionName: 'members';
+  info: {
+    displayName: 'Member';
+    pluralName: 'members';
+    singularName: 'member';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    aboutYou: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 2000;
+      }>;
+    affiliations: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email;
+    fullName: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::member.member'
+    > &
+      Schema.Attribute.Private;
+    member_type: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::member-type.member-type'
+    >;
+    preferredName: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
+    publishedAt: Schema.Attribute.DateTime;
+    topics: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 2000;
+      }>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1364,6 +1424,7 @@ declare module '@strapi/strapi' {
       'api::home-page.home-page': ApiHomePageHomePage;
       'api::member-application.member-application': ApiMemberApplicationMemberApplication;
       'api::member-type.member-type': ApiMemberTypeMemberType;
+      'api::member.member': ApiMemberMember;
       'api::publication.publication': ApiPublicationPublication;
       'api::research-project.research-project': ApiResearchProjectResearchProject;
       'plugin::content-releases.release': PluginContentReleasesRelease;

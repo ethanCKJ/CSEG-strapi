@@ -324,7 +324,6 @@ const ListMemberApplicationPage = () => {
                   disabled={results.length === 0}
                   label={`Search for ${contentTypeTitle}`}
                   placeholder='Search'
-                  trackedEvent="didSearch"
                 />
               )}
               {list.settings.filterable && schema ? (

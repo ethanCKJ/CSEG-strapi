@@ -28,6 +28,7 @@ import { FormLayout } from './components/FormLayout';
 import { Header } from './components/Header';
 import {CustomPanel, Panels} from './components/Panels';
 import { handleInvisibleAttributes } from './utils/data';
+import {MEMBER_APPLICATION_MODEL} from "../../constants/memberApplications";
 
 /* -------------------------------------------------------------------------------------------------
  * EditViewPage
@@ -126,11 +127,13 @@ const EditViewPage = () => {
     return yupSchema.validateSync(values, { abortEarly: false });
   };
 
+  const isFormDisabled = model === MEMBER_APPLICATION_MODEL || hasDraftAndPublished && status === 'published'
+
   return (
     <Main paddingLeft={RESPONSIVE_DEFAULT_SPACING} paddingRight={RESPONSIVE_DEFAULT_SPACING}>
       <Page.Title>{pageTitle}</Page.Title>
       <Form
-        disabled={hasDraftAndPublished && status === 'published'}
+        disabled={isFormDisabled}
         initialValues={initialValues}
         method={isCreatingDocument ? 'POST' : 'PUT'}
         validate={(values: Record<string, unknown>, options: Record<string, string>) => {

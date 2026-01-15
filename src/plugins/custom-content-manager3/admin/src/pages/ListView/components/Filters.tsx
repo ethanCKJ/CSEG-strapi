@@ -17,18 +17,20 @@ import { Schema } from '../../../hooks/useDocument';
 import { useGetContentTypeConfigurationQuery } from '../../../services/contentTypes';
 import { getMainField } from '../../../utils/attributes';
 import { getDisplayName } from '../../../utils/users';
+import {ADMIN_HIDDEN_FIELDS} from "../../../constants/memberApplications";
 
 /**
  * If new attributes are added, this list needs to be updated.
  */
+
 const NOT_ALLOWED_FILTERS = [
-  'json',
-  'component',
-  'media',
-  'richtext',
-  'dynamiczone',
-  'password',
-  'blocks',
+    'json',
+    'component',
+    'media',
+    'richtext',
+    'dynamiczone',
+    'password',
+    'blocks',
 ];
 const DEFAULT_ALLOWED_FILTERS = ['createdAt', 'updatedAt'];
 const USER_FILTER_ATTRIBUTES = [...CREATOR_FIELDS, 'strapi_assignee'];
@@ -116,7 +118,7 @@ const FiltersImpl = ({ disabled, schema }: FiltersProps) => {
         ...DEFAULT_ALLOWED_FILTERS,
         ...(canReadAdminUsers ? CREATOR_FIELDS : []),
       ]
-        .map((name) => {
+        .filter(name => !ADMIN_HIDDEN_FIELDS.includes(name)).map((name) => {
           const attribute = attributes[name];
 
           if (NOT_ALLOWED_FILTERS.includes(attribute.type)) {

@@ -50,6 +50,12 @@
         "approved",
         "rejected"
       ]
+    },
+    "member_type": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::member-type.member-type",
+      "private": true
     }
   }
 }

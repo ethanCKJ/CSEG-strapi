@@ -9,6 +9,7 @@ import { EditLayout } from '../../../hooks/useDocumentLayout';
 import { InputRenderer } from './InputRenderer';
 
 import type { UseDocument } from '../../../hooks/useDocument';
+import {ADMIN_HIDDEN_FIELDS} from "../../../constants/memberApplications";
 
 export const ResponsiveGridRoot = styled(Grid.Root)`
   container-type: inline-size;
@@ -99,7 +100,8 @@ const FormLayout = ({ layout, document, hasBackground = true }: FormLayoutProps)
               {panel.map((row, gridRowIndex) => {
                 return (
                   <ResponsiveGridRoot key={gridRowIndex} gap={4}>
-                    {row.map(({ size, ...field }) => {
+                    {
+                      row.map(({ size, ...field }) => {
                       return (
                         <ResponsiveGridItem
                           col={size}
