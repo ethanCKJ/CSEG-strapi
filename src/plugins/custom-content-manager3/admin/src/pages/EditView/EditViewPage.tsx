@@ -6,7 +6,6 @@ import {
   useRBAC,
   useNotification,
   useQueryParams,
-  tours,
   RESPONSIVE_DEFAULT_SPACING,
 } from '@strapi/strapi/admin';
 import { Grid, Main, Tabs, Box } from '@strapi/design-system';
@@ -162,27 +161,18 @@ const EditViewPage = () => {
           />
           <Tabs.Root variant="simple" value={status} onValueChange={handleTabChange}>
             <Tabs.List
-              aria-label={formatMessage({
-                id: getTranslation('containers.edit.tabs.label'),
-                defaultMessage: 'Document status',
-              })}
+              aria-label="Document status"
             >
               {hasDraftAndPublished ? (
                 <>
                   <StatusTab value="draft">
-                    {formatMessage({
-                      id: getTranslation('containers.edit.tabs.draft'),
-                      defaultMessage: 'draft',
-                    })}
+                    draft
                   </StatusTab>
                   <StatusTab
                     disabled={!meta || meta.availableStatus.length === 0}
                     value="published"
                   >
-                    {formatMessage({
-                      id: getTranslation('containers.edit.tabs.published'),
-                      defaultMessage: 'published',
-                    })}
+                    published
                   </StatusTab>
                 </>
               ) : null}

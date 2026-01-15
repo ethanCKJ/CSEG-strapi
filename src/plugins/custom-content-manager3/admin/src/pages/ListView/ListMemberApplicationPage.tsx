@@ -13,6 +13,7 @@ import {
   useRBAC,
   Layouts,
   useTable,
+  tours,
 } from '@strapi/strapi/admin';
 import {
   Button,
@@ -58,11 +59,12 @@ import {ViewSettingsMenu} from "./components/ViewSettingsMenu";
 import { Filters } from "./components/Filters";
 import {ContentType} from "../../../../shared/contracts/content-types";
 import {DocumentStatus} from "../EditView/components/DocumentStatus";
+import { Tabs } from "@strapi/design-system";
 
 const { INJECT_COLUMN_IN_TABLE } = HOOKS;
 
 /* -------------------------------------------------------------------------------------------------
- * ListViewPage
+ * ListMemberApplicationPage
  * -----------------------------------------------------------------------------------------------*/
 const LayoutsHeaderCustom = styled(Layouts.Header)`
   overflow-wrap: anywhere;
@@ -85,11 +87,10 @@ function NoEntriesPage(props: {
   resetHeaders: () => void,
   listFieldLayouts: ListFieldLayout[],
   callbackfn: (header) => any,
-  canCreate: boolean
 }) {
   return <Page.Main>
     <Page.Title>{`${props.contentTypeTitle}`}</Page.Title>
-    <PageHeaderCustom contentTypeTitle={props.contentTypeTitle} pagination={props.pagination}/>
+    <PageHeaderCustom contentTypeTitle={'Custom' + props.contentTypeTitle} pagination={props.pagination}/>
     <Layouts.Action
       startActions={
         <>
@@ -119,8 +120,8 @@ function NoEntriesPage(props: {
     <Layouts.Content>
       <Box background="neutral0" shadow="filterShadow" hasRadius>
         <EmptyStateLayout
-          action={props.canCreate ?
-            <CreateButton variant="secondary" contentTypeTitle={props.contentTypeTitle}/> : null}
+          action={
+            <CreateButton variant="secondary" contentTypeTitle={props.contentTypeTitle}/>}
           content="No content found"
           hasRadius
           icon={<EmptyDocuments width="16rem"/>}
@@ -130,17 +131,14 @@ function NoEntriesPage(props: {
   </Page.Main>;
 }
 
-const ListViewPage = () => {
+const ListMemberApplicationPage = () => {
 
   const navigate = useNavigate();
-  const { formatMessage } = useIntl();
   const { toggleNotification } = useNotification();
   const { _unstableFormatAPIError: formatAPIError } = useAPIErrorHandler(getTranslation);
   // TODO: Replace useDoc with custom router.
   const { collectionType, model, schema } = useDoc();
-  console.log("ListViewPage collectionType:", collectionType, "model:", model, "schema:", schema);
   const { list } = useDocumentLayout(model);
-  console.log("ListViewPage list layout:", list);
 
   const [displayedHeaders, setDisplayedHeaders] = React.useState<ListFieldLayout[]>([]);
 
@@ -165,27 +163,35 @@ const ListViewPage = () => {
     );
   };
 
+  const [{
+    query: {tab}
+  }, setQuery] = useQueryParams<{tab: 'pending' | 'approved' | 'rejected'}>({
+    tab: 'pending'
+  });
 
   const [{ query }] = useQueryParams<{
     plugins?: Record<string, unknown>;
     page?: string;
     pageSize?: string;
     sort?: string;
+    filters: { applicationStatus?: string};
   }>({
     page: '1',
     pageSize: list.settings.pageSize.toString(),
     sort: list.settings.defaultSortBy
       ? `${list.settings.defaultSortBy}:${list.settings.defaultSortOrder}`
       : '',
+    filters: {
+      applicationStatus: tab,
+    }
   });
+  console.log('query', query);
 
   const params = React.useMemo(() => buildValidParams(query), [query]);
-
   const { data, error, isFetching } = useGetAllDocumentsQuery({
     model,
     params,
   });
-  console.log("ListViewPage data:", data, "error:", error, "isFetching:", isFetching);
 
   /**
    * If the API returns an error, display a notification
@@ -213,21 +219,17 @@ const ListViewPage = () => {
         { replace: true }
       );
     }
-  }, [pagination, formatMessage, query, navigate]);
+  }, [pagination, query, navigate]);
 
-
-  const canCreate = true;
-
-  const runHookWaterfall = useStrapiApp('ListViewPage', (state) => state.runHookWaterfall);
-  console.log("ListViewPage runHookWaterfall:", runHookWaterfall);
   /**
-   * Run the waterfall and then inject our additional table headers.
+   * Compute the table headers with translations
+   * Removed runHookWaterfall as we don't need to inject new columns. Just modify the source code!
    */
   const tableHeaders = React.useMemo(() => {
-    const headers = runHookWaterfall(INJECT_COLUMN_IN_TABLE, {
+    const headers =  {
       displayedHeaders,
       layout: list,
-    });
+    };
 
     const formattedHeaders = headers.displayedHeaders.map<ListFieldLayout>((header) => {
       /**
@@ -239,14 +241,14 @@ const ListViewPage = () => {
       const translation =
         typeof header.label === 'string'
           ? {
-              id: `content-manager.content-types.${model}.${header.name}`,
-              defaultMessage: header.label,
-            }
+            id: `content-manager.content-types.${model}.${header.name}`,
+            defaultMessage: header.label,
+          }
           : header.label;
 
       return {
         ...header,
-        label: formatMessage(translation),
+        label: translation.defaultMessage,
         name: `${header.name}${header.mainField?.name ? `.${header.mainField.name}` : ''}`,
       };
     });
@@ -262,17 +264,13 @@ const ListViewPage = () => {
         sortable: false,
       } satisfies ListFieldLayout);
     }
-
     return formattedHeaders;
   }, [
     displayedHeaders,
-    formatMessage,
     list,
-    runHookWaterfall,
     schema?.options?.draftAndPublish,
     model,
   ]);
-  console.log("ListViewPage tableHeaders:", tableHeaders);
 
 
   if (isFetching) {
@@ -284,7 +282,7 @@ const ListViewPage = () => {
   }
 
   const contentTypeTitle = schema?.info.displayName ?  schema.info.displayName : 'Untitled'
-  console.log("ListViewPage contentTypeTitle:", contentTypeTitle);
+  console.log("ListMemberApplicationPage contentTypeTitle:", contentTypeTitle);
 
   const handleRowClick = (id: Modules.Documents.ID) => () => {
     navigate({
@@ -292,6 +290,13 @@ const ListViewPage = () => {
       search: stringify({ plugins: query.plugins }),
     });
   };
+
+  const handleTabChange = (newTab: string) => {
+    if (newTab === 'pending' || newTab === 'approved' || newTab === 'rejected') {
+      // setQuery will cause useQueryParams to update tab which causes the later useQueryParams to send an updated filter
+      setQuery({ tab: newTab }, 'push', true);
+    }
+  }
 
 
   if (!isFetching && results.length === 0) {
@@ -301,11 +306,11 @@ const ListViewPage = () => {
                        schema={schema} headers={handleSetHeaders}
                        resetHeaders={() => setDisplayedHeaders(list.layout)}
                        listFieldLayouts={displayedHeaders} callbackfn={(header) => header.name}
-                       canCreate={canCreate}/>
+                       canCreate={true}/>
       </>
     );
   }
-  // return (<div>Hello from the listviewpage</div>)
+  // return (<div>Hello from the ListMemberApplicationPage</div>)
   return (
     <>
       <Page.Main>
@@ -314,7 +319,6 @@ const ListViewPage = () => {
         <Layouts.Action
           startActions={
             <>
-              <CreateButton variant={"primary"} contentTypeTitle={contentTypeTitle}/>
               {list.settings.searchable && (
                 <SearchInput
                   disabled={results.length === 0}
@@ -340,6 +344,13 @@ const ListViewPage = () => {
           }
         />
         <Layouts.Content>
+          <Tabs.Root value={tab} onValueChange={handleTabChange}>
+            <Tabs.List aria-label="View types of member applications">
+              <Tabs.Trigger value="pending">Pending</Tabs.Trigger>
+              <Tabs.Trigger value="approved">Approved</Tabs.Trigger>
+              <Tabs.Trigger value="rejected">Rejected</Tabs.Trigger>
+            </Tabs.List>
+          </Tabs.Root>
           <Flex gap={4} direction="column" alignItems="stretch">
             <Table.Root rows={results} headers={tableHeaders} isLoading={isFetching}>
               {/*<TableActionsBar />*/}
@@ -431,29 +442,6 @@ const ActionsCell = styled(Table.Cell)`
   justify-content: flex-end;
 `;
 
-/* -------------------------------------------------------------------------------------------------
- * TableActionsBar
- * -----------------------------------------------------------------------------------------------*/
-
-const TableActionsBar = () => {
-  const selectRow = useTable('TableActionsBar', (state) => state.selectRow);
-  const [{ query }] = useQueryParams<{ plugins: { i18n: { locale: string } } }>();
-  const locale = query?.plugins?.i18n?.locale;
-  const prevLocale = usePrev(locale);
-
-  // TODO: find a better way to reset the selected rows when the locale changes across all the app
-  React.useEffect(() => {
-    if (prevLocale !== locale) {
-      selectRow([]);
-    }
-  }, [selectRow, prevLocale, locale]);
-
-  return (
-    <Table.ActionBar>
-      <BulkActionsRenderer />
-    </Table.ActionBar>
-  );
-};
 
 /* -------------------------------------------------------------------------------------------------
  * CreateButton
@@ -485,10 +473,10 @@ const CreateButton = ({ variant, contentTypeTitle }: CreateButtonProps) => {
 };
 
 /* -------------------------------------------------------------------------------------------------
- * ProtectedListViewPage
+ * ProtectedListMemberApplicationPage
  * -----------------------------------------------------------------------------------------------*/
 
-const ProtectedListViewPage = () => {
+const ProtectedListMemberApplicationPage = () => {
 
   const { slug = '' } = useParams<{
     slug: string;
@@ -498,13 +486,13 @@ const ProtectedListViewPage = () => {
   if (!slug) {
     return <Page.Error />;
   }
-  console.log("ProtectedListViewPage before return")
+  console.log("ProtectedListMemberApplicationPage before return")
 
   return (
-      <ListViewPage />
+    <ListMemberApplicationPage />
     // <DocumentRBAC permissions={null}>
     // </DocumentRBAC>
   );
 };
 
-export { ListViewPage, ProtectedListViewPage };
+export { ListMemberApplicationPage, ProtectedListMemberApplicationPage };

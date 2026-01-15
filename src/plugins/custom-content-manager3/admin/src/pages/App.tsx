@@ -10,6 +10,8 @@ import {ProtectedListViewPage} from "./ListView/ListViewPage";
 import {ProtectedEditViewPage} from "./EditView/EditViewPage";
 import {COLLECTION_TYPES, SINGLE_TYPES} from "../constants/collections";
 import { DesignSystemProvider, useDesignSystem, darkTheme } from "@strapi/design-system";
+import {MEMBER_APPLICATION_MODEL} from "../constants/memberApplications";
+import {ProtectedListMemberApplicationPage} from "./ListView/ListMemberApplicationPage";
 
 /**
  * On single collection types (e.g. about page), use the EditViewPage and
@@ -18,10 +20,14 @@ import { DesignSystemProvider, useDesignSystem, darkTheme } from "@strapi/design
  */
 const CollectionTypePages = () => {
 
-  const {collectionType} = useParams<{ collectionType: string }>();
+  const {collectionType, slug} = useParams<{ collectionType: string, slug: string }>();
   if (collectionType !== COLLECTION_TYPES && collectionType !== SINGLE_TYPES) {
     return <Page.Error />;
   }
+  if (slug === MEMBER_APPLICATION_MODEL){
+    return (<ProtectedListMemberApplicationPage/>);
+  }
+
   return collectionType === COLLECTION_TYPES ? (
     <ProtectedListViewPage />
   ) : (

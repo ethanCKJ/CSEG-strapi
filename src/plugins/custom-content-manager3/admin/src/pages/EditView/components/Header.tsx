@@ -61,10 +61,7 @@ const Header = ({ isCreating, status, title: documentTitle = 'Untitled' }: Heade
   const params = useParams<{ collectionType: string; slug: string }>();
 
   const title = isCreating
-    ? formatMessage({
-        id: 'content-manager.containers.edit.title.new',
-        defaultMessage: 'Create an entry',
-      })
+    ? 'Create an entry'
     : documentTitle;
 
   return (
@@ -220,10 +217,7 @@ const HeaderToolbar = () => {
           return (
             <DocumentActionsMenu
               actions={headerActions}
-              label={formatMessage({
-                id: 'content-manager.containers.edit.header.more-actions',
-                defaultMessage: 'More actions',
-              })}
+              label="More actions"
             >
               <Information activeTab={status} />
             </DocumentActionsMenu>
@@ -278,10 +272,7 @@ const Information = ({ activeTab }: InformationProps) => {
   const information: Array<{ isDisplayed?: boolean; label: string; value: React.ReactNode }> = [
     {
       isDisplayed: !!publishDocument?.[PUBLISHED_AT_ATTRIBUTE_NAME],
-      label: formatMessage({
-        id: 'content-manager.containers.edit.information.last-published.label',
-        defaultMessage: 'Published',
-      }),
+      label: 'Published',
       value: formatMessage(
         {
           id: 'content-manager.containers.edit.information.last-published.value',
@@ -300,10 +291,7 @@ const Information = ({ activeTab }: InformationProps) => {
     },
     {
       isDisplayed: !!createAndUpdateDocument?.[UPDATED_AT_ATTRIBUTE_NAME],
-      label: formatMessage({
-        id: 'content-manager.containers.edit.information.last-draft.label',
-        defaultMessage: 'Updated',
-      }),
+      label: 'Updated',
       value: formatMessage(
         {
           id: 'content-manager.containers.edit.information.last-draft.value',
@@ -322,10 +310,7 @@ const Information = ({ activeTab }: InformationProps) => {
     },
     {
       isDisplayed: !!createAndUpdateDocument?.[CREATED_AT_ATTRIBUTE_NAME],
-      label: formatMessage({
-        id: 'content-manager.containers.edit.information.document.label',
-        defaultMessage: 'Created',
-      }),
+      label: 'Created',
       value: formatMessage(
         {
           id: 'content-manager.containers.edit.information.document.value',
@@ -560,10 +545,7 @@ const ConfigureTheViewAction: DocumentActionComponent = ({ collectionType, model
 
   return isDesktop
     ? {
-        label: formatMessage({
-          id: 'app.links.configure-view',
-          defaultMessage: 'Configure the view',
-        }),
+        label: 'Configure the view',
         icon: <ListPlus />,
         onClick: () => {
           navigate(`../${collectionType}/${model}/configurations/edit`);
@@ -583,10 +565,7 @@ const EditTheModelAction: DocumentActionComponent = ({ model }) => {
 
   return isDesktop
     ? {
-        label: formatMessage({
-          id: 'content-manager.link-to-ctb',
-          defaultMessage: 'Edit the model',
-        }),
+        label: 'Edit the model',
         icon: <Pencil />,
         onClick: () => {
           navigate(`/plugins/content-type-builder/content-types/${model}`);
@@ -621,18 +600,12 @@ const DeleteAction: DocumentActionComponent = ({ documentId, model, collectionTy
     icon: <Trash />,
     dialog: {
       type: 'dialog',
-      title: formatMessage({
-        id: 'app.components.ConfirmDialog.title',
-        defaultMessage: 'Confirmation',
-      }),
+      title: 'Confirmation',
       content: (
         <Flex direction="column" gap={2}>
           <WarningCircle width="24px" height="24px" fill="danger600" />
           <Typography tag="p" variant="omega" textAlign="center">
-            {formatMessage({
-              id: 'content-manager.actions.delete.dialog.body',
-              defaultMessage: 'Are you sure?',
-            })}
+            Are you sure?
           </Typography>
         </Flex>
       ),
@@ -653,10 +626,7 @@ const DeleteAction: DocumentActionComponent = ({ documentId, model, collectionTy
             );
 
             toggleNotification({
-              message: formatMessage({
-                id: 'content-manager.actions.delete.error',
-                defaultMessage: 'An error occurred while trying to delete the document.',
-              }),
+              message: 'An error occurred while trying to delete the document.',
               type: 'danger',
             });
 

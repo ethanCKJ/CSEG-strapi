@@ -201,51 +201,37 @@ const DocumentActions = ({ actions }: DocumentActionsProps) => {
 
   return (
     <Flex direction="column" gap={2} alignItems="stretch" width="100%">
-      <tours.contentManager.Publish>
-        <Flex gap={2}>
-          {primaryAction.label === 'Publish'
-            ? addHintTooltip(
-                primaryAction,
-                <DocumentActionButton
-                  {...primaryAction}
-                  variant={primaryAction.variant || 'default'}
-                />
-              )
-            : addHintTooltip(
-                primaryAction,
-                <DocumentActionButton
-                  {...primaryAction}
-                  variant={primaryAction.variant || 'default'}
-                  buttonType="submit"
-                />
-              )}
+      <Flex gap={2}>
+        {primaryAction.label === 'Publish'
+          ? addHintTooltip(
+              primaryAction,
+              <DocumentActionButton
+                {...primaryAction}
+                variant={primaryAction.variant || 'default'}
+              />
+            )
+          : addHintTooltip(
+              primaryAction,
+              <DocumentActionButton
+                {...primaryAction}
+                variant={primaryAction.variant || 'default'}
+                buttonType="submit"
+              />
+            )}
 
-          {restActions.length > 0 ? (
-            <DocumentActionsMenu
-              actions={restActions}
-              label={formatMessage({
-                id: 'content-manager.containers.edit.panels.default.more-actions',
-                defaultMessage: 'More document actions',
-              })}
-            />
-          ) : null}
-        </Flex>
-      </tours.contentManager.Publish>
-      {secondaryAction ? (
-        secondaryAction.label === 'Publish' ? (
-          <tours.contentManager.Publish>
-            <DocumentActionButton
-              {...secondaryAction}
-              variant={secondaryAction.variant || 'secondary'}
-            />
-          </tours.contentManager.Publish>
-        ) : (
-          <DocumentActionButton
-            {...secondaryAction}
-            variant={secondaryAction.variant || 'secondary'}
-            buttonType="submit"
+        {restActions.length > 0 ? (
+          <DocumentActionsMenu
+            actions={restActions}
+            label="More document actions"
           />
-        )
+        ) : null}
+      </Flex>
+      {secondaryAction ? (
+        <DocumentActionButton
+          {...secondaryAction}
+          variant={secondaryAction.variant || 'secondary'}
+          buttonType={secondaryAction.label === 'Publish' ? undefined : 'submit'}
+        />
       ) : null}
     </Flex>
   );
@@ -389,11 +375,7 @@ const DocumentActionsMenu = ({
       >
         <More aria-hidden focusable={false} />
         <VisuallyHidden tag="span">
-          {label ||
-            formatMessage({
-              id: 'content-manager.containers.edit.panels.default.more-actions',
-              defaultMessage: 'More document actions',
-            })}jj
+          {label || 'More document actions'}
         </VisuallyHidden>
       </Menu.Trigger>
       <Menu.Content maxHeight={undefined} popoverPlacement="bottom-end">
@@ -489,17 +471,11 @@ const DocumentActionConfirmDialog = ({
         <Dialog.Footer>
           <Dialog.Cancel>
             <Button variant="tertiary" fullWidth>
-              {formatMessage({
-                id: 'app.components.Button.cancel',
-                defaultMessage: 'Cancel',
-              })}
+              Cancel
             </Button>
           </Dialog.Cancel>
           <Button onClick={handleConfirm} variant={variant} fullWidth loading={loading}>
-            {formatMessage({
-              id: 'app.components.Button.confirm',
-              defaultMessage: 'Confirm',
-            })}
+            Confirm
           </Button>
         </Dialog.Footer>
       </Dialog.Content>
@@ -649,10 +625,7 @@ const PublishAction: DocumentActionComponent = ({
     if (isErrorDraftRelations) {
       toggleNotification({
         type: 'danger',
-        message: formatMessage({
-          id: getTranslation('error.records.fetch-draft-relatons'),
-          defaultMessage: 'An error occurred while fetching draft relations on this document.',
-        }),
+        message: 'An error occurred while fetching draft relations on this document.',
       });
     }
   }, [isErrorDraftRelations, toggleNotification, formatMessage]);
@@ -778,20 +751,12 @@ const PublishAction: DocumentActionComponent = ({
         if (hasUnreadableRequiredField) {
           toggleNotification({
             type: 'danger',
-            message: formatMessage({
-              id: 'content-manager.validation.error.unreadable-required-field',
-              defaultMessage:
-                'Your current permissions prevent access to certain required fields. Please request access from an administrator to proceed.',
-            }),
+            message: 'Your current permissions prevent access to certain required fields. Please request access from an administrator to proceed.',
           });
         } else {
           toggleNotification({
             type: 'danger',
-            message: formatMessage({
-              id: 'content-manager.validation.error',
-              defaultMessage:
-                'There are validation errors in your document. Please fix them before saving.',
-            }),
+            message: 'There are validation errors in your document. Please fix them before saving.',
           });
         }
         return;
@@ -877,10 +842,7 @@ const PublishAction: DocumentActionComponent = ({
             } catch (err) {
               toggleNotification({
                 type: 'danger',
-                message: formatMessage({
-                  id: 'notification.error',
-                  defaultMessage: 'An error occurred',
-                }),
+                message: 'An error occurred',
               });
 
               throw err;
@@ -959,10 +921,7 @@ const PublishAction: DocumentActionComponent = ({
       (!modified && isDocumentPublished) ||
       (!modified && !document?.documentId) ||
       !canPublish,
-    label: formatMessage({
-      id: 'app.utils.publish',
-      defaultMessage: 'Publish',
-    }),
+    label: 'Publish',
     onClick: async () => {
       if (hasDraftRelations) {
         // In this case we need to show the user a confirmation dialog.
@@ -977,10 +936,7 @@ const PublishAction: DocumentActionComponent = ({
           type: 'dialog',
           variant: 'danger',
           footer: null,
-          title: formatMessage({
-            id: getTranslation(`popUpwarning.warning.bulk-has-draft-relations.title`),
-            defaultMessage: 'Confirmation',
-          }),
+          title: 'Confirmation',
           content: formatMessage(
             {
               id: getTranslation(`popUpwarning.warning.bulk-has-draft-relations.message`),
@@ -1261,10 +1217,7 @@ const UpdateAction: DocumentActionComponent = ({
      * - the active tab is the published tab
      */
     disabled: isSubmitting || (!modified && !isCloning) || activeTab === 'published',
-    label: formatMessage({
-      id: 'global.save',
-      defaultMessage: 'Save',
-    }),
+    label: 'Save',
     onClick: handleUpdate,
     position: ['panel', 'preview', 'relation-modal'],
   };
@@ -1309,10 +1262,7 @@ const UnpublishAction: DocumentActionComponent = ({
       !canPublish ||
       activeTab === 'published' ||
       (document?.status !== 'published' && document?.status !== 'modified'),
-    label: formatMessage({
-      id: 'app.utils.unpublish',
-      defaultMessage: 'Unpublish',
-    }),
+    label: 'Unpublish',
     icon: <Cross />,
     onClick: async () => {
       /**
@@ -1328,10 +1278,7 @@ const UnpublishAction: DocumentActionComponent = ({
           );
 
           toggleNotification({
-            message: formatMessage({
-              id: 'content-manager.actions.unpublish.error',
-              defaultMessage: 'An error occurred while trying to unpublish the document.',
-            }),
+            message: 'An error occurred while trying to unpublish the document.',
             type: 'danger',
           });
         }
@@ -1349,41 +1296,26 @@ const UnpublishAction: DocumentActionComponent = ({
     dialog: isDocumentModified
       ? {
           type: 'dialog',
-          title: formatMessage({
-            id: 'app.components.ConfirmDialog.title',
-            defaultMessage: 'Confirmation',
-          }),
+          title: 'Confirmation',
           content: (
             <Flex alignItems="flex-start" direction="column" gap={6}>
               <Flex width="100%" direction="column" gap={2}>
                 <WarningCircle width="24px" height="24px" fill="danger600" />
                 <Typography tag="p" variant="omega" textAlign="center">
-                  {formatMessage({
-                    id: 'content-manager.actions.unpublish.dialog.body',
-                    defaultMessage: 'Are you sure?',
-                  })}
+                  Are you sure?
                 </Typography>
               </Flex>
               <Radio.Group
                 defaultValue={UNPUBLISH_DRAFT_OPTIONS.KEEP}
                 name="discard-options"
-                aria-label={formatMessage({
-                  id: 'content-manager.actions.unpublish.dialog.radio-label',
-                  defaultMessage: 'Choose an option to unpublish the document.',
-                })}
+                aria-label="Choose an option to unpublish the document."
                 onValueChange={handleChange}
               >
                 <Radio.Item checked={shouldKeepDraft} value={UNPUBLISH_DRAFT_OPTIONS.KEEP}>
-                  {formatMessage({
-                    id: 'content-manager.actions.unpublish.dialog.option.keep-draft',
-                    defaultMessage: 'Keep draft',
-                  })}
+                  Keep draft
                 </Radio.Item>
                 <Radio.Item checked={!shouldKeepDraft} value={UNPUBLISH_DRAFT_OPTIONS.DISCARD}>
-                  {formatMessage({
-                    id: 'content-manager.actions.unpublish.dialog.option.replace-draft',
-                    defaultMessage: 'Replace draft',
-                  })}
+                  Replace draft
                 </Radio.Item>
               </Radio.Group>
             </Flex>
@@ -1444,10 +1376,7 @@ const DiscardAction: DocumentActionComponent = ({
 
   return {
     disabled: !canUpdate || activeTab === 'published' || document?.status !== 'modified',
-    label: formatMessage({
-      id: 'content-manager.actions.discard.label',
-      defaultMessage: 'Discard changes',
-    }),
+    label: 'Discard changes',
     icon: <Cross />,
     position: ['panel', 'table-row'],
     variant: 'danger',
@@ -1461,10 +1390,7 @@ const DiscardAction: DocumentActionComponent = ({
         <Flex direction="column" gap={2}>
           <WarningCircle width="24px" height="24px" fill="danger600" />
           <Typography tag="p" variant="omega" textAlign="center">
-            {formatMessage({
-              id: 'content-manager.actions.discard.dialog.body',
-              defaultMessage: 'Are you sure?',
-            })}
+            Are you sure?
           </Typography>
         </Flex>
       ),

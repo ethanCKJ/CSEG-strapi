@@ -204,9 +204,6 @@ const EditViewPage = () => {
             >
               <Grid.Item col={9} xs={12} direction="column" alignItems="stretch">
                 <Tabs.Content value="draft">
-                  <tours.contentManager.Fields>
-                    <Box />
-                  </tours.contentManager.Fields>
                   <FormLayout layout={layout} document={doc} />
                 </Tabs.Content>
                 <Tabs.Content value="published">
