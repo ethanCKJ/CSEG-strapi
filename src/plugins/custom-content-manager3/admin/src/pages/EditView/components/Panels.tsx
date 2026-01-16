@@ -2,27 +2,17 @@ import * as React from 'react';
 
 import {
   useQueryParams,
-  useStrapiApp,
-  DescriptionComponentRenderer,
 } from '@strapi/strapi/admin';
 import { Flex, Typography } from '@strapi/design-system';
-import { useIntl } from 'react-intl';
-import { useMatch } from 'react-router-dom';
 
 import { InjectionZone } from '../../../components/InjectionZone';
 import { useDoc } from '../../../hooks/useDocument';
-import { CLONE_PATH } from '../../../router';
-
-import { DocumentActions } from './DocumentActions';
 
 import type {
-  ContentManagerPlugin,
   DocumentActionProps,
   PanelComponent,
-  PanelComponentProps,
 } from '../../../content-manager';
 import {PublishButton} from "../../../action-buttons/PublishButton";
-import { Grid } from "@strapi/design-system";
 import {UpdateButton} from "../../../action-buttons/UpdateButton";
 import { SimpleMenu } from "@strapi/design-system";
 import { MenuItem } from "@strapi/design-system";
@@ -30,6 +20,8 @@ import {useDeleteAction} from "../../../hooks/useDeleteAction";
 import {DocumentActionConfirmDialog} from "../../../action-buttons/ActionHelper";
 import {useUnpublishAction} from "../../../hooks/useUnpublishAction";
 import {useDiscardAction} from "../../../hooks/useDiscardAction";
+import {ApproveButton} from "../../../action-buttons/ApproveButton";
+import {MEMBER_APPLICATION_MODEL} from "../../../constants/memberApplications";
 
 interface PanelDescription {
   title: string;
@@ -60,7 +52,6 @@ const ActionsPanelContent = () => {
     },
   ] = useQueryParams<{ status: 'draft' | 'published' }>();
   const { model, id, document, meta, collectionType } = useDoc();
-  // const plugins = useStrapiApp('ActionsPanel', (state) => state.plugins);
 
   const props = {
     activeTab: status,
@@ -133,7 +124,63 @@ const Panels = () => {
       </Panel>
     </Flex>
   );
+ };
+
+interface StandardActionPanelProps {
+  model: string;
+  documentId?: string;
+  document?: any;
+  status: 'draft' | 'published';
+  meta?: any;
+  collectionType: string;
+}
+
+const StandardActionPanel: React.FC<StandardActionPanelProps> = ({
+  model,
+  documentId,
+  document,
+  status,
+  meta,
+  collectionType,
+}) => {
+  const deleteAction: any = useDeleteAction(documentId, model, collectionType) as any;
+  const unpublishAction: any = useUnpublishAction(status, collectionType, model, document, documentId) as any;
+  const discardAction: any = useDiscardAction(status, collectionType, model, document, documentId) as any;
+
+  // Return the exact snippet requested by the user (inner Flex + dialogs)
+  return (
+    <>
+      <Flex alignItems="center" width="100%" gap={8}>
+        <Flex gap={2} justifyContent="center" alignItems="center" width={"50%"}>
+          <PublishButton documentId={documentId} activeTab={status} model={model} collectionType={collectionType} meta={meta} document={document}/>
+          <UpdateButton activeTab={status} documentId={documentId} model={model} collectionType={collectionType}  />
+        </Flex>
+        <SimpleMenu label={"More actions"} variant={"tertiary"} >
+          <MenuItem onSelect={deleteAction.dialog?.open} variant={deleteAction.variant} startIcon={deleteAction.icon}>{deleteAction.label}</MenuItem>
+          {unpublishAction && <MenuItem onSelect={unpublishAction.dialog?.open}  startIcon={unpublishAction.icon}>{unpublishAction.label}</MenuItem>}
+          {discardAction && <MenuItem onSelect={discardAction.dialog?.open} variant={discardAction.variant} startIcon={discardAction.icon}>{discardAction.label}</MenuItem>}
+        </SimpleMenu>
+      </Flex>
+
+      {deleteAction && <DocumentActionConfirmDialog title={"Confirmation"} onClose={deleteAction.dialog.close} onConfirm={deleteAction.onClick} isOpen={deleteAction.dialog.isOpen} content={deleteAction.dialog.content} key={"delete"}/>}
+      {unpublishAction &&  <DocumentActionConfirmDialog title={"Confirmation"} onClose={unpublishAction.dialog.close} onConfirm={unpublishAction.onClick} isOpen={unpublishAction.dialog.isOpen} content={unpublishAction.dialog.content} key={"unpublish"}/> }
+      {discardAction && <DocumentActionConfirmDialog title={discardAction.dialog?.title} onClose={discardAction.dialog?.close} onConfirm={discardAction.onClick} isOpen={discardAction.dialog?.isOpen} content={discardAction.dialog?.content} key={"discard"}/> }
+    </>
+  );
 };
+interface MemberApplicationActionPanelProps {
+  documentId: string | undefined,
+  model: string
+}
+const MemberApplicationActionPanel = ({documentId, model}: MemberApplicationActionPanelProps) => {
+  return (
+    <Flex alignItems="center" width="100%" gap={8}>
+      <Flex gap={2} justifyContent="center" alignItems="center" width={"50%"}>
+        <ApproveButton documentId={documentId} model={model}/>
+      </Flex>
+    </Flex>
+  )
+}
 
 const CustomPanel = () => {
   const [
@@ -142,56 +189,45 @@ const CustomPanel = () => {
     },
   ] = useQueryParams<{ status: 'draft' | 'published' }>();
   const { model, id: documentId, document, meta, collectionType } = useDoc();
-  console.log("In CustomPanel with documentId:", documentId, document);
-  // TODO: Standardise whether we want common action input-output or each action has its own types for input-output. Leaning towards second approach as that is what DocumentActions.tsx uses
-  const deleteAction = useDeleteAction(documentId, model, collectionType);
-  const unpublishAction = useUnpublishAction(status, collectionType, model, document, documentId);
-  const discardAction = useDiscardAction(status, collectionType, model, document, documentId);
 
-  if (!deleteAction) {
-    console.error('useDeleteAction returned null');
-    return null;
+  let panel: React.ReactNode;
+  if (model === MEMBER_APPLICATION_MODEL){
+    panel = <MemberApplicationActionPanel documentId={documentId} model={model}/>
+  } else{
+    panel = <StandardActionPanel
+      model={model}
+      documentId={documentId}
+      document={document}
+      status={status}
+      meta={meta}
+      collectionType={collectionType}
+    />
   }
 
   return (
-      <Flex
-        aria-labelledby="additional-information"
-        background="neutral0"
-        borderColor="neutral150"
-        hasRadius
-        paddingBottom={4}
-        paddingLeft={4}
-        paddingRight={4}
-        paddingTop={4}
-        shadow="tableShadow"
-        gap={3}
-        direction="column"
-        justifyContent="stretch"
-        alignItems="flex-start"
-        marginBottom={8}
-      >
-        <Typography tag="h2" variant="sigma" textTransform="uppercase">
-          Actions
-        </Typography>
-        {/* Button bar */}
-        <Flex alignItems="center" width="100%" gap={8}>
-          <Flex gap={2} justifyContent="center" alignItems="center" width={"50%"}>
-          <PublishButton documentId={documentId} activeTab={status} model={model} collectionType={collectionType} meta={meta} document={document}/>
-          <UpdateButton activeTab={status} documentId={documentId} model={model} collectionType={collectionType}  />
-          </Flex>
-          <SimpleMenu label={"More actions"} variant={"tertiary"} >
-            <MenuItem onSelect={deleteAction.dialog?.open} variant={deleteAction.variant} startIcon={deleteAction.icon}>{deleteAction.label}</MenuItem>
-            {unpublishAction && <MenuItem onSelect={unpublishAction.dialog?.open}  startIcon={unpublishAction.icon}>{unpublishAction.label}</MenuItem>}
-            {discardAction && <MenuItem onSelect={discardAction.dialog?.open} variant={discardAction.variant} startIcon={discardAction.icon}>{discardAction.label}</MenuItem>}
-          </SimpleMenu>
-        </Flex>
-        <DocumentActionConfirmDialog title={"Confirmation"} onClose={deleteAction.dialog.close} onConfirm={deleteAction.onClick} isOpen={deleteAction.dialog.isOpen} content={deleteAction.dialog.content} key={"delete"}/>
-        {unpublishAction &&  <DocumentActionConfirmDialog title={"Confirmation"} onClose={unpublishAction.dialog.close} onConfirm={unpublishAction.onClick} isOpen={unpublishAction.dialog.isOpen} content={unpublishAction.dialog.content} key={"unpublish"}/> }
-        {discardAction && <DocumentActionConfirmDialog title={discardAction.dialog?.title} onClose={discardAction.dialog?.close} onConfirm={discardAction.onClick} isOpen={discardAction.dialog?.isOpen} content={discardAction.dialog?.content} key={"discard"}/> }
-      </Flex>
+    <Flex
+      tag="aside"
+      aria-labelledby="additional-information"
+      background="neutral0"
+      borderColor="neutral150"
+      hasRadius
+      paddingBottom={4}
+      paddingLeft={4}
+      paddingRight={4}
+      paddingTop={4}
+      shadow="tableShadow"
+      gap={3}
+      direction="column"
+      justifyContent="stretch"
+      alignItems="flex-start"
+    >
+      <Typography tag="h2" variant="sigma" textTransform="uppercase" textColor="neutral600">
+        Actions
+      </Typography>
+      {panel}
+    </Flex>
   );
-
-}
+};
 
 export { Panels, ActionsPanel, CustomPanel };
 export type { PanelDescription };
