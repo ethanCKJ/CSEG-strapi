@@ -191,8 +191,18 @@ const prepareTempKeys = (relations: RelResult[], existingRelations: RelationResu
     __temp_key__: keys[index],
   }));
 };
+// useLazySearchRelationsQuery returns RTK pattern. searchForTrigger input follows
+/*
+searchRelations: build.query<
+      FindAvailable.Response,
+      FindAvailable.Params & {
+        params?: FindAvailable.Request['query'];
+      }
+    >
+    Means RTK TOutput = FindAvailable.Response and TInput = FindAvailable.Params & { params?: FindAvailable.Request['query']; }
+ */
+// const [searchForTrigger, { data, isLoading }] = useLazySearchRelationsQuery();
+const { useGetRelationsQuery, useLazySearchRelationsQuery, useSearchRelationsQuery } = relationsApi;
 
-const { useGetRelationsQuery, useLazySearchRelationsQuery } = relationsApi;
-
-export { useGetRelationsQuery, useLazySearchRelationsQuery };
+export { useGetRelationsQuery, useLazySearchRelationsQuery, useSearchRelationsQuery };
 export type { RelationResult };

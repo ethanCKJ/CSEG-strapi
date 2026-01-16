@@ -22,6 +22,11 @@ import {useUnpublishAction} from "../../../hooks/useUnpublishAction";
 import {useDiscardAction} from "../../../hooks/useDiscardAction";
 import {ApproveButton} from "../../../action-buttons/ApproveButton";
 import {MEMBER_APPLICATION_MODEL} from "../../../constants/memberApplications";
+import {useLazySearchRelationsQuery, useSearchRelationsQuery} from "../../../services/relations";
+import { Radio } from "@strapi/design-system";
+import {RelationResult} from "../../../../../shared/contracts/relations";
+import {RejectButton} from "../../../action-buttons/RejectButton";
+import {Document} from "../../../hooks/useDocument";
 
 interface PanelDescription {
   title: string;
@@ -171,14 +176,59 @@ const StandardActionPanel: React.FC<StandardActionPanelProps> = ({
 interface MemberApplicationActionPanelProps {
   documentId: string | undefined,
   model: string
+  document: Document
 }
-const MemberApplicationActionPanel = ({documentId, model}: MemberApplicationActionPanelProps) => {
+const Radios = ({memberTypes, documentId, model}: {memberTypes: RelationResult[],
+  documentId: string | undefined,
+  model: string}) => {
+  const [selectedMemberType, setSelectedMemberType] = React.useState<RelationResult>(memberTypes[0]);
+
+  const handleGroupChange = (id: number) => {
+    const found = memberTypes.find((mt) => mt.id === id);
+    if (found){
+      setSelectedMemberType(found);
+    }
+  }
   return (
-    <Flex alignItems="center" width="100%" gap={8}>
+    <>
+      <Radio.Group aria-label="member type" value={selectedMemberType.id} onValueChange={handleGroupChange}>
+        <Typography tag="label" variant="pi" fontWeight="bold">
+          Select type of new member
+        </Typography>
+        {memberTypes.map((item) => (<Radio.Item key={item.id} value={item.id}>{item.membershipName || "Unknown membership type"}</Radio.Item>))}
+      </Radio.Group>
       <Flex gap={2} justifyContent="center" alignItems="center" width={"50%"}>
-        <ApproveButton documentId={documentId} model={model}/>
+        <ApproveButton documentId={documentId} model={model} membershipTypeId={selectedMemberType.id} membershipTypeDocumentId={selectedMemberType.documentId}/>
+        <RejectButton documentId={documentId} model={model} membershipTypeId={selectedMemberType.id} membershipTypeDocumentId={selectedMemberType.documentId}/>
       </Flex>
-    </Flex>
+      <Flex alignItems="center" width="100%" gap={8}>
+      </Flex>
+    </>
+  )
+}
+
+const MemberApplicationActionPanel = ({documentId, model, document}: MemberApplicationActionPanelProps) => {
+  const {data, error, isLoading} = useSearchRelationsQuery({
+    model: MEMBER_APPLICATION_MODEL,
+    targetField: 'member_type',
+    params: {
+      pageSize: 100,
+      page:1
+    }
+  });
+  if (isLoading || !data || !data.results){
+    return <div>Loading...</div>
+  } else if (error){
+    return <div>Error loading member types.</div>
+  }
+
+  if (document.applicationStatus && document.applicationStatus !== 'pending'){
+    return <Typography>No actions available. Application is already {document.applicationStatus}.</Typography>;
+  }
+  return (
+    <>
+      <Radios memberTypes={data.results} model={model} documentId={documentId}/>
+    </>
   )
 }
 
@@ -190,9 +240,10 @@ const CustomPanel = () => {
   ] = useQueryParams<{ status: 'draft' | 'published' }>();
   const { model, id: documentId, document, meta, collectionType } = useDoc();
 
+
   let panel: React.ReactNode;
   if (model === MEMBER_APPLICATION_MODEL){
-    panel = <MemberApplicationActionPanel documentId={documentId} model={model}/>
+    panel = <MemberApplicationActionPanel documentId={documentId} model={model} document={document}/>
   } else{
     panel = <StandardActionPanel
       model={model}

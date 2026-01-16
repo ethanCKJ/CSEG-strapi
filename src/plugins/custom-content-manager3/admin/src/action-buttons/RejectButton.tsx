@@ -4,7 +4,7 @@ import { useUpdateAction } from '../hooks/useUpdateAction';
 import {MEMBER_APPLICATION_MODEL} from "../constants/memberApplications";
 import {useHandleApplicationAction} from "../hooks/useHandleApplicationAction";
 
-type ApproveButtonProps = {
+type RejectButtonProps = {
   documentId: string | undefined;
   model: string;
   membershipTypeId: number,
@@ -14,12 +14,12 @@ type ApproveButtonProps = {
 /**
  * Approves member application.
  */
-const  ApproveButton = ({ documentId, model, membershipTypeId, membershipTypeDocumentId }: ApproveButtonProps) => {
+const  RejectButton = ({ documentId, model, membershipTypeId, membershipTypeDocumentId }: RejectButtonProps) => {
   // Normalize nullable activeTab locally and pass it to the hook
 
-  const approveAction = useHandleApplicationAction(documentId, model)
+  const applicationAction = useHandleApplicationAction(documentId, model)
 
-  if (!approveAction) {
+  if (!applicationAction) {
     console.error('useHandleApplicationAction returned null');
     return null;
   }
@@ -27,18 +27,18 @@ const  ApproveButton = ({ documentId, model, membershipTypeId, membershipTypeDoc
   return (
     <Button
       flex="auto"
-      onClick={() => approveAction.onClick(membershipTypeId, membershipTypeDocumentId, 'approved')}
+      onClick={() => applicationAction.onClick(membershipTypeId, membershipTypeDocumentId, 'rejected')}
       justifyContent="center"
-      variant={"success"}
+      variant={"danger"}
       paddingTop="7px"
       paddingBottom="7px"
-      loading={approveAction.loading}
+      loading={applicationAction.loading}
       type="button"
-      disabled={approveAction.disabled}
+      disabled={applicationAction.disabled}
     >
-      Approve application
+      Reject Application
     </Button>
   );
 };
 
-export { ApproveButton };
+export { RejectButton };

@@ -298,19 +298,6 @@ const ListMemberApplicationPage = () => {
     }
   }
 
-
-  if (!isFetching && results.length === 0) {
-    return (
-      <>
-        <NoEntriesPage contentTypeTitle={contentTypeTitle} pagination={pagination} list={list}
-                       schema={schema} headers={handleSetHeaders}
-                       resetHeaders={() => setDisplayedHeaders(list.layout)}
-                       listFieldLayouts={displayedHeaders} callbackfn={(header) => header.name}
-                       canCreate={true}/>
-      </>
-    );
-  }
-  // return (<div>Hello from the ListMemberApplicationPage</div>)
   return (
     <>
       <Page.Main>
@@ -361,7 +348,7 @@ const ListMemberApplicationPage = () => {
                   ))}
                 </Table.Head>
                 <Table.Loading />
-                <Table.Empty action={<CreateButton variant="secondary" contentTypeTitle={contentTypeTitle} />} />
+                <Table.Empty />
                 <Table.Body>
                   {results.map((row) => {
                     return (

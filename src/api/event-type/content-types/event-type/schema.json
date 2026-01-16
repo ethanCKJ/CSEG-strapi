@@ -7,7 +7,7 @@
     "displayName": "EventType"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {

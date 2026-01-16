@@ -51,8 +51,7 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::event-type.event-type",
-      "inversedBy": "events",
-      "required":true
+      "inversedBy": "events"
     },
     "event_tags": {
       "type": "relation",

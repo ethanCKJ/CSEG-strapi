@@ -4,7 +4,7 @@
   "info": {
     "singularName": "member-application",
     "pluralName": "member-applications",
-    "displayName": "MemberApplication"
+    "displayName": "Manage your member applications"
   },
   "options": {
     "draftAndPublish": false

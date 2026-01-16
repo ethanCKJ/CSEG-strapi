@@ -438,7 +438,7 @@ export interface ApiEventTagEventTag extends Struct.CollectionTypeSchema {
     singularName: 'event-tag';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
@@ -479,7 +479,7 @@ export interface ApiEventTypeEventType extends Struct.CollectionTypeSchema {
     singularName: 'event-type';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
@@ -526,8 +526,7 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     event_type: Schema.Attribute.Relation<
       'manyToOne',
       'api::event-type.event-type'
-    > &
-      Schema.Attribute.Required;
+    >;
     eventDate: Schema.Attribute.Date & Schema.Attribute.Required;
     eventEndTime: Schema.Attribute.Time & Schema.Attribute.Required;
     eventPage: Schema.Attribute.Blocks & Schema.Attribute.Required;
@@ -649,7 +648,7 @@ export interface ApiMemberApplicationMemberApplication
   extends Struct.CollectionTypeSchema {
   collectionName: 'member_applications';
   info: {
-    displayName: 'MemberApplication';
+    displayName: 'Manage your member applications';
     pluralName: 'member-applications';
     singularName: 'member-application';
   };
@@ -720,7 +719,7 @@ export interface ApiMemberTypeMemberType extends Struct.CollectionTypeSchema {
     singularName: 'member-type';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
