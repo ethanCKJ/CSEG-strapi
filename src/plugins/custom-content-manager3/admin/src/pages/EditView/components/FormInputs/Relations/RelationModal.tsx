@@ -278,13 +278,16 @@ const RootRelationRenderer = (props: RelationModalRendererProps) => {
       currentDocument={currentDocument}
       isCreating={isCreating}
     >
-      <RelationModal>
-        {isRenderProp(children)
-          ? children({ dispatch })
-          : props.relation && (
-              <RelationModalTrigger relation={props.relation}>{children}</RelationModalTrigger>
-            )}
-      </RelationModal>
+      <>
+        <RelationModal>
+          {isRenderProp(children)
+            ? children({ dispatch })
+            : props.relation && (
+                <RelationModalTrigger relation={props.relation}>{children}</RelationModalTrigger>
+              )}
+        </RelationModal>
+        <RelationModalConfirmDialog />
+      </>
     </RelationModalProvider>
   );
 };
@@ -432,25 +435,12 @@ const RelationModal = ({ children }: { children: React.ReactNode }) => {
   );
 };
 /**
- * All the main content (not header and footer) of the relation modal, plus the confirmation dialog.
+ * All the main content (not header and footer) of the relation modal.
  * Will be wrapped in a Modal.Body by the RelationModal component.
  * Cannot be moved directly inside RelationModal because it needs access to the context via hooks.
  */
 const RelationModalBody = () => {
-  const navigate = useNavigate();
-  const { pathname, search } = useLocation();
-  const { formatMessage } = useIntl();
-
-  const [triggerRefetchDocument] = useLazyGetDocumentQuery();
-
-  const state = useRelationModal('RelationModalForm', (state) => state.state);
   const dispatch = useRelationModal('RelationModalForm', (state) => state.dispatch);
-  const rootDocumentMeta = useRelationModal('RelationModalForm', (state) => state.rootDocumentMeta);
-  const currentDocumentMeta = useRelationModal(
-    'RelationModalForm',
-    (state) => state.currentDocumentMeta
-  );
-  const isCreating = useRelationModal('RelationModalForm', (state) => state.isCreating);
 
   /**
    * One-way sync the modified state from the form to the modal state.
@@ -465,18 +455,37 @@ const RelationModalBody = () => {
     dispatch({ type: 'SET_HAS_UNSAVED_CHANGES', payload: { hasUnsavedChanges } });
   }, [hasUnsavedChanges, dispatch]);
 
+  return <RelationModalForm />;
+};
+
+/**
+ * Confirmation dialog for unsaved changes in the relation modal.
+ * Rendered outside Modal.Root to avoid Dialog nesting conflicts with Radix UI.
+ */
+const RelationModalConfirmDialog = () => {
+  const navigate = useNavigate();
+  const { pathname, search } = useLocation();
+  const { formatMessage } = useIntl();
+
+  const [triggerRefetchDocument] = useLazyGetDocumentQuery();
+
+  const state = useRelationModal('RelationModalConfirmDialog', (state) => state.state);
+  const dispatch = useRelationModal('RelationModalConfirmDialog', (state) => state.dispatch);
+  const rootDocumentMeta = useRelationModal(
+    'RelationModalConfirmDialog',
+    (state) => state.rootDocumentMeta
+  );
+  const currentDocumentMeta = useRelationModal(
+    'RelationModalConfirmDialog',
+    (state) => state.currentDocumentMeta
+  );
+  const isCreating = useRelationModal('RelationModalConfirmDialog', (state) => state.isCreating);
+
   const handleCloseModal = (shouldBypassConfirmation: boolean) => {
     dispatch({ type: 'CLOSE_MODAL', payload: { shouldBypassConfirmation } });
 
     if (shouldBypassConfirmation || !state.hasUnsavedChanges) {
-      // TODO: check if we can avoid this by relying on RTK invalidatesTags.
-      // If so we can delete this function and dispatch the events directly
-      triggerRefetchDocument(
-        // TODO check if params should be removed (as they were before)
-        rootDocumentMeta,
-        // Favor the cache
-        true
-      );
+      triggerRefetchDocument(rootDocumentMeta, true);
     }
   };
 
@@ -514,23 +523,24 @@ const RelationModalBody = () => {
     }
   };
 
+  if (state.confirmDialogIntent === null) {
+    return null;
+  }
+
   return (
-    <>
-      <RelationModalForm />
-      <Dialog.Root open={state.confirmDialogIntent != null}>
-        <ConfirmDialog
-          onConfirm={() => handleConfirm()}
-          onCancel={() => dispatch({ type: 'CANCEL_CONFIRM_DIALOG' })}
-          variant="danger"
-        >
-          {formatMessage({
-            id: 'content-manager.components.RelationInputModal.confirmation-message',
-            defaultMessage:
-              'Some changes were not saved. Are you sure you want to close this relation? All changes that were not saved will be lost.',
-          })}
-        </ConfirmDialog>
-      </Dialog.Root>
-    </>
+    <Dialog.Root open>
+      <ConfirmDialog
+        onConfirm={() => handleConfirm()}
+        onCancel={() => dispatch({ type: 'CANCEL_CONFIRM_DIALOG' })}
+        variant="danger"
+      >
+        {formatMessage({
+          id: 'content-manager.components.RelationInputModal.confirmation-message',
+          defaultMessage:
+            'Some changes were not saved. Are you sure you want to close this relation? All changes that were not saved will be lost.',
+        })}
+      </ConfirmDialog>
+    </Dialog.Root>
   );
 };
 
