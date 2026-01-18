@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button } from '@strapi/design-system';
 import { useUpdateAction } from '../hooks/useUpdateAction';
-import {MEMBER_APPLICATION_MODEL} from "../constants/memberApplications";
+import {MEMBER_APPLICATION_MODEL} from "../constants/specialModels";
 import {useHandleApplicationAction} from "../hooks/useHandleApplicationAction";
 
 type RejectButtonProps = {

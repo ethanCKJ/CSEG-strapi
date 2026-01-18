@@ -17,7 +17,7 @@ import { Schema } from '../../../hooks/useDocument';
 import { useGetContentTypeConfigurationQuery } from '../../../services/contentTypes';
 import { getMainField } from '../../../utils/attributes';
 import { getDisplayName } from '../../../utils/users';
-import {ADMIN_HIDDEN_FIELDS} from "../../../constants/memberApplications";
+import {ADMIN_HIDDEN_FIELDS} from "../../../constants/specialModels";
 
 /**
  * If new attributes are added, this list needs to be updated.

@@ -21,7 +21,7 @@ import {DocumentActionConfirmDialog} from "../../../action-buttons/ActionHelper"
 import {useUnpublishAction} from "../../../hooks/useUnpublishAction";
 import {useDiscardAction} from "../../../hooks/useDiscardAction";
 import {ApproveButton} from "../../../action-buttons/ApproveButton";
-import {MEMBER_APPLICATION_MODEL} from "../../../constants/memberApplications";
+import {EVENT_MODEL, MEMBER_APPLICATION_MODEL} from "../../../constants/specialModels";
 import {useLazySearchRelationsQuery, useSearchRelationsQuery} from "../../../services/relations";
 import { Radio } from "@strapi/design-system";
 import {RelationResult} from "../../../../../shared/contracts/relations";
@@ -140,6 +140,36 @@ interface StandardActionPanelProps {
   collectionType: string;
 }
 
+/**
+ * Actions for event data type
+ */
+const EventActionPanel = ({
+  model,
+  documentId,
+  document,
+  status,
+  meta,
+  collectionType,
+}) => {
+  return (
+    <>
+      <StandardActionPanel
+        model={model}
+        documentId={documentId}
+        document={document}
+        status={status}
+        meta={meta}
+        collectionType={collectionType}
+      />
+      <Typography>Special actions</Typography>
+    </>
+  )
+
+}
+
+/**
+ * Actions for most data types except member applications and events
+ */
 const StandardActionPanel: React.FC<StandardActionPanelProps> = ({
   model,
   documentId,
@@ -148,9 +178,9 @@ const StandardActionPanel: React.FC<StandardActionPanelProps> = ({
   meta,
   collectionType,
 }) => {
-  const deleteAction: any = useDeleteAction(documentId, model, collectionType) as any;
-  const unpublishAction: any = useUnpublishAction(status, collectionType, model, document, documentId) as any;
-  const discardAction: any = useDiscardAction(status, collectionType, model, document, documentId) as any;
+  const deleteAction = useDeleteAction(documentId, model, collectionType);
+  const unpublishAction = useUnpublishAction(status, collectionType, model, document, documentId);
+  const discardAction = useDiscardAction(status, collectionType, model, document, documentId);
 
   // Return the exact snippet requested by the user (inner Flex + dialogs)
   return (
@@ -240,11 +270,20 @@ const CustomPanel = () => {
   ] = useQueryParams<{ status: 'draft' | 'published' }>();
   const { model, id: documentId, document, meta, collectionType } = useDoc();
 
-
+  // Select action panel based on type of data (model).
   let panel: React.ReactNode;
   if (model === MEMBER_APPLICATION_MODEL){
     panel = <MemberApplicationActionPanel documentId={documentId} model={model} document={document}/>
-  } else{
+  }
+  else if (model === EVENT_MODEL){
+    panel = <EventActionPanel model={model}
+                                 documentId={documentId}
+                                 document={document}
+                                 status={status}
+                                 meta={meta}
+                                 collectionType={collectionType}/>
+  }
+  else{
     panel = <StandardActionPanel
       model={model}
       documentId={documentId}

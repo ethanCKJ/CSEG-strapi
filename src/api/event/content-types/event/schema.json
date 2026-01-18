@@ -79,6 +79,28 @@
         }
       },
       "inversedBy": "events"
+    },
+    "emailSubject": {
+      "type": "string"
+    },
+    "emailContent": {
+      "type": "text"
+    },
+    "emailTarget1": {
+      "type": "email"
+    },
+    "emailTarget2": {
+      "type": "email"
+    },
+    "emailTarget3": {
+      "type": "email"
+    },
+    "emailTarget4": {
+      "type": "email"
+    },
+    "emailCount": {
+      "type": "integer",
+      "default": 0
     }
   }
 }

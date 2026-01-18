@@ -10,7 +10,7 @@ import {ProtectedListViewPage} from "./ListView/ListViewPage";
 import {ProtectedEditViewPage} from "./EditView/EditViewPage";
 import {COLLECTION_TYPES, SINGLE_TYPES} from "../constants/collections";
 import { DesignSystemProvider, useDesignSystem, darkTheme } from "@strapi/design-system";
-import {MEMBER_APPLICATION_MODEL} from "../constants/memberApplications";
+import {MEMBER_APPLICATION_MODEL} from "../constants/specialModels";
 import {ProtectedListMemberApplicationPage} from "./ListView/ListMemberApplicationPage";
 
 /**

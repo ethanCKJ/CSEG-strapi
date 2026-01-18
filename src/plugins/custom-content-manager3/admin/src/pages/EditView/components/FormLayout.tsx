@@ -9,7 +9,7 @@ import { EditLayout } from '../../../hooks/useDocumentLayout';
 import { InputRenderer } from './InputRenderer';
 
 import type { UseDocument } from '../../../hooks/useDocument';
-import {ADMIN_HIDDEN_FIELDS} from "../../../constants/memberApplications";
+import {ADMIN_HIDDEN_FIELDS} from "../../../constants/specialModels";
 
 export const ResponsiveGridRoot = styled(Grid.Root)`
   container-type: inline-size;

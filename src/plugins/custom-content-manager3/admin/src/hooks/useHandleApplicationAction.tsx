@@ -14,7 +14,7 @@ import { handleInvisibleAttributes } from '../pages/EditView/utils/data';
 import { isBaseQueryError } from '../utils/api';
 import { transformData } from '../utils/actions';
 import { ActionHookResult } from './types';
-import {APPLICATION_STATUS, MEMBER_APPLICATION_MODEL} from "../constants/memberApplications";
+import {APPLICATION_STATUS, MEMBER_APPLICATION_MODEL} from "../constants/specialModels";
 
 
 /**
@@ -38,7 +38,6 @@ const useHandleApplicationAction = (
     currentDocument: { components, schema, document: rawDocument },
     currentDocumentMeta,
   } = useDocumentContext('useHandleApplicationAction');
-  console.log("rawDocument in useHandleApplicationAction",rawDocument);
 
   const isSubmitting = useForm('useHandleApplicationAction', ({ isSubmitting }) => isSubmitting);
   const setSubmitting = useForm('useHandleApplicationAction', ({ setSubmitting }) => setSubmitting);
