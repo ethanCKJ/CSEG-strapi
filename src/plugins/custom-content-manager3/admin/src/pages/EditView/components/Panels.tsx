@@ -1,9 +1,10 @@
 import * as React from 'react';
 
 import {
+  useNotification,
   useQueryParams,
 } from '@strapi/strapi/admin';
-import { Flex, Typography } from '@strapi/design-system';
+import {Button, Flex, Typography} from '@strapi/design-system';
 
 import { InjectionZone } from '../../../components/InjectionZone';
 import { useDoc } from '../../../hooks/useDocument';
@@ -27,6 +28,8 @@ import { Radio } from "@strapi/design-system";
 import {RelationResult} from "../../../../../shared/contracts/relations";
 import {RejectButton} from "../../../action-buttons/RejectButton";
 import {Document} from "../../../hooks/useDocument";
+import {useFetchClient} from "@strapi/strapi/admin";
+import {SendEmailButton} from "../../../action-buttons/SendEmailButton";
 
 interface PanelDescription {
   title: string;
@@ -150,7 +153,7 @@ const EventActionPanel = ({
   status,
   meta,
   collectionType,
-}) => {
+}: StandardActionPanelProps) => {
   return (
     <>
       <StandardActionPanel
@@ -162,6 +165,7 @@ const EventActionPanel = ({
         collectionType={collectionType}
       />
       <Typography>Special actions</Typography>
+      <SendEmailButton model={model} collectionType={collectionType} documentId={documentId}/>
     </>
   )
 
@@ -170,14 +174,14 @@ const EventActionPanel = ({
 /**
  * Actions for most data types except member applications and events
  */
-const StandardActionPanel: React.FC<StandardActionPanelProps> = ({
+const StandardActionPanel = ({
   model,
   documentId,
   document,
   status,
   meta,
   collectionType,
-}) => {
+}: StandardActionPanelProps) => {
   const deleteAction = useDeleteAction(documentId, model, collectionType);
   const unpublishAction = useUnpublishAction(status, collectionType, model, document, documentId);
   const discardAction = useDiscardAction(status, collectionType, model, document, documentId);

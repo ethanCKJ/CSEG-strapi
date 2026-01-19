@@ -1,18 +1,35 @@
 import {env} from "@strapi/utils";
 
 export default ({env}) => ({
+  // email: {
+  //   config: {
+  //     provider: "strapi-provider-email-resend",
+  //     providerOptions: {
+  //       apiKey: env("RESEND_API_KEY"), // Required
+  //     },
+  //     settings: {
+  //       defaultFrom: env("RESEND_DEFAULT_EMAIL"),
+  //       defaultReplyTo: env("RESEND_USER_EMAIL"),
+  //     },
+  //   },
+  // },
   email: {
     config: {
-      provider: "strapi-provider-email-resend",
+      provider: 'nodemailer',
       providerOptions: {
-        apiKey: env("RESEND_API_KEY"), // Required
+        host: 'smtp.gmail.com',
+        port: 587,
+        auth: {
+          user: 'noreply.cseg@gmail.com',
+          pass: env('GMAIL_APP_PASSWORD'),
+        },
       },
       settings: {
-        defaultFrom: env("RESEND_DEFAULT_EMAIL"),
-        defaultReplyTo: env("RESEND_USER_EMAIL"),
+        defaultFrom: 'noreply.cseg@gmail.com',
       },
     },
   },
+
 
   // 'custom-content-manager': {
   //   enabled: true,

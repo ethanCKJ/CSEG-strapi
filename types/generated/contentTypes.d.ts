@@ -519,13 +519,24 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    emailContent: Schema.Attribute.Text;
-    emailCount: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
-    emailSubject: Schema.Attribute.String;
-    emailTarget1: Schema.Attribute.Email;
-    emailTarget2: Schema.Attribute.Email;
-    emailTarget3: Schema.Attribute.Email;
-    emailTarget4: Schema.Attribute.Email;
+    emailBody: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<'Untitled body'>;
+    emailCount: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<0>;
+    emailSubject: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Untitled subject'>;
+    emailTarget1: Schema.Attribute.Email &
+      Schema.Attribute.Required &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<'mailing-list@example.com'>;
+    emailTarget2: Schema.Attribute.Email & Schema.Attribute.Private;
+    emailTarget3: Schema.Attribute.Email & Schema.Attribute.Private;
+    emailTarget4: Schema.Attribute.Email & Schema.Attribute.Private;
     event_tags: Schema.Attribute.Relation<
       'manyToMany',
       'api::event-tag.event-tag'

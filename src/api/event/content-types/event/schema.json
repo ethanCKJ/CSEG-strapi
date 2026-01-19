@@ -81,25 +81,38 @@
       "inversedBy": "events"
     },
     "emailSubject": {
-      "type": "string"
+      "type": "string",
+      "default": "Untitled subject",
+      "required": true
     },
-    "emailContent": {
-      "type": "text"
+    "emailBody": {
+      "type": "text",
+      "private": true,
+      "default": "Untitled body",
+      "required": true
     },
     "emailTarget1": {
-      "type": "email"
+      "type": "email",
+      "private": true,
+      "required": true,
+      "default": "mailing-list@example.com"
     },
     "emailTarget2": {
-      "type": "email"
+      "type": "email",
+      "private": true
     },
     "emailTarget3": {
-      "type": "email"
+      "type": "email",
+      "private": true
     },
     "emailTarget4": {
-      "type": "email"
+      "type": "email",
+      "private": true
     },
     "emailCount": {
       "type": "integer",
+      "private": true,
+      "required": true,
       "default": 0
     }
   }
