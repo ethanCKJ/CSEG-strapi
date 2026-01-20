@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "members",
+  "info": {
+    "singularName": "member",
+    "pluralName": "members",
+    "displayName": "Member"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "fullName": {
+      "type": "string",
+      "maxLength": 100,
+      "required": true
+    },
+    "preferredName": {
+      "type": "string",
+      "maxLength": 100,
+      "required": false
+    },
+    "affiliations": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "email": {
+      "type": "email"
+    },
+    "aboutYou": {
+      "type": "text",
+      "maxLength": 2000,
+      "required": true
+    },
+    "topics": {
+      "type": "text",
+      "maxLength": 2000,
+      "required": true,
+      "unique": false
+    },
+    "member_type": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::member-type.member-type"
+    }
+  }
+}
