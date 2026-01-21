@@ -6,7 +6,7 @@ import {MembershipIcon} from "./membership-icon";
 export default {
   register(app: any) {
     app.addMenuLink({
-      to: `plugins/${PLUGIN_ID}`,
+      to: `plugins/custom-content-manager3/collection-types/api::member.member`,
       icon: MembershipIcon,
       intlLabel: {
         id: `${PLUGIN_ID}.plugin.name`,
@@ -14,18 +14,18 @@ export default {
       },
     });
 
-    app.router.addRoute({
-      path: `plugins/${PLUGIN_ID}/*`,
-      lazy: async () => {
-        const { App } = await import('./pages/App');
-
-        return {
-          Component: App,
-        };
-        // const { Layout } = await import('./layout');
-      },
-
-    });
+    // app.router.addRoute({
+    //   path: `plugins/${PLUGIN_ID}/*`,
+    //   lazy: async () => {
+    //     const { App } = await import('./pages/App');
+    //
+    //     return {
+    //       Component: App,
+    //     };
+    //     // const { Layout } = await import('./layout');
+    //   },
+    //
+    // });
 
     app.registerPlugin({
       id: PLUGIN_ID,

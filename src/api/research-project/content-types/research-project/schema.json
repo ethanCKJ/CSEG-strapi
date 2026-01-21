@@ -4,7 +4,7 @@
   "info": {
     "singularName": "research-project",
     "pluralName": "research-projects",
-    "displayName": "ResearchProject"
+    "displayName": "Research projects"
   },
   "options": {
     "draftAndPublish": true

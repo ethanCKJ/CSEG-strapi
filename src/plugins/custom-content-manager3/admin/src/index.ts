@@ -24,19 +24,19 @@ export default {
       [PLUGIN_ID]: reducer,
     })
 
-    app.addMenuLink({
-      to: `plugins/${PLUGIN_ID}`,
-      icon: Bell,
-      intlLabel: {
-        id: `${PLUGIN_ID}.plugin.name`,
-        defaultMessage: PLUGIN_ID,
-      },
-      Component: async () => {
-        const { App } = await import('./pages/App');
-
-        return App;
-      },
-    });
+    // app.addMenuLink({
+    //   to: `plugins/${PLUGIN_ID}`,
+    //   icon: Bell,
+    //   intlLabel: {
+    //     id: `${PLUGIN_ID}.plugin.name`,
+    //     defaultMessage: PLUGIN_ID,
+    //   },
+    //   Component: async () => {
+    //     const { App } = await import('./pages/App');
+    //
+    //     return App;
+    //   },
+    // });
 
     // app.router.addRoute({
     //   path: 'custom-content-manager3/*',

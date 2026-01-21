@@ -7,6 +7,7 @@ import usersPermissions from "@strapi/plugin-users-permissions/strapi-admin";
 import customContentManager3 from "../../src/plugins/custom-content-manager3/./dist/admin/index.mjs";
 import membershipList from "../../src/plugins/membership-list/./dist/admin/index.mjs";
 import testerPlugin from "../../src/plugins/tester-plugin/./dist/admin/index.mjs";
+import eventsPlugin from "../../src/plugins/events-plugin/./dist/admin/index.mjs";
 import { renderAdmin } from "@strapi/strapi/admin";
 
 import customisations from "../../src/admin/app.tsx";
@@ -20,5 +21,6 @@ renderAdmin(document.getElementById("strapi"), {
     "custom-content-manager3": customContentManager3,
     "membership-list": membershipList,
     "tester-plugin": testerPlugin,
+    "events-plugin": eventsPlugin,
   },
 });

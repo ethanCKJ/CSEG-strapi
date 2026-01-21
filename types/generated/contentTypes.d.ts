@@ -867,7 +867,7 @@ export interface ApiResearchProjectResearchProject
   extends Struct.CollectionTypeSchema {
   collectionName: 'research_projects';
   info: {
-    displayName: 'ResearchProject';
+    displayName: 'Research projects';
     pluralName: 'research-projects';
     singularName: 'research-project';
   };
