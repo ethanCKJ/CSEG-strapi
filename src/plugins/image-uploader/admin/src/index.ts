@@ -1,5 +1,4 @@
-import { prefixPluginTranslations } from '@strapi/strapi/admin';
-import { Puzzle } from '@strapi/icons';
+import {PuzzlePiece} from "@strapi/icons";
 
 import {PLUGIN_ID} from './pluginId';
 
@@ -10,7 +9,7 @@ export default {
       name: 'organized-image',
       pluginId: 'image-uploader',
       type: 'media',
-      icon: Puzzle,
+      icon: PuzzlePiece,
       intlLabel: {
         id: `${PLUGIN_ID}.label`,
         defaultMessage: 'Organized Image',
@@ -53,25 +52,4 @@ export default {
     });
   },
 
-  async registerTrads({ locales }: { locales: string[] }) {
-    const importedTrads = await Promise.all(
-      locales.map((locale) => {
-        return import(`./translations/${locale}.json`)
-        .then(({ default: data }) => {
-          return {
-            data: prefixPluginTranslations(data, pluginId),
-            locale,
-          };
-        })
-        .catch(() => {
-          return {
-            data: {},
-            locale,
-          };
-        });
-      })
-    );
-
-    return Promise.resolve(importedTrads);
-  },
 };

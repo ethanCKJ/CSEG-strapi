@@ -12,12 +12,11 @@ import sanitizeHtml from 'sanitize-html';
  * @param str
  */
 const escapeHTML = (str: string) => {
-  str.replace(/&/g, '&amp;')
+  return str.replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
-  return str;
 }
 
 export default factories.createCoreController('api::event.event', ({strapi}) => ({
@@ -50,17 +49,14 @@ export default factories.createCoreController('api::event.event', ({strapi}) => 
 
 
       const emailBody = escapeHTML(event.emailBody || '')
-      // Regex means replace all occurrances of CRLF OR CR OR LF with <br/>. CRLF is newline in windows
-      // and LF is newline in modern unix/Mac.
-      const sanitizedHtml = sanitizeHtml(emailBody.replace(/\r\n|\r|\n/g, "<br/>"),{
-        allowedTags: sanitizeHtml.defaults.allowedTags,
-      });
 
       // Send email
       await strapi.plugin('email').service('email').send({
         to: targetEmails,
         subject: event.emailSubject,
-        html: sanitizedHtml,
+        // Regex means replace all occurrances of CRLF OR CR OR LF with <br/>. CRLF is newline in windows
+        // and LF is newline in modern unix/Mac.
+        html: emailBody.replace(/\r\n|\r|\n/g, "<br/>"),
       });
       // Update email count
       await strapi.documents('api::event.event').update({
