@@ -31,7 +31,7 @@ import pipe from 'lodash/fp/pipe';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 import { useIntl } from 'react-intl';
 import { FixedSizeList, ListChildComponentProps } from 'react-window';
-import { styled } from 'styled-components';
+import {createGlobalStyle, styled} from 'styled-components';
 
 import { RelationDragPreviewProps } from '../../../../../components/DragPreviews/RelationDragPreview';
 import { COLLECTION_TYPES } from '../../../../../constants/collections';
@@ -106,7 +106,7 @@ function useHandleDisconnect(fieldName: string, consumerName: string) {
  * RelationsField
  * -----------------------------------------------------------------------------------------------*/
 
-const RELATIONS_TO_DISPLAY = 5;
+const RELATIONS_TO_DISPLAY = 50;
 const ONE_WAY_RELATIONS = ['oneWay', 'oneToOne', 'manyToOne', 'oneToManyMorph', 'oneToOneMorph'];
 
 type RelationPosition =
@@ -636,6 +636,19 @@ interface RelationModalWithContextProps
     }>
   >;
 }
+/**
+ * Formative evaluation found users had difficulty with small dropdowns which are fixed
+ * by the Strapi design system thus requiring CSS override
+ * https://design-system.strapi.io/?path=/docs/inputs-combobox--docs
+ * https://github.com/strapi/design-system/blob/main/packages/design-system/src/components/Combobox/Combobox.tsx
+ */
+const ComboboxDropdownOverride = createGlobalStyle`
+  /* Target Radix UI Combobox dropdown */
+  div[role="listbox"] {
+    max-height: 40rem !important;
+    overflow-y: auto !important;
+  }
+`;
 
 const RelationModalWithContext = ({
   relation,
@@ -677,85 +690,91 @@ const RelationModalWithContext = ({
     setSearchParams((s) => ({ ...s, _q: search, page: 1 }));
   };
   return (
-    <RelationModalRenderer>
-      {({ dispatch }) => (
-        <Combobox
-          ref={fieldRef}
-          // creatable="visible"
-          creatableDisabled={!canCreate}
-          createMessage={() =>
-            formatMessage({
-              id: getTranslation('relation.create'),
-              defaultMessage: 'Create a relation',
-            })
-          }
-          onCreateOption={() => {
-            if (canCreate) {
-              dispatch({
-                type: 'GO_TO_RELATION',
-                payload: {
-                  document: relation,
-                  shouldBypassConfirmation: false,
-                  fieldToConnect: name,
-                  fieldToConnectUID: componentUID,
-                },
-              });
+    <>
+      <ComboboxDropdownOverride />
+      <RelationModalRenderer>
+        {({ dispatch }) => (
+          <Combobox
+            ref={fieldRef}
+            // Hide the Create a Relation button. Only a developer or super admin should do this
+            //
+            // creatable="visible"
+            // creatableDisabled={!canCreate}
+            // createMessage={() =>
+            //   formatMessage({
+            //     id: getTranslation('relation.create'),
+            //     defaultMessage: 'Create a relation',
+            //   })
+            // }
+            // onCreateOption={() => {
+            //   if (canCreate) {
+            //     dispatch({
+            //       type: 'GO_TO_RELATION',
+            //       payload: {
+            //         document: relation,
+            //         shouldBypassConfirmation: false,
+            //         fieldToConnect: name,
+            //         fieldToConnectUID: componentUID,
+            //       },
+            //     });
+            //   }
+            // }}
+            // creatableStartIcon={<Plus fill="neutral500" />}
+            name={name}
+            autocomplete={{ type: 'list', filter: 'contains' }}
+            placeholder={
+              placeholder ||
+              formatMessage({
+                id: getTranslation('relation.add'),
+                defaultMessage: 'Add relation',
+              })
             }
-          }}
-          creatableStartIcon={<Plus fill="neutral500" />}
-          name={name}
-          autocomplete={{ type: 'list', filter: 'contains' }}
-          placeholder={
-            placeholder ||
-            formatMessage({
-              id: getTranslation('relation.add'),
-              defaultMessage: 'Add relation',
-            })
-          }
-          hasMoreItems={hasNextPage}
-          loading={isLoadingSearchRelations || isLoadingPermissions}
-          onOpenChange={() => {
-            handleSearch(textValue ?? '');
-          }}
-          noOptionsMessage={() =>
-            formatMessage({
-              id: getTranslation('relation.notAvailable'),
-              defaultMessage: 'No relations available',
-            })
-          }
-          loadingMessage={formatMessage({
-            id: getTranslation('relation.isLoading'),
-            defaultMessage: 'Relations are loading',
-          })}
-          onLoadMore={handleLoadMore}
-          textValue={textValue}
-          onChange={handleChange}
-          onTextValueChange={(text) => {
-            setTextValue(text);
-          }}
-          onInputChange={(event) => {
-            handleSearch(event.currentTarget.value);
-          }}
-          {...props}
-        >
-          {options?.map((opt) => {
-            const textValue = getRelationLabel(opt, mainField);
+            hasMoreItems={hasNextPage}
+            loading={isLoadingSearchRelations || isLoadingPermissions}
+            onOpenChange={() => {
+              handleSearch(textValue ?? '');
+            }}
+            noOptionsMessage={() =>
+              formatMessage({
+                id: getTranslation('relation.notAvailable'),
+                defaultMessage: 'No relations available',
+              })
+            }
+            loadingMessage={formatMessage({
+              id: getTranslation('relation.isLoading'),
+              defaultMessage: 'Relations are loading',
+            })}
+            onLoadMore={handleLoadMore}
+            textValue={textValue}
+            onChange={handleChange}
+            onTextValueChange={(text) => {
+              setTextValue(text);
+            }}
+            onInputChange={(event) => {
+              handleSearch(event.currentTarget.value);
+            }}
+            {...props}
+          >
+            {options?.map((opt) => {
+              const textValue = getRelationLabel(opt, mainField);
 
-            return (
-              <ComboboxOption key={opt.id} value={opt.id.toString()} textValue={textValue}>
-                <Flex gap={2} justifyContent="space-between">
-                  <Flex gap={2}>
-                    <LinkIcon fill="neutral500" />
-                    <Typography ellipsis>{textValue}</Typography>
+              return (
+                <ComboboxOption key={opt.id} value={opt.id.toString()} textValue={textValue}>
+                  <Flex gap={2} justifyContent="space-between">
+                    <Flex gap={2}>
+                      <LinkIcon fill="neutral500" />
+                      <Typography ellipsis>{textValue}</Typography>
+                    </Flex>
+                    {opt.status ? <DocumentStatus status={opt.status} /> : null}
                   </Flex>
-                  {opt.status ? <DocumentStatus status={opt.status} /> : null}
-                </Flex>
-              </ComboboxOption>
-            );
-          })}
-        </Combobox>
-      )}
-    </RelationModalRenderer>
+                </ComboboxOption>
+              );
+            })}
+          </Combobox>
+        )}
+      </RelationModalRenderer>
+    </>
+
   );
 };
 

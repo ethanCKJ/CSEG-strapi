@@ -43,25 +43,26 @@ const ViewSettingsMenu = (props: ViewSettingsMenuProps) => {
       </Popover.Trigger>
       <Popover.Content side="bottom" align="end" sideOffset={4}>
         <Flex alignItems="stretch" direction="column" padding={3} gap={3}>
-          {canConfigureView ? (
-            <LinkButton
-              size="S"
-              startIcon={<ListPlus />}
-              variant="secondary"
-              tag={NavLink}
-              to={{
-                pathname: 'configurations/list',
-                search: query.plugins
-                  ? stringify({ plugins: query.plugins }, { encode: false })
-                  : '',
-              }}
-            >
-              {formatMessage({
-                id: 'app.links.configure-view',
-                defaultMessage: 'Configure the view',
-              })}
-            </LinkButton>
-          ) : null}
+          {/* The configure view page does not work because the route was not registered. You can register it if you want but I think its an unnecessary feature*/}
+          {/*{canConfigureView ? (*/}
+          {/*  <LinkButton*/}
+          {/*    size="S"*/}
+          {/*    startIcon={<ListPlus />}*/}
+          {/*    variant="secondary"*/}
+          {/*    tag={NavLink}*/}
+          {/*    to={{*/}
+          {/*      pathname: 'configurations/list',*/}
+          {/*      search: query.plugins*/}
+          {/*        ? stringify({ plugins: query.plugins }, { encode: false })*/}
+          {/*        : '',*/}
+          {/*    }}*/}
+          {/*  >*/}
+          {/*    {formatMessage({*/}
+          {/*      id: 'app.links.configure-view',*/}
+          {/*      defaultMessage: 'Configure the view',*/}
+          {/*    })}*/}
+          {/*  </LinkButton>*/}
+          {/*) : null}*/}
           <FieldPicker {...props} />
         </Flex>
       </Popover.Content>
