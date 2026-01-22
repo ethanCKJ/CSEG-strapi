@@ -6,7 +6,7 @@ import { Flex, Typography } from '@strapi/design-system';
 import { useDocumentActions } from './useDocumentActions';
 import { LIST_PATH } from '../router';
 import { SINGLE_TYPES } from '../constants/collections';
-import { ActionHookResult } from './types';
+import { DeleteActionResult } from './types';
 
 /**
  * Hook for delete action with confirmation dialog
@@ -46,7 +46,7 @@ const useDeleteAction = (
   documentId: string | undefined,
   model: string,
   collectionType: string
-): ActionHookResult => {
+): DeleteActionResult => {
   const navigate = useNavigate();
   const listViewPathMatch = useMatch(LIST_PATH);
   const { delete: deleteAction, isLoading } = useDocumentActions();

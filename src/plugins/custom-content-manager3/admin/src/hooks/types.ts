@@ -49,3 +49,11 @@ export interface ActionHookProps {
   meta?: DocumentMetadata;
   model: string;
 }
+
+/**
+ * Return type for delete action hook - dialog is always present
+ */
+export interface DeleteActionResult extends Omit<ActionHookResult, 'dialog'> {
+  /** Dialog configuration - always present for delete actions */
+  dialog: ActionDialogConfig;
+}

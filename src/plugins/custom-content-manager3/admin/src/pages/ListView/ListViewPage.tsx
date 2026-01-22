@@ -138,9 +138,9 @@ const ListViewPage = () => {
   const { _unstableFormatAPIError: formatAPIError } = useAPIErrorHandler(getTranslation);
   // TODO: Replace useDoc with custom router.
   const { collectionType, model, schema } = useDoc();
-  console.log("ListViewPage collectionType:", collectionType, "model:", model, "schema:", schema);
+
   const { list } = useDocumentLayout(model);
-  console.log("ListViewPage list layout:", list);
+
 
   const [displayedHeaders, setDisplayedHeaders] = React.useState<ListFieldLayout[]>([]);
 
@@ -177,6 +177,7 @@ const ListViewPage = () => {
     sort: list.settings.defaultSortBy
       ? `${list.settings.defaultSortBy}:${list.settings.defaultSortOrder}`
       : '',
+
   });
 
   const params = React.useMemo(() => buildValidParams(query), [query]);
@@ -185,8 +186,6 @@ const ListViewPage = () => {
     model,
     params,
   });
-  console.log("ListViewPage data:", data, "error:", error, "isFetching:", isFetching);
-
   /**
    * If the API returns an error, display a notification
    */
@@ -219,7 +218,7 @@ const ListViewPage = () => {
   const canCreate = true;
 
   const runHookWaterfall = useStrapiApp('ListViewPage', (state) => state.runHookWaterfall);
-  console.log("ListViewPage runHookWaterfall:", runHookWaterfall);
+
   /**
    * Run the waterfall and then inject our additional table headers.
    */
@@ -272,7 +271,6 @@ const ListViewPage = () => {
     schema?.options?.draftAndPublish,
     model,
   ]);
-  console.log("ListViewPage tableHeaders:", tableHeaders);
 
 
   if (isFetching) {
@@ -284,12 +282,15 @@ const ListViewPage = () => {
   }
 
   const contentTypeTitle = schema?.info.displayName ?  schema.info.displayName : 'Untitled'
-  console.log("ListViewPage contentTypeTitle:", contentTypeTitle);
 
   const handleRowClick = (id: Modules.Documents.ID) => () => {
+    // If you enter EditViewPage without status=draft or status=published in the URL, the useDocumentContext.ts
+    // may incorrectly attach relations meant for published to the draft document and vice versa leading to potential
+    // database corruption. To avoid this, always pass the status param when navigating to the EditViewPage.
+    const status = schema?.options?.draftAndPublish ? 'draft' : 'published'
     navigate({
       pathname: id.toString(),
-      search: stringify({ plugins: query.plugins }),
+      search: stringify({ plugins: query.plugins, status }),
     });
   };
 
@@ -305,7 +306,7 @@ const ListViewPage = () => {
       </>
     );
   }
-  // return (<div>Hello from the listviewpage</div>)
+
   return (
     <>
       <Page.Main>
@@ -345,7 +346,7 @@ const ListViewPage = () => {
               {/*<TableActionsBar />*/}
               <Table.Content>
                 <Table.Head>
-                  <Table.HeaderCheckboxCell />
+                  {/*<Table.HeaderCheckboxCell />*/}
                   {tableHeaders.map((header: ListFieldLayout) => (
                     <Table.HeaderCell key={header.name} {...header} />
                   ))}
@@ -354,13 +355,18 @@ const ListViewPage = () => {
                 <Table.Empty action={<CreateButton variant="secondary" contentTypeTitle={contentTypeTitle} />} />
                 <Table.Body>
                   {results.map((row) => {
+                    // console.log(row);
+                    if (row.publishedAt !== null){
+                      console.log("Alert", row);
+                    }
+                    console.log(row)
                     return (
                       <Table.Row
                         cursor="pointer"
                         key={row.id}
                         onClick={handleRowClick(row.documentId)}
                       >
-                        <Table.CheckboxCell id={row.id} />
+                        {/*<Table.CheckboxCell id={row.id} />*/}
                         {tableHeaders.map(({ cellFormatter, ...header }) => {
                           if (header.name === 'status') {
                             const { status } = row;
@@ -405,7 +411,7 @@ const ListViewPage = () => {
                         })}
                         {/* we stop propagation here to allow the menu to trigger it's events without triggering the row redirect */}
                         <ActionsCell onClick={(e) => e.stopPropagation()}>
-                          <TableActions document={row} />
+                          <TableActions document={row} schema={schema} />
                         </ActionsCell>
                       </Table.Row>
                     );
@@ -498,7 +504,6 @@ const ProtectedListViewPage = () => {
   if (!slug) {
     return <Page.Error />;
   }
-  console.log("ProtectedListViewPage before return")
 
   return (
       <ListViewPage />
