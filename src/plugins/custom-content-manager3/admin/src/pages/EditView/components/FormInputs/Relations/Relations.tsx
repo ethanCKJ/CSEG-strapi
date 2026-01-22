@@ -637,16 +637,15 @@ interface RelationModalWithContextProps
   >;
 }
 /**
- * Formative evaluation found users had difficulty with small dropdowns which are fixed
+ * Formative evaluation found users had difficulty with small dropdowns which are locked
  * by the Strapi design system thus requiring CSS override
  * https://design-system.strapi.io/?path=/docs/inputs-combobox--docs
  * https://github.com/strapi/design-system/blob/main/packages/design-system/src/components/Combobox/Combobox.tsx
  */
 const ComboboxDropdownOverride = createGlobalStyle`
-  /* Target Radix UI Combobox dropdown */
+  /* Increase max-height from 15 to 40rem*/
   div[role="listbox"] {
     max-height: 40rem !important;
-    overflow-y: auto !important;
   }
 `;
 

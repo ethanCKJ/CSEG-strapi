@@ -59,8 +59,4 @@ export default ({env}) => ({
     enabled: true,
     resolve: './src/plugins/events-plugin'
   },
-  'image-uploader':{
-    enabled: false,
-    resolve: './src/plugins/image-uploader'
-  }
 });
