@@ -23,32 +23,32 @@ export default {
     app.addReducers({
       [PLUGIN_ID]: reducer,
     })
+    // TODO: Make regular content manager point to Single types while keeping routes registered
+    app.addMenuLink({
+      to: `plugins/${PLUGIN_ID}`,
+      icon: Bell,
+      intlLabel: {
+        id: `${PLUGIN_ID}.plugin.name`,
+        defaultMessage: PLUGIN_ID,
+      },
+      Component: async () => {
+        const { App } = await import('./pages/App');
 
-    // app.addMenuLink({
-    //   to: `plugins/${PLUGIN_ID}`,
-    //   icon: Bell,
-    //   intlLabel: {
-    //     id: `${PLUGIN_ID}.plugin.name`,
-    //     defaultMessage: PLUGIN_ID,
-    //   },
-    //   Component: async () => {
-    //     const { App } = await import('./pages/App');
-    //
-    //     return App;
-    //   },
-    // });
+        return App;
+      },
+    });
 
-    // app.router.addRoute({
-    //   path: 'custom-content-manager3/*',
-    //   lazy: async () => {
-    //     const { Layout } = await import('./layout');
-    //
-    //     return {
-    //       Component: Layout,
-    //     };
-    //   },
-    //   children: routes,
-    // });
+    app.router.addRoute({
+      path: 'custom-content-manager3/*',
+      lazy: async () => {
+        const { Layout } = await import('./layout');
+
+        return {
+          Component: Layout,
+        };
+      },
+      children: routes,
+    });
 
     app.registerPlugin(cm.config);
   },

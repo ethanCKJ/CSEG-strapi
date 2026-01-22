@@ -524,7 +524,6 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private &
       Schema.Attribute.DefaultTo<'Untitled body'>;
     emailCount: Schema.Attribute.Integer &
-      Schema.Attribute.Required &
       Schema.Attribute.Private &
       Schema.Attribute.DefaultTo<0>;
     emailSubject: Schema.Attribute.String &

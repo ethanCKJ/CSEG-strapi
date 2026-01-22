@@ -112,7 +112,7 @@
     "emailCount": {
       "type": "integer",
       "private": true,
-      "required": true,
+      "required": false,
       "default": 0
     }
   }

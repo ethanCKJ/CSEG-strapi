@@ -65,7 +65,6 @@ Please login to the Strapi admin panel to approve or reject this application.
 
 Regards,
 CSEG Website System`
-          console.log(html);
           await strapi.plugin('email').service('email').send({
             to: env('MEMBER_APPLICATION_REVIEWER'),
             subject: subject,

@@ -3,7 +3,6 @@
  */
 
 import {factories} from '@strapi/strapi'
-import sanitizeHtml from 'sanitize-html';
 
 /**
  * Input string is escaped to prevent XSS attacks.
@@ -11,12 +10,17 @@ import sanitizeHtml from 'sanitize-html';
  * be used in HTML body.
  * @param str
  */
-const escapeHTML = (str: string) => {
-  return str.replace(/&/g, '&amp;')
+const escapeHTML = (str: string | null| undefined) => {
+  // .replace(/\r\n|\r|\n/g, "<br/>") Regex means replace all occurrances of CRLF OR CR OR LF with <br/>. CRLF is newline in windows
+  // and LF is newline in modern unix/Mac.
+  if (typeof str === 'string'){
+    return str.replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
+    .replace(/'/g, '&#39;')
+  }
+  return '';
 }
 
 export default factories.createCoreController('api::event.event', ({strapi}) => ({
