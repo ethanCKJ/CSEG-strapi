@@ -29,9 +29,7 @@ a[href="/admin/content-manager"] {
 a[href="/admin/plugins/cloud"] {
   display: none;
 }
-a[href="/admin/settings"] {
-  display: none;
-}
+
 
 html {
   height: 100%;

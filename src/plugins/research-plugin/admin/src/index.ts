@@ -5,11 +5,11 @@ import {PluginIcon} from './components/PluginIcon';
 export default {
   register(app: any) {
     app.addMenuLink({
-      to: `plugins/custom-content-manager3/collection-types/api::event.event`,
+      to: `plugins/custom-content-manager3/collection-types/api::research-project.research-project`,
       icon: PluginIcon,
       intlLabel: {
         id: `${PLUGIN_ID}.plugin.name`,
-        defaultMessage: 'CSEG Events',
+        defaultMessage: 'Research Projects',
       },
     });
 
