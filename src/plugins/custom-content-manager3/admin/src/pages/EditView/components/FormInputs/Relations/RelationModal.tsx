@@ -2,13 +2,12 @@ import * as React from 'react';
 
 import {
   ConfirmDialog,
+  createContext,
   DescriptionComponentRenderer,
   Form as FormContext,
-  useRBAC,
-  useStrapiApp,
-  createContext,
   useForm,
   useQueryParams,
+  useStrapiApp,
 } from '@strapi/strapi/admin';
 import {
   Box,
@@ -18,29 +17,28 @@ import {
   IconButton,
   Loader,
   Modal,
-  Typography,
   TextButton,
+  Typography,
 } from '@strapi/design-system';
-import { ArrowLeft, ArrowsOut, WarningCircle } from '@strapi/icons';
-import { useIntl } from 'react-intl';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { styled } from 'styled-components';
+import {ArrowLeft, ArrowsOut, WarningCircle} from '@strapi/icons';
+import {useIntl} from 'react-intl';
+import {useLocation, useNavigate} from 'react-router-dom';
+import {styled} from 'styled-components';
 
-import { COLLECTION_TYPES, SINGLE_TYPES } from '../../../../../constants/collections';
-import { PERMISSIONS } from '../../../../../constants/plugin';
-import { buildValidParams } from '../../../../../exports';
-import { DocumentRBAC } from '../../../../../features/DocumentRBAC';
-import { useDoc, useDocument, type UseDocument } from '../../../../../hooks/useDocument';
-import { type DocumentMeta } from '../../../../../hooks/useDocumentContext';
-import { useDocumentLayout } from '../../../../../hooks/useDocumentLayout';
-import { useLazyGetDocumentQuery } from '../../../../../services/documents';
-import { createYupSchema } from '../../../../../utils/validation';
-import { DocumentActionButton } from '../../../components/DocumentActions';
-import { DocumentStatus } from '../../DocumentStatus';
-import { FormLayout } from '../../FormLayout';
-import { ComponentProvider } from '../ComponentContext';
+import {COLLECTION_TYPES, SINGLE_TYPES} from '../../../../../constants/collections';
+import {buildValidParams} from '../../../../../exports';
+import {DocumentRBAC} from '../../../../../features/DocumentRBAC';
+import {useDoc, useDocument, type UseDocument} from '../../../../../hooks/useDocument';
+import {type DocumentMeta} from '../../../../../hooks/useDocumentContext';
+import {useDocumentLayout} from '../../../../../hooks/useDocumentLayout';
+import {useLazyGetDocumentQuery} from '../../../../../services/documents';
+import {createYupSchema} from '../../../../../utils/validation';
+import {DocumentActionButton} from '../../../components/DocumentActions';
+import {DocumentStatus} from '../../DocumentStatus';
+import {FormLayout} from '../../FormLayout';
+import {ComponentProvider} from '../ComponentContext';
 
-import type { ContentManagerPlugin, DocumentActionProps } from '../../../../../content-manager';
+import type {ContentManagerPlugin, DocumentActionProps} from '../../../../../content-manager';
 
 export function getCollectionType(url: string) {
   const regex = new RegExp(`(${COLLECTION_TYPES}|${SINGLE_TYPES})`);

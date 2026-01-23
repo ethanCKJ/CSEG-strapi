@@ -1,65 +1,57 @@
 import * as React from 'react';
 
 import {
+  Layouts,
   Page,
   Pagination,
   SearchInput,
   Table,
-  BackButton,
-  useNotification,
-  useStrapiApp,
   useAPIErrorHandler,
+  useNotification,
   useQueryParams,
-  useRBAC,
-  Layouts,
-  useTable,
-  tours,
 } from '@strapi/strapi/admin';
 import {
-  Button,
-  Flex,
-  Typography,
-  ButtonProps,
   Box,
-  EmptyStateLayout, DesignSystemProvider,
+  Button,
+  ButtonProps,
+  EmptyStateLayout,
+  Flex,
+  Tabs,
+  Typography,
 } from '@strapi/design-system';
-import { Plus } from '@strapi/icons';
-import { EmptyDocuments } from '@strapi/icons/symbols';
+import {Plus} from '@strapi/icons';
+import {EmptyDocuments} from '@strapi/icons/symbols';
 import isEqual from 'lodash/isEqual';
-import { stringify } from 'qs';
-import { useIntl } from 'react-intl';
-import { useNavigate, Link as ReactRouterLink, useParams } from 'react-router-dom';
-import { styled, useTheme } from 'styled-components';
+import {stringify} from 'qs';
+import {Link as ReactRouterLink, useNavigate, useParams} from 'react-router-dom';
+import {styled} from 'styled-components';
 
-import { InjectionZone } from '../../components/InjectionZone';
-import { HOOKS } from '../../constants/hooks';
-import { PERMISSIONS } from '../../constants/plugin';
-import { DocumentRBAC, useDocumentRBAC } from '../../features/DocumentRBAC';
-import { useDoc } from '../../hooks/useDocument';
+import {InjectionZone} from '../../components/InjectionZone';
+import {HOOKS} from '../../constants/hooks';
+import {useDoc} from '../../hooks/useDocument';
 import {
-  ListFieldLayout,
   convertListLayoutToFieldLayouts,
-  useDocumentLayout, ListLayout,
+  ListFieldLayout,
+  ListLayout,
+  useDocumentLayout,
 } from '../../hooks/useDocumentLayout';
-import { usePrev } from '../../hooks/usePrev';
-import { useGetAllDocumentsQuery } from '../../services/documents';
-import { buildValidParams } from '../../utils/api';
-import { getTranslation } from '../../utils/translations';
-import { getDisplayName } from '../../utils/users';
+import {usePrev} from '../../hooks/usePrev';
+import {useGetAllDocumentsQuery} from '../../services/documents';
+import {buildValidParams} from '../../utils/api';
+import {getTranslation} from '../../utils/translations';
+import {getDisplayName} from '../../utils/users';
 // import { DocumentStatus } from '../EditView/components/DocumentStatus';
 //
 // import { BulkActionsRenderer } from './components/BulkActions/Actions';
 // import { Filters } from './components/Filters';
-import { TableActions } from './components/TableActions';
-import { CellContent } from './components/TableCells/CellContent';
+import {TableActions} from './components/TableActions';
+import {CellContent} from './components/TableCells/CellContent';
 // import { ViewSettingsMenu } from './components/ViewSettingsMenu';
-
-import type { Modules } from '@strapi/types';
+import type {Modules} from '@strapi/types';
 import {ViewSettingsMenu} from "./components/ViewSettingsMenu";
-import { Filters } from "./components/Filters";
+import {Filters} from "./components/Filters";
 import {ContentType} from "../../../../shared/contracts/content-types";
 import {DocumentStatus} from "../EditView/components/DocumentStatus";
-import { Tabs } from "@strapi/design-system";
 
 const { INJECT_COLUMN_IN_TABLE } = HOOKS;
 

@@ -14,6 +14,9 @@ import { ItemTypes } from './constants/dragAndDrop';
 import { useContentManagerInitData } from './hooks/useContentManagerInitData';
 import { getTranslation } from './utils/translations';
 import {ContentType} from "../../shared/contracts/content-types";
+import {CardDragPreview} from "./components/DragPreviews/CardDragPreview";
+import {ComponentDragPreview} from "./components/DragPreviews/ComponentDragPreview";
+import {RelationDragPreview} from "./components/DragPreviews/RelationDragPreview";
 
 /* -------------------------------------------------------------------------------------------------
  * Layout

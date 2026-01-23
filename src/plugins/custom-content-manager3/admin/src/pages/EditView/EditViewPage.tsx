@@ -1,34 +1,29 @@
 import * as React from 'react';
 
 import {
-  Page,
   Form,
-  useRBAC,
+  Page,
+  RESPONSIVE_DEFAULT_SPACING,
   useNotification,
   useQueryParams,
-  RESPONSIVE_DEFAULT_SPACING,
 } from '@strapi/strapi/admin';
-import { Grid, Main, Tabs, Box } from '@strapi/design-system';
-import { useIntl } from 'react-intl';
-import { useLocation, useParams } from 'react-router-dom';
-import { styled } from 'styled-components';
+import {Grid, Main, Tabs} from '@strapi/design-system';
+import {useIntl} from 'react-intl';
+import {useLocation, useParams} from 'react-router-dom';
+import {styled} from 'styled-components';
 
-import { SINGLE_TYPES } from '../../constants/collections';
-import { PERMISSIONS } from '../../constants/plugin';
-import { DocumentRBAC, useDocumentRBAC } from '../../features/DocumentRBAC';
-import { useDoc, type UseDocument } from '../../hooks/useDocument';
-import { useDocumentLayout } from '../../hooks/useDocumentLayout';
-import { useLazyComponents } from '../../hooks/useLazyComponents';
-import { useOnce } from '../../hooks/useOnce';
-import { getTranslation } from '../../utils/translations';
-import { createYupSchema } from '../../utils/validation';
+import {SINGLE_TYPES} from '../../constants/collections';
+import {useDoc, type UseDocument} from '../../hooks/useDocument';
+import {useDocumentLayout} from '../../hooks/useDocumentLayout';
+import {useLazyComponents} from '../../hooks/useLazyComponents';
+import {useOnce} from '../../hooks/useOnce';
+import {createYupSchema} from '../../utils/validation';
 
-import { Blocker } from './components/Blocker';
-import { FormLayout } from './components/FormLayout';
-import { Header } from './components/Header';
-import {CustomPanel, Panels} from './components/Panels';
-import { handleInvisibleAttributes } from './utils/data';
-import {MEMBER_APPLICATION_MODEL} from "../../constants/specialModels";
+import {Blocker} from './components/Blocker';
+import {FormLayout} from './components/FormLayout';
+import {Header} from './components/Header';
+import {CustomPanel} from './components/Panels';
+import {handleInvisibleAttributes} from './utils/data';
 
 /* -------------------------------------------------------------------------------------------------
  * EditViewPage

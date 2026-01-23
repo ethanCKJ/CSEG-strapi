@@ -3,64 +3,61 @@ import * as React from 'react';
 import {
   type InputProps,
   useField,
-  useForm,
-  useNotification,
   useFocusInputField,
-  useRBAC,
+  useForm,
   useIsDesktop,
+  useNotification,
 } from '@strapi/strapi/admin';
 import {
   Box,
+  BoxComponent,
   Combobox,
   ComboboxOption,
+  Field,
   Flex,
+  FlexComponent,
   IconButton,
+  Link,
   TextButton,
   Typography,
-  VisuallyHidden,
   useComposedRefs,
-  Link,
-  Field,
-  FlexComponent,
-  BoxComponent,
-  EmptyStateLayout,
+  VisuallyHidden,
 } from '@strapi/design-system';
-import { Cross, Drag, ArrowClockwise, Link as LinkIcon, Plus, WarningCircle } from '@strapi/icons';
-import { generateNKeysBetween } from 'fractional-indexing';
+import {ArrowClockwise, Cross, Drag, Link as LinkIcon} from '@strapi/icons';
+import {generateNKeysBetween} from 'fractional-indexing';
 import pipe from 'lodash/fp/pipe';
-import { getEmptyImage } from 'react-dnd-html5-backend';
-import { useIntl } from 'react-intl';
-import { FixedSizeList, ListChildComponentProps } from 'react-window';
+import {getEmptyImage} from 'react-dnd-html5-backend';
+import {useIntl} from 'react-intl';
+import {FixedSizeList, ListChildComponentProps} from 'react-window';
 import {createGlobalStyle, styled} from 'styled-components';
 
-import { RelationDragPreviewProps } from '../../../../../components/DragPreviews/RelationDragPreview';
-import { COLLECTION_TYPES } from '../../../../../constants/collections';
-import { ItemTypes } from '../../../../../constants/dragAndDrop';
-import { PERMISSIONS } from '../../../../../constants/plugin';
-import { DocumentRBAC, useDocumentRBAC } from '../../../../../features/DocumentRBAC';
-import { useDebounce } from '../../../../../hooks/useDebounce';
-import { useDocument } from '../../../../../hooks/useDocument';
-import { type DocumentMeta, useDocumentContext } from '../../../../../hooks/useDocumentContext';
-import { type EditFieldLayout } from '../../../../../hooks/useDocumentLayout';
+import {RelationDragPreviewProps} from '../../../../../components/DragPreviews/RelationDragPreview';
+import {COLLECTION_TYPES} from '../../../../../constants/collections';
+import {ItemTypes} from '../../../../../constants/dragAndDrop';
+import {DocumentRBAC, useDocumentRBAC} from '../../../../../features/DocumentRBAC';
+import {useDebounce} from '../../../../../hooks/useDebounce';
+import {useDocument} from '../../../../../hooks/useDocument';
+import {type DocumentMeta, useDocumentContext} from '../../../../../hooks/useDocumentContext';
+import {type EditFieldLayout} from '../../../../../hooks/useDocumentLayout';
 import {
   DROP_SENSITIVITY,
-  UseDragAndDropOptions,
   useDragAndDrop,
+  UseDragAndDropOptions,
 } from '../../../../../hooks/useDragAndDrop';
 import {
+  RelationResult,
   useGetRelationsQuery,
   useLazySearchRelationsQuery,
-  RelationResult,
 } from '../../../../../services/relations';
-import { type MainField } from '../../../../../utils/attributes';
-import { getRelationLabel } from '../../../../../utils/relations';
-import { getTranslation } from '../../../../../utils/translations';
-import { DocumentStatus } from '../../DocumentStatus';
-import { useComponent } from '../ComponentContext';
-import { RelationModalRenderer, getCollectionType } from '../Relations/RelationModal';
+import {type MainField} from '../../../../../utils/attributes';
+import {getRelationLabel} from '../../../../../utils/relations';
+import {getTranslation} from '../../../../../utils/translations';
+import {DocumentStatus} from '../../DocumentStatus';
+import {useComponent} from '../ComponentContext';
+import {getCollectionType, RelationModalRenderer} from '../Relations/RelationModal';
 
-import type { FindAvailable } from '../../../../../../../shared/contracts/relations';
-import type { Schema } from '@strapi/types';
+import type {FindAvailable} from '../../../../../../../shared/contracts/relations';
+import type {Schema} from '@strapi/types';
 
 /**
  * Remove a relation, whether it's been already saved or not.
