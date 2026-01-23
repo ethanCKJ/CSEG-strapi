@@ -59,4 +59,16 @@ export default ({env}) => ({
     enabled: true,
     resolve: './src/plugins/events-plugin'
   },
+  'publication-plugin':{
+    enabled: true,
+    resolve: './src/plugins/publication-plugin'
+  },
+  'member-application-plugin':{
+    enabled: true,
+    resolve: './src/plugins/member-application-plugin'
+  },
+  'contact-plugin':{
+    enabled: true,
+    resolve: './src/plugins/contact-plugin'
+  }
 });

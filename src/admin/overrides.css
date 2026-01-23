@@ -17,15 +17,16 @@
 /*}*/
 
 @media(min-width: 1080px) {
-  html body div#strapi nav {
-    width: 240px !important; /* Keep it expanded */
-    /*align-items: start !important;*/
+  html body div#strapi > div > div > nav {
+    width: 180px !important; /* Keep it expanded */
+
   }
 }
 
-a[href="/admin/content-manager"] {
-  display: none;
-}
+/*a[href="/admin/content-manager"] {*/
+/*  display: none;*/
+/*}*/
+
 a[href="/admin/plugins/cloud"] {
   display: none;
 }

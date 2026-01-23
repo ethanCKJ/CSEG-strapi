@@ -4,7 +4,7 @@
   "info": {
     "singularName": "event-type",
     "pluralName": "event-types",
-    "displayName": "EventType"
+    "displayName": "Types of events"
   },
   "options": {
     "draftAndPublish": false

@@ -4,7 +4,7 @@
   "info": {
     "singularName": "event-tag",
     "pluralName": "event-tags",
-    "displayName": "Topic"
+    "displayName": "Topics"
   },
   "options": {
     "draftAndPublish": false

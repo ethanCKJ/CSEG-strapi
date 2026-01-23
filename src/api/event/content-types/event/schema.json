@@ -114,6 +114,10 @@
       "private": true,
       "required": false,
       "default": 0
+    },
+    "privateNotes": {
+      "type": "text",
+      "private": true
     }
   }
 }

@@ -430,10 +430,85 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiAboutPageAboutPage extends Struct.SingleTypeSchema {
+  collectionName: 'about_pages';
+  info: {
+    displayName: 'About page';
+    pluralName: 'about-pages';
+    singularName: 'about-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    content: Schema.Attribute.RichText;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::about-page.about-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiContactContact extends Struct.CollectionTypeSchema {
+  collectionName: 'contacts';
+  info: {
+    displayName: 'Contact messages';
+    pluralName: 'contacts';
+    singularName: 'contact';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::contact.contact'
+    > &
+      Schema.Attribute.Private;
+    message: Schema.Attribute.Text & Schema.Attribute.Required;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
+    privateNotes: Schema.Attribute.Text & Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    resolved: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    subject: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiEventTagEventTag extends Struct.CollectionTypeSchema {
   collectionName: 'event_tags';
   info: {
-    displayName: 'Topic';
+    displayName: 'Topics';
     pluralName: 'event-tags';
     singularName: 'event-tag';
   };
@@ -474,7 +549,7 @@ export interface ApiEventTagEventTag extends Struct.CollectionTypeSchema {
 export interface ApiEventTypeEventType extends Struct.CollectionTypeSchema {
   collectionName: 'event_types';
   info: {
-    displayName: 'EventType';
+    displayName: 'Types of events';
     pluralName: 'event-types';
     singularName: 'event-type';
   };
@@ -560,6 +635,7 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
       'manyToMany',
       'api::member-type.member-type'
     >;
+    privateNotes: Schema.Attribute.Text & Schema.Attribute.Private;
     publicEvent: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<false>;
@@ -620,7 +696,7 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
 export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
   collectionName: 'home_pages';
   info: {
-    displayName: 'HomePage';
+    displayName: 'Home page';
     pluralName: 'home-pages';
     singularName: 'home-page';
   };
@@ -661,11 +737,40 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiLeadershipLeadership extends Struct.CollectionTypeSchema {
+  collectionName: 'leaderships';
+  info: {
+    displayName: 'Leadership list shown on people page';
+    pluralName: 'leaderships';
+    singularName: 'leadership';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.RichText & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::leadership.leadership'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiMemberApplicationMemberApplication
   extends Struct.CollectionTypeSchema {
   collectionName: 'member_applications';
   info: {
-    displayName: 'Manage your member applications';
+    displayName: 'Manage member applications';
     pluralName: 'member-applications';
     singularName: 'member-application';
   };
@@ -731,7 +836,7 @@ export interface ApiMemberApplicationMemberApplication
 export interface ApiMemberTypeMemberType extends Struct.CollectionTypeSchema {
   collectionName: 'member_types';
   info: {
-    displayName: 'MemberType';
+    displayName: 'Types of members';
     pluralName: 'member-types';
     singularName: 'member-type';
   };
@@ -765,7 +870,7 @@ export interface ApiMemberTypeMemberType extends Struct.CollectionTypeSchema {
 export interface ApiMemberMember extends Struct.CollectionTypeSchema {
   collectionName: 'members';
   info: {
-    displayName: 'Member';
+    displayName: 'Current member';
     pluralName: 'members';
     singularName: 'member';
   };
@@ -1407,6 +1512,7 @@ export interface PluginUsersPermissionsUser
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    testcomponent: Schema.Attribute.Component<'shared.rich-text', false>;
     TestEnumeration: Schema.Attribute.Enumeration<
       ['item1', 'item2', 'item3', 'item4', 'item5', 'item6']
     >;
@@ -1433,11 +1539,14 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::about-page.about-page': ApiAboutPageAboutPage;
+      'api::contact.contact': ApiContactContact;
       'api::event-tag.event-tag': ApiEventTagEventTag;
       'api::event-type.event-type': ApiEventTypeEventType;
       'api::event.event': ApiEventEvent;
       'api::global.global': ApiGlobalGlobal;
       'api::home-page.home-page': ApiHomePageHomePage;
+      'api::leadership.leadership': ApiLeadershipLeadership;
       'api::member-application.member-application': ApiMemberApplicationMemberApplication;
       'api::member-type.member-type': ApiMemberTypeMemberType;
       'api::member.member': ApiMemberMember;

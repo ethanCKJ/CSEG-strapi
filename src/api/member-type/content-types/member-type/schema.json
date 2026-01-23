@@ -4,7 +4,7 @@
   "info": {
     "singularName": "member-type",
     "pluralName": "member-types",
-    "displayName": "MemberType"
+    "displayName": "Types of members"
   },
   "options": {
     "draftAndPublish": false

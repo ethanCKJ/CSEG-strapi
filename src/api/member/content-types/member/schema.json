@@ -4,7 +4,7 @@
   "info": {
     "singularName": "member",
     "pluralName": "members",
-    "displayName": "Member"
+    "displayName": "Current member"
   },
   "options": {
     "draftAndPublish": false

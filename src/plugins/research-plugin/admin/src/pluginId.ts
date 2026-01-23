@@ -1,1 +1,1 @@
-export const PLUGIN_ID = 'events-plugin';
+export const PLUGIN_ID = 'research-plugin';

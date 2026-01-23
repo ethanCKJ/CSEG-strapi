@@ -8,6 +8,9 @@ import customContentManager3 from "../../src/plugins/custom-content-manager3/./d
 import membershipList from "../../src/plugins/membership-list/./dist/admin/index.mjs";
 import testerPlugin from "../../src/plugins/tester-plugin/./dist/admin/index.mjs";
 import eventsPlugin from "../../src/plugins/events-plugin/./dist/admin/index.mjs";
+import publicationPlugin from "../../src/plugins/publication-plugin/./dist/admin/index.mjs";
+import memberApplicationPlugin from "../../src/plugins/member-application-plugin/./dist/admin/index.mjs";
+import contactPlugin from "../../src/plugins/contact-plugin/./dist/admin/index.mjs";
 import { renderAdmin } from "@strapi/strapi/admin";
 
 import customisations from "../../src/admin/app.tsx";
@@ -22,5 +25,8 @@ renderAdmin(document.getElementById("strapi"), {
     "membership-list": membershipList,
     "tester-plugin": testerPlugin,
     "events-plugin": eventsPlugin,
+    "publication-plugin": publicationPlugin,
+    "member-application-plugin": memberApplicationPlugin,
+    "contact-plugin": contactPlugin,
   },
 });
