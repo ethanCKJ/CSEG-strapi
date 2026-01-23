@@ -88,10 +88,11 @@ const DocumentRBAC = ({ children, permissions, model }: DocumentRBACProps) => {
     }, {});
   }, [contentTypeUid, userPermissions]);
 
+  const contentTypePermissionsList = Object.values(contentTypePermissions).flat();
   const { isLoading, allowedActions } = useRBAC(
-    contentTypePermissions,
+    contentTypePermissionsList,
     permissions ?? undefined,
-    // TODO: useRBAC context should be typed and built differently
+    // TODO: (Strapi Developers) useRBAC context should be typed and built differently
     // We are passing raw query as context to the hook so that it can
     // rely on the locale provided from DocumentRBAC for its permission calculations.
     rawQuery
