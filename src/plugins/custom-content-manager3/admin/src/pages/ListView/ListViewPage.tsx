@@ -273,13 +273,19 @@ const ListViewPage = () => {
   const contentTypeTitle = schema?.info.displayName ?  schema.info.displayName : 'Untitled'
 
   const handleRowClick = (id: Modules.Documents.ID) => () => {
-    // If you enter EditViewPage without status=draft or status=published in the URL, the useDocumentContext.ts
+    // If you enter EditViewPage of a type with 'Draft and Publish' ON without status=draft or status=published in the URL, the useDocumentContext.ts
     // may incorrectly attach relations meant for published to the draft document and vice versa leading to potential
     // database corruption. To avoid this, always pass the status param when navigating to the EditViewPage.
-    const status = schema?.options?.draftAndPublish ? 'draft' : 'published'
+    if (schema?.options?.draftAndPublish) {
+      navigate({
+        pathname: id.toString(),
+        search: stringify({ plugins: query.plugins, status: 'draft' }),
+      });
+      return;
+    }
     navigate({
       pathname: id.toString(),
-      search: stringify({ plugins: query.plugins, status }),
+      search: stringify({ plugins: query.plugins}),
     });
   };
 
