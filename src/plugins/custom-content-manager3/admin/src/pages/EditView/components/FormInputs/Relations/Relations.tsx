@@ -47,7 +47,7 @@ import {
 import {
   RelationResult,
   useGetRelationsQuery,
-  useLazySearchRelationsQuery,
+  useSearchRelationsQuery,
 } from '../../../../../services/relations';
 import {type MainField} from '../../../../../utils/attributes';
 import {getRelationLabel} from '../../../../../utils/relations';
@@ -498,49 +498,32 @@ const RelationsInput = ({
   const field = useField<RelationsFormValue>(name);
 
   const searchParamsDebounced = useDebounce(searchParams, 300);
-  const [searchForTrigger, { data, isLoading }] = useLazySearchRelationsQuery();
 
   /**
-   * Because we're using a lazy query, we need to trigger the search
-   * when the component mounts and when the search params change.
-   * We also need to trigger the search when the field value changes
-   * so that we can filter out the relations that are already connected.
+   * The `name` prop is a complete path to the field, e.g. `field1.field2.field3`.
+   * Where the above example would a nested field within two components, however
+   * we only require the field on the component not the complete path since we query
+   * individual components. Therefore we split the string and take the last item.
    */
-  React.useEffect(() => {
-    /**
-     * The `name` prop is a complete path to the field, e.g. `field1.field2.field3`.
-     * Where the above example would a nested field within two components, however
-     * we only require the field on the component not the complete path since we query
-     * individual components. Therefore we split the string and take the last item.
-     */
-    const [targetField] = name.split('.').slice(-1);
+  const [targetField] = name.split('.').slice(-1);
 
-    // Return early if there is no relation to the document
-    if (!isRelatedToCurrentDocument) return;
-
-    searchForTrigger({
+  const { data, isLoading } = useSearchRelationsQuery(
+    {
       model,
       targetField,
       params: {
         ...currentDocumentMeta.params,
         id: id ?? '',
-        pageSize: 10,
+        pageSize: 20,
         idsToInclude: field.value?.disconnect?.map((rel) => rel.id.toString()) ?? [],
         idsToOmit: field.value?.connect?.map((rel) => rel.id.toString()) ?? [],
         ...searchParamsDebounced,
       },
-    });
-  }, [
-    field.value?.connect,
-    field.value?.disconnect,
-    id,
-    model,
-    name,
-    searchForTrigger,
-    searchParamsDebounced,
-    isRelatedToCurrentDocument,
-    currentDocumentMeta.params,
-  ]);
+    },
+    {
+      skip: !isRelatedToCurrentDocument || !id,
+    }
+  );
 
   const hasNextPage = data?.pagination ? data.pagination.page < data.pagination.pageCount : false;
 
