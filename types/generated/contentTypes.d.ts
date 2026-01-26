@@ -594,6 +594,7 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    daysBefore: Schema.Attribute.Integer & Schema.Attribute.Required;
     emailBody: Schema.Attribute.Text &
       Schema.Attribute.Required &
       Schema.Attribute.Private &
@@ -601,6 +602,60 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     emailCount: Schema.Attribute.Integer &
       Schema.Attribute.Private &
       Schema.Attribute.DefaultTo<0>;
+    emailRule1OrCustom: Schema.Attribute.Enumeration<
+      [
+        'Send on day of event',
+        'Send 1 day before at 09:00',
+        'Send 3 days before at 09:00',
+        'Send 7 days before at 09:00',
+        'No scheduled email',
+        'Custom rule',
+      ]
+    > &
+      Schema.Attribute.DefaultTo<'Send on day of event'>;
+    emailRule2: Schema.Attribute.Enumeration<
+      [
+        'No scheduled email',
+        'Send on day of event',
+        'Send 1 day before at 09:00',
+        'Send 3 days before at 09:00',
+        'Send 7 days before at 09:00',
+      ]
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'No scheduled email'>;
+    emailRule3: Schema.Attribute.Enumeration<
+      [
+        'No scheduled email',
+        'Send on day of event',
+        'Send 1 day before at 09:00',
+        'Send 3 days before at 09:00',
+        'Send 7 days before at 09:00',
+      ]
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'No scheduled email'>;
+    emailRule4: Schema.Attribute.Enumeration<
+      [
+        'No scheduled email',
+        'Send on day of event',
+        'Send 1 day before at 09:00',
+        'Send 3 days before at 09:00',
+        'Send 7 days before at 09:00',
+      ]
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'No scheduled email'>;
+    emailRule5: Schema.Attribute.Enumeration<
+      [
+        'Send on day of event',
+        'Send 1 day before at 09:00',
+        'Send 3 days before at 09:00',
+        'Send 7 days before at 09:00',
+      ]
+    > &
+      Schema.Attribute.Required;
+    emailRuleV2: Schema.Attribute.Component<'shared.email-rule', true>;
     emailSubject: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'Untitled subject'>;
@@ -640,6 +695,9 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<false>;
     publishedAt: Schema.Attribute.DateTime;
+    sendTime: Schema.Attribute.Time &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'09:00:00.000'>;
     speaker: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{

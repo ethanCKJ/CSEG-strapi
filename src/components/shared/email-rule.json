@@ -1,0 +1,52 @@
+{
+  "collectionName": "components_shared_email_rules",
+  "info": {
+    "displayName": "email_rule",
+    "icon": "clock"
+  },
+  "options": {},
+  "attributes": {
+    "quickrule": {
+      "type": "enumeration",
+      "required": true,
+      "default": "Send on day of event",
+      "enum": [
+        "Send on day of event",
+        "Send 1 day before at 09:00",
+        "Send 3 days before at 09:00",
+        "Custom time"
+      ]
+    },
+    "daysBefore": {
+      "type": "integer",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "quickrule"
+            },
+            "Custom time"
+          ]
+        }
+      },
+      "required": true,
+      "default": 1
+    },
+    "sendTime": {
+      "type": "time",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "quickrule"
+            },
+            "Custom time"
+          ]
+        }
+      },
+      "required": true,
+      "default": "09:00:00.000"
+    }
+  },
+  "config": {}
+}

@@ -118,6 +118,138 @@
     "privateNotes": {
       "type": "text",
       "private": true
+    },
+    "emailRule1OrCustom": {
+      "type": "enumeration",
+      "default": "Send on day of event",
+      "enum": [
+        "Send on day of event",
+        "Send 1 day before at 09:00",
+        "Send 3 days before at 09:00",
+        "Send 7 days before at 09:00",
+        "No scheduled email",
+        "Custom rule"
+      ]
+    },
+    "emailRule2": {
+      "type": "enumeration",
+      "conditions": {
+        "visible": {
+          "!=": [
+            {
+              "var": "emailRule1OrCustom"
+            },
+            "No scheduled email"
+          ]
+        }
+      },
+      "required": true,
+      "default": "No scheduled email",
+      "enum": [
+        "No scheduled email",
+        "Send on day of event",
+        "Send 1 day before at 09:00",
+        "Send 3 days before at 09:00",
+        "Send 7 days before at 09:00"
+      ]
+    },
+    "emailRule3": {
+      "type": "enumeration",
+      "conditions": {
+        "visible": {
+          "!=": [
+            {
+              "var": "emailRule2"
+            },
+            "No scheduled email"
+          ]
+        }
+      },
+      "required": true,
+      "default": "No scheduled email",
+      "enum": [
+        "No scheduled email",
+        "Send on day of event",
+        "Send 1 day before at 09:00",
+        "Send 3 days before at 09:00",
+        "Send 7 days before at 09:00"
+      ]
+    },
+    "emailRule4": {
+      "type": "enumeration",
+      "conditions": {
+        "visible": {
+          "!=": [
+            {
+              "var": "emailRule3"
+            },
+            "No scheduled email"
+          ]
+        }
+      },
+      "required": true,
+      "default": "No scheduled email",
+      "enum": [
+        "No scheduled email",
+        "Send on day of event",
+        "Send 1 day before at 09:00",
+        "Send 3 days before at 09:00",
+        "Send 7 days before at 09:00"
+      ]
+    },
+    "emailRule5": {
+      "type": "enumeration",
+      "conditions": {
+        "visible": {
+          "!=": [
+            {
+              "var": "emailRule4"
+            },
+            "No scheduled email"
+          ]
+        }
+      },
+      "required": true,
+      "enum": [
+        "Send on day of event",
+        "Send 1 day before at 09:00",
+        "Send 3 days before at 09:00",
+        "Send 7 days before at 09:00"
+      ]
+    },
+    "sendTime": {
+      "type": "time",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "emailRule1OrCustom"
+            },
+            "Custom rule"
+          ]
+        }
+      },
+      "required": true,
+      "default": "09:00:00.000"
+    },
+    "emailRuleV2": {
+      "type": "component",
+      "component": "shared.email-rule",
+      "repeatable": true
+    },
+    "daysBefore": {
+      "type": "integer",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "emailRule1OrCustom"
+            },
+            "Custom rule"
+          ]
+        }
+      },
+      "required": true
     }
   }
 }

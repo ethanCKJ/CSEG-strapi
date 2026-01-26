@@ -4,11 +4,11 @@ export default ({ env }) => ({
     secret: env('ADMIN_JWT_SECRET'),
     // Resolves expiresIn deprecation warning. See https://docs.strapi.io/cms/configurations/admin-panel#basic-authentication
     sessions: {
-      accessTokenLifespan: 1800, // 30 minutes
+      accessTokenLifespan: 3600, // 1 hour
       maxRefreshTokenLifespan: 2592000, // 30 days
       idleRefreshTokenLifespan: 604800, // 7 days
       maxSessionLifespan: 2592000, // 30 days
-      idleSessionLifespan: 36000, // 1 hour
+      idleSessionLifespan: 3600, // 1 hour
     }
   },
   apiToken: {
