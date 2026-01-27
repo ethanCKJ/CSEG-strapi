@@ -70,5 +70,9 @@ export default ({env}) => ({
   'contact-plugin':{
     enabled: true,
     resolve: './src/plugins/contact-plugin'
+  },
+  'documentation-viewer':{
+    enabled: true,
+    resolve: './src/plugins/documentation-viewer'
   }
 });

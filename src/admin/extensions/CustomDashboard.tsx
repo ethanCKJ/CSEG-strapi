@@ -84,15 +84,8 @@ export function CustomDashboard() {
           {/*<Grid.Root padding={4} gap={4}>*/}
           {/*  <CustomCard value={1} text={"foobar"}/>*/}
           {/*</Grid.Root>*/}
-          {userData?.isSuperAdmin && <Accordion.Root disabled={!userData?.isSuperAdmin}>
-            <Accordion.Item value="acc-01">
-              <Accordion.Header>
-                <Accordion.Trigger description="Your personal information">
-                  Developer links
-                </Accordion.Trigger>
-              </Accordion.Header>
-              <Accordion.Content>
-                <Box padding={4}>
+          {userData?.isSuperAdmin &&
+                <Box padding={4} borderColor={"warning500"}>
                     <Link href="/admin/content-manager/" paddingBottom={2}>
                       Content manager
                     </Link>
@@ -104,10 +97,7 @@ export function CustomDashboard() {
                         <li>3. You need to static webpage content e.g. homepage picture</li>
                       </ol>
                     </Typography>
-                </Box>
-              </Accordion.Content>
-            </Accordion.Item>
-          </Accordion.Root>}
+                </Box>}
 
 
         </Box>

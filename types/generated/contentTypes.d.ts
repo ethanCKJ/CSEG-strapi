@@ -1576,6 +1576,17 @@ export interface PluginUsersPermissionsUser
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    docs: Schema.Attribute.String &
+      Schema.Attribute.CustomField<
+        'plugin::documentation-viewer.doc-viewer',
+        {
+          documentId: 'b9502go1zg514pcf7lsrf4m2';
+        }
+      >;
+    documentation: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::documentation.documentation'
+    >;
     email: Schema.Attribute.Email &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{

@@ -84,6 +84,18 @@
       "type": "component",
       "component": "shared.rich-text",
       "repeatable": false
+    },
+    "documentation": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::documentation.documentation"
+    },
+    "docs": {
+      "type": "customField",
+      "customField": "plugin::documentation-viewer.doc-viewer",
+      "options": {
+        "documentId": "b9502go1zg514pcf7lsrf4m2"
+      }
     }
   }
 }

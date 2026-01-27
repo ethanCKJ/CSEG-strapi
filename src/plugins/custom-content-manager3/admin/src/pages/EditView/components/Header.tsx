@@ -101,7 +101,7 @@ const Header = ({ isCreating, status, title: documentTitle = 'Untitled' }: Heade
         <Typography variant="alpha" tag="h1">
           {title}
         </Typography>
-        <HeaderToolbar />
+        {/*<HeaderToolbar />*/}
       </Flex>
       {status ? (
         <Box marginTop={1}>
