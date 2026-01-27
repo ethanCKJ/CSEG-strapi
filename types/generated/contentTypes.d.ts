@@ -505,6 +505,35 @@ export interface ApiContactContact extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiDocumentationDocumentation
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'documentations';
+  info: {
+    displayName: 'Documentation';
+    pluralName: 'documentations';
+    singularName: 'documentation';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    content: Schema.Attribute.RichText & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::documentation.documentation'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiEventTagEventTag extends Struct.CollectionTypeSchema {
   collectionName: 'event_tags';
   info: {
@@ -1600,6 +1629,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::about-page.about-page': ApiAboutPageAboutPage;
       'api::contact.contact': ApiContactContact;
+      'api::documentation.documentation': ApiDocumentationDocumentation;
       'api::event-tag.event-tag': ApiEventTagEventTag;
       'api::event-type.event-type': ApiEventTypeEventType;
       'api::event.event': ApiEventEvent;

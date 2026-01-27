@@ -52,7 +52,7 @@ export default ({env}) => ({
     resolve: './src/plugins/membership-list',
   },
   'tester-plugin':{
-    enabled: true,
+    enabled: false,
     resolve: './src/plugins/tester-plugin',
   },
   'events-plugin':{
