@@ -41,7 +41,7 @@ const sanitizeMainField = (model: any, mainField: any, userAbility: any) => {
 
   // Edge cases
 
-  // 1. Enforce 'name' as the main field for users and permissions' roles
+  // 1. Enforce 'name' as the main field for users and permissions' role_codes
   if (model.uid === 'plugin::users-permissions.role') {
     return 'name';
   }

@@ -22,6 +22,10 @@
       "relation": "manyToMany",
       "target": "api::event.event",
       "mappedBy": "open_to"
+    },
+    "mailingList": {
+      "type": "email",
+      "required": false
     }
   }
 }

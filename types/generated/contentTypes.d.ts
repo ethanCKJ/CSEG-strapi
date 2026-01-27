@@ -912,6 +912,7 @@ export interface ApiMemberTypeMemberType extends Struct.CollectionTypeSchema {
       'api::member-type.member-type'
     > &
       Schema.Attribute.Private;
+    mailingList: Schema.Attribute.Email;
     membershipName: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique &

@@ -1,34 +1,23 @@
 import * as React from 'react';
 
-import {
-  useNotification,
-  useQueryParams,
-} from '@strapi/strapi/admin';
-import {Button, Flex, Typography} from '@strapi/design-system';
+import {useQueryParams,} from '@strapi/strapi/admin';
+import {Flex, MenuItem, Radio, SimpleMenu, Typography} from '@strapi/design-system';
 
-import { InjectionZone } from '../../../components/InjectionZone';
-import { useDoc } from '../../../hooks/useDocument';
+import {InjectionZone} from '../../../components/InjectionZone';
+import {Document, useDoc} from '../../../hooks/useDocument';
 
-import type {
-  DocumentActionProps,
-  PanelComponent,
-} from '../../../content-manager';
+import type {DocumentActionProps, PanelComponent,} from '../../../content-manager';
 import {PublishButton} from "../../../action-buttons/PublishButton";
 import {UpdateButton} from "../../../action-buttons/UpdateButton";
-import { SimpleMenu } from "@strapi/design-system";
-import { MenuItem } from "@strapi/design-system";
 import {useDeleteAction} from "../../../hooks/useDeleteAction";
 import {DocumentActionConfirmDialog} from "../../../action-buttons/ActionHelper";
 import {useUnpublishAction} from "../../../hooks/useUnpublishAction";
 import {useDiscardAction} from "../../../hooks/useDiscardAction";
 import {ApproveButton} from "../../../action-buttons/ApproveButton";
 import {EVENT_MODEL, MEMBER_APPLICATION_MODEL} from "../../../constants/specialModels";
-import {useLazySearchRelationsQuery, useSearchRelationsQuery} from "../../../services/relations";
-import { Radio } from "@strapi/design-system";
+import {useSearchRelationsQuery} from "../../../services/relations";
 import {RelationResult} from "../../../../../shared/contracts/relations";
 import {RejectButton} from "../../../action-buttons/RejectButton";
-import {Document} from "../../../hooks/useDocument";
-import {useFetchClient} from "@strapi/strapi/admin";
 import {SendEmailButton} from "../../../action-buttons/SendEmailButton";
 
 interface PanelDescription {

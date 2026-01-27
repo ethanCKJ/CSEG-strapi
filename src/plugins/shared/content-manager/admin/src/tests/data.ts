@@ -213,7 +213,7 @@ const permissions = [
   },
   {
     id: 39,
-    action: 'plugin::users-permissions.roles.update',
+    action: 'plugin::users-permissions.role_codes.update',
     subject: null,
     properties: {},
     conditions: [],

@@ -392,7 +392,7 @@ This ensures all packages share the same node_modules.
 Modify Strapi's admin entry point to wrap everything:
 
 ```typescript
-// In src/admin/app.tsx or equivalent
+// In src/admin/app.example.tsx or equivalent
 import { DesignSystemProvider } from '@strapi/design-system';
 
 export default {

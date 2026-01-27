@@ -85,7 +85,7 @@ const useSendEmailAction = (
         })
         setIsMailDialogOpen(false);
       } else {
-        throw new Error('An unkown error occurred sending emails')
+        throw new Error('An unknown error occurred sending emails')
       }
     } catch (e) {
       const errorMsg = e instanceof Error ? e.message : 'An unknown error occurred sending emails';
