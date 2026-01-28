@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import type {ComponentPropsWithoutRef} from "react";
+import type {JSX} from "react";
 
-const Wrapper  = styled.div<ComponentPropsWithoutRef<'div'>>`
+const Wrapper: JSX.ElementType  = styled.div`
+  top: 0;
   top: 0;
   overflow: auto;
   padding: ${({theme}) => `${theme.spaces[1]} ${theme.spaces[2]}`};
