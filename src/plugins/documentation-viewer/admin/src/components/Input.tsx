@@ -75,7 +75,7 @@ const Input: React.FC<CustomFieldInputProps> = ({
       try {
         const res = await get(`/content-manager/collection-types/api::documentation.documentation/${documentId}`);
         console.log('res',res)
-        let data = ''
+        let data = null
         if ('data' in res){
           data = res.data.data;
         } else{
@@ -84,7 +84,11 @@ const Input: React.FC<CustomFieldInputProps> = ({
         setMarkdown(data.content || '');
         setTitle(data.title || 'Documentation');
       } catch (error) {
-        setMarkdown(`*Error loading document: ${error.message}*`);
+        if (error instanceof Error) {
+          setMarkdown(`*Error loading document: ${error.message}*`);
+        } else {
+          setMarkdown(`*Error loading document: Unknown error*`);
+        }
       } finally {
         setLoading(false);
       }
