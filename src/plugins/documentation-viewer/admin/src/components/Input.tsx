@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {Box, Typography, Accordion} from '@strapi/design-system';
 import MarkDown from 'react-markdown';
 import {useFetchClient} from "@strapi/strapi/admin";
-import {Wrapper} from "./Wrapper";
+import Wrapper from "./Wrapper";
 
 
 // IntlObject type used by Strapi
