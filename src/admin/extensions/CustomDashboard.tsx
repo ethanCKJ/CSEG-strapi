@@ -86,7 +86,7 @@ export function CustomDashboard() {
           {/*</Grid.Root>*/}
           {userData?.isSuperAdmin &&
                 <Box padding={4} borderColor={"warning500"}>
-                    <Link href="/admin/content-manager/" paddingBottom={2}>
+                    <Link href="/admin/content-manager/" paddingBottom={2} target={"_blank"}>
                       Content manager
                     </Link>
                     <Typography display="block">

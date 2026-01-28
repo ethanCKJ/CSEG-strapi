@@ -33,6 +33,7 @@ export default {
       // 'vi',
       // 'zh-Hans',
       // 'zh',
+        'en-GB',
     ],
   },
   register(app: StrapiApp) {

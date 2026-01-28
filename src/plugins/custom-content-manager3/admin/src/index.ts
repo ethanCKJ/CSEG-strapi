@@ -1,18 +1,9 @@
-import { getTranslation } from './utils/getTranslation';
-import { PLUGIN_ID } from './pluginId';
+import {PLUGIN_ID} from './pluginId';
 // import { Initializer } from './components/Initializer';
 // import { PluginIcon } from './components/PluginIcon';
-import {Bell} from "@strapi/icons";
-
-import { CheckCircle, Feather, Pencil, PuzzlePiece } from '@strapi/icons';
-
-import { historyAdmin } from './history';
-import { reducer } from './modules/reducers';
-import { previewAdmin } from './preview';
-import { routes } from './router';
-import { prefixPluginTranslations } from './utils/translations';
-
-import type { WidgetArgs } from '@strapi/strapi/admin';
+import {reducer} from './modules/reducers';
+import {routes} from './router';
+import {prefixPluginTranslations} from './utils/translations';
 
 import 'prismjs';
 import {ContentManagerPlugin} from "./content-manager";
@@ -58,13 +49,13 @@ export default {
       locales.map(async (locale) => {
         try {
           const { default: data } = await import(`./translations/${locale}.json`);
-          return { data, locale };
+          return { data: prefixPluginTranslations(data, 'content-manager'), locale };
         } catch {
           // Try base language (e.g., "en" for "en-GB")
           try {
             const baseLocale = locale.split('-')[0];
             const { default: data } = await import(`./translations/${baseLocale}.json`);
-            return { data, locale };
+            return { data: prefixPluginTranslations(data, 'content-manager'), locale };
           } catch {
             return { data: {}, locale };
           }
