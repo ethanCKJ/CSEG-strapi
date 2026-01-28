@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   font-size: 1.4rem;
   background-color: ${({theme}) => theme.colors.neutral100};
   color: ${({theme}) => theme.colors.neutral800};
-  line-height: ${({theme}) => theme.lineHeights[6]};
+  line-height: ${({theme}) => theme.lineHeights[6] + 0.10};
   a {
     color: ${({theme}) => theme.colors.primary600};
   }

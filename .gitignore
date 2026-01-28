@@ -142,3 +142,9 @@ vite.config.ts.timestamp-*
 
 # strapi auto generated
 .strapi
+
+# Ignore all markdown files
+*.md
+
+# But do NOT ignore README.md
+!README.md

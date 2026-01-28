@@ -1,6 +1,6 @@
 import type {MessageDescriptor} from 'react-intl';
 import React, {useEffect, useState} from 'react';
-import {Box, Typography} from '@strapi/design-system';
+import {Box, Typography, Accordion} from '@strapi/design-system';
 import MarkDown from 'react-markdown';
 import {useFetchClient} from "@strapi/strapi/admin";
 import {Wrapper} from "./Wrapper";
@@ -96,6 +96,29 @@ const Input: React.FC<CustomFieldInputProps> = ({
   if (loading){
     return <div>Loading...</div>
   }
+
+  if (attribute?.options?.isAccordion) {
+    return (
+      <Accordion.Root>
+        <Accordion.Item value="acc-01">
+          <Accordion.Header>
+            <Accordion.Trigger description="documentation">
+              {title}
+            </Accordion.Trigger>
+          </Accordion.Header>
+          <Accordion.Content>
+            <Typography display="block" padding={4}>
+              <Wrapper>
+                <MarkDown
+                >{markdown}</MarkDown>
+              </Wrapper>
+            </Typography>
+          </Accordion.Content>
+        </Accordion.Item>
+      </Accordion.Root>
+    )
+  }
+
 
   return (
     <Box marginBottom={1}>

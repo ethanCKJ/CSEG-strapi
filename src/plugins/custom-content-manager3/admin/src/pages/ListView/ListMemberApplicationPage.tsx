@@ -473,4 +473,5 @@ const ProtectedListMemberApplicationPage = () => {
   );
 };
 
-export { ListMemberApplicationPage, ProtectedListMemberApplicationPage };
+// Exports moved to ListTabbedPage.tsx - this file is kept for reference
+// export { ListMemberApplicationPage, ProtectedListMemberApplicationPage };

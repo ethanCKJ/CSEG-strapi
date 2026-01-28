@@ -11,7 +11,7 @@ import {ProtectedEditViewPage} from "./EditView/EditViewPage";
 import {COLLECTION_TYPES, SINGLE_TYPES} from "../constants/collections";
 import { DesignSystemProvider, useDesignSystem, darkTheme } from "@strapi/design-system";
 import {MEMBER_APPLICATION_MODEL} from "../constants/specialModels";
-import {ProtectedListMemberApplicationPage} from "./ListView/ListMemberApplicationPage";
+import {ProtectedListMemberApplicationPage} from "./ListView/ListTabbedPage";
 
 /**
  * On single collection types (e.g. about page), use the EditViewPage and
