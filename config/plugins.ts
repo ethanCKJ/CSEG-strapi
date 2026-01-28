@@ -74,5 +74,9 @@ export default ({env}) => ({
   'documentation-viewer':{
     enabled: true,
     resolve: './src/plugins/documentation-viewer'
+  },
+  'research-plugin':{
+    enabled: true,
+    resolve: './src/plugins/research-plugin'
   }
 });

@@ -6,7 +6,7 @@ This is the template for each menu link.
 0. Create a new folder `custom-plugin` in `src/plugins/`.
 1. Copy and paste all files except `dist`, `node_modules` and `README.md` from `events-plugin` to `custom-plugin`.
 2. (Webstorm) CTRL + SHIFT + F the `custom-plguin` folder for events-plugin and replace with `custom-plugin`.
-This is the In `src/components/PluginIcon.tsx`, `package.json`, `index.ts` and `pluginId.ts` files.
+This is the In `src/components/PluginIcon.tsx`, `package.json`, `index.ts`, `src/translations/en.json` and `pluginId.ts` files.
 3. CTRL + F work `events` and replace with your desired name.
 4. `npm install` to install dependencies.
 5. `npm run build` to build the plugin.
