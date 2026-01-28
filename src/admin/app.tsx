@@ -1,10 +1,38 @@
-import type { StrapiApp } from '@strapi/strapi/admin';
+import type {StrapiApp} from '@strapi/strapi/admin';
 import './overrides.css'
 
+// Suppress MISSING_TRANSLATION errors for en-GB since Strapi falls back
+// to en.json meaning text is rendered correctly even if the translation is missing.
+//
+// Strapi hard codes en-US time format (mm/dd/yyyy) which requires setting locale to
+// en-GB. However, many translations are missing for en-GB causing numerous console errors.
+
+// Hopefully, strapi will fix this in future releases as this is well complained
+// https://feedback.strapi.io/customization/p/option-to-change-the-date-format-in-the-admin-dashboard
+//
+
+const originalError = console.error;
+console.error = (...args: any[]) => {
+  // Handle both string and Error object
+  const message = typeof args[0] === 'string'
+      ? args[0]
+      : args[0]?.message || String(args[0]);
+
+  // Filter out formatjs MISSING_TRANSLATION errors for en-GB
+  if (
+      message.includes('[@formatjs/intl Error MISSING_TRANSLATION]') &&
+      message.includes('en-GB')
+  ) {
+    return; // Suppress this error
+  }
+
+  // Let all other errors through
+  originalError.apply(console, args);
+};
 export default {
   config: {
     tutorials: false,
-    notifications: { releases: false },
+    notifications: {releases: false},
 
     locales: [
       // 'ar',
@@ -33,12 +61,13 @@ export default {
       // 'vi',
       // 'zh-Hans',
       // 'zh',
-        'en-GB',
+      'en-GB',
     ],
   },
   register(app: StrapiApp) {
+
     const indexRoute = app.router.routes.find(({index}) => index);
-    if (!indexRoute){
+    if (!indexRoute) {
       throw new Error("Unable to find index page");
     }
     indexRoute.lazy = async () => {
