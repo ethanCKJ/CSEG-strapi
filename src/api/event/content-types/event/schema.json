@@ -43,16 +43,6 @@
       "type": "text",
       "maxLength": 250
     },
-    "eventPage": {
-      "type": "blocks",
-      "required": true
-    },
-    "event_type": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::event-type.event-type",
-      "inversedBy": "events"
-    },
     "event_tags": {
       "type": "relation",
       "relation": "manyToMany",
@@ -91,24 +81,6 @@
       "default": "Untitled body",
       "required": true
     },
-    "emailTarget1": {
-      "type": "email",
-      "private": true,
-      "required": true,
-      "default": "mailing-list@example.com"
-    },
-    "emailTarget2": {
-      "type": "email",
-      "private": true
-    },
-    "emailTarget3": {
-      "type": "email",
-      "private": true
-    },
-    "emailTarget4": {
-      "type": "email",
-      "private": true
-    },
     "emailCount": {
       "type": "integer",
       "private": true,
@@ -119,137 +91,45 @@
       "type": "text",
       "private": true
     },
-    "emailRule1OrCustom": {
-      "type": "enumeration",
-      "default": "Send on day of event",
-      "enum": [
-        "Send on day of event",
-        "Send 1 day before at 09:00",
-        "Send 3 days before at 09:00",
-        "Send 7 days before at 09:00",
-        "No scheduled email",
-        "Custom rule"
-      ]
-    },
-    "emailRule2": {
-      "type": "enumeration",
-      "conditions": {
-        "visible": {
-          "!=": [
-            {
-              "var": "emailRule1OrCustom"
-            },
-            "No scheduled email"
-          ]
-        }
-      },
-      "required": true,
-      "default": "No scheduled email",
-      "enum": [
-        "No scheduled email",
-        "Send on day of event",
-        "Send 1 day before at 09:00",
-        "Send 3 days before at 09:00",
-        "Send 7 days before at 09:00"
-      ]
-    },
-    "emailRule3": {
-      "type": "enumeration",
-      "conditions": {
-        "visible": {
-          "!=": [
-            {
-              "var": "emailRule2"
-            },
-            "No scheduled email"
-          ]
-        }
-      },
-      "required": true,
-      "default": "No scheduled email",
-      "enum": [
-        "No scheduled email",
-        "Send on day of event",
-        "Send 1 day before at 09:00",
-        "Send 3 days before at 09:00",
-        "Send 7 days before at 09:00"
-      ]
-    },
-    "emailRule4": {
-      "type": "enumeration",
-      "conditions": {
-        "visible": {
-          "!=": [
-            {
-              "var": "emailRule3"
-            },
-            "No scheduled email"
-          ]
-        }
-      },
-      "required": true,
-      "default": "No scheduled email",
-      "enum": [
-        "No scheduled email",
-        "Send on day of event",
-        "Send 1 day before at 09:00",
-        "Send 3 days before at 09:00",
-        "Send 7 days before at 09:00"
-      ]
-    },
-    "emailRule5": {
-      "type": "enumeration",
-      "conditions": {
-        "visible": {
-          "!=": [
-            {
-              "var": "emailRule4"
-            },
-            "No scheduled email"
-          ]
-        }
-      },
-      "required": true,
-      "enum": [
-        "Send on day of event",
-        "Send 1 day before at 09:00",
-        "Send 3 days before at 09:00",
-        "Send 7 days before at 09:00"
-      ]
-    },
     "sendTime": {
       "type": "time",
-      "conditions": {
-        "visible": {
-          "==": [
-            {
-              "var": "emailRule1OrCustom"
-            },
-            "Custom rule"
-          ]
-        }
-      },
+      "private": true,
       "required": true,
       "default": "09:00:00.000"
     },
-    "emailRuleV2": {
-      "type": "component",
-      "component": "shared.email-rule",
-      "repeatable": true
+    "eventType": {
+      "type": "enumeration",
+      "required": true,
+      "default": "Teaching Hour",
+      "enum": [
+        "Teaching Hour",
+        "Reading Group",
+        "Workshop",
+        "Big Event",
+        "Other"
+      ]
     },
-    "daysBefore": {
-      "type": "integer",
+    "eventPage": {
+      "type": "richtext",
+      "required": true
+    },
+    "emailInstructions": {
+      "type": "customField",
       "conditions": {
         "visible": {
           "==": [
             {
-              "var": "emailRule1OrCustom"
+              "var": ""
             },
-            "Custom rule"
+            ""
           ]
         }
       },
-      "required": true
+      "customField": "plugin::documentation-viewer.doc-viewer",
+      "options": {
+        "documentId": "gprskf4rmcwx3fgzfaah77l2",
+        "isAccordion": true
+      }
     }
   }
 }

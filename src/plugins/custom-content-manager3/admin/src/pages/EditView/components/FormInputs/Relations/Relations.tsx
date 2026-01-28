@@ -514,14 +514,15 @@ const RelationsInput = ({
       params: {
         ...currentDocumentMeta.params,
         id: id ?? '',
-        pageSize: 20,
+        pageSize: 100,
         idsToInclude: field.value?.disconnect?.map((rel) => rel.id.toString()) ?? [],
         idsToOmit: field.value?.connect?.map((rel) => rel.id.toString()) ?? [],
         ...searchParamsDebounced,
       },
     },
     {
-      skip: !isRelatedToCurrentDocument || !id,
+      // Skip
+      skip: !isRelatedToCurrentDocument,  // Only skip if not related, allow empty id
     }
   );
 

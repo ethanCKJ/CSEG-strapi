@@ -58,10 +58,16 @@ export default {
       locales.map(async (locale) => {
         try {
           const { default: data } = await import(`./translations/${locale}.json`);
-
           return { data, locale };
         } catch {
-          return { data: {}, locale };
+          // Try base language (e.g., "en" for "en-GB")
+          try {
+            const baseLocale = locale.split('-')[0];
+            const { default: data } = await import(`./translations/${baseLocale}.json`);
+            return { data, locale };
+          } catch {
+            return { data: {}, locale };
+          }
         }
       })
     );

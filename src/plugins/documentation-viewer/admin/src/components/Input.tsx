@@ -1,9 +1,9 @@
-import type { MessageDescriptor } from 'react-intl';
-import React, { useEffect, useState } from 'react';
-import { Box, Typography } from '@strapi/design-system';
+import type {MessageDescriptor} from 'react-intl';
+import React, {useEffect, useState} from 'react';
+import {Box, Typography} from '@strapi/design-system';
 import MarkDown from 'react-markdown';
 import {useFetchClient} from "@strapi/strapi/admin";
-import styled from "styled-components";
+import {Wrapper} from "./Wrapper";
 
 
 // IntlObject type used by Strapi
@@ -18,147 +18,6 @@ interface CustomFieldAttribute {
     [key: string]: any; // Allow other custom options
   };
 }
-
-const Wrapper = styled.div`
-  top: 0;
-  overflow: auto;
-  padding: ${({ theme }) => `${theme.spaces[1]} ${theme.spaces[2]}`};
-  font-size: 1.4rem;
-  background-color: ${({ theme }) => theme.colors.neutral100};
-  color: ${({ theme }) => theme.colors.neutral800};
-  line-height: ${({ theme }) => theme.lineHeights[6]};
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    margin-block-start: ${({ theme }) => theme.spaces[2]};
-    margin-block-end: ${({ theme }) => theme.spaces[2]};
-  }
-
-  p {
-    margin-bottom: ${({ theme }) => theme.spaces[2]};
-  }
-
-  h1 {
-    font-size: 3.6rem;
-    font-weight: 600;
-  }
-
-  h2 {
-    font-size: 3rem;
-    font-weight: 500;
-  }
-
-  h3 {
-    font-size: 2.4rem;
-    font-weight: 500;
-  }
-
-  h4 {
-    font-size: 2rem;
-    font-weight: 500;
-  }
-
-  strong {
-    font-weight: 800;
-  }
-
-  em {
-    font-style: italic;
-  }
-
-  blockquote {
-    margin-top: ${({ theme }) => theme.spaces[8]};
-    margin-bottom: ${({ theme }) => theme.spaces[7]};
-    font-size: 1.4rem;
-    font-weight: 400;
-    border-left: 4px solid ${({ theme }) => theme.colors.neutral150};
-    font-style: italic;
-    padding: ${({ theme }) => theme.spaces[2]} ${({ theme }) => theme.spaces[5]};
-  }
-
-  img {
-    max-width: 100%;
-  }
-
-  table {
-    thead {
-      background: ${({ theme }) => theme.colors.neutral150};
-
-      th {
-        padding: ${({ theme }) => theme.spaces[4]};
-      }
-    }
-    tr {
-      border: 1px solid ${({ theme }) => theme.colors.neutral200};
-    }
-    th,
-    td {
-      padding: ${({ theme }) => theme.spaces[4]};
-      border: 1px solid ${({ theme }) => theme.colors.neutral200};
-      border-bottom: 0;
-      border-top: 0;
-    }
-  }
-
-  pre,
-  code {
-    font-size: 1.4rem;
-    border-radius: 4px;
-    /*
-      Hard coded since the color is the same between themes,
-      theme.colors.neutral800 changes between themes.
-
-      Matches the color of the JSON Input component.
-    */
-    background-color: #32324d;
-    max-width: 100%;
-    overflow: auto;
-    padding: ${({ theme }) => theme.spaces[2]};
-  }
-
-  /* Inline code */
-  p,
-  pre,
-  td {
-    > code {
-      color: #839496;
-    }
-  }
-
-  ol {
-    list-style-type: decimal;
-    margin-block-start: ${({ theme }) => theme.spaces[4]};
-    margin-block-end: ${({ theme }) => theme.spaces[4]};
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: ${({ theme }) => theme.spaces[4]};
-
-    ol,
-    ul {
-      margin-block-start: 0px;
-      margin-block-end: 0px;
-    }
-  }
-
-  ul {
-    list-style-type: disc;
-    margin-block-start: ${({ theme }) => theme.spaces[4]};
-    margin-block-end: ${({ theme }) => theme.spaces[4]};
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: ${({ theme }) => theme.spaces[4]};
-
-    ul,
-    ol {
-      margin-block-start: 0px;
-      margin-block-end: 0px;
-    }
-  }
-`;
 
 // The onChange event target structure
 interface ChangeEventTarget {
@@ -197,10 +56,12 @@ const Input: React.FC<CustomFieldInputProps> = ({
                                                   intlLabel,
                                                 }) => {
   const [markdown, setMarkdown] = useState('');
+  const [title, setTitle] = useState('Documentation');
   const [loading, setLoading] = useState(true);
   const {get} = useFetchClient();
 
   // Type-safe access to documentId from options
+  console.log('attribute',attribute)
   const documentId = attribute?.options?.documentId;
 
   useEffect(() => {
@@ -213,15 +74,15 @@ const Input: React.FC<CustomFieldInputProps> = ({
     const fetchDocument = async () => {
       try {
         const res = await get(`/content-manager/collection-types/api::documentation.documentation/${documentId}`);
-        console.log(res)
+        console.log('res',res)
         let data = ''
         if ('data' in res){
           data = res.data.data;
         } else{
           throw new Error('Invalid response format');
         }
-        console.log('data',data)
         setMarkdown(data.content || '');
+        setTitle(data.title || 'Documentation');
       } catch (error) {
         setMarkdown(`*Error loading document: ${error.message}*`);
       } finally {
@@ -232,18 +93,18 @@ const Input: React.FC<CustomFieldInputProps> = ({
     fetchDocument();
   }, [documentId]);
 
+  if (loading){
+    return <div>Loading...</div>
+  }
+
   return (
     <Box marginBottom={1}>
-      <Typography>Documentation</Typography>
+      <Typography>{title}</Typography>
       <Box background="neutral100" borderRadius="4px">
-      {loading ? (
-        <Typography>Loading documentation...</Typography>
-      ) : (
         <Wrapper>
           <MarkDown
           >{markdown}</MarkDown>
         </Wrapper>
-      )}
       </Box>
     </Box>
   );

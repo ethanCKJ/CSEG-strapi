@@ -528,6 +528,9 @@ export interface ApiDocumentationDocumentation
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Documentation'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -589,7 +592,6 @@ export interface ApiEventTypeEventType extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    events: Schema.Attribute.Relation<'oneToMany', 'api::event.event'>;
     EventType: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique &
@@ -623,7 +625,6 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    daysBefore: Schema.Attribute.Integer & Schema.Attribute.Required;
     emailBody: Schema.Attribute.Text &
       Schema.Attribute.Required &
       Schema.Attribute.Private &
@@ -631,82 +632,30 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     emailCount: Schema.Attribute.Integer &
       Schema.Attribute.Private &
       Schema.Attribute.DefaultTo<0>;
-    emailRule1OrCustom: Schema.Attribute.Enumeration<
-      [
-        'Send on day of event',
-        'Send 1 day before at 09:00',
-        'Send 3 days before at 09:00',
-        'Send 7 days before at 09:00',
-        'No scheduled email',
-        'Custom rule',
-      ]
-    > &
-      Schema.Attribute.DefaultTo<'Send on day of event'>;
-    emailRule2: Schema.Attribute.Enumeration<
-      [
-        'No scheduled email',
-        'Send on day of event',
-        'Send 1 day before at 09:00',
-        'Send 3 days before at 09:00',
-        'Send 7 days before at 09:00',
-      ]
-    > &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'No scheduled email'>;
-    emailRule3: Schema.Attribute.Enumeration<
-      [
-        'No scheduled email',
-        'Send on day of event',
-        'Send 1 day before at 09:00',
-        'Send 3 days before at 09:00',
-        'Send 7 days before at 09:00',
-      ]
-    > &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'No scheduled email'>;
-    emailRule4: Schema.Attribute.Enumeration<
-      [
-        'No scheduled email',
-        'Send on day of event',
-        'Send 1 day before at 09:00',
-        'Send 3 days before at 09:00',
-        'Send 7 days before at 09:00',
-      ]
-    > &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'No scheduled email'>;
-    emailRule5: Schema.Attribute.Enumeration<
-      [
-        'Send on day of event',
-        'Send 1 day before at 09:00',
-        'Send 3 days before at 09:00',
-        'Send 7 days before at 09:00',
-      ]
-    > &
-      Schema.Attribute.Required;
-    emailRuleV2: Schema.Attribute.Component<'shared.email-rule', true>;
+    emailInstructions: Schema.Attribute.String &
+      Schema.Attribute.CustomField<
+        'plugin::documentation-viewer.doc-viewer',
+        {
+          documentId: 'gprskf4rmcwx3fgzfaah77l2';
+          isAccordion: true;
+        }
+      >;
     emailSubject: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'Untitled subject'>;
-    emailTarget1: Schema.Attribute.Email &
-      Schema.Attribute.Required &
-      Schema.Attribute.Private &
-      Schema.Attribute.DefaultTo<'mailing-list@example.com'>;
-    emailTarget2: Schema.Attribute.Email & Schema.Attribute.Private;
-    emailTarget3: Schema.Attribute.Email & Schema.Attribute.Private;
-    emailTarget4: Schema.Attribute.Email & Schema.Attribute.Private;
     event_tags: Schema.Attribute.Relation<
       'manyToMany',
       'api::event-tag.event-tag'
     >;
-    event_type: Schema.Attribute.Relation<
-      'manyToOne',
-      'api::event-type.event-type'
-    >;
     eventDate: Schema.Attribute.Date & Schema.Attribute.Required;
     eventEndTime: Schema.Attribute.Time & Schema.Attribute.Required;
-    eventPage: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    eventPage: Schema.Attribute.RichText & Schema.Attribute.Required;
     eventStartTime: Schema.Attribute.Time & Schema.Attribute.Required;
+    eventType: Schema.Attribute.Enumeration<
+      ['Teaching Hour', 'Reading Group', 'Workshop', 'Big Event', 'Other']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Teaching Hour'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::event.event'> &
       Schema.Attribute.Private;
@@ -726,6 +675,7 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     sendTime: Schema.Attribute.Time &
       Schema.Attribute.Required &
+      Schema.Attribute.Private &
       Schema.Attribute.DefaultTo<'09:00:00.000'>;
     speaker: Schema.Attribute.String &
       Schema.Attribute.Required &
@@ -846,6 +796,7 @@ export interface ApiLeadershipLeadership extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     name: Schema.Attribute.String & Schema.Attribute.Required;
+    picture: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -902,8 +853,7 @@ export interface ApiMemberApplicationMemberApplication
     member_type: Schema.Attribute.Relation<
       'oneToOne',
       'api::member-type.member-type'
-    > &
-      Schema.Attribute.Private;
+    >;
     preferredName: Schema.Attribute.String &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 100;

@@ -27,7 +27,7 @@ export default {
    */
   register({ strapi }: { strapi: Core.Strapi } ) {
     strapi.documents.use(async (context, next) => {
-      // target the 'create' action on articles
+      // The api::member-application.member-application content type
       if (context.uid === 'api::member-application.member-application' && (context.action === 'update' || context.action === 'create')) {
         const applicationData = context.params.data;
         if (context.action === 'update' && context.params.data.applicationStatus === 'approved'){
@@ -71,6 +71,38 @@ CSEG Website System`
             html: html.replace(/\r\n|\r|\n/g, "<br/>"),
           });
         }
+      }
+
+      /**
+       * When a contact message appears on api::contact.contact forward message
+       * content to site admin email.
+       */
+      if (context.uid === 'api::contact.contact' && context.action === 'create'){
+        const messageData = context.params.data;
+        const subject = `CSEG Contact message from ${escapeHTML(messageData.name)}`
+        const html = `Dear administrator,
+
+You have received a new contact message:
+
+Full name: ${escapeHTML(messageData.name)}
+
+Email: ${escapeHTML(messageData.email)}
+
+Subject: ${escapeHTML(messageData.subject)}
+
+Message:
+${escapeHTML(messageData.message)}
+
+Do not reply to this email directly. Instead, kindly respond to the sender's email address
+and mark the message as resolved in the admin panel.
+
+Regards,
+CSEG Website System`
+        await strapi.plugin('email').service('email').send({
+          to: env('CONTACT_MESSAGE_REVIEWER'),
+          subject: subject,
+          html: html.replace(/\r\n|\r|\n/g, "<br/>"),
+        });
       }
 
       // always return next()

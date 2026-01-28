@@ -72,7 +72,7 @@ export function CustomDashboard() {
   if (isError) {
     return <Box>Error loading user data</Box>
   }
-  console.log(userData)
+
 
   return (
       <DesignSystemProvider theme={darkTheme}>
