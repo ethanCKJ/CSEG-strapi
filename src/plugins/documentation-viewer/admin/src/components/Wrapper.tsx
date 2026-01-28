@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import type {ComponentPropsWithoutRef} from "react";
 
-export const Wrapper = styled.div`
+export const Wrapper  = styled.div<ComponentPropsWithoutRef<'div'>>`
   top: 0;
   overflow: auto;
   padding: ${({theme}) => `${theme.spaces[1]} ${theme.spaces[2]}`};
