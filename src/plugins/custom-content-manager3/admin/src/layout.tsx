@@ -1,30 +1,31 @@
 /* eslint-disable check-file/filename-naming-convention */
 import * as React from 'react';
 
-import { Page, Layouts, SubNav, useIsMobile } from '@strapi/strapi/admin';
-import { useIntl } from 'react-intl';
-import { Navigate, Outlet, useLocation, useMatch } from 'react-router-dom';
+import {Page} from '@strapi/strapi/admin';
+import {Outlet} from 'react-router-dom';
 
-import { DragLayer, DragLayerProps } from './components/DragLayer';
+import {DragLayerProps} from './components/DragLayer';
 // import { CardDragPreview } from './components/DragPreviews/CardDragPreview';
 // import { ComponentDragPreview } from './components/DragPreviews/ComponentDragPreview';
 // import { RelationDragPreview } from './components/DragPreviews/RelationDragPreview';
-import { LeftMenu } from './components/LeftMenu';
-import { ItemTypes } from './constants/dragAndDrop';
-import { useContentManagerInitData } from './hooks/useContentManagerInitData';
-import { getTranslation } from './utils/translations';
-import {ContentType} from "../../shared/contracts/content-types";
+import {ItemTypes} from './constants/dragAndDrop';
 import {CardDragPreview} from "./components/DragPreviews/CardDragPreview";
 import {ComponentDragPreview} from "./components/DragPreviews/ComponentDragPreview";
 import {RelationDragPreview} from "./components/DragPreviews/RelationDragPreview";
+import {StyleSheetManager, useTheme} from "styled-components";
+import {darkTheme, DesignSystemProvider} from "@strapi/design-system";
+import isPropValid from '@emotion/is-prop-valid';
+
+import {DndProvider} from "react-dnd";
+import {HTML5Backend} from "react-dnd-html5-backend";
 
 /* -------------------------------------------------------------------------------------------------
  * Layout
  * -----------------------------------------------------------------------------------------------*/
 
 const Layout = () => {
-  const contentTypeMatch = useMatch('/custom-content-manager3/:kind/:uid/*');
-  const isMobile = useIsMobile();
+  // const contentTypeMatch = useMatch('/custom-content-manager3/:kind/:uid/*');
+  // const isMobile = useIsMobile();
 
   // const { isLoading, collectionTypeLinks, models, singleTypeLinks } = useContentManagerInitData();
   // const authorisedModels = [...collectionTypeLinks, ...singleTypeLinks].sort((a, b) =>
@@ -32,87 +33,99 @@ const Layout = () => {
   // );
   // console.log("In Layout: authorisedModels =", authorisedModels, "loading =", isLoading);
   // TODO: Use real data
-  const isLoading = false;
-  const models = [1,2,3,4,5]
-  const authorisedModels= [1,2,3,4,5]
+  // const isLoading = false;
+  // const models = [1,2,3,4,5]
+  // const authorisedModels= [1,2,3,4,5]
 
 
-  const { pathname } = useLocation();
-  const { formatMessage } = useIntl();
-
-  if (isLoading) {
-    return (
-      <>
-        <Page.Title>
-          {formatMessage({
-            id: getTranslation('plugin.name'),
-            defaultMessage: 'Content Manager',
-          })}
-        </Page.Title>
-        <Page.Loading />
-      </>
-    );
-  }
+  // const { pathname } = useLocation();
+  // const { formatMessage } = useIntl();
+  //
+  // if (isLoading) {
+  //   return (
+  //     <>
+  //       <Page.Title>
+  //         {formatMessage({
+  //           id: getTranslation('plugin.name'),
+  //           defaultMessage: 'Content Manager',
+  //         })}
+  //       </Page.Title>
+  //       <Page.Loading />
+  //     </>
+  //   );
+  // }
 
   // Array of models that are displayed in the content manager
   // const supportedModelsToDisplay = models.filter(({ isDisplayed }) => isDisplayed);
-  const supportedModelsToDisplay = models;
-
-  // Redirect the user to the 403 page
-  if (
-    authorisedModels.length === 0 &&
-    supportedModelsToDisplay.length > 0 &&
-    pathname !== '/content-manager/403'
-  ) {
-    return <Navigate to="/403" />;
-  }
-
-  // Redirect the user to the create content type page
-  if (supportedModelsToDisplay.length === 0 && pathname !== '/no-content-types') {
-    return <Navigate to="/no-content-types" />;
-  }
+  // const supportedModelsToDisplay = models;
+  //
+  // // Redirect the user to the 403 page
+  // if (
+  //   authorisedModels.length === 0 &&
+  //   supportedModelsToDisplay.length > 0 &&
+  //   pathname !== '/content-manager/403'
+  // ) {
+  //   return <Navigate to="/403" />;
+  // }
+  //
+  // // Redirect the user to the create content type page
+  // if (supportedModelsToDisplay.length === 0 && pathname !== '/no-content-types') {
+  //   return <Navigate to="/no-content-types" />;
+  // }
 
   // On /custom-content-manager3 base route, navigate home
-  if (!contentTypeMatch && authorisedModels.length > 0) {
-    // On desktop, navigate to homepage
-    if (!isMobile) {
-      return (
-        <Navigate
-          to="/admin"
-          replace
-        />
-      );
-    }
+  // if (!contentTypeMatch && authorisedModels.length > 0) {
+  //   // On desktop, navigate to homepage
+  //   if (!isMobile) {
+  //     return (
+  //       <Navigate
+  //         to="/admin"
+  //         replace
+  //       />
+  //     );
+  //   }
 
     // On mobile: show navigation page
-    return (
-      <>
-        <Page.Title>
-          {formatMessage({
-            id: getTranslation('plugin.name'),
-            defaultMessage: 'Content Manager',
-          })}
-        </Page.Title>
-        <SubNav.PageWrapper>
-          <LeftMenu isFullPage />
-        </SubNav.PageWrapper>
-      </>
-    );
-  }
+  //   return (
+  //     <>
+  //       <Page.Title>
+  //         {formatMessage({
+  //           id: getTranslation('plugin.name'),
+  //           defaultMessage: 'Content Manager',
+  //         })}
+  //       </Page.Title>
+  //       <SubNav.PageWrapper>
+  //         <LeftMenu isFullPage />
+  //       </SubNav.PageWrapper>
+  //     </>
+  //   );
+  // }
+  const parentTheme = useTheme();
+  const mergedTheme = {...darkTheme, sizes:parentTheme.sizes}
 
   return (
     <>
       <Page.Title>
-        {formatMessage({
-          id: getTranslation('plugin.name'),
-          defaultMessage: 'Content Manager',
-        })}
+        Custom Content Manager
       </Page.Title>
-      <Layouts.Root>
-        {/* TODO: Re-introduce drag*/}
-        {/*<DragLayer renderItem={renderDraglayerItem} />*/}
-        <Outlet />
-      </Layouts.Root>
+      {/* StyleSheetManager silences warnings about invalid HTML attributes from 'styled-components'*/}
+      <StyleSheetManager
+        shouldForwardProp={(propName, elementToBeCreated) => {
+          // Forward all props for non-HTML elements (React components)
+          if (typeof elementToBeCreated === 'string') {
+            // For HTML elements, filter out styled-components transient props and invalid HTML attributes
+            return isPropValid(propName);
+          }
+          // For React components, forward all props
+          return true;
+        }}
+      >
+        <DndProvider backend={HTML5Backend}>
+          <DesignSystemProvider theme={mergedTheme} locale="en-GB">
+            <Outlet />
+          </DesignSystemProvider>
+        </DndProvider>
+      </StyleSheetManager>
     </>
   );
 };
