@@ -13,10 +13,7 @@
   "attributes": {
     "name": {
       "type": "string",
-      "required": true
-    },
-    "description": {
-      "type": "richtext",
+      "maxLength": 70,
       "required": true
     },
     "picture": {
@@ -26,6 +23,13 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "link": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text",
+      "maxLength": 400
     }
   }
 }
