@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import {useQueryParams,} from '@strapi/strapi/admin';
-import {Flex, MenuItem, Radio, SimpleMenu, Typography} from '@strapi/design-system';
+import {useForm, useQueryParams,} from '@strapi/strapi/admin';
+import {Button, Flex, MenuItem, Radio, SimpleMenu, Typography} from '@strapi/design-system';
 
 import {InjectionZone} from '../../../components/InjectionZone';
 import {Document, useDoc} from '../../../hooks/useDocument';
@@ -143,8 +143,36 @@ const EventActionPanel = ({
   meta,
   collectionType,
 }: StandardActionPanelProps) => {
+  const deleteAction = useDeleteAction(documentId, model, collectionType);
+  const unpublishAction = useUnpublishAction(status, collectionType, model, document, documentId);
+  const discardAction = useDiscardAction(status, collectionType, model, document, documentId);
+  const onChange = useForm("EventActionPanel", ({onChange}) => onChange);
+  const formValues = useForm("EventActionPanel", ({values}) => values);
+  console.log('formValues in EventActionPanel:', formValues);
+
+  const handleEmailTemplates = () => {
+    const summary = formValues.summary ?? '';
+    const eventDate = formValues.eventDate ?? '';
+    const eventStartTime = formValues.eventStartTime ?? '';
+    const eventEndTime = formValues.eventEndTime ?? '';
+    onChange('showEmailFields', true);
+    onChange('emailSubject3', formValues.title ?? 'Untitled subject');
+    onChange('emailBody3', `
+    Hello everyone,
+
+    You are invited to ${summary}
+
+    Date: ${eventDate}
+    Time: ${eventStartTime.substring(0,5)} - ${eventEndTime.substring(0,5)}
+
+    Regards,
+    CSEG Website System
+    `)
+  }
+
   return (
     <>
+      <Button onClick={handleEmailTemplates}>Update Event Dates</Button>
       <StandardActionPanel
         model={model}
         documentId={documentId}
@@ -154,7 +182,6 @@ const EventActionPanel = ({
         collectionType={collectionType}
       />
       <Typography>Special actions</Typography>
-      <SendEmailButton model={model} collectionType={collectionType} documentId={documentId}/>
     </>
   )
 

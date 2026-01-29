@@ -70,32 +70,55 @@
       },
       "inversedBy": "events"
     },
-    "emailSubject": {
+    "emailSubject1": {
       "type": "string",
-      "default": "Untitled subject",
-      "required": true
+      "private": true,
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "showEmailFields"
+            },
+            true
+          ]
+        }
+      },
+      "required": false
     },
-    "emailBody": {
+    "emailBody1": {
       "type": "text",
       "private": true,
-      "default": "Untitled body",
-      "required": true
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "showEmailFields"
+            },
+            true
+          ]
+        }
+      },
+      "required": false
     },
     "emailCount": {
       "type": "integer",
       "private": true,
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "showEmailFields"
+            },
+            true
+          ]
+        }
+      },
       "required": false,
       "default": 0
     },
     "privateNotes": {
       "type": "text",
       "private": true
-    },
-    "sendTime": {
-      "type": "time",
-      "private": true,
-      "required": true,
-      "default": "09:00:00.000"
     },
     "eventType": {
       "type": "enumeration",
@@ -118,6 +141,169 @@
       "customField": "plugin::documentation-viewer.doc-viewer",
       "options": {
         "documentId": "gprskf4rmcwx3fgzfaah77l2",
+        "isAccordion": true
+      }
+    },
+    "emailSubject2": {
+      "type": "string",
+      "private": true,
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "showEmailFields"
+            },
+            true
+          ]
+        }
+      }
+    },
+    "emailBody2": {
+      "type": "text",
+      "private": true,
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "showEmailFields"
+            },
+            true
+          ]
+        }
+      }
+    },
+    "emailSubject3": {
+      "type": "string",
+      "private": true,
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "showEmailFields"
+            },
+            true
+          ]
+        }
+      }
+    },
+    "emailBody3": {
+      "type": "text",
+      "private": true,
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "showEmailFields"
+            },
+            true
+          ]
+        }
+      }
+    },
+    "showEmailFields": {
+      "type": "boolean",
+      "private": true,
+      "required": true,
+      "default": false
+    },
+    "emailDate1": {
+      "type": "datetime",
+      "private": true,
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "showEmailFields"
+            },
+            true
+          ]
+        }
+      },
+      "required": true
+    },
+    "emailDate2": {
+      "type": "datetime",
+      "private": true,
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "showEmailFields"
+            },
+            true
+          ]
+        }
+      },
+      "required": true
+    },
+    "emailDate3": {
+      "type": "datetime",
+      "private": true,
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "showEmailFields"
+            },
+            true
+          ]
+        }
+      },
+      "required": true
+    },
+    "disableEmail1": {
+      "type": "boolean",
+      "private": true,
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "showEmailFields"
+            },
+            true
+          ]
+        }
+      },
+      "required": true,
+      "default": false
+    },
+    "disableEmail2": {
+      "type": "boolean",
+      "private": true,
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "showEmailFields"
+            },
+            true
+          ]
+        }
+      },
+      "required": true,
+      "default": false
+    },
+    "disableEmail3": {
+      "type": "boolean",
+      "private": true,
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "showEmailFields"
+            },
+            true
+          ]
+        }
+      },
+      "required": true,
+      "default": false
+    },
+    "eventEmailDocs": {
+      "type": "customField",
+      "customField": "plugin::documentation-viewer.doc-viewer",
+      "options": {
+        "documentId": "pkryz2g3hq4qmhcbjig97hw1",
         "isAccordion": true
       }
     }

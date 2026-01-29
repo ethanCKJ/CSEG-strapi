@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "text_email_templates",
+  "info": {
+    "singularName": "text-email-template",
+    "pluralName": "text-email-templates",
+    "displayName": "Text based Email template"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "templateName": {
+      "type": "string",
+      "private": true,
+      "required": true
+    },
+    "template": {
+      "type": "text",
+      "required": true
+    },
+    "docEmailTemplate": {
+      "type": "customField",
+      "customField": "plugin::documentation-viewer.doc-viewer",
+      "options": {
+        "documentId": "q5pua18p5vvlyr84oasrlvav"
+      }
+    }
+  }
+}
