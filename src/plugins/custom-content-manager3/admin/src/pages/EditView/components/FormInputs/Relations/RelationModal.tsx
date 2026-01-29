@@ -550,15 +550,17 @@ const RelationModalTrigger = ({
   relation: DocumentMeta;
 }) => {
   const dispatch = useRelationModal('ModalTrigger', (state) => state.dispatch);
-
+  // Disabled the onClick as there are Relation Dialog bugs when interacting with the relation
+  // Also, in most cases, we don't want organisers modifying a relation. Only a Super Admin
+  // from the regular content manager.
   return (
     <StyledTextButton
-      onClick={() => {
-        dispatch({
-          type: 'GO_TO_RELATION',
-          payload: { document: relation, shouldBypassConfirmation: false },
-        });
-      }}
+      // onClick={() => {
+      //   dispatch({
+      //     type: 'GO_TO_RELATION',
+      //     payload: { document: relation, shouldBypassConfirmation: false },
+      //   });
+      // }}
     >
       {children}
     </StyledTextButton>
