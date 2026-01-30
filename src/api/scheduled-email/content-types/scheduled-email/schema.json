@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "scheduled_emails",
+  "info": {
+    "singularName": "scheduled-email",
+    "pluralName": "scheduled-emails",
+    "displayName": "ScheduledEmail"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "targetDocumentId": {
+      "type": "string",
+      "required": true
+    },
+    "targetModel": {
+      "type": "string",
+      "required": true
+    },
+    "subject": {
+      "type": "string",
+      "required": true
+    },
+    "body": {
+      "type": "text",
+      "required": true
+    },
+    "emails": {
+      "type": "string",
+      "required": true
+    },
+    "scheduledDatetime": {
+      "type": "datetime",
+      "required": true
+    },
+    "emailId": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "sent": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    }
+  }
+}
