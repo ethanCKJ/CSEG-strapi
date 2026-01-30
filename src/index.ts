@@ -20,6 +20,118 @@ const escapeHTML = (str: string | null| undefined) => {
   return '';
 }
 
+/**
+ * Collects mailing list emails based on event visibility settings.
+ * @param strapi - Strapi instance
+ * @param publicEvent - Whether the event is public
+ * @param openToMemberTypes - Array of member-type objects with mailingList field (for non-public events)
+ * @returns Comma-separated string of mailing list emails
+ */
+async function collectTargetEmails(
+  strapi: Core.Strapi,
+  publicEvent: boolean,
+  openToMemberTypes: Array<{ mailingList?: string | null }> | null
+): Promise<string> {
+  let memberTypes: Array<{ mailingList?: string | null }> = [];
+
+  if (publicEvent) {
+    // Fetch ALL member types and their mailing lists
+    const result = await strapi.documents('api::member-type.member-type').findMany({
+      fields: ['mailingList'],
+    });
+    memberTypes = result;
+  } else if (openToMemberTypes && openToMemberTypes.length > 0) {
+    // Use the already-populated member types from open_to relation
+    memberTypes = openToMemberTypes;
+  }
+
+  // Collect non-empty mailing list emails
+  const emails = memberTypes
+    .map(mt => mt.mailingList)
+    .filter((email): email is string => !!email && email.trim() !== '');
+
+  return emails.join(',');
+}
+
+/**
+ * Syncs a single scheduled email slot based on event data.
+ * @param strapi - Strapi instance
+ * @param eventDocumentId - The event's documentId
+ * @param slotNumber - 1, 2, or 3
+ * @param disabled - Whether the email slot is disabled
+ * @param subject - Email subject
+ * @param body - Email body
+ * @param scheduledDatetime - When to send the email
+ * @param targetEmails - Comma-separated target emails
+ */
+async function syncScheduledEmailSlot(
+  strapi: Core.Strapi,
+  eventDocumentId: string,
+  slotNumber: 1 | 2 | 3,
+  disabled: boolean,
+  subject: string | null | undefined,
+  body: string | null | undefined,
+  scheduledDatetime: string | Date | null | undefined,
+  targetEmails: string
+): Promise<void> {
+  const emailId = `event-${eventDocumentId}-${slotNumber}`;
+
+  // Convert Date to ISO string if needed
+  const datetimeValue = scheduledDatetime instanceof Date
+    ? scheduledDatetime.toISOString()
+    : scheduledDatetime || new Date().toISOString();
+
+  // Find existing scheduled email by emailId
+  const existingEmails = await strapi.documents('api::scheduled-email.scheduled-email').findMany({
+    filters: { emailId: { $eq: emailId } },
+    fields: ['documentId', 'sent'],
+  });
+
+  const existingEmail = existingEmails.length > 0 ? existingEmails[0] : null;
+
+  if (disabled) {
+    // EMAIL IS DISABLED
+    if (existingEmail && !existingEmail.sent) {
+      // Delete unsent scheduled email
+      await strapi.documents('api::scheduled-email.scheduled-email').delete({
+        documentId: existingEmail.documentId,
+      });
+    }
+    // If sent or doesn't exist, do nothing
+  } else {
+    // EMAIL IS ENABLED
+    if (existingEmail) {
+      if (!existingEmail.sent) {
+        // Update existing unsent scheduled email
+        await strapi.documents('api::scheduled-email.scheduled-email').update({
+          documentId: existingEmail.documentId,
+          data: {
+            subject: subject || '',
+            body: body || '',
+            emails: targetEmails,
+            scheduledDatetime: datetimeValue,
+          },
+        });
+      }
+      // If sent, leave it alone
+    } else {
+      // Create new scheduled email
+      await strapi.documents('api::scheduled-email.scheduled-email').create({
+        data: {
+          targetDocumentId: eventDocumentId,
+          targetModel: 'api::event.event',
+          subject: subject || '',
+          body: body || '',
+          emails: targetEmails,
+          scheduledDatetime: datetimeValue,
+          emailId: emailId,
+          sent: false,
+        },
+      });
+    }
+  }
+}
+
 export default {
   /**
    * Document service middleware.
@@ -103,6 +215,80 @@ CSEG Website System`
           subject: subject,
           html: html.replace(/\r\n|\r|\n/g, "<br/>"),
         });
+      }
+
+      /**
+       * When an event is updated, sync scheduled emails based on email slot settings.
+       * Creates, updates, or deletes scheduled-email records for each of the 3 email slots.
+       */
+      if (context.uid === 'api::event.event' && context.action === 'update') {
+        const eventDocumentId = context.params.documentId;
+
+        // Execute the update first so we can fetch the complete persisted data
+        const result = await next();
+
+        try {
+          // Fetch the updated event with relations to get complete data
+          const updatedEvent = await strapi.documents('api::event.event').findOne({
+            documentId: eventDocumentId,
+            populate: {
+              open_to: {
+                fields: ['documentId', 'mailingList'],
+              },
+            },
+          });
+
+          if (!updatedEvent) {
+            return result;
+          }
+
+          // Collect target emails based on visibility settings
+          const openToMemberTypes = updatedEvent.open_to || [];
+          const targetEmails = await collectTargetEmails(
+            strapi,
+            updatedEvent.publicEvent,
+            openToMemberTypes
+          );
+
+          // Sync each of the 3 email slots
+          await syncScheduledEmailSlot(
+            strapi,
+            eventDocumentId,
+            1,
+            updatedEvent.disableEmail1,
+            updatedEvent.emailSubject1,
+            updatedEvent.emailBody1,
+            updatedEvent.emailDate1,
+            targetEmails
+          );
+
+          await syncScheduledEmailSlot(
+            strapi,
+            eventDocumentId,
+            2,
+            updatedEvent.disableEmail2,
+            updatedEvent.emailSubject2,
+            updatedEvent.emailBody2,
+            updatedEvent.emailDate2,
+            targetEmails
+          );
+
+          await syncScheduledEmailSlot(
+            strapi,
+            eventDocumentId,
+            3,
+            updatedEvent.disableEmail3,
+            updatedEvent.emailSubject3,
+            updatedEvent.emailBody3,
+            updatedEvent.emailDate3,
+            targetEmails
+          );
+        } catch (error) {
+          // Log but don't fail the update operation
+          strapi.log.error('Failed to sync scheduled emails for event:', error);
+        }
+
+        return result;
       }
 
       return next();
