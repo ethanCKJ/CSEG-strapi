@@ -483,11 +483,7 @@ export interface ApiContactContact extends Struct.CollectionTypeSchema {
       'api::contact.contact'
     > &
       Schema.Attribute.Private;
-    message: Schema.Attribute.Text &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 2500;
-      }>;
+    message: Schema.Attribute.Text & Schema.Attribute.Required;
     name: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
@@ -626,41 +622,16 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    abstract: Schema.Attribute.Text &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 250;
-      }>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    disableEmail1: Schema.Attribute.Boolean &
+    emailBody: Schema.Attribute.Text &
       Schema.Attribute.Required &
       Schema.Attribute.Private &
-      Schema.Attribute.DefaultTo<true>;
-    disableEmail2: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.Private &
-      Schema.Attribute.DefaultTo<true>;
-    disableEmail3: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.Private &
-      Schema.Attribute.DefaultTo<true>;
-    emailBody1: Schema.Attribute.Text & Schema.Attribute.Private;
-    emailBody2: Schema.Attribute.Text & Schema.Attribute.Private;
-    emailBody3: Schema.Attribute.Text & Schema.Attribute.Private;
+      Schema.Attribute.DefaultTo<'Untitled body'>;
     emailCount: Schema.Attribute.Integer &
       Schema.Attribute.Private &
       Schema.Attribute.DefaultTo<0>;
-    emailDate1: Schema.Attribute.DateTime &
-      Schema.Attribute.Required &
-      Schema.Attribute.Private;
-    emailDate2: Schema.Attribute.DateTime &
-      Schema.Attribute.Required &
-      Schema.Attribute.Private;
-    emailDate3: Schema.Attribute.DateTime &
-      Schema.Attribute.Required &
-      Schema.Attribute.Private;
     emailInstructions: Schema.Attribute.String &
       Schema.Attribute.CustomField<
         'plugin::documentation-viewer.doc-viewer',
@@ -669,22 +640,14 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
           isAccordion: true;
         }
       >;
-    emailSubject1: Schema.Attribute.String & Schema.Attribute.Private;
-    emailSubject2: Schema.Attribute.String & Schema.Attribute.Private;
-    emailSubject3: Schema.Attribute.String & Schema.Attribute.Private;
+    emailSubject: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Untitled subject'>;
     event_tags: Schema.Attribute.Relation<
       'manyToMany',
       'api::event-tag.event-tag'
     >;
     eventDate: Schema.Attribute.Date & Schema.Attribute.Required;
-    eventEmailDocs: Schema.Attribute.String &
-      Schema.Attribute.CustomField<
-        'plugin::documentation-viewer.doc-viewer',
-        {
-          documentId: 'pkryz2g3hq4qmhcbjig97hw1';
-          isAccordion: true;
-        }
-      >;
     eventEndTime: Schema.Attribute.Time & Schema.Attribute.Required;
     eventPage: Schema.Attribute.RichText & Schema.Attribute.Required;
     eventStartTime: Schema.Attribute.Time & Schema.Attribute.Required;
@@ -697,6 +660,7 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::event.event'> &
       Schema.Attribute.Private;
     location: Schema.Attribute.String &
+      Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 200;
       }>;
@@ -709,16 +673,19 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<false>;
     publishedAt: Schema.Attribute.DateTime;
-    showDisableToggles: Schema.Attribute.Boolean &
+    sendTime: Schema.Attribute.Time &
       Schema.Attribute.Required &
       Schema.Attribute.Private &
-      Schema.Attribute.DefaultTo<false>;
+      Schema.Attribute.DefaultTo<'09:00:00.000'>;
     speaker: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 200;
       }>;
-    teamsLink: Schema.Attribute.String;
+    summary: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 250;
+      }>;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique &
@@ -821,7 +788,10 @@ export interface ApiLeadershipLeadership extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 400;
+      }>;
     link: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -829,7 +799,11 @@ export interface ApiLeadershipLeadership extends Struct.CollectionTypeSchema {
       'api::leadership.leadership'
     > &
       Schema.Attribute.Private;
-    name: Schema.Attribute.String & Schema.Attribute.Required;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 70;
+      }>;
     picture: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
@@ -1091,83 +1065,6 @@ export interface ApiResearchProjectResearchProject
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 200;
       }>;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiScheduledEmailScheduledEmail
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'scheduled_emails';
-  info: {
-    displayName: 'ScheduledEmail';
-    pluralName: 'scheduled-emails';
-    singularName: 'scheduled-email';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    body: Schema.Attribute.Text & Schema.Attribute.Required;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    emailId: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
-    emails: Schema.Attribute.String & Schema.Attribute.Required;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::scheduled-email.scheduled-email'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    scheduledDatetime: Schema.Attribute.DateTime & Schema.Attribute.Required;
-    sent: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<false>;
-    subject: Schema.Attribute.String & Schema.Attribute.Required;
-    targetDocumentId: Schema.Attribute.String & Schema.Attribute.Required;
-    targetModel: Schema.Attribute.String & Schema.Attribute.Required;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiTextEmailTemplateTextEmailTemplate
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'text_email_templates';
-  info: {
-    displayName: 'Text based Email template';
-    pluralName: 'text-email-templates';
-    singularName: 'text-email-template';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    docEmailTemplate: Schema.Attribute.String &
-      Schema.Attribute.CustomField<
-        'plugin::documentation-viewer.doc-viewer',
-        {
-          documentId: 'q5pua18p5vvlyr84oasrlvav';
-        }
-      >;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::text-email-template.text-email-template'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    template: Schema.Attribute.Text & Schema.Attribute.Required;
-    templateName: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1713,8 +1610,6 @@ declare module '@strapi/strapi' {
       'api::member.member': ApiMemberMember;
       'api::publication.publication': ApiPublicationPublication;
       'api::research-project.research-project': ApiResearchProjectResearchProject;
-      'api::scheduled-email.scheduled-email': ApiScheduledEmailScheduledEmail;
-      'api::text-email-template.text-email-template': ApiTextEmailTemplateTextEmailTemplate;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
