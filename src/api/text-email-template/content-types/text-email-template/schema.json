@@ -13,7 +13,6 @@
   "attributes": {
     "templateName": {
       "type": "string",
-      "private": true,
       "required": true
     },
     "template": {

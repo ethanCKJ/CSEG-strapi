@@ -74,7 +74,6 @@ const Input: React.FC<CustomFieldInputProps> = ({
     const fetchDocument = async () => {
       try {
         const res = await get(`/content-manager/collection-types/api::documentation.documentation/${documentId}`);
-        console.log('res',res)
         let data = null
         if ('data' in res){
           data = res.data.data;
