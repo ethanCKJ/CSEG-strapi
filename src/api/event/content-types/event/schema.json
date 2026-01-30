@@ -32,16 +32,12 @@
     "location": {
       "type": "string",
       "maxLength": 200,
-      "required": true
+      "required": false
     },
     "speaker": {
       "type": "string",
       "maxLength": 200,
       "required": true
-    },
-    "summary": {
-      "type": "text",
-      "maxLength": 250
     },
     "event_tags": {
       "type": "relation",
@@ -306,6 +302,14 @@
         "documentId": "pkryz2g3hq4qmhcbjig97hw1",
         "isAccordion": true
       }
+    },
+    "teamsLink": {
+      "type": "string"
+    },
+    "abstract": {
+      "type": "text",
+      "maxLength": 250,
+      "required": true
     }
   }
 }
