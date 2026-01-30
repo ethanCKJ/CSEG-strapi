@@ -1097,6 +1097,46 @@ export interface ApiResearchProjectResearchProject
   };
 }
 
+export interface ApiScheduledEmailScheduledEmail
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'scheduled_emails';
+  info: {
+    displayName: 'ScheduledEmail';
+    pluralName: 'scheduled-emails';
+    singularName: 'scheduled-email';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    body: Schema.Attribute.Text & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    emailId: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    emails: Schema.Attribute.String & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::scheduled-email.scheduled-email'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    scheduledDatetime: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    sent: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    subject: Schema.Attribute.String & Schema.Attribute.Required;
+    targetDocumentId: Schema.Attribute.String & Schema.Attribute.Required;
+    targetModel: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiTextEmailTemplateTextEmailTemplate
   extends Struct.CollectionTypeSchema {
   collectionName: 'text_email_templates';
@@ -1673,6 +1713,7 @@ declare module '@strapi/strapi' {
       'api::member.member': ApiMemberMember;
       'api::publication.publication': ApiPublicationPublication;
       'api::research-project.research-project': ApiResearchProjectResearchProject;
+      'api::scheduled-email.scheduled-email': ApiScheduledEmailScheduledEmail;
       'api::text-email-template.text-email-template': ApiTextEmailTemplateTextEmailTemplate;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
