@@ -637,15 +637,15 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     disableEmail1: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
       Schema.Attribute.Private &
-      Schema.Attribute.DefaultTo<false>;
+      Schema.Attribute.DefaultTo<true>;
     disableEmail2: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
       Schema.Attribute.Private &
-      Schema.Attribute.DefaultTo<false>;
+      Schema.Attribute.DefaultTo<true>;
     disableEmail3: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
       Schema.Attribute.Private &
-      Schema.Attribute.DefaultTo<false>;
+      Schema.Attribute.DefaultTo<true>;
     emailBody1: Schema.Attribute.Text & Schema.Attribute.Private;
     emailBody2: Schema.Attribute.Text & Schema.Attribute.Private;
     emailBody3: Schema.Attribute.Text & Schema.Attribute.Private;
@@ -709,7 +709,7 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<false>;
     publishedAt: Schema.Attribute.DateTime;
-    showEmailFields: Schema.Attribute.Boolean &
+    showDisableToggles: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
       Schema.Attribute.Private &
       Schema.Attribute.DefaultTo<false>;

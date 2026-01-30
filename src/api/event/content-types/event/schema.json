@@ -73,9 +73,9 @@
         "visible": {
           "==": [
             {
-              "var": "showEmailFields"
+              "var": "disableEmail1"
             },
-            true
+            false
           ]
         }
       },
@@ -88,9 +88,9 @@
         "visible": {
           "==": [
             {
-              "var": "showEmailFields"
+              "var": "disableEmail1"
             },
-            true
+            false
           ]
         }
       },
@@ -147,9 +147,9 @@
         "visible": {
           "==": [
             {
-              "var": "showEmailFields"
+              "var": "disableEmail2"
             },
-            true
+            false
           ]
         }
       }
@@ -161,9 +161,9 @@
         "visible": {
           "==": [
             {
-              "var": "showEmailFields"
+              "var": "disableEmail2"
             },
-            true
+            false
           ]
         }
       }
@@ -175,9 +175,9 @@
         "visible": {
           "==": [
             {
-              "var": "showEmailFields"
+              "var": "disableEmail3"
             },
-            true
+            false
           ]
         }
       }
@@ -189,18 +189,12 @@
         "visible": {
           "==": [
             {
-              "var": "showEmailFields"
+              "var": "disableEmail3"
             },
-            true
+            false
           ]
         }
       }
-    },
-    "showEmailFields": {
-      "type": "boolean",
-      "private": true,
-      "required": true,
-      "default": false
     },
     "emailDate1": {
       "type": "datetime",
@@ -209,9 +203,9 @@
         "visible": {
           "==": [
             {
-              "var": "showEmailFields"
+              "var": "disableEmail1"
             },
-            true
+            false
           ]
         }
       },
@@ -224,9 +218,9 @@
         "visible": {
           "==": [
             {
-              "var": "showEmailFields"
+              "var": "disableEmail2"
             },
-            true
+            false
           ]
         }
       },
@@ -239,9 +233,9 @@
         "visible": {
           "==": [
             {
-              "var": "showEmailFields"
+              "var": "disableEmail3"
             },
-            true
+            false
           ]
         }
       },
@@ -254,14 +248,14 @@
         "visible": {
           "==": [
             {
-              "var": "showEmailFields"
+              "var": "showDisableToggles"
             },
             true
           ]
         }
       },
       "required": true,
-      "default": false
+      "default": true
     },
     "disableEmail2": {
       "type": "boolean",
@@ -270,14 +264,14 @@
         "visible": {
           "==": [
             {
-              "var": "showEmailFields"
+              "var": "showDisableToggles"
             },
             true
           ]
         }
       },
       "required": true,
-      "default": false
+      "default": true
     },
     "disableEmail3": {
       "type": "boolean",
@@ -286,14 +280,14 @@
         "visible": {
           "==": [
             {
-              "var": "showEmailFields"
+              "var": "showDisableToggles"
             },
             true
           ]
         }
       },
       "required": true,
-      "default": false
+      "default": true
     },
     "eventEmailDocs": {
       "type": "customField",
@@ -310,6 +304,12 @@
       "type": "text",
       "maxLength": 250,
       "required": true
+    },
+    "showDisableToggles": {
+      "type": "boolean",
+      "private": true,
+      "required": true,
+      "default": false
     }
   }
 }

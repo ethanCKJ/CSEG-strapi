@@ -216,12 +216,15 @@ const EventActionPanel = ({
   const handleEmailTemplates = async () => {
     // Load email templates
     setLoadingTemplates(true);
+    onChange('showDisableToggles', true);
+    for (let i = 0; i < emailTemplateName.length; i++) {
+      onChange(`disableEmail${i+1}`, false);
+    }
     let templateName = '';
     try {
       const parsedEventDate = new Date(formValues.eventDate);
       for (let i = 0; i < emailTemplateName.length; i++) {
         // Fill in default time to send emails as X days before eventDate at 9 am.
-        console.log(formValues.emailDate1, typeof formValues.emailDate1);
         if (!isNaN(parsedEventDate.getTime())) {
           const parsedEventDateCopy = new Date(parsedEventDate);
           parsedEventDateCopy.setDate(parsedEventDate.getDate()  - daysBefore[i]);
@@ -293,7 +296,7 @@ const EventActionPanel = ({
         }
 
         // Fill in subject
-        onChange(`emailSubject${i+1}`, `${eventTypeFormatted} ${eventDateRaw && (' - ' + formatSubjectDate(eventDateRaw))} - ${title}`);
+        onChange(`emailSubject${i+1}`, `${eventTypeFormatted} - ${eventDateRaw ? formatSubjectDate(eventDateRaw) : '[Please insert event date here]'} - ${title}`);
 
         // Fill in body using template
         templateName = emailTemplateName[i];
@@ -313,7 +316,6 @@ const EventActionPanel = ({
             speaker
           })
           onChange(`emailBody${i+1}`, result);
-          console.log(result);
         } else {
           throw new Error('Template not found');
         }
@@ -325,27 +327,12 @@ const EventActionPanel = ({
     } finally {
       setLoadingTemplates(false);
     }
-
-
-
-    onChange('showEmailFields', true);
-    // onChange('emailSubject3', formValues.title ?? 'Untitled subject');
-    // onChange('emailBody3', `
-    // Hello everyone,
-    //
-    // You are invited to ${abstract}
-    //
-    // Date: ${eventDate}
-    // Time: ${eventStartTime.substring(0, 5)} - ${eventEndTime.substring(0, 5)}
-    //
-    // Regards,
-    // CSEG Website System
-    // `)
   }
+
 
   return (
     <>
-      <Button onClick={handleEmailTemplates} loading={loadingTemplates}>Generate Emails</Button>
+      {<Button onClick={handleEmailTemplates} loading={loadingTemplates}>Generate Email Templates</Button>}
       <StandardActionPanel
         model={model}
         documentId={documentId}
