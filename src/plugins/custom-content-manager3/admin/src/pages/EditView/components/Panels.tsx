@@ -165,6 +165,27 @@ const formatDate = (date: Date) => {
 
   return `${dayName} ${dayNumber}${suffix} ${monthName}`;
 };
+/**
+ * Monday 26th Jan, 12 pm
+ * @param date
+ */
+const formatSubjectDate = (date: Date) => {
+  const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+  const dayName = days[date.getDay()];
+  const day = date.getDate();
+  const month = months[date.getMonth()];
+
+  const hours24 = date.getHours();
+  const hours12 = hours24 % 12 || 12;
+  const ampm = hours24 >= 12 ? "pm" : "am";
+
+  const suffix = getOrdinal(day);
+
+  return `${dayName} ${day}${suffix} ${month}, ${hours12}${ampm}`;
+
+}
 
 /**
  * Actions for event data type
@@ -188,6 +209,8 @@ const EventActionPanel = ({
   // qoq891lngymb8o99jbtwat1e is on days of event before
 
   const emailTemplateName = ['q4enok6b2tgm3td9l7voh4hk', 'y4fjycg0agtpz4leq2qr74y6', 'qoq891lngymb8o99jbtwat1e']
+  const daysBefore = [7, 3, 0];
+  const DEFAULT_TIME = ['09:00:00']
   const [loadingTemplates, setLoadingTemplates] = React.useState<boolean>(false);
 
   const handleEmailTemplates = async () => {
@@ -195,72 +218,88 @@ const EventActionPanel = ({
     setLoadingTemplates(true);
     let templateName = '';
     try {
+      const parsedEventDate = new Date(formValues.eventDate);
       for (let i = 0; i < emailTemplateName.length; i++) {
+        // Fill in default time to send emails as X days before eventDate at 9 am.
+        console.log(formValues.emailDate1, typeof formValues.emailDate1);
+        if (!isNaN(parsedEventDate.getTime())) {
+          const parsedEventDateCopy = new Date(parsedEventDate);
+          parsedEventDateCopy.setDate(parsedEventDate.getDate()  - daysBefore[i]);
+          parsedEventDateCopy.setHours(9,0,0,0);
+          onChange(`emailDate${i+1}`, parsedEventDateCopy.toISOString());
+        }
+
+        // Extract and validate form values
+        let title = '[Please insert title here]';
+        if (typeof formValues.title === 'string' && formValues.title.trim() !== '') {
+          title = formValues.title.trim();
+        }
+
+        let abstract = '[Please insert abstract here]';
+        if (typeof formValues.abstract === 'string' && formValues.abstract.trim() !== '') {
+          abstract = formValues.abstract.trim();
+        }
+
+        let eventDateRaw = null;
+        let eventDate = '[Please insert date here]';
+        if (typeof formValues.eventDate === 'string' && formValues.eventDate.trim() !== '') {
+          const parsedDate = new Date(formValues.eventDate.trim());
+          if (!isNaN(parsedDate.getTime())) {
+            eventDate = formatDate(parsedDate);
+            eventDateRaw = parsedDate;
+          }
+        }
+
+        let eventStartTime = '[Please insert start time here]';
+        if (typeof formValues.eventStartTime === 'string' && formValues.eventStartTime.trim() !== '') {
+          eventStartTime = formValues.eventStartTime.trim().substring(0,5);
+        }
+
+        let eventEndTime = '[Please insert end time here]';
+        if (typeof formValues.eventEndTime === 'string' && formValues.eventEndTime.trim() !== '') {
+          eventEndTime = formValues.eventEndTime.trim().substring(0,5);
+        }
+
+        let speaker = '[Please insert speaker here]';
+        if (typeof formValues.speaker === 'string' && formValues.speaker.trim() !== '') {
+          speaker = formValues.speaker.trim();
+        }
+
+        let eventTypeFormatted = 'event';
+        if (typeof formValues.eventType === 'string' && formValues.eventType.trim() !== '') {
+          const trimmedType = formValues.eventType.trim();
+          if (!trimmedType.toLowerCase().includes('other')) {
+            eventTypeFormatted = trimmedType;
+          }
+        }
+
+        let physicalLocation = '';
+        if (typeof formValues.location === 'string' && formValues.location.trim() !== '') {
+          physicalLocation = formValues.location.trim();
+        }
+
+        let teamsLink = '';
+        if (typeof formValues.teamsLink === 'string' && formValues.teamsLink.trim() !== '') {
+          teamsLink = formValues.teamsLink.trim();
+        }
+
+        let locationFormatted = '[Please enter location and microsoft teams link here]';
+        if (physicalLocation && teamsLink) {
+          locationFormatted = `hybrid - both in person in ${physicalLocation}, and online on MS Teams at ${teamsLink}`;
+        } else if (physicalLocation) {
+          locationFormatted = `in person in ${physicalLocation}`;
+        } else if (teamsLink) {
+          locationFormatted = `online on MS Teams at ${teamsLink}`;
+        }
+
+        // Fill in subject
+        onChange(`emailSubject${i+1}`, `${eventTypeFormatted} ${eventDateRaw && (' - ' + formatSubjectDate(eventDateRaw))} - ${title}`);
+
+        // Fill in body using template
         templateName = emailTemplateName[i];
         const res = await get(`/content-manager/collection-types/api::text-email-template.text-email-template/${templateName}`);
         if (res.data.data && res.data.data.template){
           const textTemplate = res.data.data.template;
-
-          // Extract and validate form values
-          let title = '[Please insert title here]';
-          if (typeof formValues.title === 'string' && formValues.title.trim() !== '') {
-            title = formValues.title.trim();
-          }
-
-          let abstract = '[Please insert abstract here]';
-          if (typeof formValues.abstract === 'string' && formValues.abstract.trim() !== '') {
-            abstract = formValues.abstract.trim();
-          }
-
-          let eventDate = '[Please insert date here]';
-          if (typeof formValues.eventDate === 'string' && formValues.eventDate.trim() !== '') {
-            const parsedDate = new Date(formValues.eventDate.trim());
-            if (!isNaN(parsedDate.getTime())) {
-              eventDate = formatDate(parsedDate);
-            }
-          }
-
-          let eventStartTime = '[Please insert start time here]';
-          if (typeof formValues.eventStartTime === 'string' && formValues.eventStartTime.trim() !== '') {
-            eventStartTime = formValues.eventStartTime.trim().substring(0,5);
-          }
-
-          let eventEndTime = '[Please insert end time here]';
-          if (typeof formValues.eventEndTime === 'string' && formValues.eventEndTime.trim() !== '') {
-            eventEndTime = formValues.eventEndTime.trim().substring(0,5);
-          }
-
-          let speaker = '[Please insert speaker here]';
-          if (typeof formValues.speaker === 'string' && formValues.speaker.trim() !== '') {
-            speaker = formValues.speaker.trim();
-          }
-
-          let eventTypeFormatted = 'event';
-          if (typeof formValues.eventType === 'string' && formValues.eventType.trim() !== '') {
-            const trimmedType = formValues.eventType.trim();
-            if (!trimmedType.toLowerCase().includes('other')) {
-              eventTypeFormatted = trimmedType;
-            }
-          }
-
-          let physicalLocation = '';
-          if (typeof formValues.location === 'string' && formValues.location.trim() !== '') {
-            physicalLocation = formValues.location.trim();
-          }
-
-          let teamsLink = '';
-          if (typeof formValues.teamsLink === 'string' && formValues.teamsLink.trim() !== '') {
-            teamsLink = formValues.teamsLink.trim();
-          }
-
-          let locationFormatted = '[Please enter location and microsoft teams link here]';
-          if (physicalLocation && teamsLink) {
-            locationFormatted = `hybrid - both in person in ${physicalLocation}, and online on MS Teams at ${teamsLink}`;
-          } else if (physicalLocation) {
-            locationFormatted = `in person in ${physicalLocation}`;
-          } else if (teamsLink) {
-            locationFormatted = `online on MS Teams at ${teamsLink}`;
-          }
 
           // Format the location
           const result = renderLodashStyleTemplate(textTemplate, {
@@ -273,6 +312,7 @@ const EventActionPanel = ({
             title,
             speaker
           })
+          onChange(`emailBody${i+1}`, result);
           console.log(result);
         } else {
           throw new Error('Template not found');
