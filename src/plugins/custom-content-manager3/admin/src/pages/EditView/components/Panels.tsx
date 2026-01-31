@@ -157,7 +157,7 @@ const ScheduledEmails = ({model, documentId}: {model: string, documentId: string
   } else if (Array.isArray(data?.results) && data.results.length === 0) {
     return (
       <Flex direction="column" gap={2} alignItems="start">
-        <Typography>No scheduled emails found.</Typography>
+        <Typography>No scheduled emails found. Make sure you selected mailing lists or types of members allowed to attend</Typography>
         <Button onClick={handleRefresh} loading={isFetching} size="S" variant="secondary">
           Refresh
         </Button>
@@ -301,7 +301,7 @@ const EventActionPanel = ({
               Show scheduled and sent emails (updated after saving document and refreshing)
             </Accordion.Trigger>
           </Accordion.Header>
-          <Accordion.Content>
+          <Accordion.Content padding={2}>
             <ScheduledEmails model={model} documentId={documentId} />
           </Accordion.Content>
         </Accordion.Item>

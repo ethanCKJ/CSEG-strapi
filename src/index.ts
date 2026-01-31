@@ -27,26 +27,25 @@ const escapeHTML = (str: string | null| undefined) => {
  * @param openToMemberTypes - Array of member-type objects with mailingList field (for non-public events)
  * @returns Comma-separated string of mailing list emails
  */
-async function collectTargetEmails(
+function collectTargetEmails(
   strapi: Core.Strapi,
   publicEvent: boolean,
-  openToMemberTypes: Array<{ mailingList?: string | null }> | null
-): Promise<string> {
-  let memberTypes: Array<{ mailingList?: string | null }> = [];
+  openToMemberTypes: Array<{ mailingList?: string | null }> | null,
+  publicEventMailingLists: Array<{ mailingList?: string | null }> | null,
+): string {
+  let mailingLists: Array<{ mailingList?: string | null }> = [];
 
   if (publicEvent) {
     // Fetch ALL member types and their mailing lists
-    const result = await strapi.documents('api::member-type.member-type').findMany({
-      fields: ['mailingList'],
-    });
-    memberTypes = result;
+    const result = publicEventMailingLists;
+    mailingLists = result;
   } else if (openToMemberTypes && openToMemberTypes.length > 0) {
     // Use the already-populated member types from open_to relation
-    memberTypes = openToMemberTypes;
+    mailingLists = openToMemberTypes;
   }
 
   // Collect non-empty mailing list emails
-  const emails = memberTypes
+  const emails = mailingLists
     .map(mt => mt.mailingList)
     .filter((email): email is string => !!email && email.trim() !== '');
 
@@ -88,7 +87,6 @@ async function syncScheduledEmailSlot(
   });
 
   const existingEmail = existingEmails.length > 0 ? existingEmails[0] : null;
-  console.log('target',targetEmails, targetEmails.trim() === '');
   if (disabled || targetEmails.trim() === '') {
     // EMAIL IS DISABLED or all mailing lists were removed
     if (existingEmail && !existingEmail.sent) {
@@ -238,6 +236,9 @@ async function handleEvent(context, next, strapi: Core.Strapi) {
         open_to: {
           fields: ['documentId', 'mailingList'],
         },
+        public_event_mailing_lists: {
+          fields: ['documentId', 'mailingList'],
+        }
       },
     });
 
@@ -247,10 +248,12 @@ async function handleEvent(context, next, strapi: Core.Strapi) {
 
     // Collect target emails based on visibility settings
     const openToMemberTypes = updatedEvent.open_to || [];
+    const publicEventMailingLists = updatedEvent.public_event_mailing_lists || [];
     const targetEmails = await collectTargetEmails(
         strapi,
         updatedEvent.publicEvent,
-        openToMemberTypes
+        openToMemberTypes,
+        publicEventMailingLists,
     );
 
     // Sync each of the 3 email slots
@@ -310,7 +313,7 @@ export default {
         await handleContact(context, strapi);
       }
 
-      if (context.uid === 'api::event.event' && (context.action === 'update' || context.action ===  'publish')) {
+      if (context.uid === 'api::event.event' && (context.action === 'update' || context.action ===  'publish' || context.action === 'create')) {
         return await handleEvent(context, next, strapi);
       }
 
