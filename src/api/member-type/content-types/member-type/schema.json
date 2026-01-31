@@ -26,6 +26,12 @@
     "mailingList": {
       "type": "email",
       "required": false
+    },
+    "displayNameAndEmail": {
+      "type": "string",
+      "private": true,
+      "required": true,
+      "unique": true
     }
   }
 }

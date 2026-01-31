@@ -166,8 +166,8 @@ const ListViewPage = () => {
     sort: list.settings.defaultSortBy
       ? `${list.settings.defaultSortBy}:${list.settings.defaultSortOrder}`
       : '',
-
   });
+
 
   const params = React.useMemo(() => buildValidParams(query), [query]);
 

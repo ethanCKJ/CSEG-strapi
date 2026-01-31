@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import {useFetchClient, useForm, useQueryParams,} from '@strapi/strapi/admin';
 import {Button, Flex, MenuItem, Radio, SimpleMenu, Typography} from '@strapi/design-system';
-import template from 'lodash/template'
 import {InjectionZone} from '../../../components/InjectionZone';
 import {Document, useDoc} from '../../../hooks/useDocument';
 
@@ -18,8 +17,17 @@ import {EVENT_MODEL, MEMBER_APPLICATION_MODEL} from "../../../constants/specialM
 import {useSearchRelationsQuery} from "../../../services/relations";
 import {RelationResult} from "../../../../../shared/contracts/relations";
 import {RejectButton} from "../../../action-buttons/RejectButton";
-import {SendEmailButton} from "../../../action-buttons/SendEmailButton";
 import qs from "qs";
+import {
+  extractFormString,
+  extractlocationFormatted,
+  extractValidDate,
+  formatDate,
+  formatSubjectDate,
+  renderLodashStyleTemplate
+} from "../utils/panelUtil";
+import {useGetAllDocumentsQuery} from "../../../services/documents";
+import { Accordion } from "@strapi/design-system";
 
 interface PanelDescription {
   title: string;
@@ -31,43 +39,6 @@ interface PanelDescription {
  * Default Action Panels (CE)
  * -----------------------------------------------------------------------------------------------*/
 
-const ActionsPanel: PanelComponent = () => {
-  console.log("In ActionsPanel");
-  return {
-    title: 'Entry',
-    content: <ActionsPanelContent/>,
-  };
-};
-
-ActionsPanel.type = 'actions';
-
-const ActionsPanelContent = () => {
-
-  const [
-    {
-      query: {status = 'draft'},
-    },
-  ] = useQueryParams<{ status: 'draft' | 'published' }>();
-  const {model, id, document, meta, collectionType} = useDoc();
-
-  const props = {
-    activeTab: status,
-    model,
-    documentId: id,
-    document: document,
-    meta: meta,
-    collectionType,
-  } satisfies DocumentActionProps;
-
-  return (
-    <Flex direction="column" gap={2} width="100%" alignItems="stretch">
-      <PublishButton {...props}/>
-      <div>HASDFASDFAfd</div>
-      <InjectionZone area="editView.right-links" slug={model}/>
-    </Flex>
-  );
-};
-
 /* -------------------------------------------------------------------------------------------------
  * Panel
  * -----------------------------------------------------------------------------------------------*/
@@ -75,8 +46,7 @@ const ActionsPanelContent = () => {
 interface PanelProps extends Pick<PanelDescription, 'title'> {
   children: React.ReactNode;
 }
-
-const Panel = React.forwardRef<any, PanelProps>(({children, title}, ref) => {
+React.forwardRef<any, PanelProps>(({children, title}, ref) => {
   return (
     <Flex
       ref={ref}
@@ -102,26 +72,9 @@ const Panel = React.forwardRef<any, PanelProps>(({children, title}, ref) => {
     </Flex>
   );
 });
-
 /* -------------------------------------------------------------------------------------------------
  * Panels
  * -----------------------------------------------------------------------------------------------*/
-/**
- * Side panel of the EditViewPage
- * @constructor
- */
-const Panels = () => {
-  const description = {
-    title: "Entry"
-  }
-  return (
-    <Flex direction="column" alignItems="stretch" gap={2}>
-      <Panel {...description}>
-        <ActionsPanelContent/>
-      </Panel>
-    </Flex>
-  );
-};
 
 interface StandardActionPanelProps {
   model: string;
@@ -132,59 +85,110 @@ interface StandardActionPanelProps {
   collectionType: string;
 }
 
+/**
+ * Custom hook for fetching and rendering email templates
+ */
+const useEmailTemplates = () => {
+  const { get } = useFetchClient();
 
-function renderLodashStyleTemplate(template: string, values: object) {
-  return template.replace(
-    /<%=\s*([\w.]+)\s*%>/g,
-    (_, keyPath) => {
-      return keyPath
-      .split('.')
-      .reduce((acc, key) => acc?.[key], values) ?? '';
+  const fetchTemplate = async (
+    templateName: string,
+    variables: Record<string, string>
+  ): Promise<string> => {
+    // TODO: Consider replacing with useGetAllDocuments
+    const query = qs.stringify({
+      filters: {
+        templateName: {
+          $eq: templateName
+        }
+      }
+    });
+
+    const res = await get(`/content-manager/collection-types/api::text-email-template.text-email-template?${query}`);
+
+    if (Array.isArray(res.data?.results) && res.data.results.length > 0 && res.data.results[0].template) {
+      const textTemplate = res.data.results[0].template;
+      return renderLodashStyleTemplate(textTemplate, variables);
     }
-  );
+
+    throw new Error(`Template '${templateName}' not found`);
+  };
+
+  return { fetchTemplate };
+};
+
+/**
+ * Wrapper around useGetAllDocumentsQuery to fetch scheduled emails
+ * @param model - model sending the emails e.g. api::event.event
+ * @param documentId
+ * @param sequence
+ */
+const useScheduledEmails = (model: string, documentId: string, sequence: number[]) => {
+  const modelName = model.substring(5, model.indexOf('.'));
+  return useGetAllDocumentsQuery({
+    model: 'api::scheduled-email.scheduled-email',
+    params: {
+      page: '1',
+      pageSize: '100',
+      filters: {
+        emailId: {
+          $in: sequence.map((num) => `${modelName}-${documentId}-${num}`),
+        }
+      },
+      sort: 'scheduledDatetime:asc',
+    }
+  });
 }
 
-const getOrdinal = (d: number) => {
-  if (d > 3 && d < 21) return 'th';
-  switch (d % 10) {
-    case 1:  return "st";
-    case 2:  return "nd";
-    case 3:  return "rd";
-    default: return "th";
+const ScheduledEmails = ({model, documentId}: {model: string, documentId: string | undefined}) => {
+  if (!documentId) {
+    return <Typography>No scheduled emails as document is not saved</Typography>
   }
-};
-/**
- * Monday 26th January
- * @param date
- */
-const formatDate = (date: Date) => {
-  const dayName = date.toLocaleDateString('en-US', { weekday: 'long' }); // Monday
-  const monthName = date.toLocaleDateString('en-US', { month: 'long' }); // January
-  const dayNumber = date.getDate(); // 26
-  const suffix = getOrdinal(dayNumber); // th
+  const {data, error, isLoading, refetch, isFetching} = useScheduledEmails(model, documentId, [1,2,3]);
 
-  return `${dayName} ${dayNumber}${suffix} ${monthName}`;
-};
-/**
- * Monday 26th Jan, 12 pm
- * @param date
- */
-const formatSubjectDate = (date: Date) => {
-  const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const handleRefresh = () => {
+    refetch();
+  };
 
-  const dayName = days[date.getDay()];
-  const day = date.getDate();
-  const month = months[date.getMonth()];
+  if (isLoading) {
+    return <Typography>Loading scheduled emails...</Typography>
+  } else if (error) {
+    return <Typography variant={"danger"}>Error loading scheduled emails.</Typography>
+  } else if (Array.isArray(data?.results) && data.results.length === 0) {
+    return (
+      <Flex direction="column" gap={2} alignItems="start">
+        <Typography>No scheduled emails found.</Typography>
+        <Button onClick={handleRefresh} loading={isFetching} size="S" variant="secondary">
+          Refresh
+        </Button>
+      </Flex>
+    );
+  }
 
-  const hours24 = date.getHours();
-  const hours12 = hours24 % 12 || 12;
-  const ampm = hours24 >= 12 ? "pm" : "am";
-
-  const suffix = getOrdinal(day);
-
-  return `${dayName} ${day}${suffix} ${month}, ${hours12}${ampm}`;
-
+  return (
+    <Flex direction="column" gap={2} padding={2} alignItems="start" background="neutral100" width="100%">
+      <Typography>Note you cannot disable an email that has already been sent. Disable emails using the toggles in the main form above</Typography>
+      <Button onClick={handleRefresh} loading={isFetching} size="S">
+        Refresh
+      </Button>
+      {data && data.results.map((email) => (
+        <Flex key={email.id} direction="column" padding={2} borderColor="neutral150" borderWidth="1px" hasRadius  width={"100%"} alignItems="start">
+          <Typography><strong>Subject:</strong> {email.subject}</Typography>
+          <Typography><strong>Body:</strong> {email.body}</Typography>
+          <Typography><strong>Scheduled Date:</strong> {new Date(email.scheduledDatetime).toLocaleDateString('en-GB', {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false,
+          })}</Typography>
+          <Typography><strong>Scheduled emails:</strong> {email.emails.replace(',', ', ')}</Typography>
+          <Typography><strong>Sent:</strong> {email.sent ? 'Yes' : 'No'}</Typography>
+        </Flex>
+      ))}
+    </Flex>
+  )
 }
 
 /**
@@ -198,137 +202,86 @@ const EventActionPanel = ({
                             meta,
                             collectionType,
                           }: StandardActionPanelProps) => {
-  const deleteAction = useDeleteAction(documentId, model, collectionType);
-  const unpublishAction = useUnpublishAction(status, collectionType, model, document, documentId);
-  const discardAction = useDiscardAction(status, collectionType, model, document, documentId);
   const onChange = useForm("EventActionPanel", ({onChange}) => onChange);
   const formValues = useForm("EventActionPanel", ({values}) => values);
-  const {get} = useFetchClient();
-
-  // q4enok6b2tgm3td9l7voh4hk is event 7 days before
-  // qoq891lngymb8o99jbtwat1e is on days of event before
-
-  const emailTemplateName = ['q4enok6b2tgm3td9l7voh4hk', 'y4fjycg0agtpz4leq2qr74y6', 'qoq891lngymb8o99jbtwat1e']
+  const { fetchTemplate } = useEmailTemplates();
+  const emailTemplateName = ['event-announcement-email', 'event-first-reminder-email', 'event-final-reminder-email']
   const daysBefore = [7, 3, 0];
-  const DEFAULT_TIME = ['09:00:00']
   const [loadingTemplates, setLoadingTemplates] = React.useState<boolean>(false);
 
   const handleEmailTemplates = async () => {
     // Load email templates
     setLoadingTemplates(true);
     onChange('showDisableToggles', true);
+
+    // Populate subject and dates
+    const title = extractFormString(formValues.title, '[Please insert title here]');
+    const abstract = extractFormString(formValues.abstract, '[Please insert abstract here]');
+
+    const eventDateObj = extractValidDate(formValues.eventDate);
+    const eventDateFormatted = eventDateObj ? formatDate(eventDateObj) : '[Please insert date here]';
+
+    const eventStartTimeRaw = extractFormString(formValues.eventStartTime, '[Please insert start time here]');
+    const eventStartTime = eventStartTimeRaw === '[Please insert start time here]'
+      ? eventStartTimeRaw
+      : eventStartTimeRaw.substring(0, 5);
+
+    const eventEndTimeRaw = extractFormString(formValues.eventEndTime, '[Please insert end time here]');
+    const eventEndTime = eventEndTimeRaw === '[Please insert end time here]'
+      ? eventEndTimeRaw
+      : eventEndTimeRaw.substring(0, 5);
+
+    const speaker = extractFormString(formValues.speaker, '[Please insert speaker here]');
+
+    let eventTypeFormatted = 'event';
+    const eventTypeStr = extractFormString(formValues.eventType, '');
+    if (eventTypeStr && !eventTypeStr.toLowerCase().includes('other')) {
+      eventTypeFormatted = eventTypeStr;
+    }
+
+    const physicalLocation = extractFormString(formValues.location, '');
+    const teamsLink = extractFormString(formValues.teamsLink, '');
+    const eventFormat = extractFormString(formValues.eventFormat, '');
+    let locationFormatted = extractlocationFormatted(eventFormat, physicalLocation, teamsLink);
+
+    // Prepare template variables
+    const templateVariables = {
+      abstract,
+      eventDate: eventDateFormatted,
+      eventStartTime,
+      eventEndTime,
+      locationFormatted,
+      eventTypeFormatted,
+      title,
+      speaker
+    };
+
     for (let i = 0; i < emailTemplateName.length; i++) {
       onChange(`disableEmail${i+1}`, false);
+      // Fill in default time to send emails as X days before eventDate at 9 am.
+      if (eventDateObj) {
+        const emailDate = new Date(eventDateObj);
+        emailDate.setDate(eventDateObj.getDate() - daysBefore[i]);
+        emailDate.setHours(9, 0, 0, 0);
+        onChange(`emailDate${i+1}`, emailDate.toISOString());
+      }
+      // Fill in subject
+      onChange(`emailSubject${i+1}`, `${eventTypeFormatted} - ${eventDateObj ? formatSubjectDate(eventDateObj) : '[Please insert event date here]'} - ${title}`);
     }
-    let templateName = '';
+
     try {
-      const parsedEventDate = new Date(formValues.eventDate);
       for (let i = 0; i < emailTemplateName.length; i++) {
-        // Fill in default time to send emails as X days before eventDate at 9 am.
-        if (!isNaN(parsedEventDate.getTime())) {
-          const parsedEventDateCopy = new Date(parsedEventDate);
-          parsedEventDateCopy.setDate(parsedEventDate.getDate()  - daysBefore[i]);
-          parsedEventDateCopy.setHours(9,0,0,0);
-          onChange(`emailDate${i+1}`, parsedEventDateCopy.toISOString());
-        }
-
-        // Extract and validate form values
-        let title = '[Please insert title here]';
-        if (typeof formValues.title === 'string' && formValues.title.trim() !== '') {
-          title = formValues.title.trim();
-        }
-
-        let abstract = '[Please insert abstract here]';
-        if (typeof formValues.abstract === 'string' && formValues.abstract.trim() !== '') {
-          abstract = formValues.abstract.trim();
-        }
-
-        let eventDateRaw = null;
-        let eventDate = '[Please insert date here]';
-        if (typeof formValues.eventDate === 'string' && formValues.eventDate.trim() !== '') {
-          const parsedDate = new Date(formValues.eventDate.trim());
-          if (!isNaN(parsedDate.getTime())) {
-            eventDate = formatDate(parsedDate);
-            eventDateRaw = parsedDate;
-          }
-        }
-
-        let eventStartTime = '[Please insert start time here]';
-        if (typeof formValues.eventStartTime === 'string' && formValues.eventStartTime.trim() !== '') {
-          eventStartTime = formValues.eventStartTime.trim().substring(0,5);
-        }
-
-        let eventEndTime = '[Please insert end time here]';
-        if (typeof formValues.eventEndTime === 'string' && formValues.eventEndTime.trim() !== '') {
-          eventEndTime = formValues.eventEndTime.trim().substring(0,5);
-        }
-
-        let speaker = '[Please insert speaker here]';
-        if (typeof formValues.speaker === 'string' && formValues.speaker.trim() !== '') {
-          speaker = formValues.speaker.trim();
-        }
-
-        let eventTypeFormatted = 'event';
-        if (typeof formValues.eventType === 'string' && formValues.eventType.trim() !== '') {
-          const trimmedType = formValues.eventType.trim();
-          if (!trimmedType.toLowerCase().includes('other')) {
-            eventTypeFormatted = trimmedType;
-          }
-        }
-
-        let physicalLocation = '';
-        if (typeof formValues.location === 'string' && formValues.location.trim() !== '') {
-          physicalLocation = formValues.location.trim();
-        }
-
-        let teamsLink = '';
-        if (typeof formValues.teamsLink === 'string' && formValues.teamsLink.trim() !== '') {
-          teamsLink = formValues.teamsLink.trim();
-        }
-
-        let locationFormatted = '[Please enter location and microsoft teams link here]';
-        if (physicalLocation && teamsLink) {
-          locationFormatted = `hybrid - both in person in ${physicalLocation}, and online on MS Teams at ${teamsLink}`;
-        } else if (physicalLocation) {
-          locationFormatted = `in person in ${physicalLocation}`;
-        } else if (teamsLink) {
-          locationFormatted = `online on MS Teams at ${teamsLink}`;
-        }
-
-        // Fill in subject
-        onChange(`emailSubject${i+1}`, `${eventTypeFormatted} - ${eventDateRaw ? formatSubjectDate(eventDateRaw) : '[Please insert event date here]'} - ${title}`);
-
-        // Fill in body using template
-        templateName = emailTemplateName[i];
-        const res = await get(`/content-manager/collection-types/api::text-email-template.text-email-template/${templateName}`);
-        if (res.data.data && res.data.data.template){
-          const textTemplate = res.data.data.template;
-
-          // Format the location
-          const result = renderLodashStyleTemplate(textTemplate, {
-            abstract,
-            eventDate,
-            eventStartTime,
-            eventEndTime,
-            locationFormatted,
-            eventTypeFormatted,
-            title,
-            speaker
-          })
-          onChange(`emailBody${i+1}`, result);
-        } else {
-          throw new Error('Template not found');
-        }
-
+        const templateName = emailTemplateName[i];
+        const result = await fetchTemplate(templateName, templateVariables);
+        onChange(`emailBody${i+1}`, result);
       }
     } catch (e) {
       const message = e instanceof Error ? e.message : 'Unknown error';
-      console.error('Error loading template', templateName, 'with message', message);
+      console.error('Error loading email templates:', message);
     } finally {
       setLoadingTemplates(false);
     }
   }
-
 
   return (
     <>
@@ -341,7 +294,19 @@ const EventActionPanel = ({
         meta={meta}
         collectionType={collectionType}
       />
-      <Typography>Special actions</Typography>
+      <Accordion.Root variant="primary">
+        <Accordion.Item value="acc-01">
+          <Accordion.Header>
+            <Accordion.Trigger description="Your personal information">
+              Show scheduled and sent emails (updated after saving document and refreshing)
+            </Accordion.Trigger>
+          </Accordion.Header>
+          <Accordion.Content>
+            <ScheduledEmails model={model} documentId={documentId} />
+          </Accordion.Content>
+        </Accordion.Item>
+      </Accordion.Root>
+
     </>
   )
 
@@ -531,5 +496,4 @@ const CustomPanel = () => {
   );
 };
 
-export {Panels, ActionsPanel, CustomPanel};
-export type {PanelDescription};
+export {CustomPanel};

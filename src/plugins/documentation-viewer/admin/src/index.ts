@@ -40,17 +40,62 @@ export default {
             },
           },
             {
-              name: 'options.isAccordion',
-              type: 'checkbox',
-              default: false,
+              name: 'options.dividerText',
+              require: false,
+              type: 'text',
               intlLabel: {
-                id: 'documentation-viewer.isAccordion.label',
-                defaultMessage: 'Use accordion style',
+                id: 'documentation-viewer.divider.label',
+                defaultMessage: 'Divider text',
               },
               description: {
-                id: 'documentation-viewer.isAccordion.description',
-                defaultMessage: 'According is open by default',
+                id: 'documentation-viewer.documentId.description',
+                defaultMessage: 'Section divider text',
               },
+            },
+            {
+              intlLabel: {
+                id: "documentation-viewer.type.label",
+                defaultMessage: "Component Type",
+              },
+              description: {
+                id: 'documentation-viewer.type.description',
+                defaultMessage: 'Markdown renders plain markdown by searching api::documentation.documentation for a documentId. Accordion is the same as Markdown but uses Accordion. Divider is hr',
+              },
+              name: 'options.type',
+              type: 'select',
+              value: 'markdown',
+              options:  [
+                {
+                  key: "accordion",
+                  value: "accordion",
+                  metadatas: {
+                    intlLabel: {
+                      id: "documentation-viewer.component-type.accordion",
+                      defaultMessage: "Accordion",
+                    },
+                  },
+                },
+                {
+                  key: "markdown",
+                  value: "markdown",
+                  metadatas: {
+                    intlLabel: {
+                      id: "documentation-viewer.component-type.markdown",
+                      defaultMessage: "Markdown",
+                    },
+                  },
+                },
+                {
+                  key: "divider",
+                  value: "divider",
+                  metadatas: {
+                    intlLabel: {
+                      id: "documentation-viewer.component-type.divider",
+                      defaultMessage: "Divider",
+                    },
+                  },
+                },
+              ],
             }
           ],
         }],

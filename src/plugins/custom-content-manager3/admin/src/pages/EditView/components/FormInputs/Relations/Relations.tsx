@@ -47,7 +47,7 @@ import {
 import {
   RelationResult,
   useGetRelationsQuery,
-  useSearchRelationsQuery,
+  useLazySearchRelationsQuery,
 } from '../../../../../services/relations';
 import {type MainField} from '../../../../../utils/attributes';
 import {getRelationLabel} from '../../../../../utils/relations';
@@ -499,6 +499,8 @@ const RelationsInput = ({
 
   const searchParamsDebounced = useDebounce(searchParams, 300);
 
+  const [searchForTrigger, { data, isLoading }] = useLazySearchRelationsQuery();
+
   /**
    * The `name` prop is a complete path to the field, e.g. `field1.field2.field3`.
    * Where the above example would a nested field within two components, however
@@ -507,8 +509,17 @@ const RelationsInput = ({
    */
   const [targetField] = name.split('.').slice(-1);
 
-  const { data, isLoading } = useSearchRelationsQuery(
-    {
+  /**
+   * Because we're using a lazy query, we need to trigger the search
+   * when the component mounts and when the search params change.
+   * We also need to trigger the search when the field value changes
+   * so that we can filter out the relations that are already connected.
+   */
+  React.useEffect(() => {
+    // Return early if there is no relation to the document
+    if (!isRelatedToCurrentDocument) return;
+
+    searchForTrigger({
       model,
       targetField,
       params: {
@@ -519,12 +530,18 @@ const RelationsInput = ({
         idsToOmit: field.value?.connect?.map((rel) => rel.id.toString()) ?? [],
         ...searchParamsDebounced,
       },
-    },
-    {
-      // Skip
-      skip: !isRelatedToCurrentDocument,  // Only skip if not related, allow empty id
-    }
-  );
+    });
+  }, [
+    field.value?.connect,
+    field.value?.disconnect,
+    id,
+    model,
+    targetField,
+    searchForTrigger,
+    searchParamsDebounced,
+    isRelatedToCurrentDocument,
+    currentDocumentMeta.params,
+  ]);
 
   const hasNextPage = data?.pagination ? data.pagination.page < data.pagination.pageCount : false;
 

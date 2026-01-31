@@ -88,9 +88,9 @@ async function syncScheduledEmailSlot(
   });
 
   const existingEmail = existingEmails.length > 0 ? existingEmails[0] : null;
-
-  if (disabled) {
-    // EMAIL IS DISABLED
+  console.log('target',targetEmails, targetEmails.trim() === '');
+  if (disabled || targetEmails.trim() === '') {
+    // EMAIL IS DISABLED or all mailing lists were removed
     if (existingEmail && !existingEmail.sent) {
       // Delete unsent scheduled email
       await strapi.documents('api::scheduled-email.scheduled-email').delete({
@@ -110,6 +110,8 @@ async function syncScheduledEmailSlot(
             body: body || '',
             emails: targetEmails,
             scheduledDatetime: datetimeValue,
+            isSending: false,
+            failedAttempts: 0,
           },
         });
       }
@@ -126,38 +128,38 @@ async function syncScheduledEmailSlot(
           scheduledDatetime: datetimeValue,
           emailId: emailId,
           sent: false,
+          isSending: false,
+          failedAttempts: 0,
         },
       });
     }
   }
 }
 
-export default {
-  /**
-   * Document service middleware.
-   * https://strapi.io/blog/what-are-document-service-middleware-and-what-happened-to-lifecycle-hooks-1
-   */
-  register({ strapi }: { strapi: Core.Strapi } ) {
-    strapi.documents.use(async (context, next) => {
-      // The api::member-application.member-application content type
-      if (context.uid === 'api::member-application.member-application' && (context.action === 'update' || context.action === 'create')) {
-        const applicationData = context.params.data;
-        if (context.action === 'update' && context.params.data.applicationStatus === 'approved'){
-          await strapi.documents('api::member.member').create({
-            data: {
-              fullName: applicationData.fullName,
-              preferredName: applicationData.preferredName ?? '',
-              affiliations: applicationData.affiliations ?? '',
-              email: applicationData.email ?? '',
-              aboutYou: applicationData.aboutYou ?? '',
-              topics: applicationData.topics ?? '',
-              // member_type may be a relation; preserve whatever structure came from the application data
-              member_type: applicationData.member_type ??  undefined,
-            }
-          })
-        } else if (context.action === 'create'){
-          const subject = `CSEG Member application from ${escapeHTML(applicationData.fullName)}`
-          const html = `Dear administrator,
+/**
+ * If member application is new, send email to organisers to view it
+ * If application is approved, add member to membership list database (api::member.member)
+ * @param context
+ * @param strapi
+ */
+async function handleMemberApplication(context, strapi: Core.Strapi) {
+  const applicationData = context.params.data;
+  if (context.action === 'update' && context.params.data.applicationStatus === 'approved') {
+    await strapi.documents('api::member.member').create({
+      data: {
+        fullName: applicationData.fullName,
+        preferredName: applicationData.preferredName ?? '',
+        affiliations: applicationData.affiliations ?? '',
+        email: applicationData.email ?? '',
+        aboutYou: applicationData.aboutYou ?? '',
+        topics: applicationData.topics ?? '',
+        // member_type may be a relation; preserve whatever structure came from the application data
+        member_type: applicationData.member_type ?? undefined,
+      }
+    })
+  } else if (context.action === 'create') {
+    const subject = `CSEG Member application from ${escapeHTML(applicationData.fullName)}`
+    const html = `Dear administrator,
 
 Kindly review this membership application:
 
@@ -177,22 +179,23 @@ Please login to the Strapi admin panel to approve or reject this application.
 
 Regards,
 CSEG Website System`
-          await strapi.plugin('email').service('email').send({
-            to: env('MEMBER_APPLICATION_REVIEWER'),
-            subject: subject,
-            html: html.replace(/\r\n|\r|\n/g, "<br/>"),
-          });
-        }
-      }
+    await strapi.plugin('email').service('email').send({
+      to: env('MEMBER_APPLICATION_REVIEWER'),
+      subject: subject,
+      html: html.replace(/\r\n|\r|\n/g, "<br/>"),
+    });
+  }
+}
 
-      /**
-       * When a contact message appears on api::contact.contact forward message
-       * content to site admin email.
-       */
-      if (context.uid === 'api::contact.contact' && context.action === 'create'){
-        const messageData = context.params.data;
-        const subject = `CSEG Contact message from ${escapeHTML(messageData.name)}`
-        const html = `Dear administrator,
+/**
+ * Send email to administrator to handle contact message
+ * @param context
+ * @param strapi
+ */
+async function handleContact(context, strapi: Core.Strapi) {
+  const messageData = context.params.data;
+  const subject = `CSEG Contact message from ${escapeHTML(messageData.name)}`
+  const html = `Dear administrator,
 
 You have received a new contact message:
 
@@ -210,85 +213,105 @@ and mark the message as resolved in the admin panel.
 
 Regards,
 CSEG Website System`
-        await strapi.plugin('email').service('email').send({
-          to: env('CONTACT_MESSAGE_REVIEWER'),
-          subject: subject,
-          html: html.replace(/\r\n|\r|\n/g, "<br/>"),
-        });
+  await strapi.plugin('email').service('email').send({
+    to: env('CONTACT_MESSAGE_REVIEWER'),
+    subject: subject,
+    html: html.replace(/\r\n|\r|\n/g, "<br/>"),
+  });
+}
+
+/**
+ * When an event is updated, sync scheduled emails based on email slot settings.
+ * Creates, updates, or deletes scheduled-email records for each of the 3 email slots.
+ */
+async function handleEvent(context, next, strapi: Core.Strapi) {
+  const eventDocumentId = context.params.documentId;
+
+  // Execute the update first so we can fetch the complete persisted data
+  const result = await next();
+
+  try {
+    // Fetch the updated event with relations to get complete data
+    const updatedEvent = await strapi.documents('api::event.event').findOne({
+      documentId: eventDocumentId,
+      populate: {
+        open_to: {
+          fields: ['documentId', 'mailingList'],
+        },
+      },
+    });
+
+    if (!updatedEvent) {
+      return result;
+    }
+
+    // Collect target emails based on visibility settings
+    const openToMemberTypes = updatedEvent.open_to || [];
+    const targetEmails = await collectTargetEmails(
+        strapi,
+        updatedEvent.publicEvent,
+        openToMemberTypes
+    );
+
+    // Sync each of the 3 email slots
+    await syncScheduledEmailSlot(
+        strapi,
+        eventDocumentId,
+        1,
+        updatedEvent.disableEmail1,
+        updatedEvent.emailSubject1,
+        updatedEvent.emailBody1,
+        updatedEvent.emailDate1,
+        targetEmails
+    );
+
+    await syncScheduledEmailSlot(
+        strapi,
+        eventDocumentId,
+        2,
+        updatedEvent.disableEmail2,
+        updatedEvent.emailSubject2,
+        updatedEvent.emailBody2,
+        updatedEvent.emailDate2,
+        targetEmails
+    );
+
+    await syncScheduledEmailSlot(
+        strapi,
+        eventDocumentId,
+        3,
+        updatedEvent.disableEmail3,
+        updatedEvent.emailSubject3,
+        updatedEvent.emailBody3,
+        updatedEvent.emailDate3,
+        targetEmails
+    );
+  } catch (error) {
+    // Log but don't fail the update operation
+    strapi.log.error('Failed to sync scheduled emails for event:', error);
+  }
+
+  return result;
+}
+
+export default {
+  /**
+   * Document service middleware.
+   * https://strapi.io/blog/what-are-document-service-middleware-and-what-happened-to-lifecycle-hooks-1
+   */
+  register({ strapi }: { strapi: Core.Strapi } ) {
+    strapi.documents.use(async (context, next) => {
+      // The api::member-application.member-application content type
+      if (context.uid === 'api::member-application.member-application' && (context.action === 'update' || context.action === 'create')) {
+        await handleMemberApplication(context, strapi);
       }
 
-      /**
-       * When an event is updated, sync scheduled emails based on email slot settings.
-       * Creates, updates, or deletes scheduled-email records for each of the 3 email slots.
-       */
-      if (context.uid === 'api::event.event' && context.action === 'update') {
-        const eventDocumentId = context.params.documentId;
+      if (context.uid === 'api::contact.contact' && context.action === 'create'){
+        await handleContact(context, strapi);
+      }
 
-        // Execute the update first so we can fetch the complete persisted data
-        const result = await next();
-
-        try {
-          // Fetch the updated event with relations to get complete data
-          const updatedEvent = await strapi.documents('api::event.event').findOne({
-            documentId: eventDocumentId,
-            populate: {
-              open_to: {
-                fields: ['documentId', 'mailingList'],
-              },
-            },
-          });
-
-          if (!updatedEvent) {
-            return result;
-          }
-
-          // Collect target emails based on visibility settings
-          const openToMemberTypes = updatedEvent.open_to || [];
-          const targetEmails = await collectTargetEmails(
-            strapi,
-            updatedEvent.publicEvent,
-            openToMemberTypes
-          );
-
-          // Sync each of the 3 email slots
-          await syncScheduledEmailSlot(
-            strapi,
-            eventDocumentId,
-            1,
-            updatedEvent.disableEmail1,
-            updatedEvent.emailSubject1,
-            updatedEvent.emailBody1,
-            updatedEvent.emailDate1,
-            targetEmails
-          );
-
-          await syncScheduledEmailSlot(
-            strapi,
-            eventDocumentId,
-            2,
-            updatedEvent.disableEmail2,
-            updatedEvent.emailSubject2,
-            updatedEvent.emailBody2,
-            updatedEvent.emailDate2,
-            targetEmails
-          );
-
-          await syncScheduledEmailSlot(
-            strapi,
-            eventDocumentId,
-            3,
-            updatedEvent.disableEmail3,
-            updatedEvent.emailSubject3,
-            updatedEvent.emailBody3,
-            updatedEvent.emailDate3,
-            targetEmails
-          );
-        } catch (error) {
-          // Log but don't fail the update operation
-          strapi.log.error('Failed to sync scheduled emails for event:', error);
-        }
-
-        return result;
+      if (context.uid === 'api::event.event' && (context.action === 'update' || context.action ===  'publish')) {
+        return await handleEvent(context, next, strapi);
       }
 
       return next();

@@ -631,6 +631,15 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 250;
       }>;
+    announcement1: Schema.Attribute.String &
+      Schema.Attribute.CustomField<
+        'plugin::documentation-viewer.doc-viewer',
+        {
+          dividerText: 'Announcement email';
+          documentId: 'no-documentationID';
+          type: 'divider';
+        }
+      >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -661,14 +670,6 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     emailDate3: Schema.Attribute.DateTime &
       Schema.Attribute.Required &
       Schema.Attribute.Private;
-    emailInstructions: Schema.Attribute.String &
-      Schema.Attribute.CustomField<
-        'plugin::documentation-viewer.doc-viewer',
-        {
-          documentId: 'gprskf4rmcwx3fgzfaah77l2';
-          isAccordion: true;
-        }
-      >;
     emailSubject1: Schema.Attribute.String & Schema.Attribute.Private;
     emailSubject2: Schema.Attribute.String & Schema.Attribute.Private;
     emailSubject3: Schema.Attribute.String & Schema.Attribute.Private;
@@ -682,10 +683,20 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
         'plugin::documentation-viewer.doc-viewer',
         {
           documentId: 'pkryz2g3hq4qmhcbjig97hw1';
-          isAccordion: true;
+          isAccordion: false;
+          type: 'accordion';
         }
       >;
     eventEndTime: Schema.Attribute.Time & Schema.Attribute.Required;
+    eventFormat: Schema.Attribute.Enumeration<
+      [
+        'Online only event',
+        'in-person event',
+        'Hybrid event (online and in-person)',
+      ]
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Online only event'>;
     eventPage: Schema.Attribute.RichText & Schema.Attribute.Required;
     eventStartTime: Schema.Attribute.Time & Schema.Attribute.Required;
     eventType: Schema.Attribute.Enumeration<
@@ -693,13 +704,41 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'Teaching Hour'>;
+    finalReminder: Schema.Attribute.String &
+      Schema.Attribute.CustomField<
+        'plugin::documentation-viewer.doc-viewer',
+        {
+          dividerText: 'Final reminder email';
+          documentId: 'no-documentationID';
+          type: 'divider';
+        }
+      >;
+    firstReminderEmail: Schema.Attribute.String &
+      Schema.Attribute.CustomField<
+        'plugin::documentation-viewer.doc-viewer',
+        {
+          dividerText: 'First reminder email';
+          documentId: 'no-documentationID';
+          type: 'divider';
+        }
+      >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::event.event'> &
       Schema.Attribute.Private;
     location: Schema.Attribute.String &
+      Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 200;
       }>;
+    markdownTemplate: Schema.Attribute.String &
+      Schema.Attribute.CustomField<
+        'plugin::documentation-viewer.doc-viewer',
+        {
+          documentId: 'gprskf4rmcwx3fgzfaah77l2';
+          isAccordion: false;
+          type: 'accordion';
+        }
+      >;
     open_to: Schema.Attribute.Relation<
       'manyToMany',
       'api::member-type.member-type'
@@ -718,10 +757,9 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 200;
       }>;
-    teamsLink: Schema.Attribute.String;
+    teamsLink: Schema.Attribute.String & Schema.Attribute.Required;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
-      Schema.Attribute.Unique &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 200;
       }>;
@@ -918,6 +956,10 @@ export interface ApiMemberTypeMemberType extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    displayNameAndEmail: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Private &
+      Schema.Attribute.Unique;
     events: Schema.Attribute.Relation<'manyToMany', 'api::event.event'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -1028,7 +1070,6 @@ export interface ApiPublicationPublication extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
-      Schema.Attribute.Unique &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 300;
       }>;
@@ -1087,7 +1128,6 @@ export interface ApiResearchProjectResearchProject
       }>;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
-      Schema.Attribute.Unique &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 200;
       }>;
@@ -1117,6 +1157,18 @@ export interface ApiScheduledEmailScheduledEmail
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
     emails: Schema.Attribute.String & Schema.Attribute.Required;
+    failedAttempts: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<0>;
+    isSending: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1156,7 +1208,9 @@ export interface ApiTextEmailTemplateTextEmailTemplate
       Schema.Attribute.CustomField<
         'plugin::documentation-viewer.doc-viewer',
         {
+          dividerText: '';
           documentId: 'q5pua18p5vvlyr84oasrlvav';
+          type: 'accordion';
         }
       >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -1167,7 +1221,9 @@ export interface ApiTextEmailTemplateTextEmailTemplate
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     template: Schema.Attribute.Text & Schema.Attribute.Required;
-    templateName: Schema.Attribute.String & Schema.Attribute.Required;
+    templateName: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
