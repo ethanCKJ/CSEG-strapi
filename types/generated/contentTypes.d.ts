@@ -509,6 +509,35 @@ export interface ApiContactContact extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiDeleteDatabaseDeleteDatabase
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'delete_databases';
+  info: {
+    displayName: 'DeleteDatabase';
+    pluralName: 'delete-databases';
+    singularName: 'delete-database';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::delete-database.delete-database'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiDocumentationDocumentation
   extends Struct.CollectionTypeSchema {
   collectionName: 'documentations';
@@ -1701,6 +1730,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::about-page.about-page': ApiAboutPageAboutPage;
       'api::contact.contact': ApiContactContact;
+      'api::delete-database.delete-database': ApiDeleteDatabaseDeleteDatabase;
       'api::documentation.documentation': ApiDocumentationDocumentation;
       'api::event-tag.event-tag': ApiEventTagEventTag;
       'api::event-type.event-type': ApiEventTypeEventType;
