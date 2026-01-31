@@ -635,7 +635,7 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
       Schema.Attribute.CustomField<
         'plugin::documentation-viewer.doc-viewer',
         {
-          dividerText: 'Announcement email 1';
+          dividerText: 'Announcement email';
           documentId: 'no-documentationID';
           type: 'divider';
         }

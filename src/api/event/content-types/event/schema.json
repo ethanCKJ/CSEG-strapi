@@ -359,7 +359,7 @@
       "customField": "plugin::documentation-viewer.doc-viewer",
       "options": {
         "documentId": "no-documentationID",
-        "dividerText": "Announcement email 1",
+        "dividerText": "Announcement email",
         "type": "divider"
       }
     },
