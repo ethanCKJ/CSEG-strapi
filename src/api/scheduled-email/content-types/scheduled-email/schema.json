@@ -44,6 +44,17 @@
       "type": "boolean",
       "required": true,
       "default": false
+    },
+    "isSending": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "failedAttempts": {
+      "type": "integer",
+      "required": true,
+      "default": 0,
+      "min": 0
     }
   }
 }

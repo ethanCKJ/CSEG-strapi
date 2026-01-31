@@ -1153,6 +1153,18 @@ export interface ApiScheduledEmailScheduledEmail
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
     emails: Schema.Attribute.String & Schema.Attribute.Required;
+    failedAttempts: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<0>;
+    isSending: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

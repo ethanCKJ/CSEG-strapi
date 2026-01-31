@@ -110,6 +110,8 @@ async function syncScheduledEmailSlot(
             body: body || '',
             emails: targetEmails,
             scheduledDatetime: datetimeValue,
+            isSending: false,
+            failedAttempts: 0,
           },
         });
       }
@@ -126,6 +128,8 @@ async function syncScheduledEmailSlot(
           scheduledDatetime: datetimeValue,
           emailId: emailId,
           sent: false,
+          isSending: false,
+          failedAttempts: 0,
         },
       });
     }
