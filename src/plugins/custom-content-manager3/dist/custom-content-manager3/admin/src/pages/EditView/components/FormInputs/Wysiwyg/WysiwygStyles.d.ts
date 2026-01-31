@@ -1,0 +1,5 @@
+/// <reference types="react" />
+export declare const MainButtons: import("styled-components/dist/types").IStyledComponentBase<"web", import("styled-components").FastOmit<any, never>> & string & (import("styled-components/dist/types").BaseObject | Omit<any, keyof import("react").Component<any, {}, any>>);
+export declare const MoreButton: import("styled-components/dist/types").IStyledComponentBase<"web", import("styled-components").FastOmit<any, never>> & string & (import("styled-components/dist/types").BaseObject | Omit<IconButtonComponent, keyof import("react").Component<any, {}, any>>);
+export declare const IconButtonGroupMargin: import("styled-components/dist/types").IStyledComponentBase<"web", import("styled-components").FastOmit<any, never>> & string & (import("styled-components/dist/types").BaseObject | Omit<any, keyof import("react").Component<any, {}, any>>);
+export declare const ExpandButton: import("styled-components/dist/types").IStyledComponentBase<"web", import("styled-components").FastOmit<any, never>> & string & (import("styled-components/dist/types").BaseObject | Omit<any, keyof import("react").Component<any, {}, any>>);
