@@ -142,12 +142,13 @@
       "type": "richtext",
       "required": true
     },
-    "emailInstructions": {
+    "markdownTemplate": {
       "type": "customField",
       "customField": "plugin::documentation-viewer.doc-viewer",
       "options": {
         "documentId": "gprskf4rmcwx3fgzfaah77l2",
-        "isAccordion": true
+        "isAccordion": false,
+        "type": "accordion"
       }
     },
     "emailSubject2": {
@@ -304,7 +305,8 @@
       "customField": "plugin::documentation-viewer.doc-viewer",
       "options": {
         "documentId": "pkryz2g3hq4qmhcbjig97hw1",
-        "isAccordion": true
+        "isAccordion": false,
+        "type": "accordion"
       }
     },
     "teamsLink": {
@@ -341,6 +343,63 @@
         "in-person event",
         "Hybrid event (online and in-person)"
       ]
+    },
+    "announcement1": {
+      "type": "customField",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "showDisableToggles"
+            },
+            true
+          ]
+        }
+      },
+      "customField": "plugin::documentation-viewer.doc-viewer",
+      "options": {
+        "documentId": "no-documentationID",
+        "dividerText": "Announcement email 1",
+        "type": "divider"
+      }
+    },
+    "firstReminderEmail": {
+      "type": "customField",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "showDisableToggles"
+            },
+            true
+          ]
+        }
+      },
+      "customField": "plugin::documentation-viewer.doc-viewer",
+      "options": {
+        "documentId": "no-documentationID",
+        "dividerText": "First reminder email",
+        "type": "divider"
+      }
+    },
+    "finalReminder": {
+      "type": "customField",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "showDisableToggles"
+            },
+            true
+          ]
+        }
+      },
+      "customField": "plugin::documentation-viewer.doc-viewer",
+      "options": {
+        "documentId": "no-documentationID",
+        "dividerText": "Final reminder email",
+        "type": "divider"
+      }
     }
   }
 }

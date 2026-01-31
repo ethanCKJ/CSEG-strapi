@@ -631,6 +631,15 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 250;
       }>;
+    announcement1: Schema.Attribute.String &
+      Schema.Attribute.CustomField<
+        'plugin::documentation-viewer.doc-viewer',
+        {
+          dividerText: 'Announcement email 1';
+          documentId: 'no-documentationID';
+          type: 'divider';
+        }
+      >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -661,14 +670,6 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     emailDate3: Schema.Attribute.DateTime &
       Schema.Attribute.Required &
       Schema.Attribute.Private;
-    emailInstructions: Schema.Attribute.String &
-      Schema.Attribute.CustomField<
-        'plugin::documentation-viewer.doc-viewer',
-        {
-          documentId: 'gprskf4rmcwx3fgzfaah77l2';
-          isAccordion: true;
-        }
-      >;
     emailSubject1: Schema.Attribute.String & Schema.Attribute.Private;
     emailSubject2: Schema.Attribute.String & Schema.Attribute.Private;
     emailSubject3: Schema.Attribute.String & Schema.Attribute.Private;
@@ -682,7 +683,8 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
         'plugin::documentation-viewer.doc-viewer',
         {
           documentId: 'pkryz2g3hq4qmhcbjig97hw1';
-          isAccordion: true;
+          isAccordion: false;
+          type: 'accordion';
         }
       >;
     eventEndTime: Schema.Attribute.Time & Schema.Attribute.Required;
@@ -702,6 +704,24 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'Teaching Hour'>;
+    finalReminder: Schema.Attribute.String &
+      Schema.Attribute.CustomField<
+        'plugin::documentation-viewer.doc-viewer',
+        {
+          dividerText: 'Final reminder email';
+          documentId: 'no-documentationID';
+          type: 'divider';
+        }
+      >;
+    firstReminderEmail: Schema.Attribute.String &
+      Schema.Attribute.CustomField<
+        'plugin::documentation-viewer.doc-viewer',
+        {
+          dividerText: 'First reminder email';
+          documentId: 'no-documentationID';
+          type: 'divider';
+        }
+      >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::event.event'> &
       Schema.Attribute.Private;
@@ -710,6 +730,15 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 200;
       }>;
+    markdownTemplate: Schema.Attribute.String &
+      Schema.Attribute.CustomField<
+        'plugin::documentation-viewer.doc-viewer',
+        {
+          documentId: 'gprskf4rmcwx3fgzfaah77l2';
+          isAccordion: false;
+          type: 'accordion';
+        }
+      >;
     open_to: Schema.Attribute.Relation<
       'manyToMany',
       'api::member-type.member-type'
@@ -1163,7 +1192,9 @@ export interface ApiTextEmailTemplateTextEmailTemplate
       Schema.Attribute.CustomField<
         'plugin::documentation-viewer.doc-viewer',
         {
+          dividerText: '';
           documentId: 'q5pua18p5vvlyr84oasrlvav';
+          type: 'accordion';
         }
       >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;

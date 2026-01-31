@@ -23,7 +23,9 @@
       "type": "customField",
       "customField": "plugin::documentation-viewer.doc-viewer",
       "options": {
-        "documentId": "q5pua18p5vvlyr84oasrlvav"
+        "documentId": "q5pua18p5vvlyr84oasrlvav",
+        "dividerText": "",
+        "type": "accordion"
       }
     }
   }

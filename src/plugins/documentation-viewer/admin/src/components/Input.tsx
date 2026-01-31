@@ -60,12 +60,12 @@ const Input: React.FC<CustomFieldInputProps> = ({
   const [loading, setLoading] = useState(true);
   const {get} = useFetchClient();
 
-  // Type-safe access to documentId from options
-  console.log('attribute',attribute)
   const documentId = attribute?.options?.documentId;
+  const type = attribute?.options?.type
+  console.log('type',type);
 
   useEffect(() => {
-    if (!documentId) {
+    if (!documentId && (type === 'accordion' || type === 'markdown')) {
       setMarkdown('*No document configured. Set Document ID in Content Type Builder.*');
       setLoading(false);
       return;
@@ -100,7 +100,7 @@ const Input: React.FC<CustomFieldInputProps> = ({
     return <div>Loading...</div>
   }
 
-  if (attribute?.options?.isAccordion) {
+  if (type === 'accordion') {
     return (
       <Accordion.Root>
         <Accordion.Item value="acc-01">
@@ -122,18 +122,27 @@ const Input: React.FC<CustomFieldInputProps> = ({
     )
   }
 
+  if (type === 'markdown'){
+    return (
+      <Box marginBottom={1}>
+        <Typography>{title}</Typography>
+        <Box background="neutral100" borderRadius="4px">
+          <Wrapper>
+            <MarkDown
+            >{markdown}</MarkDown>
+          </Wrapper>
+        </Box>
+      </Box>
+    );
+  }
 
   return (
-    <Box marginBottom={1}>
-      <Typography>{title}</Typography>
-      <Box background="neutral100" borderRadius="4px">
-        <Wrapper>
-          <MarkDown
-          >{markdown}</MarkDown>
-        </Wrapper>
-      </Box>
+    <Box background={"alternative600"} color={"black"} padding={1}>
+      <Typography variant={"delta"}>{attribute?.options?.dividerText || <hr/>}</Typography>
     </Box>
   );
+
+
 };
 
 export default Input;
