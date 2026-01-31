@@ -88,9 +88,9 @@ async function syncScheduledEmailSlot(
   });
 
   const existingEmail = existingEmails.length > 0 ? existingEmails[0] : null;
-
-  if (disabled) {
-    // EMAIL IS DISABLED
+  console.log('target',targetEmails, targetEmails.trim() === '');
+  if (disabled || targetEmails.trim() === '') {
+    // EMAIL IS DISABLED or all mailing lists were removed
     if (existingEmail && !existingEmail.sent) {
       // Delete unsent scheduled email
       await strapi.documents('api::scheduled-email.scheduled-email').delete({

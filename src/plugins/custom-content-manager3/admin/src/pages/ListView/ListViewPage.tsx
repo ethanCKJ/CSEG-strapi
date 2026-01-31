@@ -168,6 +168,7 @@ const ListViewPage = () => {
       : '',
   });
 
+
   const params = React.useMemo(() => buildValidParams(query), [query]);
 
   const { data, error, isFetching } = useGetAllDocumentsQuery({
