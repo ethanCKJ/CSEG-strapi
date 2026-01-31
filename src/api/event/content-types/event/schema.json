@@ -400,6 +400,23 @@
         "dividerText": "Final reminder email",
         "type": "divider"
       }
+    },
+    "public_event_mailing_lists": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::member-type.member-type",
+      "private": true,
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "publicEvent"
+            },
+            true
+          ]
+        }
+      },
+      "inversedBy": "eventsPublicMailingList"
     }
   }
 }

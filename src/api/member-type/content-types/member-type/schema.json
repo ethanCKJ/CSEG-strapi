@@ -32,6 +32,13 @@
       "private": true,
       "required": true,
       "unique": true
+    },
+    "eventsPublicMailingList": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::event.event",
+      "private": true,
+      "mappedBy": "public_event_mailing_lists"
     }
   }
 }

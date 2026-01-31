@@ -744,6 +744,11 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
       'api::member-type.member-type'
     >;
     privateNotes: Schema.Attribute.Text & Schema.Attribute.Private;
+    public_event_mailing_lists: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::member-type.member-type'
+    > &
+      Schema.Attribute.Private;
     publicEvent: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<false>;
@@ -961,6 +966,11 @@ export interface ApiMemberTypeMemberType extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private &
       Schema.Attribute.Unique;
     events: Schema.Attribute.Relation<'manyToMany', 'api::event.event'>;
+    eventsPublicMailingList: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::event.event'
+    > &
+      Schema.Attribute.Private;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
