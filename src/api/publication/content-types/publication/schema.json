@@ -15,7 +15,7 @@
       "type": "string",
       "maxLength": 300,
       "required": true,
-      "unique": true
+      "unique": false
     },
     "author": {
       "type": "string",

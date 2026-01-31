@@ -15,7 +15,7 @@
       "type": "string",
       "maxLength": 200,
       "required": true,
-      "unique": true
+      "unique": false
     },
     "eventDate": {
       "type": "date",
@@ -31,8 +31,18 @@
     },
     "location": {
       "type": "string",
+      "conditions": {
+        "visible": {
+          "!=": [
+            {
+              "var": "eventFormat"
+            },
+            "Online only event"
+          ]
+        }
+      },
       "maxLength": 200,
-      "required": false
+      "required": true
     },
     "speaker": {
       "type": "string",
@@ -298,7 +308,18 @@
       }
     },
     "teamsLink": {
-      "type": "string"
+      "type": "string",
+      "conditions": {
+        "visible": {
+          "!=": [
+            {
+              "var": "eventFormat"
+            },
+            "in-person event"
+          ]
+        }
+      },
+      "required": true
     },
     "abstract": {
       "type": "text",
@@ -310,6 +331,16 @@
       "private": true,
       "required": true,
       "default": false
+    },
+    "eventFormat": {
+      "type": "enumeration",
+      "required": true,
+      "default": "Online only event",
+      "enum": [
+        "Online only event",
+        "in-person event",
+        "Hybrid event (online and in-person)"
+      ]
     }
   }
 }

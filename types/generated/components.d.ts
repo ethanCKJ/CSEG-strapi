@@ -1,31 +1,5 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
-export interface SharedEmailRule extends Struct.ComponentSchema {
-  collectionName: 'components_shared_email_rules';
-  info: {
-    displayName: 'email_rule';
-    icon: 'clock';
-  };
-  attributes: {
-    daysBefore: Schema.Attribute.Integer &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<1>;
-    quickrule: Schema.Attribute.Enumeration<
-      [
-        'Send on day of event',
-        'Send 1 day before at 09:00',
-        'Send 3 days before at 09:00',
-        'Custom time',
-      ]
-    > &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'Send on day of event'>;
-    sendTime: Schema.Attribute.Time &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'09:00:00.000'>;
-  };
-}
-
 export interface SharedMedia extends Struct.ComponentSchema {
   collectionName: 'components_shared_media';
   info: {
@@ -89,7 +63,6 @@ export interface SharedSlider extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
-      'shared.email-rule': SharedEmailRule;
       'shared.media': SharedMedia;
       'shared.quote': SharedQuote;
       'shared.rich-text': SharedRichText;

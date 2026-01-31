@@ -509,35 +509,6 @@ export interface ApiContactContact extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiDeleteDatabaseDeleteDatabase
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'delete_databases';
-  info: {
-    displayName: 'DeleteDatabase';
-    pluralName: 'delete-databases';
-    singularName: 'delete-database';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::delete-database.delete-database'
-    > &
-      Schema.Attribute.Private;
-    name: Schema.Attribute.String;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiDocumentationDocumentation
   extends Struct.CollectionTypeSchema {
   collectionName: 'documentations';
@@ -715,6 +686,15 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
         }
       >;
     eventEndTime: Schema.Attribute.Time & Schema.Attribute.Required;
+    eventFormat: Schema.Attribute.Enumeration<
+      [
+        'Online only event',
+        'in-person event',
+        'Hybrid event (online and in-person)',
+      ]
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Online only event'>;
     eventPage: Schema.Attribute.RichText & Schema.Attribute.Required;
     eventStartTime: Schema.Attribute.Time & Schema.Attribute.Required;
     eventType: Schema.Attribute.Enumeration<
@@ -726,6 +706,7 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::event.event'> &
       Schema.Attribute.Private;
     location: Schema.Attribute.String &
+      Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 200;
       }>;
@@ -747,10 +728,9 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 200;
       }>;
-    teamsLink: Schema.Attribute.String;
+    teamsLink: Schema.Attribute.String & Schema.Attribute.Required;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
-      Schema.Attribute.Unique &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 200;
       }>;
@@ -1057,7 +1037,6 @@ export interface ApiPublicationPublication extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
-      Schema.Attribute.Unique &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 300;
       }>;
@@ -1116,7 +1095,6 @@ export interface ApiResearchProjectResearchProject
       }>;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
-      Schema.Attribute.Unique &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 200;
       }>;
@@ -1730,7 +1708,6 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::about-page.about-page': ApiAboutPageAboutPage;
       'api::contact.contact': ApiContactContact;
-      'api::delete-database.delete-database': ApiDeleteDatabaseDeleteDatabase;
       'api::documentation.documentation': ApiDocumentationDocumentation;
       'api::event-tag.event-tag': ApiEventTagEventTag;
       'api::event-type.event-type': ApiEventTypeEventType;
