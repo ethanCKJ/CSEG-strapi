@@ -208,7 +208,7 @@ const EventActionPanel = ({
   // q4enok6b2tgm3td9l7voh4hk is event 7 days before
   // qoq891lngymb8o99jbtwat1e is on days of event before
 
-  const emailTemplateName = ['q4enok6b2tgm3td9l7voh4hk', 'y4fjycg0agtpz4leq2qr74y6', 'qoq891lngymb8o99jbtwat1e']
+  const emailTemplateName = ['event-announcement-email', 'event-first-reminder-email', 'event-final-reminder-email']
   const daysBefore = [7, 3, 0];
   const DEFAULT_TIME = ['09:00:00']
   const [loadingTemplates, setLoadingTemplates] = React.useState<boolean>(false);
@@ -274,13 +274,18 @@ const EventActionPanel = ({
       teamsLink = formValues.teamsLink.trim();
     }
 
+    let eventFormat = '';
+    if (typeof formValues.eventFormat === 'string' && formValues.eventFormat.trim() !== ''){
+      eventFormat = formValues.eventFormat.trim();
+    }
+
     let locationFormatted = '[Please enter location and microsoft teams link here]';
-    if (physicalLocation && teamsLink) {
+    if (eventFormat.toLowerCase().includes('hybrid')){
       locationFormatted = `hybrid - both in person in ${physicalLocation}, and online on MS Teams at ${teamsLink}`;
-    } else if (physicalLocation) {
-      locationFormatted = `in person in ${physicalLocation}`;
-    } else if (teamsLink) {
+    } else if (eventFormat.toLowerCase().includes('online') ){
       locationFormatted = `online on MS Teams at ${teamsLink}`;
+    } else if (eventFormat.toLowerCase().includes('person')) {
+      locationFormatted = `in person in ${physicalLocation}`;
     }
 
     for (let i = 0; i < emailTemplateName.length; i++) {
@@ -299,9 +304,16 @@ const EventActionPanel = ({
       for (let i = 0; i < emailTemplateName.length; i++) {
         // Fill in body using template
         templateName = emailTemplateName[i];
-        const res = await get(`/content-manager/collection-types/api::text-email-template.text-email-template/${templateName}`);
-        if (res.data.data && res.data.data.template){
-          const textTemplate = res.data.data.template;
+        const query = qs.stringify({
+          filters: {
+            templateName: {
+              $eq: templateName
+            }
+          }
+        })
+        const res = await get(`/content-manager/collection-types/api::text-email-template.text-email-template?${query}`);
+        if (Array.isArray(res.data?.results) && res.data.results.length > 0 && res.data.results[0].template){
+          const textTemplate = res.data.results[0].template;
 
           // Format the location
           const result = renderLodashStyleTemplate(textTemplate, {

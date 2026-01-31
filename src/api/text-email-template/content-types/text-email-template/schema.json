@@ -13,7 +13,9 @@
   "attributes": {
     "templateName": {
       "type": "string",
-      "required": true
+      "required": true,
+      "unique": true,
+      "regex": "^[a-z0-9]+(-[a-z0-9]+)*$"
     },
     "template": {
       "type": "text",

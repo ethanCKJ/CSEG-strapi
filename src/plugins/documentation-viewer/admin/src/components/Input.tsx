@@ -62,11 +62,16 @@ const Input: React.FC<CustomFieldInputProps> = ({
 
   const documentId = attribute?.options?.documentId;
   const type = attribute?.options?.type
-  console.log('type',type);
+
 
   useEffect(() => {
     if (!documentId && (type === 'accordion' || type === 'markdown')) {
       setMarkdown('*No document configured. Set Document ID in Content Type Builder.*');
+      setLoading(false);
+      return;
+    }
+    // Divider uses text from attribute.options do does not need to fetch a template
+    if (type === 'divider') {
       setLoading(false);
       return;
     }
