@@ -722,6 +722,7 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
           type: 'divider';
         }
       >;
+    ics: Schema.Attribute.Text;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::event.event'> &
       Schema.Attribute.Private;

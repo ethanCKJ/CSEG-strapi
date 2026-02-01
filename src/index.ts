@@ -1,145 +1,18 @@
-import type { Core } from '@strapi/strapi';
+import type {Core} from '@strapi/strapi';
+import {contactMiddleware} from "./utils/contact-middleware";
+import {memberApplicationMiddleware} from "./utils/member-application-middleware";
+import {eventNotificationMiddleware} from "./utils/document-service-middlewares";
+import {handleEventICS} from "./utils/helper-functions";
+
+// ============================================================================
+// OLD CODE - COMMENTED OUT FOR REFERENCE
+// Refactored into separate middleware files in src/utils/
+// ============================================================================
+
+/*
 import {env} from "@strapi/utils";
+import {collectTargetEmails, escapeHTML, syncScheduledEmailSlot} from "./utils/helper-functions";
 
-/**
- * Input string is escaped to prevent XSS attacks.
- * Note the escaped string should not be used in <script> tags but can
- * be used in HTML body.
- * @param str
- */
-const escapeHTML = (str: string | null| undefined) => {
-  // .replace(/\r\n|\r|\n/g, "<br/>") Regex means replace all occurrances of CRLF OR CR OR LF with <br/>. CRLF is newline in windows
-  // and LF is newline in modern unix/Mac.
-  if (typeof str === 'string'){
-    return str.replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;')
-  }
-  return '';
-}
-
-/**
- * Collects mailing list emails based on event visibility settings.
- * @param strapi - Strapi instance
- * @param publicEvent - Whether the event is public
- * @param openToMemberTypes - Array of member-type objects with mailingList field (for non-public events)
- * @returns Comma-separated string of mailing list emails
- */
-function collectTargetEmails(
-  strapi: Core.Strapi,
-  publicEvent: boolean,
-  openToMemberTypes: Array<{ mailingList?: string | null }> | null,
-  publicEventMailingLists: Array<{ mailingList?: string | null }> | null,
-): string {
-  let mailingLists: Array<{ mailingList?: string | null }> = [];
-
-  if (publicEvent) {
-    // Fetch ALL member types and their mailing lists
-    const result = publicEventMailingLists;
-    mailingLists = result;
-  } else if (openToMemberTypes && openToMemberTypes.length > 0) {
-    // Use the already-populated member types from open_to relation
-    mailingLists = openToMemberTypes;
-  }
-
-  // Collect non-empty mailing list emails
-  const emails = mailingLists
-    .map(mt => mt.mailingList)
-    .filter((email): email is string => !!email && email.trim() !== '');
-
-  return emails.join(',');
-}
-
-/**
- * Syncs a single scheduled email slot based on event data.
- * @param strapi - Strapi instance
- * @param eventDocumentId - The event's documentId
- * @param slotNumber - 1, 2, or 3
- * @param disabled - Whether the email slot is disabled
- * @param subject - Email subject
- * @param body - Email body
- * @param scheduledDatetime - When to send the email
- * @param targetEmails - Comma-separated target emails
- */
-async function syncScheduledEmailSlot(
-  strapi: Core.Strapi,
-  eventDocumentId: string,
-  slotNumber: 1 | 2 | 3,
-  disabled: boolean,
-  subject: string | null | undefined,
-  body: string | null | undefined,
-  scheduledDatetime: string | Date | null | undefined,
-  targetEmails: string
-): Promise<void> {
-  const emailId = `event-${eventDocumentId}-${slotNumber}`;
-
-  // Convert Date to ISO string if needed
-  const datetimeValue = scheduledDatetime instanceof Date
-    ? scheduledDatetime.toISOString()
-    : scheduledDatetime || new Date().toISOString();
-
-  // Find existing scheduled email by emailId
-  const existingEmails = await strapi.documents('api::scheduled-email.scheduled-email').findMany({
-    filters: { emailId: { $eq: emailId } },
-    fields: ['documentId', 'sent'],
-  });
-
-  const existingEmail = existingEmails.length > 0 ? existingEmails[0] : null;
-  if (disabled || targetEmails.trim() === '') {
-    // EMAIL IS DISABLED or all mailing lists were removed
-    if (existingEmail && !existingEmail.sent) {
-      // Delete unsent scheduled email
-      await strapi.documents('api::scheduled-email.scheduled-email').delete({
-        documentId: existingEmail.documentId,
-      });
-    }
-    // If sent or doesn't exist, do nothing
-  } else {
-    // EMAIL IS ENABLED
-    if (existingEmail) {
-      if (!existingEmail.sent) {
-        // Update existing unsent scheduled email
-        await strapi.documents('api::scheduled-email.scheduled-email').update({
-          documentId: existingEmail.documentId,
-          data: {
-            subject: subject || '',
-            body: body || '',
-            emails: targetEmails,
-            scheduledDatetime: datetimeValue,
-            isSending: false,
-            failedAttempts: 0,
-          },
-        });
-      }
-      // If sent, leave it alone
-    } else {
-      // Create new scheduled email
-      await strapi.documents('api::scheduled-email.scheduled-email').create({
-        data: {
-          targetDocumentId: eventDocumentId,
-          targetModel: 'api::event.event',
-          subject: subject || '',
-          body: body || '',
-          emails: targetEmails,
-          scheduledDatetime: datetimeValue,
-          emailId: emailId,
-          sent: false,
-          isSending: false,
-          failedAttempts: 0,
-        },
-      });
-    }
-  }
-}
-
-/**
- * If member application is new, send email to organisers to view it
- * If application is approved, add member to membership list database (api::member.member)
- * @param context
- * @param strapi
- */
 async function handleMemberApplication(context, strapi: Core.Strapi) {
   const applicationData = context.params.data;
   if (context.action === 'update' && context.params.data.applicationStatus === 'approved') {
@@ -151,7 +24,6 @@ async function handleMemberApplication(context, strapi: Core.Strapi) {
         email: applicationData.email ?? '',
         aboutYou: applicationData.aboutYou ?? '',
         topics: applicationData.topics ?? '',
-        // member_type may be a relation; preserve whatever structure came from the application data
         member_type: applicationData.member_type ?? undefined,
       }
     })
@@ -185,11 +57,6 @@ CSEG Website System`
   }
 }
 
-/**
- * Send email to administrator to handle contact message
- * @param context
- * @param strapi
- */
 async function handleContact(context, strapi: Core.Strapi) {
   const messageData = context.params.data;
   const subject = `CSEG Contact message from ${escapeHTML(messageData.name)}`
@@ -218,18 +85,107 @@ CSEG Website System`
   });
 }
 
-/**
- * When an event is updated, sync scheduled emails based on email slot settings.
- * Creates, updates, or deletes scheduled-email records for each of the 3 email slots.
- */
-async function handleEvent(context, next, strapi: Core.Strapi) {
-  const eventDocumentId = context.params.documentId;
+const escapeICSText = (str: string | null | undefined): string => {
+  if (typeof str !== 'string') return '';
+  return str
+    .replace(/\\/g, '\\\\')
+    .replace(/;/g, '\\;')
+    .replace(/,/g, '\\,')
+    .replace(/\r\n|\r|\n/g, '\\n');
+};
 
-  // Execute the update first so we can fetch the complete persisted data
+const foldICSLine = (line: string): string => {
+  const maxLength = 75;
+  if (line.length <= maxLength) return line;
+
+  const parts: string[] = [];
+  let remaining = line;
+  let isFirst = true;
+
+  while (remaining.length > 0) {
+    const chunkLength = isFirst ? maxLength : maxLength - 1;
+    const chunk = remaining.slice(0, chunkLength);
+    parts.push(isFirst ? chunk : ' ' + chunk);
+    remaining = remaining.slice(chunkLength);
+    isFirst = false;
+  }
+
+  return parts.join('\r\n');
+};
+
+async function handleEventICS(documentId: string, strapi: Core.Strapi,
+                              eventStartTime: string,
+                              eventEndTime: string,
+                              eventDate: string,
+                              speaker: string,
+                              abstract: string,
+                              eventFormat: string,
+                              location: string,
+                              teamsLink: string,
+                              title: string
+                              ) {
+  if (!eventStartTime || !eventEndTime || !eventDate || !title) {
+    return;
+  }
+  const eventFormatLower = (eventFormat || '').toLowerCase();
+  let locationFormatted: string;
+  if (eventFormatLower.includes('hybrid')) {
+    locationFormatted = `Hybrid: in person at ${location || 'TBA'} and online at ${teamsLink || 'TBA'}`;
+  } else if (eventFormatLower.includes('online')) {
+    locationFormatted = `Online at ${teamsLink || 'TBA'}`;
+  } else if (eventFormatLower.includes('person')) {
+    locationFormatted = `In person at ${location || 'TBA'}`;
+  } else {
+    locationFormatted = 'To Be Announced';
+  }
+
+  const description = `Speaker: ${speaker || 'TBA'}\n\nAbstract: ${abstract || 'TBA'}\n\nLocation: ${locationFormatted}`;
+
+  const datePart = eventDate.split('T')[0];
+  const startTimePart = eventStartTime.split('.')[0];
+  const endTimePart = eventEndTime.split('.')[0];
+
+  const startDateTime = new Date(`${datePart}T${startTimePart}Z`).toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+  const endDateTime = new Date(`${datePart}T${endTimePart}Z`).toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+  const currentTimestamp = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+
+  const lines = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//CSEG//CSEG Events Calendar//EN',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH',
+    'BEGIN:VEVENT',
+    `UID:${documentId}@cseg.ed.ac.uk`,
+    `DTSTAMP:${currentTimestamp}`,
+    `DTSTART:${startDateTime}`,
+    `DTEND:${endDateTime}`,
+    `SUMMARY:${escapeICSText(title)}`,
+    `DESCRIPTION:${escapeICSText(description)}`,
+    `LOCATION:${escapeICSText(locationFormatted)}`,
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ];
+
+  const icsContent = lines.map(foldICSLine).join('\r\n');
+  console.log('Generated ICS content:', icsContent);
+
+  await strapi.documents('api::event.event').update({
+    documentId: documentId,
+    data: {
+      ics: icsContent,
+    },
+  });
+}
+
+async function handleEvent(context, next, strapi: Core.Strapi) {
   const result = await next();
+  const eventDocumentId = context.params.documentId || result.documentId;
+  console.log('Handling event update for eventDocumentId:', eventDocumentId, 'action:', context.action);
+
+  console.log('Event updated, syncing scheduled emails for eventDocumentId:', eventDocumentId, 'result:', result);
 
   try {
-    // Fetch the updated event with relations to get complete data
     const updatedEvent = await strapi.documents('api::event.event').findOne({
       documentId: eventDocumentId,
       populate: {
@@ -246,7 +202,6 @@ async function handleEvent(context, next, strapi: Core.Strapi) {
       return result;
     }
 
-    // Collect target emails based on visibility settings
     const openToMemberTypes = updatedEvent.open_to || [];
     const publicEventMailingLists = updatedEvent.public_event_mailing_lists || [];
     const targetEmails = await collectTargetEmails(
@@ -256,7 +211,6 @@ async function handleEvent(context, next, strapi: Core.Strapi) {
         publicEventMailingLists,
     );
 
-    // Sync each of the 3 email slots
     await syncScheduledEmailSlot(
         strapi,
         eventDocumentId,
@@ -290,21 +244,105 @@ async function handleEvent(context, next, strapi: Core.Strapi) {
         targetEmails
     );
   } catch (error) {
-    // Log but don't fail the update operation
     strapi.log.error('Failed to sync scheduled emails for event:', error);
+  }
+
+  if (context.action === 'update' || context.action === 'create') {
+    const eventData = result;
+    console.log(eventData);
+    await handleEventICS(
+        eventDocumentId,
+        strapi,
+        eventData.eventStartTime,
+        eventData.eventEndTime,
+        eventData.eventDate,
+        eventData.speaker,
+        eventData.abstract,
+        eventData.eventFormat,
+        eventData.location,
+        eventData.teamsLink,
+        eventData.title
+    );
   }
 
   return result;
 }
+*/
+
+// ============================================================================
+// END OF OLD CODE
+// ============================================================================
+
+/**
+ * Middleware to handle ICS file generation for events.
+ * Generates calendar files after event creation/update.
+ */
+const eventICSMiddleware = () => {
+  return async (context, next) => {
+    // Only process events
+    if (context.uid !== 'api::event.event') {
+      return next();
+    }
+
+    // Only process create and update actions
+    if (context.action !== 'create' && context.action !== 'update') {
+      return next();
+    }
+
+    // Execute the create/update operation first
+    const result = await next();
+
+    // Extract documentId
+    const documentId = context.params.documentId || result.documentId;
+
+    if (!documentId) {
+      strapi.log.warn('No documentId available for ICS generation');
+      return result;
+    }
+
+    try {
+      // Use result data if available, otherwise fetch fresh
+      const eventData = result;
+
+      await handleEventICS(
+        documentId,
+        strapi,
+        String(eventData.eventStartTime || ''),
+        String(eventData.eventEndTime || ''),
+        String(eventData.eventDate || ''),
+        String(eventData.speaker || ''),
+        String(eventData.abstract || ''),
+        String(eventData.eventFormat || ''),
+        String(eventData.location || ''),
+        String(eventData.teamsLink || ''),
+        String(eventData.title || '')
+      );
+    } catch (error) {
+      strapi.log.error('Failed to generate ICS file for event:', error);
+      // Don't fail the operation if ICS generation fails
+    }
+
+    return result;
+  };
+};
 
 export default {
   /**
    * Document service middleware.
    * https://strapi.io/blog/what-are-document-service-middleware-and-what-happened-to-lifecycle-hooks-1
+   * https://docs.strapi.io/cms/api/document-service#method-overview (context.action options)
+   * https://docs.strapi.io/cms/api/document-service/middlewares#context
    */
   register({ strapi }: { strapi: Core.Strapi } ) {
+    // Register all middlewares using factory pattern
+    strapi.documents.use(contactMiddleware());
+    strapi.documents.use(memberApplicationMiddleware());
+    strapi.documents.use(eventNotificationMiddleware());
+    // strapi.documents.use(eventICSMiddleware());
+
+    // OLD REGISTRATION CODE - COMMENTED OUT
+    /*
     strapi.documents.use(async (context, next) => {
-      // The api::member-application.member-application content type
       if (context.uid === 'api::member-application.member-application' && (context.action === 'update' || context.action === 'create')) {
         await handleMemberApplication(context, strapi);
       }
@@ -313,13 +351,13 @@ export default {
         await handleContact(context, strapi);
       }
 
-      if (context.uid === 'api::event.event' && (context.action === 'update' || context.action ===  'publish' || context.action === 'create')) {
+      if (context.uid === 'api::event.event' && (context.action === 'update' ||  context.action === 'create')) {
         return await handleEvent(context, next, strapi);
       }
 
       return next();
     });
-
+    */
   },
 
   /**
