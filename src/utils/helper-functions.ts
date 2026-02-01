@@ -171,8 +171,7 @@ export const foldICSLine = (line: string): string => {
 
 /**
  * Generates ICS calendar file content for an event.
- * @param documentId - Event document ID
- * @param strapi - Strapi instance
+ * @param icsUID - Event document ID
  * @param eventStartTime - Event start time string
  * @param eventEndTime - Event end time string
  * @param eventDate - Event date string
@@ -183,9 +182,8 @@ export const foldICSLine = (line: string): string => {
  * @param teamsLink - MS Teams link
  * @param title - Event title
  */
-export async function handleEventICS(
-  documentId: string,
-  strapi: Core.Strapi,
+export function handleEventICS(
+  icsUID: string,
   eventStartTime: string,
   eventEndTime: string,
   eventDate: string,
@@ -195,7 +193,7 @@ export async function handleEventICS(
   location: string,
   teamsLink: string,
   title: string
-): Promise<void> {
+) {
   if (!eventStartTime || !eventEndTime || !eventDate || !title) {
     // Missing essential data; skip ICS generation
     return;
@@ -237,7 +235,7 @@ export async function handleEventICS(
     'CALSCALE:GREGORIAN',
     'METHOD:PUBLISH',
     'BEGIN:VEVENT',
-    `UID:${documentId}@cseg.ed.ac.uk`,
+    `UID:${icsUID}@cseg.ed.ac.uk`,
     `DTSTAMP:${currentTimestamp}`,
     `DTSTART:${startDateTime}`,
     `DTEND:${endDateTime}`,
@@ -250,12 +248,6 @@ export async function handleEventICS(
 
   // Apply line folding to each line and join with CRLF (ICS standard)
   const icsContent = lines.map(foldICSLine).join('\r\n');
-
-  await strapi.documents('api::event.event').update({
-    documentId: documentId,
-    data: {
-      ics: icsContent,
-    },
-  });
+  return icsContent;
 }
 

@@ -2,7 +2,7 @@ import type {Core} from '@strapi/strapi';
 import {contactMiddleware} from "./utils/contact-middleware";
 import {memberApplicationMiddleware} from "./utils/member-application-middleware";
 import {eventNotificationMiddleware} from "./utils/document-service-middlewares";
-import {handleEventICS} from "./utils/helper-functions";
+import {eventICSMiddleware} from "./utils/eventICSMiddleware";
 
 // ============================================================================
 // OLD CODE - COMMENTED OUT FOR REFERENCE
@@ -273,59 +273,6 @@ async function handleEvent(context, next, strapi: Core.Strapi) {
 // END OF OLD CODE
 // ============================================================================
 
-/**
- * Middleware to handle ICS file generation for events.
- * Generates calendar files after event creation/update.
- */
-const eventICSMiddleware = () => {
-  return async (context, next) => {
-    // Only process events
-    if (context.uid !== 'api::event.event') {
-      return next();
-    }
-
-    // Only process create and update actions
-    if (context.action !== 'create' && context.action !== 'update') {
-      return next();
-    }
-
-    // Execute the create/update operation first
-    const result = await next();
-
-    // Extract documentId
-    const documentId = context.params.documentId || result.documentId;
-
-    if (!documentId) {
-      strapi.log.warn('No documentId available for ICS generation');
-      return result;
-    }
-
-    try {
-      // Use result data if available, otherwise fetch fresh
-      const eventData = result;
-
-      await handleEventICS(
-        documentId,
-        strapi,
-        String(eventData.eventStartTime || ''),
-        String(eventData.eventEndTime || ''),
-        String(eventData.eventDate || ''),
-        String(eventData.speaker || ''),
-        String(eventData.abstract || ''),
-        String(eventData.eventFormat || ''),
-        String(eventData.location || ''),
-        String(eventData.teamsLink || ''),
-        String(eventData.title || '')
-      );
-    } catch (error) {
-      strapi.log.error('Failed to generate ICS file for event:', error);
-      // Don't fail the operation if ICS generation fails
-    }
-
-    return result;
-  };
-};
-
 export default {
   /**
    * Document service middleware.
@@ -338,7 +285,7 @@ export default {
     strapi.documents.use(contactMiddleware());
     strapi.documents.use(memberApplicationMiddleware());
     strapi.documents.use(eventNotificationMiddleware());
-    // strapi.documents.use(eventICSMiddleware());
+    strapi.documents.use(eventICSMiddleware());
 
     // OLD REGISTRATION CODE - COMMENTED OUT
     /*
