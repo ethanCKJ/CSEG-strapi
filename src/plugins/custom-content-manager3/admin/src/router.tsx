@@ -8,6 +8,7 @@ import { routes as historyRoutes } from './history/routes';
 import { routes as previewRoutes } from './preview/routes';
 import { MEMBER_APPLICATION_MODEL, CONTACT_MODEL } from "./constants/specialModels";
 import { Page } from "@strapi/strapi/admin";
+import {NoPermissions} from "./pages/NoPermissionsPage";
 
 const ProtectedEditViewPage = lazy(() =>
   import('./pages/EditView/EditViewPage').then((mod) => ({ default: mod.ProtectedEditViewPage }))
