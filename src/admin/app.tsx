@@ -1,5 +1,28 @@
 import type {StrapiApp} from '@strapi/strapi/admin';
-import './overrides.css'
+
+// Inject CSS overrides dynamically
+const injectStyles = () => {
+  const style = document.createElement('style');
+  style.textContent = `
+    @media(min-width: 1080px) {
+      html body div#strapi > div > div > nav {
+        width: 180px !important;
+      }
+    }
+    a[href="/admin/content-manager"] {
+      display: none;
+    }
+    a[href="/admin/plugins/cloud"] {
+      display: none;
+    }
+    html {
+      height: 100%;
+      overflow: hidden;
+    }
+  `;
+  document.head.appendChild(style);
+};
+injectStyles();
 
 // Suppress MISSING_TRANSLATION errors for en-GB since Strapi falls back
 // to en.json meaning text is rendered correctly even if the translation is missing.
