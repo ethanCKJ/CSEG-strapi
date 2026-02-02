@@ -26,10 +26,13 @@ const Initializer = ({ setPlugin }) => {
   }, []);
   return null;
 };
-const PluginIcon = () => /* @__PURE__ */ jsxRuntime.jsxs("div", { style: { display: "flex", alignItems: "center", fontSize: "16px", gap: "8px" }, children: [
-  /* @__PURE__ */ jsxRuntime.jsx(icons.Calendar, { width: 20, height: 20 }),
-  /* @__PURE__ */ jsxRuntime.jsx("span", { children: "Events" })
-] });
+const PluginIcon = () => (
+  // <div style={{display: 'flex', alignItems: 'center', fontSize: '16px', gap:'8px'}}>
+  //   <Calendar width={20} height={20}/>
+  //   <span>{"Events"}</span>
+  // </div>;
+  /* @__PURE__ */ jsxRuntime.jsx(icons.Calendar, { width: 20, height: 20 })
+);
 const index = {
   register(app) {
     app.addMenuLink({

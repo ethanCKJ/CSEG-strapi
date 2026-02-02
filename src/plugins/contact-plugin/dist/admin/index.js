@@ -26,10 +26,13 @@ const Initializer = ({ setPlugin }) => {
   }, []);
   return null;
 };
-const PluginIcon = () => /* @__PURE__ */ jsxRuntime.jsxs("div", { style: { display: "flex", alignItems: "center", fontSize: "16px", gap: "8px" }, children: [
-  /* @__PURE__ */ jsxRuntime.jsx(icons.Message, { width: 20, height: 20 }),
-  /* @__PURE__ */ jsxRuntime.jsx("span", { children: "Contact messages" })
-] });
+const PluginIcon = () => (
+  // <div style={{display: 'flex', alignItems: 'center', fontSize: '16px', gap:'8px'}}>
+  //   <Message width={20} height={20}/>
+  //   <span>{"Contact messages"}</span>
+  // </div>;
+  /* @__PURE__ */ jsxRuntime.jsx(icons.Message, { width: 20, height: 20 })
+);
 const index = {
   register(app) {
     app.addMenuLink({

@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import { jsxs, jsx } from "react/jsx-runtime";
+import { jsx } from "react/jsx-runtime";
 import { File } from "@strapi/icons";
 const __variableDynamicImportRuntimeHelper = (glob, path, segs) => {
   const v = glob[path];
@@ -25,10 +25,13 @@ const Initializer = ({ setPlugin }) => {
   }, []);
   return null;
 };
-const PluginIcon = () => /* @__PURE__ */ jsxs("div", { style: { display: "flex", alignItems: "center", fontSize: "16px", gap: "8px" }, children: [
-  /* @__PURE__ */ jsx(File, { width: 20, height: 20 }),
-  /* @__PURE__ */ jsx("span", { children: "Publications" })
-] });
+const PluginIcon = () => (
+  // <div style={{display: 'flex', alignItems: 'center', fontSize: '16px', gap:'8px'}}>
+  //   <File width={20} height={20}/>
+  //   <span>{"Publications"}</span>
+  // </div>;
+  /* @__PURE__ */ jsx(File, { width: 20, height: 20 })
+);
 const index = {
   register(app) {
     app.addMenuLink({
