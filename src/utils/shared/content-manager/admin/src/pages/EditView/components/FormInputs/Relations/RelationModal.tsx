@@ -35,7 +35,7 @@ import { type DocumentMeta } from '../../../../../hooks/useDocumentContext';
 import { useDocumentLayout } from '../../../../../hooks/useDocumentLayout';
 import { useLazyGetDocumentQuery } from '../../../../../services/documents';
 import { createYupSchema } from '../../../../../utils/validation';
-import { DocumentActionButton } from '../../../components/DocumentActions';
+import { DocumentActionButton } from '../../DocumentActions';
 import { DocumentStatus } from '../../DocumentStatus';
 import { FormLayout } from '../../FormLayout';
 import { ComponentProvider } from '../ComponentContext';

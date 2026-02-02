@@ -1,9 +1,11 @@
 {
   "extends": "tsconfig/base.json",
-  "include": ["./src"],
+  "include": [
+    "./src"
+  ],
   "compilerOptions": {
     "rootDir": "../",
-    "baseUrl": ".",
+    "baseUrl": "./",
     "types": ["lodash", "jest"],
     "esModuleInterop": true
   }

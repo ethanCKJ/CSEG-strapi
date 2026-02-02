@@ -1,11 +1,12 @@
 {
-  "extends": "./tsconfig",
+  "extends": "./tsconfig.json",
   "compilerOptions": {
     "rootDir": "../",
-    "baseUrl": ".",
+    "baseUrl": "./",
     "outDir": "../dist",
     "noEmit": false
   },
-  "include": ["./src", "./custom.d.ts", "../shared"],
+  "include": [
+    "./src", "./custom.d.ts", "../shared"],
   "exclude": ["node_modules", "**/__mocks__", "./src/**/tests", "**/*.test.*"]
 }
