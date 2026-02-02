@@ -9838,4 +9838,3 @@ const Input = ({
   return /* @__PURE__ */ jsxRuntime.jsx(designSystem.Box, { background: "alternative600", color: "black", padding: 1, children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { variant: "delta", children: attribute?.options?.dividerText || /* @__PURE__ */ jsxRuntime.jsx("hr", {}) }) });
 };
 exports.default = Input;
-//# sourceMappingURL=Input-CE10xWhl.js.map

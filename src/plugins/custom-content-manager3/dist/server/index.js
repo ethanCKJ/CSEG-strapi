@@ -59,4 +59,3 @@ const index = {
   middlewares
 };
 module.exports = index;
-//# sourceMappingURL=index.js.map
