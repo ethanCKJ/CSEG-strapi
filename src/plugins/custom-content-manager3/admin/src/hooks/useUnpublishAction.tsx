@@ -147,7 +147,7 @@ const useUnpublishAction = (
   );
 
   return {
-    label: 'Unpublish',
+    label: 'Take down from public website',
     onClick: handleUnpublish,
     loading: false,
     disabled:

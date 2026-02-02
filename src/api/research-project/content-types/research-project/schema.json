@@ -39,10 +39,6 @@
         "images"
       ]
     },
-    "projectPageContent": {
-      "type": "blocks",
-      "required": true
-    },
     "projectStartDate": {
       "type": "date",
       "required": true
@@ -72,6 +68,24 @@
     },
     "coInvestigatorEmail": {
       "type": "string"
+    },
+    "research_topics": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::event-tag.event-tag",
+      "mappedBy": "research_projects"
+    },
+    "projectPageContent": {
+      "type": "richtext",
+      "required": true
+    },
+    "markdownTemplateDocs": {
+      "type": "customField",
+      "customField": "plugin::documentation-viewer.doc-viewer",
+      "options": {
+        "documentId": "gprskf4rmcwx3fgzfaah77l2",
+        "type": "accordion"
+      }
     }
   }
 }

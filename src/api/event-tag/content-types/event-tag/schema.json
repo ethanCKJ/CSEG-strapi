@@ -33,6 +33,12 @@
       "relation": "manyToMany",
       "target": "api::publication.publication",
       "mappedBy": "topics"
+    },
+    "research_projects": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::research-project.research-project",
+      "inversedBy": "research_topics"
     }
   }
 }

@@ -126,7 +126,7 @@ const usePublishAction = ({
       return null;
     }
     return {
-      label: 'Publish to website',
+      label: 'Publish onto public website',
       onClick: async () => {
         await performPublish();
       },

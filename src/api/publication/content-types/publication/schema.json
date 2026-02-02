@@ -24,6 +24,16 @@
     },
     "publicationDate": {
       "type": "date",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "onPress"
+            },
+            false
+          ]
+        }
+      },
       "required": true
     },
     "topics": {
@@ -36,6 +46,11 @@
       "type": "string",
       "maxLength": 200,
       "unique": true
+    },
+    "onPress": {
+      "type": "boolean",
+      "required": true,
+      "default": false
     }
   }
 }

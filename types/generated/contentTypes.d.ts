@@ -570,6 +570,10 @@ export interface ApiEventTagEventTag extends Struct.CollectionTypeSchema {
       'api::publication.publication'
     >;
     publishedAt: Schema.Attribute.DateTime;
+    research_projects: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::research-project.research-project'
+    >;
     tagName: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique &
@@ -1077,6 +1081,9 @@ export interface ApiPublicationPublication extends Struct.CollectionTypeSchema {
       'api::publication.publication'
     > &
       Schema.Attribute.Private;
+    onPress: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
     publicationDate: Schema.Attribute.Date & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     title: Schema.Attribute.String &
@@ -1117,6 +1124,14 @@ export interface ApiResearchProjectResearchProject
       'api::research-project.research-project'
     > &
       Schema.Attribute.Private;
+    markdownTemplateDocs: Schema.Attribute.String &
+      Schema.Attribute.CustomField<
+        'plugin::documentation-viewer.doc-viewer',
+        {
+          documentId: 'gprskf4rmcwx3fgzfaah77l2';
+          type: 'accordion';
+        }
+      >;
     ongoingProject: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<false>;
@@ -1128,10 +1143,14 @@ export interface ApiResearchProjectResearchProject
     primaryInvestigatorEmail: Schema.Attribute.String &
       Schema.Attribute.Required;
     projectEndDate: Schema.Attribute.Date & Schema.Attribute.Required;
-    projectPageContent: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    projectPageContent: Schema.Attribute.RichText & Schema.Attribute.Required;
     projectPageCoverImage: Schema.Attribute.Media<'images'>;
     projectStartDate: Schema.Attribute.Date & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
+    research_topics: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::event-tag.event-tag'
+    >;
     summary: Schema.Attribute.Text &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{

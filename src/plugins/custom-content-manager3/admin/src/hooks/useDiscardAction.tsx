@@ -25,7 +25,7 @@ const useDiscardAction = (
   }
   return {
     disabled: activeTab === 'published' || document?.status !== 'modified',
-    label: 'Discard modifications',
+    label: 'Discard modifications (replace current draft with published version)',
     icon: <ArrowLeft/>,
     variant: 'warning',
     loading: isLoading,
