@@ -6,7 +6,7 @@ import {
   useTable,
   useQueryParams,
 } from '@strapi/strapi/admin';
-import { Box, ButtonProps, Flex, Typography } from '@strapi/design-system';
+import {Box, Button, ButtonProps, Flex, Typography} from '@strapi/design-system';
 import { WarningCircle } from '@strapi/icons';
 import { useIntl } from 'react-intl';
 
@@ -26,7 +26,8 @@ import {
 import { PublishAction } from './PublishAction';
 
 import type { BulkActionComponent, ContentManagerPlugin } from '../../../../content-manager';
-
+import {ComponentProps} from "react";
+type ButtonComponentProps = ComponentProps<typeof Button>;
 interface BulkActionDescription {
   dialog?: DialogOptions | NotificationOptions | ModalOptions;
   disabled?: boolean;
@@ -40,7 +41,7 @@ interface BulkActionDescription {
   /**
    * @default 'secondary'
    */
-  variant?: ButtonProps['variant'];
+  variant?: ButtonComponentProps['variant'];
 }
 
 /* -------------------------------------------------------------------------------------------------
