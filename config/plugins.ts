@@ -15,7 +15,7 @@ export default ({env}) => ({
   // },
   email: {
     config: {
-      provider: 'nodemailer',
+      provider: '@strapi/provider-email-nodemailer',
       providerOptions: {
         host: 'smtp.gmail.com',
         port: 587,
