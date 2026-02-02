@@ -26,5 +26,7 @@ declare function ListTabbedPage<TFilterValue extends string = string>({ tabsConf
 declare function ProtectedListTabbedPage<TFilterValue extends string = string>(props: ListTabbedPageProps<TFilterValue>): import("react/jsx-runtime").JSX.Element;
 declare const ListMemberApplicationPage: () => import("react/jsx-runtime").JSX.Element;
 declare const ProtectedListMemberApplicationPage: () => import("react/jsx-runtime").JSX.Element;
-export { ListTabbedPage, ProtectedListTabbedPage, ListMemberApplicationPage, ProtectedListMemberApplicationPage };
+declare const ListContactPage: () => import("react/jsx-runtime").JSX.Element;
+declare const ProtectedListContactPage: () => import("react/jsx-runtime").JSX.Element;
+export { ListTabbedPage, ProtectedListTabbedPage, ListMemberApplicationPage, ProtectedListMemberApplicationPage, ListContactPage, ProtectedListContactPage };
 export type { TabConfig, TabsConfig, ListTabbedPageProps };

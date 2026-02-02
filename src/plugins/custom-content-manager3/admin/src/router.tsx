@@ -6,7 +6,7 @@ import { Navigate, PathRouteProps, useParams } from 'react-router-dom';
 import { COLLECTION_TYPES, SINGLE_TYPES } from './constants/collections';
 import { routes as historyRoutes } from './history/routes';
 import { routes as previewRoutes } from './preview/routes';
-import {MEMBER_APPLICATION_MODEL} from "./constants/specialModels";
+import { MEMBER_APPLICATION_MODEL, CONTACT_MODEL } from "./constants/specialModels";
 import { Page } from "@strapi/strapi/admin";
 
 const ProtectedEditViewPage = lazy(() =>
@@ -15,31 +15,16 @@ const ProtectedEditViewPage = lazy(() =>
 const ProtectedListViewPage = lazy(() =>
   import('./pages/ListView/ListViewPage').then((mod) => ({ default: mod.ProtectedListViewPage }))
 );
-// const ProtectedListConfiguration = lazy(() =>
-//   import('./pages/ListConfiguration/ListConfigurationPage').then((mod) => ({
-//     default: mod.ProtectedListConfiguration,
-//   }))
-// );
-// const ProtectedEditConfigurationPage = lazy(() =>
-//   import('./pages/EditConfigurationPage').then((mod) => ({
-//     default: mod.ProtectedEditConfigurationPage,
-//   }))
-// );
-// const ProtectedComponentConfigurationPage = lazy(() =>
-//   import('./pages/ComponentConfigurationPage').then((mod) => ({
-//     default: mod.ProtectedComponentConfigurationPage,
-//   }))
-// );
-const NoPermissions = lazy(() =>
-  import('./pages/NoPermissionsPage').then((mod) => ({ default: mod.NoPermissions }))
-);
-// const NoContentType = lazy(() =>
-//   import('./pages/NoContentTypePage').then((mod) => ({ default: mod.NoContentType }))
-// );
+// ...existing code...
 
 const ProtectedListMemberApplicationPage = lazy(() =>
   import('./pages/ListView/ListTabbedPage').then((mod) => ({ default: mod.ProtectedListMemberApplicationPage }))
 );
+
+const ProtectedListContactPage = lazy(() =>
+  import('./pages/ListView/ListTabbedPage').then((mod) => ({ default: mod.ProtectedListContactPage }))
+);
+
 /**
  * On single collection types (e.g. about page), use the EditViewPage and
  * for collection types (e.g. events), use the ListViewPage.
@@ -54,6 +39,9 @@ const CollectionTypePages = () => {
   }
   if (slug === MEMBER_APPLICATION_MODEL){
     return (<ProtectedListMemberApplicationPage/>);
+  }
+  if (slug === CONTACT_MODEL){
+    return (<ProtectedListContactPage/>);
   }
 
   return collectionType === COLLECTION_TYPES ? (

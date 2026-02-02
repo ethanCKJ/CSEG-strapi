@@ -6,6 +6,10 @@
  */
 export declare const MEMBER_APPLICATION_MODEL = "api::member-application.member-application";
 /**
+ * The content type UID for contact messages
+ */
+export declare const CONTACT_MODEL = "api::contact.contact";
+/**
  * The content type UID for approved members
  */
 export declare const MEMBER_MODEL = "api::member.member";

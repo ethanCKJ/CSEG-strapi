@@ -487,8 +487,37 @@ const ProtectedListMemberApplicationPage = () => {
 };
 
 /* -------------------------------------------------------------------------------------------------
+ * ListContactPage - Uses ListTabbedPage with contact resolved status config
+ * -----------------------------------------------------------------------------------------------*/
+
+const contactTabsConfig: TabsConfig<'true' | 'false'> = {
+  filterField: 'resolved',
+  defaultTab: 'false',
+  ariaLabel: 'View contact messages by resolved status',
+  tabs: [
+    { value: 'false', label: 'Unresolved' },
+    { value: 'true', label: 'Resolved' },
+  ],
+};
+
+const ListContactPage = () => {
+  return <ListTabbedPage tabsConfig={contactTabsConfig} />;
+};
+
+const ProtectedListContactPage = () => {
+  return <ProtectedListTabbedPage tabsConfig={contactTabsConfig} />;
+};
+
+/* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
 
-export { ListTabbedPage, ProtectedListTabbedPage, ListMemberApplicationPage, ProtectedListMemberApplicationPage };
+export {
+  ListTabbedPage,
+  ProtectedListTabbedPage,
+  ListMemberApplicationPage,
+  ProtectedListMemberApplicationPage,
+  ListContactPage,
+  ProtectedListContactPage
+};
 export type { TabConfig, TabsConfig, ListTabbedPageProps };
