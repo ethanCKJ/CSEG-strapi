@@ -57,7 +57,7 @@ import { getRelationLabel } from '../../../../../utils/relations';
 import { getTranslation } from '../../../../../utils/translations';
 import { DocumentStatus } from '../../DocumentStatus';
 import { useComponent } from '../ComponentContext';
-import { RelationModalRenderer, getCollectionType } from '../Relations/RelationModal';
+import { RelationModalRenderer, getCollectionType } from './RelationModal';
 
 import type { FindAvailable } from '../../../../../../../shared/contracts/relations';
 import type { Schema } from '@strapi/types';

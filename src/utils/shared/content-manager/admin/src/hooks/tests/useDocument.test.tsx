@@ -4,7 +4,7 @@ import { renderHook, server, waitFor, screen } from '@tests/utils';
 import { rest } from 'msw';
 import { Route, Routes } from 'react-router-dom';
 
-import { mockData } from '../../../tests/mockData';
+import { mockData } from '@tests/mockData';
 import { useDocument, useDoc } from '../useDocument';
 
 describe('useDocument', () => {

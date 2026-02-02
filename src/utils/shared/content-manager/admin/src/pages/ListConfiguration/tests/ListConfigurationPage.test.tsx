@@ -1,7 +1,7 @@
 import { fireEvent, waitFor, render as renderRTL, screen } from '@tests/utils';
 import { Route, Routes, useLocation } from 'react-router-dom';
 
-import { mockData } from '../../../../tests/mockData';
+import { mockData } from '@tests/mockData';
 import { ListConfiguration } from '../ListConfigurationPage';
 
 const LocationDisplay = () => {
