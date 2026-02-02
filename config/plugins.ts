@@ -55,6 +55,9 @@ export default ({env}) => ({
     enabled: false,
     resolve: './src/plugins/tester-plugin',
   },
+  'shared':{
+    enabled: false,
+  },
   'events-plugin':{
     enabled: true,
     resolve: './src/plugins/events-plugin'
