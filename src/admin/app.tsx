@@ -9,10 +9,13 @@ const injectStyles = () => {
         width: 180px !important;
       }
     }
-    a[href="/admin/content-manager"] {
+    a[href="/admin/content-manager"]:not(.exclude-hiding) {
       display: none;
     }
     a[href="/admin/plugins/cloud"] {
+      display: none;
+    }
+    a[href="/admin/plugins/upload"]:not(.exclude-hiding) {
       display: none;
     }
     html {

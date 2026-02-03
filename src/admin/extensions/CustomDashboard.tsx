@@ -86,7 +86,7 @@ export function CustomDashboard() {
           {/*</Grid.Root>*/}
           {userData?.isSuperAdmin &&
                 <Box padding={4} borderColor={"warning500"}>
-                    <Link href="/admin/content-manager/" paddingBottom={2} target={"_blank"}>
+                    <Link href="/admin/content-manager/" paddingBottom={2} target={"_blank"} className={"exclude-hiding"}>
                       Content manager
                     </Link>
                     <Typography display="block">
@@ -95,6 +95,15 @@ export function CustomDashboard() {
                         <li>1. The custom content manager does not work and you need an override.</li>
                         <li>2. You need to modify the topics assigned to events/publications/research projects </li>
                         <li>3. You need to static webpage content e.g. homepage picture</li>
+                      </ol>
+                    </Typography>
+                  <Link href="/admin/plugins/upload" paddingBottom={2} target={"_blank"} className={"exclude-hiding"}>
+                      Media library
+                    </Link>
+                    <Typography display="block">
+                      Use this link if
+                      <ol>
+                        <li>1. You need to see all files in the media library and edit folders</li>
                       </ol>
                     </Typography>
                 </Box>}
