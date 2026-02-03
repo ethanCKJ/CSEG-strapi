@@ -26,13 +26,10 @@ const Initializer = ({ setPlugin }) => {
   }, []);
   return null;
 };
-const PluginIcon = () => (
-  // <div style={{display: 'flex', alignItems: 'center', fontSize: '16px', gap:'8px'}}>
-  //   <Walk width={20} height={20}/>
-  //   <span>{"New members"}</span>
-  // </div>;
-  /* @__PURE__ */ jsxRuntime.jsx(icons.Walk, { width: 20, height: 20 })
-);
+const PluginIcon = () => /* @__PURE__ */ jsxRuntime.jsxs("div", { style: { display: "flex", alignItems: "center", fontSize: "16px", gap: "8px" }, children: [
+  /* @__PURE__ */ jsxRuntime.jsx(icons.Walk, { width: 20, height: 20 }),
+  /* @__PURE__ */ jsxRuntime.jsx("span", { children: "New members" })
+] });
 const index = {
   register(app) {
     app.addMenuLink({

@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import { jsx } from "react/jsx-runtime";
+import { jsxs, jsx } from "react/jsx-runtime";
 import { Calendar } from "@strapi/icons";
 const __variableDynamicImportRuntimeHelper = (glob, path, segs) => {
   const v = glob[path];
@@ -25,13 +25,10 @@ const Initializer = ({ setPlugin }) => {
   }, []);
   return null;
 };
-const PluginIcon = () => (
-  // <div style={{display: 'flex', alignItems: 'center', fontSize: '16px', gap:'8px'}}>
-  //   <Calendar width={20} height={20}/>
-  //   <span>{"Events"}</span>
-  // </div>;
-  /* @__PURE__ */ jsx(Calendar, { width: 20, height: 20 })
-);
+const PluginIcon = () => /* @__PURE__ */ jsxs("div", { style: { display: "flex", alignItems: "center", fontSize: "16px", gap: "8px" }, children: [
+  /* @__PURE__ */ jsx(Calendar, { width: 20, height: 20 }),
+  /* @__PURE__ */ jsx("span", { children: "Events" })
+] });
 const index = {
   register(app) {
     app.addMenuLink({
