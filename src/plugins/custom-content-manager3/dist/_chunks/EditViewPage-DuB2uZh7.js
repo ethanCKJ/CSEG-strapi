@@ -27,7 +27,7 @@ const designSystem = require("@strapi/design-system");
 const reactIntl = require("react-intl");
 const reactRouterDom = require("react-router-dom");
 const styledComponents = require("styled-components");
-const index = require("./index-DwujH_yg.js");
+const index = require("./index-CcsyhobK.js");
 const React = require("react");
 const yup = require("yup");
 const fractionalIndexing = require("fractional-indexing");
@@ -11495,7 +11495,7 @@ const EventActionPanel = ({
     }
   };
   return /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { onClick: handleEmailTemplates, loading: loadingTemplates, children: "Generate Email Templates" }),
+    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { onClick: handleEmailTemplates, loading: loadingTemplates, startIcon: /* @__PURE__ */ jsxRuntime.jsx(Icons.Mail, {}), children: "Setup email reminders" }),
     /* @__PURE__ */ jsxRuntime.jsx(
       StandardActionPanel,
       {

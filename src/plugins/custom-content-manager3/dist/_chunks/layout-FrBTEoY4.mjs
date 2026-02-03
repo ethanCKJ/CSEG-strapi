@@ -1,23 +1,21 @@
-"use strict";
-Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
-const jsxRuntime = require("react/jsx-runtime");
-const admin = require("@strapi/strapi/admin");
-const reactRouterDom = require("react-router-dom");
-const designSystem = require("@strapi/design-system");
-require("@strapi/icons");
-const styledComponents = require("styled-components");
-require("react-intl");
-require("./EditViewPage-B5Qcms7X.js");
-const reactDnd = require("react-dnd");
-const reactDndHtml5Backend = require("react-dnd-html5-backend");
-const ActionBox = styledComponents.styled(designSystem.Flex)`
+import { jsxs, Fragment, jsx } from "react/jsx-runtime";
+import { Page } from "@strapi/strapi/admin";
+import { Outlet } from "react-router-dom";
+import { Flex, darkTheme, DesignSystemProvider } from "@strapi/design-system";
+import "@strapi/icons";
+import { styled, useTheme, StyleSheetManager } from "styled-components";
+import "react-intl";
+import "./EditViewPage-B1oiBYhR.mjs";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+const ActionBox = styled(Flex)`
   height: ${({ theme }) => theme.spaces[7]};
 
   &:last-child {
     padding: 0 ${({ theme }) => theme.spaces[3]};
   }
 `;
-styledComponents.styled(ActionBox)`
+styled(ActionBox)`
   border-right: 1px solid ${({ theme }) => theme.colors.primary200};
 
   svg {
@@ -25,7 +23,7 @@ styledComponents.styled(ActionBox)`
     height: 1.2rem;
   }
 `;
-styledComponents.styled(designSystem.Flex)`
+styled(Flex)`
   border: 1px solid
     ${({ theme, $isSibling }) => $isSibling ? theme.colors.neutral150 : theme.colors.primary200};
 
@@ -38,7 +36,7 @@ styledComponents.styled(designSystem.Flex)`
     }
   }
 `;
-styledComponents.styled(designSystem.Flex)`
+styled(Flex)`
   border-radius: 50%;
 
   svg {
@@ -49,7 +47,7 @@ styledComponents.styled(designSystem.Flex)`
     }
   }
 `;
-styledComponents.styled.button`
+styled.button`
   border: none;
   background: transparent;
   display: block;
@@ -72,12 +70,12 @@ var isPropValid = /* @__PURE__ */ memoize(
   /* Z+1 */
 );
 const Layout = () => {
-  const parentTheme = styledComponents.useTheme();
-  const mergedTheme = { ...designSystem.darkTheme, sizes: parentTheme.sizes };
-  return /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-    /* @__PURE__ */ jsxRuntime.jsx(admin.Page.Title, { children: "Custom Content Manager" }),
-    /* @__PURE__ */ jsxRuntime.jsx(
-      styledComponents.StyleSheetManager,
+  const parentTheme = useTheme();
+  const mergedTheme = { ...parentTheme, fontSizes: darkTheme.fontSizes };
+  return /* @__PURE__ */ jsxs(Fragment, { children: [
+    /* @__PURE__ */ jsx(Page.Title, { children: "Custom Content Manager" }),
+    /* @__PURE__ */ jsx(
+      StyleSheetManager,
       {
         shouldForwardProp: (propName, elementToBeCreated) => {
           if (typeof elementToBeCreated === "string") {
@@ -85,9 +83,11 @@ const Layout = () => {
           }
           return true;
         },
-        children: /* @__PURE__ */ jsxRuntime.jsx(reactDnd.DndProvider, { backend: reactDndHtml5Backend.HTML5Backend, children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.DesignSystemProvider, { theme: mergedTheme, locale: "en-GB", children: /* @__PURE__ */ jsxRuntime.jsx(reactRouterDom.Outlet, {}) }) })
+        children: /* @__PURE__ */ jsx(DndProvider, { backend: HTML5Backend, children: /* @__PURE__ */ jsx(DesignSystemProvider, { theme: mergedTheme, locale: "en-GB", children: /* @__PURE__ */ jsx(Outlet, {}) }) })
       }
     )
   ] });
 };
-exports.Layout = Layout;
+export {
+  Layout
+};

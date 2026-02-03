@@ -81,16 +81,16 @@ const NoPermissions = () => {
   ] });
 };
 const ProtectedEditViewPage = React.lazy(
-  () => Promise.resolve().then(() => require("./EditViewPage-B5Qcms7X.js")).then((n) => n.EditViewPage).then((mod) => ({ default: mod.ProtectedEditViewPage }))
+  () => Promise.resolve().then(() => require("./EditViewPage-DuB2uZh7.js")).then((n) => n.EditViewPage).then((mod) => ({ default: mod.ProtectedEditViewPage }))
 );
 const ProtectedListViewPage = React.lazy(
-  () => Promise.resolve().then(() => require("./ListViewPage-sOl5JLnD.js")).then((mod) => ({ default: mod.ProtectedListViewPage }))
+  () => Promise.resolve().then(() => require("./ListViewPage-CBq91QJ0.js")).then((mod) => ({ default: mod.ProtectedListViewPage }))
 );
 const ProtectedListMemberApplicationPage = React.lazy(
-  () => Promise.resolve().then(() => require("./ListTabbedPage-Cfrrqevb.js")).then((mod) => ({ default: mod.ProtectedListMemberApplicationPage }))
+  () => Promise.resolve().then(() => require("./ListTabbedPage-Df-iH86P.js")).then((mod) => ({ default: mod.ProtectedListMemberApplicationPage }))
 );
 const ProtectedListContactPage = React.lazy(
-  () => Promise.resolve().then(() => require("./ListTabbedPage-Cfrrqevb.js")).then((mod) => ({ default: mod.ProtectedListContactPage }))
+  () => Promise.resolve().then(() => require("./ListTabbedPage-Df-iH86P.js")).then((mod) => ({ default: mod.ProtectedListContactPage }))
 );
 const CollectionTypePages = () => {
   const { collectionType, slug } = reactRouterDom.useParams();
@@ -281,7 +281,7 @@ const index = {
     app.router.addRoute({
       path: "plugins/custom-content-manager3/*",
       lazy: async () => {
-        const { Layout } = await Promise.resolve().then(() => require("./layout-Dp9TONIt.js"));
+        const { Layout } = await Promise.resolve().then(() => require("./layout-B31rfz6u.js"));
         return {
           Component: Layout
         };

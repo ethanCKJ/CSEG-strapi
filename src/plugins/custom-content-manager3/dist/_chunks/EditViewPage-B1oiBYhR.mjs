@@ -4,7 +4,7 @@ import { Status, Typography, Button, Dialog, Modal, Tabs, Flex, IconButton, Text
 import { useIntl } from "react-intl";
 import { useParams, useNavigate, useLocation, useMatch } from "react-router-dom";
 import { styled, css, createGlobalStyle, keyframes } from "styled-components";
-import { S as SINGLE_TYPES, g as getTranslation, C as COLLECTION_TYPES, a as CLONE_PATH, L as LIST_PATH, M as MEMBER_APPLICATION_MODEL, A as APPLICATION_STATUS, E as EVENT_MODEL } from "./index-C26PLF82.mjs";
+import { S as SINGLE_TYPES, g as getTranslation, C as COLLECTION_TYPES, a as CLONE_PATH, L as LIST_PATH, M as MEMBER_APPLICATION_MODEL, A as APPLICATION_STATUS, E as EVENT_MODEL } from "./index-0CKMdxK6.mjs";
 import * as React from "react";
 import React__default, { useState, useEffect, useCallback, useRef } from "react";
 import * as yup from "yup";
@@ -14,7 +14,7 @@ import pipe$1 from "lodash/fp/pipe";
 import qs, { stringify } from "qs";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import * as Icons from "@strapi/icons";
-import { ArrowLineLeft, ArrowLeft, ArrowsOut, WarningCircle, CodeBlock as CodeBlock$1, HeadingSix, HeadingFive, HeadingFour, HeadingThree, HeadingTwo, HeadingOne, Image as Image$1, BulletList, NumberList, Paragraph, Quotes, More, Link as Link$1, Drag, Collapse, Code, StrikeThrough, Underline, Italic, Bold, Expand, PlusCircle, Plus, Trash, ArrowClockwise, Cross, CheckCircle, Loader as Loader$1 } from "@strapi/icons";
+import { ArrowLineLeft, ArrowLeft, ArrowsOut, WarningCircle, CodeBlock as CodeBlock$1, HeadingSix, HeadingFive, HeadingFour, HeadingThree, HeadingTwo, HeadingOne, Image as Image$1, BulletList, NumberList, Paragraph, Quotes, More, Link as Link$1, Drag, Collapse, Code, StrikeThrough, Underline, Italic, Bold, Expand, PlusCircle, Plus, Trash, ArrowClockwise, Cross, CheckCircle, Loader as Loader$1, Mail } from "@strapi/icons";
 import { intervalToDuration, isPast } from "date-fns";
 import mapValues from "lodash/fp/mapValues";
 import "lodash/get";
@@ -11435,7 +11435,7 @@ const EventActionPanel = ({
     }
   };
   return /* @__PURE__ */ jsxs(Fragment, { children: [
-    /* @__PURE__ */ jsx(Button, { onClick: handleEmailTemplates, loading: loadingTemplates, children: "Generate Email Templates" }),
+    /* @__PURE__ */ jsx(Button, { onClick: handleEmailTemplates, loading: loadingTemplates, startIcon: /* @__PURE__ */ jsx(Mail, {}), children: "Setup email reminders" }),
     /* @__PURE__ */ jsx(
       StandardActionPanel,
       {
