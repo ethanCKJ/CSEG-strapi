@@ -7,7 +7,7 @@
     "displayName": "Home page"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
@@ -20,67 +20,7 @@
       ]
     },
     "HeroText": {
-      "type": "blocks",
-      "required": true
-    },
-    "PublicationsCardImage": {
-      "type": "media",
-      "multiple": false,
-      "required": true,
-      "allowedTypes": [
-        "images"
-      ]
-    },
-    "PublicationsCardText": {
-      "type": "text",
-      "required": true
-    },
-    "ResearchProjectsCardImage": {
-      "type": "media",
-      "multiple": false,
-      "required": true,
-      "allowedTypes": [
-        "images"
-      ]
-    },
-    "ResearchProjectsCardText": {
-      "type": "text",
-      "required": true
-    },
-    "AboutUsCardImage": {
-      "type": "media",
-      "multiple": false,
-      "required": true,
-      "allowedTypes": [
-        "images"
-      ]
-    },
-    "AboutUsCardText": {
-      "type": "text",
-      "required": true
-    },
-    "JoinUsCardImage": {
-      "type": "media",
-      "multiple": false,
-      "required": true,
-      "allowedTypes": [
-        "images"
-      ]
-    },
-    "JoinUsCardText": {
-      "type": "text",
-      "required": true
-    },
-    "ContactUsCardImage": {
-      "type": "media",
-      "multiple": false,
-      "required": true,
-      "allowedTypes": [
-        "images"
-      ]
-    },
-    "ContactUsCardText": {
-      "type": "text",
+      "type": "richtext",
       "required": true
     }
   }

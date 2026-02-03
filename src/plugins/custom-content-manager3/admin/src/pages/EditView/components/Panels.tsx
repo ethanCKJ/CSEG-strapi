@@ -1,11 +1,16 @@
 import * as React from 'react';
 
 import {useFetchClient, useForm, useQueryParams,} from '@strapi/strapi/admin';
-import {Button, Flex, MenuItem, Radio, SimpleMenu, Typography} from '@strapi/design-system';
-import {InjectionZone} from '../../../components/InjectionZone';
+import {
+  Accordion,
+  Button,
+  Flex,
+  MenuItem,
+  Radio,
+  SimpleMenu,
+  Typography
+} from '@strapi/design-system';
 import {Document, useDoc} from '../../../hooks/useDocument';
-
-import type {DocumentActionProps, PanelComponent,} from '../../../content-manager';
 import {PublishButton} from "../../../action-buttons/PublishButton";
 import {UpdateButton} from "../../../action-buttons/UpdateButton";
 import {useDeleteAction} from "../../../hooks/useDeleteAction";
@@ -27,7 +32,7 @@ import {
   renderLodashStyleTemplate
 } from "../utils/panelUtil";
 import {useGetAllDocumentsQuery} from "../../../services/documents";
-import { Accordion } from "@strapi/design-system";
+import {Mail} from "@strapi/icons"
 
 interface PanelDescription {
   title: string;
@@ -285,7 +290,7 @@ const EventActionPanel = ({
 
   return (
     <>
-      {<Button onClick={handleEmailTemplates} loading={loadingTemplates}>Generate Email Templates</Button>}
+      {<Button onClick={handleEmailTemplates} loading={loadingTemplates} startIcon={<Mail/>}>Setup email reminders</Button>}
       <StandardActionPanel
         model={model}
         documentId={documentId}

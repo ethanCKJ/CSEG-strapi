@@ -691,7 +691,9 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
           type: 'accordion';
         }
       >;
-    eventEndTime: Schema.Attribute.Time & Schema.Attribute.Required;
+    eventEndTime: Schema.Attribute.Time &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'09:00:00.000'>;
     eventFormat: Schema.Attribute.Enumeration<
       [
         'Online only event',
@@ -702,7 +704,9 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'Online only event'>;
     eventPage: Schema.Attribute.RichText & Schema.Attribute.Required;
-    eventStartTime: Schema.Attribute.Time & Schema.Attribute.Required;
+    eventStartTime: Schema.Attribute.Time &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'09:00:00.000'>;
     eventType: Schema.Attribute.Enumeration<
       ['Teaching Hour', 'Reading Group', 'Workshop', 'Big Event', 'Other']
     > &
@@ -794,7 +798,6 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    defaultSeo: Schema.Attribute.Component<'shared.seo', false>;
     favicon: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -819,36 +822,21 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
     singularName: 'home-page';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
-    AboutUsCardImage: Schema.Attribute.Media<'images'> &
-      Schema.Attribute.Required;
-    AboutUsCardText: Schema.Attribute.Text & Schema.Attribute.Required;
-    ContactUsCardImage: Schema.Attribute.Media<'images'> &
-      Schema.Attribute.Required;
-    ContactUsCardText: Schema.Attribute.Text & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     HeroImage: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
-    HeroText: Schema.Attribute.Blocks & Schema.Attribute.Required;
-    JoinUsCardImage: Schema.Attribute.Media<'images'> &
-      Schema.Attribute.Required;
-    JoinUsCardText: Schema.Attribute.Text & Schema.Attribute.Required;
+    HeroText: Schema.Attribute.RichText & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::home-page.home-page'
     > &
       Schema.Attribute.Private;
-    PublicationsCardImage: Schema.Attribute.Media<'images'> &
-      Schema.Attribute.Required;
-    PublicationsCardText: Schema.Attribute.Text & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    ResearchProjectsCardImage: Schema.Attribute.Media<'images'> &
-      Schema.Attribute.Required;
-    ResearchProjectsCardText: Schema.Attribute.Text & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1758,7 +1746,6 @@ export interface PluginUsersPermissionsUser
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    testcomponent: Schema.Attribute.Component<'shared.rich-text', false>;
     TestEnumeration: Schema.Attribute.Enumeration<
       ['item1', 'item2', 'item3', 'item4', 'item5', 'item6']
     >;

@@ -80,11 +80,6 @@
         "item6"
       ]
     },
-    "testcomponent": {
-      "type": "component",
-      "component": "shared.rich-text",
-      "repeatable": false
-    },
     "documentation": {
       "type": "relation",
       "relation": "oneToOne",

@@ -101,7 +101,7 @@ const Layout = () => {
   //   );
   // }
   const parentTheme = useTheme();
-  const mergedTheme = {...darkTheme, sizes:parentTheme.sizes}
+  const mergedTheme = {...parentTheme, fontSizes: darkTheme.fontSizes}
 
   return (
     <>

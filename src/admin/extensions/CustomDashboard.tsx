@@ -1,6 +1,7 @@
 import React from 'react'
 import {Box, Typography, DesignSystemProvider, darkTheme, Flex, Accordion, Link, Grid} from "@strapi/design-system";
 import {Page, useFetchClient} from "@strapi/strapi/admin";
+import {useTheme} from "styled-components";
 
 
 type Role = {
@@ -73,9 +74,10 @@ export function CustomDashboard() {
     return <Box>Error loading user data</Box>
   }
 
-
+  const parentTheme = useTheme();
+  const mergedTheme = {...parentTheme, fontSizes: darkTheme.fontSizes}
   return (
-      <DesignSystemProvider theme={darkTheme}>
+      <DesignSystemProvider theme={mergedTheme}>
         <Box padding={4}>
           <Flex direction={"column"} alignItems={"flex-start"} paddingBottom={4}>
             <Typography variant={"alpha"}>{`Welcome ${userData?.firstname ?? 'User'}`}</Typography>
