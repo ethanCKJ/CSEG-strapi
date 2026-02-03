@@ -23,11 +23,13 @@
     },
     "eventStartTime": {
       "type": "time",
-      "required": true
+      "required": true,
+      "default": "09:00:00.000"
     },
     "eventEndTime": {
       "type": "time",
-      "required": true
+      "required": true,
+      "default": "09:00:00.000"
     },
     "location": {
       "type": "string",
@@ -74,7 +76,7 @@
           ]
         }
       },
-      "inversedBy": "events"
+      "inversedBy": "events",
     },
     "emailSubject1": {
       "type": "string",
