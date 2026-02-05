@@ -3,6 +3,7 @@ import {contactMiddleware} from "./utils/contact-middleware";
 import {memberApplicationMiddleware} from "./utils/member-application-middleware";
 import {eventNotificationMiddleware} from "./utils/document-service-middlewares";
 import {eventICSMiddleware} from "./utils/eventICSMiddleware";
+import {validateRelations} from "./utils/required-relations-custom";
 
 // ============================================================================
 // OLD CODE - COMMENTED OUT FOR REFERENCE
@@ -314,5 +315,18 @@ export default {
    * This gives you an opportunity to set up your data model,
    * run jobs, or perform some special logic.
    */
-  bootstrap(/* { strapi }: { strapi: Core.Strapi } */) {},
+  bootstrap({ strapi }: { strapi: Core.Strapi } ) {
+    strapi.db.lifecycles.subscribe({
+      async beforeCreate(event) {
+        await validateRelations(event, strapi);
+      },
+      async beforeUpdate(event) {
+        await validateRelations(event, strapi);
+      },
+    });
+  }
 };
+
+
+
+

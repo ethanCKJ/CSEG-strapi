@@ -751,7 +751,8 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     open_to: Schema.Attribute.Relation<
       'manyToMany',
       'api::member-type.member-type'
-    >;
+    > &
+      Schema.Attribute.Required;
     privateNotes: Schema.Attribute.Text & Schema.Attribute.Private;
     public_event_mailing_lists: Schema.Attribute.Relation<
       'manyToMany',

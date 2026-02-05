@@ -1,5 +1,3 @@
-import {env} from "@strapi/utils";
-
 export default ({env}) => ({
   // email: {
   //   config: {
