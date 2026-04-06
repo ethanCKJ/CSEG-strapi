@@ -351,10 +351,6 @@ const ListViewPage = () => {
                 <Table.Body>
                   {results.map((row) => {
                     // console.log(row);
-                    if (row.publishedAt !== null){
-                      console.log("Alert", row);
-                    }
-                    console.log(row)
                     return (
                       <Table.Row
                         cursor="pointer"

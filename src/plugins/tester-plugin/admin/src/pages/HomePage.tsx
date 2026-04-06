@@ -19,12 +19,9 @@ const HomePage = () => {
   const { isLoading, allowedActions } = useRBAC(pluginPermissions);
 
   const state = useStrapiApp("HomePage", (state) => state);
-  console.log('Strapi App State:', state);
-
   if (isLoading){
     return <Page.Loading></Page.Loading>
   }
-  console.log('Allowed Actions:', allowedActions);
   return (
     <Page.Main>
       <h1>Welcome to 1 {formatMessage({ id: getTranslation('plugin.name') })}</h1>

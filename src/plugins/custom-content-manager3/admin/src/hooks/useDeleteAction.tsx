@@ -53,7 +53,6 @@ const useDeleteAction = (
   const { toggleNotification } = useNotification();
   const setSubmitting = useForm('DeleteAction', (state) => state.setSubmitting);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = React.useState(false);
-  console.log("listViewPathMatch", listViewPathMatch);
 
   const handleDelete = async () => {
     /**

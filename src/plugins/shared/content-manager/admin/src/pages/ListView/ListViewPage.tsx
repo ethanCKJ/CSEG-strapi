@@ -68,7 +68,6 @@ const LayoutsHeaderCustom = styled(Layouts.Header)`
 `;
 
 const ListViewPage = () => {
-  console.log('Rendering ListViewPage');
   const { trackUsage } = useTracking();
   const navigate = useNavigate();
   const { formatMessage } = useIntl();
@@ -79,9 +78,7 @@ const ListViewPage = () => {
   const model ='api::event.event';
   const collectionType= 'collection-types';
   const {schema} = useContentTypeSchema(model);
-  console.log('schema',schema)
   const { list} = useDocumentLayout(model);
-  console.log('list',list)
 
   const [displayedHeaders, setDisplayedHeaders] = React.useState<ListFieldLayout[]>([]);
 

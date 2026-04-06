@@ -586,39 +586,6 @@ export interface ApiEventTagEventTag extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiEventTypeEventType extends Struct.CollectionTypeSchema {
-  collectionName: 'event_types';
-  info: {
-    displayName: 'Types of events';
-    pluralName: 'event-types';
-    singularName: 'event-type';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    EventType: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 30;
-      }>;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::event-type.event-type'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiEventEvent extends Struct.CollectionTypeSchema {
   collectionName: 'events';
   info: {
@@ -1070,9 +1037,6 @@ export interface ApiPublicationPublication extends Struct.CollectionTypeSchema {
       'api::publication.publication'
     > &
       Schema.Attribute.Private;
-    onPress: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<false>;
     publicationDate: Schema.Attribute.Date & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     title: Schema.Attribute.String &
@@ -1777,7 +1741,6 @@ declare module '@strapi/strapi' {
       'api::contact.contact': ApiContactContact;
       'api::documentation.documentation': ApiDocumentationDocumentation;
       'api::event-tag.event-tag': ApiEventTagEventTag;
-      'api::event-type.event-type': ApiEventTypeEventType;
       'api::event.event': ApiEventEvent;
       'api::global.global': ApiGlobalGlobal;
       'api::home-page.home-page': ApiHomePageHomePage;

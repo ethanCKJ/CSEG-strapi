@@ -41,7 +41,6 @@ export function CustomDashboard() {
         const data = res.data.data;
         const roleNames = []
         let isSuperAdmin = false;
-        console.log(data);
         for (const role of data.roles){
           if (role.code === 'strapi-super-admin'){
             isSuperAdmin = true;

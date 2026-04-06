@@ -51,7 +51,6 @@ const useSendEmailAction = (
   const modified = useForm('sendEmailAction', ({modified}) => modified);
   const documentForm = useForm('sendEmailAction', ({values}) => values);
   const emailCount = (documentForm?.emailCount as number) || 0;
-  console.log('documentForm',documentForm)
   // Early return if model parsing failed
   if (!modelSingular) {
     console.error('useSendEmailAction: Unable to parse model name from:', model);

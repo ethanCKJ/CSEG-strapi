@@ -32,6 +32,25 @@ export const memberApplicationMiddleware = () => {
             member_type: applicationData.member_type ?? undefined,
           }
         });
+
+        try {
+          const subject = `Welcome ${escapeHTML(applicationData.preferredName)} to CSEG`;
+          const html = `Dear applicant,
+          
+          Congratulations! Your application to join CSEG has been approved. 
+          
+          Looking forward to see you at our next event.
+          Regards,
+          CSEG Organisers`;
+
+          await strapi.plugin('email').service('email').send({
+            to: applicationData.email,
+            subject: subject,
+            html: html.replace(/\r\n|\r|\n/g, "<br/>"),
+          });
+        } catch (error) {
+          strapi.log.error('Failed to send member application notification email:', error);
+        }
       } catch (error) {
         strapi.log.error('Failed to create member from approved application:', error);
         // Continue with update even if member creation fails

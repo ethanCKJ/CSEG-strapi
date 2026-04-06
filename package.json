@@ -37,7 +37,8 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "baseline-browser-mapping": "^2.9.14",
-    "typescript": "^5"
+    "typescript": "^5",
+    "@strapi/sdk-plugin": "^5.4.0"
   },
   "engines": {
     "node": ">=20.0.0 <=24.x.x",

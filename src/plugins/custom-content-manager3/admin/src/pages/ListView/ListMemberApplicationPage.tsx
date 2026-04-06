@@ -177,8 +177,6 @@ const ListMemberApplicationPage = () => {
       applicationStatus: tab,
     }
   });
-  console.log('query', query);
-
   const params = React.useMemo(() => buildValidParams(query), [query]);
   const { data, error, isFetching } = useGetAllDocumentsQuery({
     model,
@@ -274,7 +272,6 @@ const ListMemberApplicationPage = () => {
   }
 
   const contentTypeTitle = schema?.info.displayName ?  schema.info.displayName : 'Untitled'
-  console.log("ListMemberApplicationPage contentTypeTitle:", contentTypeTitle);
 
   const handleRowClick = (id: Modules.Documents.ID) => () => {
     navigate({
@@ -464,7 +461,6 @@ const ProtectedListMemberApplicationPage = () => {
   if (!slug) {
     return <Page.Error />;
   }
-  console.log("ProtectedListMemberApplicationPage before return")
 
   return (
     <ListMemberApplicationPage />

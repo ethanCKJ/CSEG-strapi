@@ -84,7 +84,6 @@ const useUnpublishAction = (
       console.error(
         "You're trying to unpublish a document without an id, this is likely a bug with Strapi. Please open an issue."
       );
-      console.log("documentId", documentId, "collectionType", collectionType);
 
       toggleNotification({
         message: 'An error occurred while trying to unpublish the document.',

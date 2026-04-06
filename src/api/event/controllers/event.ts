@@ -29,7 +29,6 @@ export default factories.createCoreController('api::event.event', ({strapi}) => 
        * @param ctx
        */
   async sendEmail(ctx) {
-    console.log(ctx.request.body);
     // try {
     //   const {documentId} = ctx.request.body;
     //   if (!documentId){

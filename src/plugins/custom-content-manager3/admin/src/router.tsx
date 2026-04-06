@@ -34,7 +34,6 @@ const ProtectedListContactPage = lazy(() =>
 const CollectionTypePages = () => {
 
   const {collectionType, slug} = useParams<{ collectionType: string, slug: string }>();
-  console.log('In router.tsx with params:', {collectionType, slug});
   if (collectionType !== COLLECTION_TYPES && collectionType !== SINGLE_TYPES) {
     return <Page.Error />;
   }
