@@ -1,10 +1,9 @@
-"use strict";
-const toolkit = require("@reduxjs/toolkit");
-const jsxRuntime = require("react/jsx-runtime");
-const React = require("react");
-const reactRouterDom = require("react-router-dom");
-const admin = require("@strapi/strapi/admin");
-require("prismjs");
+import { createSlice, combineReducers } from "@reduxjs/toolkit";
+import { jsxs, Fragment, jsx } from "react/jsx-runtime";
+import { lazy } from "react";
+import { useParams } from "react-router-dom";
+import { Layouts, Page } from "@strapi/strapi/admin";
+import "prismjs";
 const __variableDynamicImportRuntimeHelper = (glob, path, segs) => {
   const v = glob[path];
   if (v) {
@@ -30,7 +29,7 @@ const initialState = {
   singleTypeLinks: [],
   isLoading: true
 };
-const appSlice = toolkit.createSlice({
+const appSlice = createSlice({
   name: "app",
   initialState,
   reducers: {
@@ -55,7 +54,7 @@ const appSlice = toolkit.createSlice({
 });
 const { actions, reducer: reducer$1 } = appSlice;
 const { setInitialData } = actions;
-const reducer = toolkit.combineReducers({
+const reducer = combineReducers({
   app: reducer$1
 });
 const SINGLE_TYPES = "single-types";
@@ -70,41 +69,40 @@ const APPLICATION_STATUS = {
 const ADMIN_HIDDEN_FIELDS = ["applicationStatus"];
 const EVENT_MODEL = "api::event.event";
 const NoPermissions = () => {
-  return /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-    /* @__PURE__ */ jsxRuntime.jsx(
-      admin.Layouts.Header,
+  return /* @__PURE__ */ jsxs(Fragment, { children: [
+    /* @__PURE__ */ jsx(
+      Layouts.Header,
       {
         title: "Content"
       }
     ),
-    /* @__PURE__ */ jsxRuntime.jsx(admin.Layouts.Content, { children: /* @__PURE__ */ jsxRuntime.jsx(admin.Page.NoPermissions, {}) })
+    /* @__PURE__ */ jsx(Layouts.Content, { children: /* @__PURE__ */ jsx(Page.NoPermissions, {}) })
   ] });
 };
-const ProtectedEditViewPage = React.lazy(
-  () => Promise.resolve().then(() => require("./EditViewPage-DuB2uZh7.js")).then((n) => n.EditViewPage).then((mod) => ({ default: mod.ProtectedEditViewPage }))
+const ProtectedEditViewPage = lazy(
+  () => import("./EditViewPage-DeV7GvMh.mjs").then((n) => n.E).then((mod) => ({ default: mod.ProtectedEditViewPage }))
 );
-const ProtectedListViewPage = React.lazy(
-  () => Promise.resolve().then(() => require("./ListViewPage-CBq91QJ0.js")).then((mod) => ({ default: mod.ProtectedListViewPage }))
+const ProtectedListViewPage = lazy(
+  () => import("./ListViewPage-B2jEy-Q6.mjs").then((mod) => ({ default: mod.ProtectedListViewPage }))
 );
-const ProtectedListMemberApplicationPage = React.lazy(
-  () => Promise.resolve().then(() => require("./ListTabbedPage-Df-iH86P.js")).then((mod) => ({ default: mod.ProtectedListMemberApplicationPage }))
+const ProtectedListMemberApplicationPage = lazy(
+  () => import("./ListTabbedPage-CXDrVWHp.mjs").then((mod) => ({ default: mod.ProtectedListMemberApplicationPage }))
 );
-const ProtectedListContactPage = React.lazy(
-  () => Promise.resolve().then(() => require("./ListTabbedPage-Df-iH86P.js")).then((mod) => ({ default: mod.ProtectedListContactPage }))
+const ProtectedListContactPage = lazy(
+  () => import("./ListTabbedPage-CXDrVWHp.mjs").then((mod) => ({ default: mod.ProtectedListContactPage }))
 );
 const CollectionTypePages = () => {
-  const { collectionType, slug } = reactRouterDom.useParams();
-  console.log("In router.tsx with params:", { collectionType, slug });
+  const { collectionType, slug } = useParams();
   if (collectionType !== COLLECTION_TYPES && collectionType !== SINGLE_TYPES) {
-    return /* @__PURE__ */ jsxRuntime.jsx(admin.Page.Error, {});
+    return /* @__PURE__ */ jsx(Page.Error, {});
   }
   if (slug === MEMBER_APPLICATION_MODEL) {
-    return /* @__PURE__ */ jsxRuntime.jsx(ProtectedListMemberApplicationPage, {});
+    return /* @__PURE__ */ jsx(ProtectedListMemberApplicationPage, {});
   }
   if (slug === CONTACT_MODEL) {
-    return /* @__PURE__ */ jsxRuntime.jsx(ProtectedListContactPage, {});
+    return /* @__PURE__ */ jsx(ProtectedListContactPage, {});
   }
-  return collectionType === COLLECTION_TYPES ? /* @__PURE__ */ jsxRuntime.jsx(ProtectedListViewPage, {}) : /* @__PURE__ */ jsxRuntime.jsx(ProtectedEditViewPage, {});
+  return collectionType === COLLECTION_TYPES ? /* @__PURE__ */ jsx(ProtectedListViewPage, {}) : /* @__PURE__ */ jsx(ProtectedEditViewPage, {});
 };
 const CLONE_RELATIVE_PATH = ":collectionType/:slug/clone/:origin";
 const CLONE_PATH = `plugins/custom-content-manager3/${CLONE_RELATIVE_PATH}`;
@@ -113,7 +111,7 @@ const LIST_PATH = `plugins/custom-content-manager3/collection-types/:slug`;
 const routes = [
   {
     path: LIST_RELATIVE_PATH,
-    element: /* @__PURE__ */ jsxRuntime.jsx(CollectionTypePages, {})
+    element: /* @__PURE__ */ jsx(CollectionTypePages, {})
   },
   {
     path: ":collectionType/:slug/:id",
@@ -281,7 +279,7 @@ const index = {
     app.router.addRoute({
       path: "plugins/custom-content-manager3/*",
       lazy: async () => {
-        const { Layout } = await Promise.resolve().then(() => require("./layout-B31rfz6u.js"));
+        const { Layout } = await import("./layout-DEE6_wMw.mjs");
         return {
           Component: Layout
         };
@@ -294,12 +292,12 @@ const index = {
     return Promise.all(
       locales.map(async (locale) => {
         try {
-          const { default: data } = await __variableDynamicImportRuntimeHelper(/* @__PURE__ */ Object.assign({ "./translations/ar.json": () => Promise.resolve().then(() => require("./ar-BUUWXIYu.js")), "./translations/ca.json": () => Promise.resolve().then(() => require("./ca-Cmk45QO6.js")), "./translations/cs.json": () => Promise.resolve().then(() => require("./cs-CkJy6B2v.js")), "./translations/de.json": () => Promise.resolve().then(() => require("./de-CCEmbAah.js")), "./translations/en.json": () => Promise.resolve().then(() => require("./en-DRCQ5GNB.js")), "./translations/es.json": () => Promise.resolve().then(() => require("./es-B4FK7zPw.js")), "./translations/eu.json": () => Promise.resolve().then(() => require("./eu-VDH-3ovk.js")), "./translations/fr.json": () => Promise.resolve().then(() => require("./fr-BvA-TbAU.js")), "./translations/gu.json": () => Promise.resolve().then(() => require("./gu-BRmF601H.js")), "./translations/hi.json": () => Promise.resolve().then(() => require("./hi-CCJBptSq.js")), "./translations/hu.json": () => Promise.resolve().then(() => require("./hu-sNV_yLYy.js")), "./translations/id.json": () => Promise.resolve().then(() => require("./id-B5Ser98A.js")), "./translations/it.json": () => Promise.resolve().then(() => require("./it-DkBIs7vD.js")), "./translations/ja.json": () => Promise.resolve().then(() => require("./ja-7sfIbjxE.js")), "./translations/ko.json": () => Promise.resolve().then(() => require("./ko-woFZPmLk.js")), "./translations/ml.json": () => Promise.resolve().then(() => require("./ml-C2W8N8k1.js")), "./translations/ms.json": () => Promise.resolve().then(() => require("./ms-BuFotyP_.js")), "./translations/nl.json": () => Promise.resolve().then(() => require("./nl-bbEOHChV.js")), "./translations/pl.json": () => Promise.resolve().then(() => require("./pl-uzwG-hk7.js")), "./translations/pt-BR.json": () => Promise.resolve().then(() => require("./pt-BR-BiOz37D9.js")), "./translations/pt.json": () => Promise.resolve().then(() => require("./pt-CeXQuq50.js")), "./translations/ru.json": () => Promise.resolve().then(() => require("./ru-DZRJ-z5T.js")), "./translations/sa.json": () => Promise.resolve().then(() => require("./sa-CcvkYInH.js")), "./translations/sk.json": () => Promise.resolve().then(() => require("./sk-CvY09Xjv.js")), "./translations/sv.json": () => Promise.resolve().then(() => require("./sv-MYDuzgvT.js")), "./translations/th.json": () => Promise.resolve().then(() => require("./th-D9_GfAjc.js")), "./translations/tr.json": () => Promise.resolve().then(() => require("./tr-D9UH-O_R.js")), "./translations/uk.json": () => Promise.resolve().then(() => require("./uk-l6ae-yv3.js")), "./translations/vi.json": () => Promise.resolve().then(() => require("./vi-CJlYDheJ.js")), "./translations/zh-Hans.json": () => Promise.resolve().then(() => require("./zh-Hans-Ds9l_goR.js")), "./translations/zh.json": () => Promise.resolve().then(() => require("./zh-CQQfszqR.js")) }), `./translations/${locale}.json`, 3);
+          const { default: data } = await __variableDynamicImportRuntimeHelper(/* @__PURE__ */ Object.assign({ "./translations/ar.json": () => import("./ar-CCEVvqGG.mjs"), "./translations/ca.json": () => import("./ca-5U32ON2v.mjs"), "./translations/cs.json": () => import("./cs-CM2aBUar.mjs"), "./translations/de.json": () => import("./de-C72KDNOl.mjs"), "./translations/en.json": () => import("./en-BQH2ym_1.mjs"), "./translations/es.json": () => import("./es-D_NgQEgP.mjs"), "./translations/eu.json": () => import("./eu-CdALomew.mjs"), "./translations/fr.json": () => import("./fr-Bfec4wcs.mjs"), "./translations/gu.json": () => import("./gu-CNpaMDpH.mjs"), "./translations/hi.json": () => import("./hi-Dwvd04m3.mjs"), "./translations/hu.json": () => import("./hu-CeYvaaO0.mjs"), "./translations/id.json": () => import("./id-BtwA9WJT.mjs"), "./translations/it.json": () => import("./it-BrVPqaf1.mjs"), "./translations/ja.json": () => import("./ja-BHqhDq4V.mjs"), "./translations/ko.json": () => import("./ko-HVQRlfUI.mjs"), "./translations/ml.json": () => import("./ml-BihZwQit.mjs"), "./translations/ms.json": () => import("./ms-m_WjyWx7.mjs"), "./translations/nl.json": () => import("./nl-D4R9gHx5.mjs"), "./translations/pl.json": () => import("./pl-sbx9mSt_.mjs"), "./translations/pt-BR.json": () => import("./pt-BR-C71iDxnh.mjs"), "./translations/pt.json": () => import("./pt-BsaFvS8-.mjs"), "./translations/ru.json": () => import("./ru-D3jBXGmK.mjs"), "./translations/sa.json": () => import("./sa-Dag0k-Z8.mjs"), "./translations/sk.json": () => import("./sk-BFg-R8qJ.mjs"), "./translations/sv.json": () => import("./sv-CUnfWGsh.mjs"), "./translations/th.json": () => import("./th-BqbI8lIT.mjs"), "./translations/tr.json": () => import("./tr-CgeK3wJM.mjs"), "./translations/uk.json": () => import("./uk-DKbw8IH5.mjs"), "./translations/vi.json": () => import("./vi-DUXIk_fw.mjs"), "./translations/zh-Hans.json": () => import("./zh-Hans-FOssYmB1.mjs"), "./translations/zh.json": () => import("./zh-BWZspA60.mjs") }), `./translations/${locale}.json`, 3);
           return { data: prefixPluginTranslations(data, "content-manager"), locale };
         } catch {
           try {
             const baseLocale = locale.split("-")[0];
-            const { default: data } = await __variableDynamicImportRuntimeHelper(/* @__PURE__ */ Object.assign({ "./translations/ar.json": () => Promise.resolve().then(() => require("./ar-BUUWXIYu.js")), "./translations/ca.json": () => Promise.resolve().then(() => require("./ca-Cmk45QO6.js")), "./translations/cs.json": () => Promise.resolve().then(() => require("./cs-CkJy6B2v.js")), "./translations/de.json": () => Promise.resolve().then(() => require("./de-CCEmbAah.js")), "./translations/en.json": () => Promise.resolve().then(() => require("./en-DRCQ5GNB.js")), "./translations/es.json": () => Promise.resolve().then(() => require("./es-B4FK7zPw.js")), "./translations/eu.json": () => Promise.resolve().then(() => require("./eu-VDH-3ovk.js")), "./translations/fr.json": () => Promise.resolve().then(() => require("./fr-BvA-TbAU.js")), "./translations/gu.json": () => Promise.resolve().then(() => require("./gu-BRmF601H.js")), "./translations/hi.json": () => Promise.resolve().then(() => require("./hi-CCJBptSq.js")), "./translations/hu.json": () => Promise.resolve().then(() => require("./hu-sNV_yLYy.js")), "./translations/id.json": () => Promise.resolve().then(() => require("./id-B5Ser98A.js")), "./translations/it.json": () => Promise.resolve().then(() => require("./it-DkBIs7vD.js")), "./translations/ja.json": () => Promise.resolve().then(() => require("./ja-7sfIbjxE.js")), "./translations/ko.json": () => Promise.resolve().then(() => require("./ko-woFZPmLk.js")), "./translations/ml.json": () => Promise.resolve().then(() => require("./ml-C2W8N8k1.js")), "./translations/ms.json": () => Promise.resolve().then(() => require("./ms-BuFotyP_.js")), "./translations/nl.json": () => Promise.resolve().then(() => require("./nl-bbEOHChV.js")), "./translations/pl.json": () => Promise.resolve().then(() => require("./pl-uzwG-hk7.js")), "./translations/pt-BR.json": () => Promise.resolve().then(() => require("./pt-BR-BiOz37D9.js")), "./translations/pt.json": () => Promise.resolve().then(() => require("./pt-CeXQuq50.js")), "./translations/ru.json": () => Promise.resolve().then(() => require("./ru-DZRJ-z5T.js")), "./translations/sa.json": () => Promise.resolve().then(() => require("./sa-CcvkYInH.js")), "./translations/sk.json": () => Promise.resolve().then(() => require("./sk-CvY09Xjv.js")), "./translations/sv.json": () => Promise.resolve().then(() => require("./sv-MYDuzgvT.js")), "./translations/th.json": () => Promise.resolve().then(() => require("./th-D9_GfAjc.js")), "./translations/tr.json": () => Promise.resolve().then(() => require("./tr-D9UH-O_R.js")), "./translations/uk.json": () => Promise.resolve().then(() => require("./uk-l6ae-yv3.js")), "./translations/vi.json": () => Promise.resolve().then(() => require("./vi-CJlYDheJ.js")), "./translations/zh-Hans.json": () => Promise.resolve().then(() => require("./zh-Hans-Ds9l_goR.js")), "./translations/zh.json": () => Promise.resolve().then(() => require("./zh-CQQfszqR.js")) }), `./translations/${baseLocale}.json`, 3);
+            const { default: data } = await __variableDynamicImportRuntimeHelper(/* @__PURE__ */ Object.assign({ "./translations/ar.json": () => import("./ar-CCEVvqGG.mjs"), "./translations/ca.json": () => import("./ca-5U32ON2v.mjs"), "./translations/cs.json": () => import("./cs-CM2aBUar.mjs"), "./translations/de.json": () => import("./de-C72KDNOl.mjs"), "./translations/en.json": () => import("./en-BQH2ym_1.mjs"), "./translations/es.json": () => import("./es-D_NgQEgP.mjs"), "./translations/eu.json": () => import("./eu-CdALomew.mjs"), "./translations/fr.json": () => import("./fr-Bfec4wcs.mjs"), "./translations/gu.json": () => import("./gu-CNpaMDpH.mjs"), "./translations/hi.json": () => import("./hi-Dwvd04m3.mjs"), "./translations/hu.json": () => import("./hu-CeYvaaO0.mjs"), "./translations/id.json": () => import("./id-BtwA9WJT.mjs"), "./translations/it.json": () => import("./it-BrVPqaf1.mjs"), "./translations/ja.json": () => import("./ja-BHqhDq4V.mjs"), "./translations/ko.json": () => import("./ko-HVQRlfUI.mjs"), "./translations/ml.json": () => import("./ml-BihZwQit.mjs"), "./translations/ms.json": () => import("./ms-m_WjyWx7.mjs"), "./translations/nl.json": () => import("./nl-D4R9gHx5.mjs"), "./translations/pl.json": () => import("./pl-sbx9mSt_.mjs"), "./translations/pt-BR.json": () => import("./pt-BR-C71iDxnh.mjs"), "./translations/pt.json": () => import("./pt-BsaFvS8-.mjs"), "./translations/ru.json": () => import("./ru-D3jBXGmK.mjs"), "./translations/sa.json": () => import("./sa-Dag0k-Z8.mjs"), "./translations/sk.json": () => import("./sk-BFg-R8qJ.mjs"), "./translations/sv.json": () => import("./sv-CUnfWGsh.mjs"), "./translations/th.json": () => import("./th-BqbI8lIT.mjs"), "./translations/tr.json": () => import("./tr-CgeK3wJM.mjs"), "./translations/uk.json": () => import("./uk-DKbw8IH5.mjs"), "./translations/vi.json": () => import("./vi-DUXIk_fw.mjs"), "./translations/zh-Hans.json": () => import("./zh-Hans-FOssYmB1.mjs"), "./translations/zh.json": () => import("./zh-BWZspA60.mjs") }), `./translations/${baseLocale}.json`, 3);
             return { data: prefixPluginTranslations(data, "content-manager"), locale };
           } catch {
             return { data: {}, locale };
@@ -309,14 +307,16 @@ const index = {
     );
   }
 };
-exports.ADMIN_HIDDEN_FIELDS = ADMIN_HIDDEN_FIELDS;
-exports.APPLICATION_STATUS = APPLICATION_STATUS;
-exports.CLONE_PATH = CLONE_PATH;
-exports.COLLECTION_TYPES = COLLECTION_TYPES;
-exports.EVENT_MODEL = EVENT_MODEL;
-exports.LIST_PATH = LIST_PATH;
-exports.MEMBER_APPLICATION_MODEL = MEMBER_APPLICATION_MODEL;
-exports.PLUGIN_ID = PLUGIN_ID;
-exports.SINGLE_TYPES = SINGLE_TYPES;
-exports.getTranslation = getTranslation;
-exports.index = index;
+export {
+  APPLICATION_STATUS as A,
+  COLLECTION_TYPES as C,
+  EVENT_MODEL as E,
+  LIST_PATH as L,
+  MEMBER_APPLICATION_MODEL as M,
+  PLUGIN_ID as P,
+  SINGLE_TYPES as S,
+  CLONE_PATH as a,
+  ADMIN_HIDDEN_FIELDS as b,
+  getTranslation as g,
+  index as i
+};

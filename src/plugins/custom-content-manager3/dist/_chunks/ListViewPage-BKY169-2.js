@@ -11,9 +11,9 @@ const qs = require("qs");
 const reactIntl = require("react-intl");
 const reactRouterDom = require("react-router-dom");
 const styledComponents = require("styled-components");
-const Filters = require("./Filters-jP3MphQ_.js");
-const EditViewPage = require("./EditViewPage-DuB2uZh7.js");
-const index = require("./index-CcsyhobK.js");
+const Filters = require("./Filters-D3W1-lYC.js");
+const EditViewPage = require("./EditViewPage-CtZ_cEAm.js");
+const index = require("./index-ySPu0CBj.js");
 const _interopDefault = (e) => e && e.__esModule ? e : { default: e };
 function _interopNamespace(e) {
   if (e && e.__esModule) return e;
@@ -268,10 +268,6 @@ const ListViewPage = () => {
         /* @__PURE__ */ jsxRuntime.jsx(admin.Table.Loading, {}),
         /* @__PURE__ */ jsxRuntime.jsx(admin.Table.Empty, { action: /* @__PURE__ */ jsxRuntime.jsx(CreateButton, { variant: "secondary", contentTypeTitle }) }),
         /* @__PURE__ */ jsxRuntime.jsx(admin.Table.Body, { children: results.map((row) => {
-          if (row.publishedAt !== null) {
-            console.log("Alert", row);
-          }
-          console.log(row);
           return /* @__PURE__ */ jsxRuntime.jsxs(
             admin.Table.Row,
             {

@@ -7,7 +7,7 @@ const designSystem = require("@strapi/design-system");
 require("@strapi/icons");
 const styledComponents = require("styled-components");
 require("react-intl");
-require("./EditViewPage-DuB2uZh7.js");
+require("./EditViewPage-CtZ_cEAm.js");
 const reactDnd = require("react-dnd");
 const reactDndHtml5Backend = require("react-dnd-html5-backend");
 const ActionBox = styledComponents.styled(designSystem.Flex)`

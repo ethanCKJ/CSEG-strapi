@@ -271,6 +271,7 @@ const EventActionPanel = ({
         onChange(`emailDate${i+1}`, emailDate.toISOString());
       }
       // Fill in subject
+      // TODO: Bug where eventDateObj should set time to eventStartTime before being inserted to formatSubjectDate
       onChange(`emailSubject${i+1}`, `${eventTypeFormatted} - ${eventDateObj ? formatSubjectDate(eventDateObj) : '[Please insert event date here]'} - ${title}`);
     }
 

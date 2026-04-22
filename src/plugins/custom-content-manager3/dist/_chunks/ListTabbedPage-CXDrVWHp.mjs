@@ -8,9 +8,9 @@ import isEqual from "lodash/isEqual";
 import { stringify } from "qs";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { styled } from "styled-components";
-import { I as InjectionZone, V as ViewSettingsMenu, F as FiltersImpl, T as TableActions, g as getDisplayName, C as CellContent } from "./Filters-CiksFFhC.mjs";
-import { u as useDoc, a as useDocumentLayout, b as usePrev, c as buildValidParams, d as useGetAllDocumentsQuery, e as convertListLayoutToFieldLayouts, D as DocumentStatus } from "./EditViewPage-B1oiBYhR.mjs";
-import { g as getTranslation } from "./index-0CKMdxK6.mjs";
+import { I as InjectionZone, V as ViewSettingsMenu, F as FiltersImpl, T as TableActions, g as getDisplayName, C as CellContent } from "./Filters-ClhoppFo.mjs";
+import { u as useDoc, a as useDocumentLayout, b as usePrev, c as buildValidParams, d as useGetAllDocumentsQuery, e as convertListLayoutToFieldLayouts, D as DocumentStatus } from "./EditViewPage-DeV7GvMh.mjs";
+import { g as getTranslation } from "./index-DLmy0Bnc.mjs";
 const ActionsCell = styled(Table.Cell)`
   display: flex;
   justify-content: flex-end;

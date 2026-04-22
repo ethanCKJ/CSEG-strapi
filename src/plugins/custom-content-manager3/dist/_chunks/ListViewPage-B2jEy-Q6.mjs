@@ -9,9 +9,9 @@ import { stringify } from "qs";
 import { useIntl } from "react-intl";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { styled } from "styled-components";
-import { I as InjectionZone, V as ViewSettingsMenu, F as FiltersImpl, g as getDisplayName, C as CellContent, T as TableActions } from "./Filters-CiksFFhC.mjs";
-import { u as useDoc, a as useDocumentLayout, b as usePrev, c as buildValidParams, d as useGetAllDocumentsQuery, D as DocumentStatus, e as convertListLayoutToFieldLayouts } from "./EditViewPage-B1oiBYhR.mjs";
-import { g as getTranslation } from "./index-0CKMdxK6.mjs";
+import { I as InjectionZone, V as ViewSettingsMenu, F as FiltersImpl, g as getDisplayName, C as CellContent, T as TableActions } from "./Filters-ClhoppFo.mjs";
+import { u as useDoc, a as useDocumentLayout, b as usePrev, c as buildValidParams, d as useGetAllDocumentsQuery, D as DocumentStatus, e as convertListLayoutToFieldLayouts } from "./EditViewPage-DeV7GvMh.mjs";
+import { g as getTranslation } from "./index-DLmy0Bnc.mjs";
 const HOOKS = {
   /**
    * Hook that allows to mutate the displayed headers of the list view table
@@ -246,10 +246,6 @@ const ListViewPage = () => {
         /* @__PURE__ */ jsx(Table.Loading, {}),
         /* @__PURE__ */ jsx(Table.Empty, { action: /* @__PURE__ */ jsx(CreateButton, { variant: "secondary", contentTypeTitle }) }),
         /* @__PURE__ */ jsx(Table.Body, { children: results.map((row) => {
-          if (row.publishedAt !== null) {
-            console.log("Alert", row);
-          }
-          console.log(row);
           return /* @__PURE__ */ jsxs(
             Table.Row,
             {

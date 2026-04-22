@@ -1,161 +1,101 @@
-"use strict";
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
-  // If the importer is in node compatibility mode or this is not an ESM
-  // file that has been converted to a CommonJS file using a Babel-
-  // compatible transform (i.e. "__esModule" has not been set), then set
-  // "default" to the CommonJS "module.exports" for node compatibility.
-  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
-  mod
-));
-const jsxRuntime = require("react/jsx-runtime");
-const admin = require("@strapi/strapi/admin");
-const designSystem = require("@strapi/design-system");
-const reactIntl = require("react-intl");
-const reactRouterDom = require("react-router-dom");
-const styledComponents = require("styled-components");
-const index = require("./index-CcsyhobK.js");
-const React = require("react");
-const yup = require("yup");
-const fractionalIndexing = require("fractional-indexing");
-const pipe$1 = require("lodash/fp/pipe");
-const qs = require("qs");
-const react = require("@reduxjs/toolkit/query/react");
-const Icons = require("@strapi/icons");
-const dateFns = require("date-fns");
-const mapValues = require("lodash/fp/mapValues");
-require("lodash/get");
-require("lodash/merge");
-require("lodash/set");
-const slate = require("slate");
-const slateHistory = require("slate-history");
-const slateReact = require("slate-react");
-const Prism = require("prismjs");
-require("prismjs/themes/prism-solarizedlight.css");
-require("prismjs/components/prism-asmatmel");
-require("prismjs/components/prism-bash");
-require("prismjs/components/prism-basic");
-require("prismjs/components/prism-c");
-require("prismjs/components/prism-clojure");
-require("prismjs/components/prism-cobol");
-require("prismjs/components/prism-cpp");
-require("prismjs/components/prism-csharp");
-require("prismjs/components/prism-dart");
-require("prismjs/components/prism-docker");
-require("prismjs/components/prism-elixir");
-require("prismjs/components/prism-erlang");
-require("prismjs/components/prism-fortran");
-require("prismjs/components/prism-fsharp");
-require("prismjs/components/prism-go");
-require("prismjs/components/prism-graphql");
-require("prismjs/components/prism-groovy");
-require("prismjs/components/prism-haskell");
-require("prismjs/components/prism-haxe");
-require("prismjs/components/prism-ini");
-require("prismjs/components/prism-java");
-require("prismjs/components/prism-javascript");
-require("prismjs/components/prism-jsx");
-require("prismjs/components/prism-json");
-require("prismjs/components/prism-julia");
-require("prismjs/components/prism-kotlin");
-require("prismjs/components/prism-latex");
-require("prismjs/components/prism-lua");
-require("prismjs/components/prism-markdown");
-require("prismjs/components/prism-matlab");
-require("prismjs/components/prism-makefile");
-require("prismjs/components/prism-objectivec");
-require("prismjs/components/prism-perl");
-require("prismjs/components/prism-php");
-require("prismjs/components/prism-powershell");
-require("prismjs/components/prism-python");
-require("prismjs/components/prism-r");
-require("prismjs/components/prism-ruby");
-require("prismjs/components/prism-rust");
-require("prismjs/components/prism-sas");
-require("prismjs/components/prism-scala");
-require("prismjs/components/prism-scheme");
-require("prismjs/components/prism-sql");
-require("prismjs/components/prism-stata");
-require("prismjs/components/prism-swift");
-require("prismjs/components/prism-typescript");
-require("prismjs/components/prism-tsx");
-require("prismjs/components/prism-vbnet");
-require("prismjs/components/prism-yaml");
-const reactDnd = require("react-dnd");
-const Toolbar = require("@radix-ui/react-toolbar");
-const reactDndHtml5Backend = require("react-dnd-html5-backend");
-require("lodash/clone");
-const toPath = require("lodash/toPath");
-const Symbols = require("@strapi/icons/symbols");
-const reactWindow = require("react-window");
-const CodeMirror = require("codemirror5");
-const sanitizeHtml = require("sanitize-html");
-const highlight_js = require("highlight.js");
-const Markdown = require("markdown-it");
-const abbr = require("markdown-it-abbr");
-const container = require("markdown-it-container");
-const deflist = require("markdown-it-deflist");
-const emoji = require("markdown-it-emoji");
-const footnote = require("markdown-it-footnote");
-const ins = require("markdown-it-ins");
-const mark = require("markdown-it-mark");
-const sub = require("markdown-it-sub");
-const sup = require("markdown-it-sup");
-require("highlight.js/styles/solarized-dark.css");
-require("codemirror5/addon/display/placeholder");
-const _interopDefault = (e) => e && e.__esModule ? e : { default: e };
-function _interopNamespace(e) {
-  if (e && e.__esModule) return e;
-  const n = Object.create(null, { [Symbol.toStringTag]: { value: "Module" } });
-  if (e) {
-    for (const k in e) {
-      if (k !== "default") {
-        const d = Object.getOwnPropertyDescriptor(e, k);
-        Object.defineProperty(n, k, d.get ? d : {
-          enumerable: true,
-          get: () => e[k]
-        });
-      }
-    }
-  }
-  n.default = e;
-  return Object.freeze(n);
-}
-const React__namespace = /* @__PURE__ */ _interopNamespace(React);
-const yup__namespace = /* @__PURE__ */ _interopNamespace(yup);
-const pipe__default = /* @__PURE__ */ _interopDefault(pipe$1);
-const qs__default = /* @__PURE__ */ _interopDefault(qs);
-const Icons__namespace = /* @__PURE__ */ _interopNamespace(Icons);
-const mapValues__default = /* @__PURE__ */ _interopDefault(mapValues);
-const Prism__namespace = /* @__PURE__ */ _interopNamespace(Prism);
-const Toolbar__namespace = /* @__PURE__ */ _interopNamespace(Toolbar);
-const toPath__default = /* @__PURE__ */ _interopDefault(toPath);
-const Symbols__namespace = /* @__PURE__ */ _interopNamespace(Symbols);
-const CodeMirror__default = /* @__PURE__ */ _interopDefault(CodeMirror);
-const sanitizeHtml__default = /* @__PURE__ */ _interopDefault(sanitizeHtml);
-const Markdown__default = /* @__PURE__ */ _interopDefault(Markdown);
-const abbr__default = /* @__PURE__ */ _interopDefault(abbr);
-const container__default = /* @__PURE__ */ _interopDefault(container);
-const deflist__default = /* @__PURE__ */ _interopDefault(deflist);
-const emoji__default = /* @__PURE__ */ _interopDefault(emoji);
-const footnote__default = /* @__PURE__ */ _interopDefault(footnote);
-const ins__default = /* @__PURE__ */ _interopDefault(ins);
-const mark__default = /* @__PURE__ */ _interopDefault(mark);
-const sub__default = /* @__PURE__ */ _interopDefault(sub);
-const sup__default = /* @__PURE__ */ _interopDefault(sup);
+import { jsx, jsxs, Fragment } from "react/jsx-runtime";
+import { createRulesEngine, adminApi, translatedErrors, useNotification, useAPIErrorHandler, useQueryParams, getYupValidationErrors, useStrapiApp, useForm, Blocker as Blocker$1, useAuth, useRBAC, Page, createContext, Form, ConfirmDialog, DescriptionComponentRenderer, useField, useElementOnScreen, useIsDesktop, useFocusInputField, InputRenderer, BackButton, useFetchClient, RESPONSIVE_DEFAULT_SPACING } from "@strapi/strapi/admin";
+import { Status, Typography, Button, Dialog, Modal, Tabs, Flex, IconButton, TextButton, Loader, EmptyStateLayout, Box, SingleSelect, SingleSelectOption, Popover, Field, Menu, Tooltip, useComposedRefs, VisuallyHidden, Divider, Accordion, Grid as Grid$1, Combobox, ComboboxOption, Link as Link$2, TextInput, IconButtonGroup, Radio, SimpleMenu, MenuItem, Main } from "@strapi/design-system";
+import { useIntl } from "react-intl";
+import { useParams, useNavigate, useLocation, useMatch } from "react-router-dom";
+import { styled, css, createGlobalStyle, keyframes } from "styled-components";
+import { S as SINGLE_TYPES, g as getTranslation, C as COLLECTION_TYPES, a as CLONE_PATH, L as LIST_PATH, M as MEMBER_APPLICATION_MODEL, A as APPLICATION_STATUS, E as EVENT_MODEL } from "./index-DLmy0Bnc.mjs";
+import * as React from "react";
+import React__default, { useState, useEffect, useCallback, useRef } from "react";
+import * as yup from "yup";
+import { ValidationError } from "yup";
+import { generateNKeysBetween } from "fractional-indexing";
+import pipe$1 from "lodash/fp/pipe";
+import qs, { stringify } from "qs";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import * as Icons from "@strapi/icons";
+import { ArrowLineLeft, ArrowLeft, ArrowsOut, WarningCircle, CodeBlock as CodeBlock$1, HeadingSix, HeadingFive, HeadingFour, HeadingThree, HeadingTwo, HeadingOne, Image as Image$1, BulletList, NumberList, Paragraph, Quotes, More, Link as Link$1, Drag, Collapse, Code, StrikeThrough, Underline, Italic, Bold, Expand, PlusCircle, Plus, Trash, ArrowClockwise, Cross, CheckCircle, Loader as Loader$1, Mail } from "@strapi/icons";
+import { intervalToDuration, isPast } from "date-fns";
+import mapValues from "lodash/fp/mapValues";
+import "lodash/get";
+import "lodash/merge";
+import "lodash/set";
+import { Editor as Editor$1, Transforms, Node as Node$1, Element, Range, Path, Point, createEditor } from "slate";
+import { withHistory } from "slate-history";
+import { useFocused, useSelected, ReactEditor, Editable, withReact, Slate, useSlate } from "slate-react";
+import * as Prism from "prismjs";
+import "prismjs/themes/prism-solarizedlight.css";
+import "prismjs/components/prism-asmatmel";
+import "prismjs/components/prism-bash";
+import "prismjs/components/prism-basic";
+import "prismjs/components/prism-c";
+import "prismjs/components/prism-clojure";
+import "prismjs/components/prism-cobol";
+import "prismjs/components/prism-cpp";
+import "prismjs/components/prism-csharp";
+import "prismjs/components/prism-dart";
+import "prismjs/components/prism-docker";
+import "prismjs/components/prism-elixir";
+import "prismjs/components/prism-erlang";
+import "prismjs/components/prism-fortran";
+import "prismjs/components/prism-fsharp";
+import "prismjs/components/prism-go";
+import "prismjs/components/prism-graphql";
+import "prismjs/components/prism-groovy";
+import "prismjs/components/prism-haskell";
+import "prismjs/components/prism-haxe";
+import "prismjs/components/prism-ini";
+import "prismjs/components/prism-java";
+import "prismjs/components/prism-javascript";
+import "prismjs/components/prism-jsx";
+import "prismjs/components/prism-json";
+import "prismjs/components/prism-julia";
+import "prismjs/components/prism-kotlin";
+import "prismjs/components/prism-latex";
+import "prismjs/components/prism-lua";
+import "prismjs/components/prism-markdown";
+import "prismjs/components/prism-matlab";
+import "prismjs/components/prism-makefile";
+import "prismjs/components/prism-objectivec";
+import "prismjs/components/prism-perl";
+import "prismjs/components/prism-php";
+import "prismjs/components/prism-powershell";
+import "prismjs/components/prism-python";
+import "prismjs/components/prism-r";
+import "prismjs/components/prism-ruby";
+import "prismjs/components/prism-rust";
+import "prismjs/components/prism-sas";
+import "prismjs/components/prism-scala";
+import "prismjs/components/prism-scheme";
+import "prismjs/components/prism-sql";
+import "prismjs/components/prism-stata";
+import "prismjs/components/prism-swift";
+import "prismjs/components/prism-typescript";
+import "prismjs/components/prism-tsx";
+import "prismjs/components/prism-vbnet";
+import "prismjs/components/prism-yaml";
+import { useDrop, useDrag } from "react-dnd";
+import * as Toolbar from "@radix-ui/react-toolbar";
+import { getEmptyImage } from "react-dnd-html5-backend";
+import "lodash/clone";
+import toPath from "lodash/toPath";
+import * as Symbols from "@strapi/icons/symbols";
+import { FixedSizeList } from "react-window";
+import CodeMirror from "codemirror5";
+import sanitizeHtml from "sanitize-html";
+import { getLanguage, highlight, highlightAuto } from "highlight.js";
+import Markdown from "markdown-it";
+import abbr from "markdown-it-abbr";
+import container from "markdown-it-container";
+import deflist from "markdown-it-deflist";
+import emoji from "markdown-it-emoji";
+import footnote from "markdown-it-footnote";
+import ins from "markdown-it-ins";
+import mark from "markdown-it-mark";
+import sub from "markdown-it-sub";
+import sup from "markdown-it-sup";
+import "highlight.js/styles/solarized-dark.css";
+import "codemirror5/addon/display/placeholder";
 const ID = "id";
 const CREATED_BY_ATTRIBUTE_NAME = "createdBy";
 const UPDATED_BY_ATTRIBUTE_NAME = "updatedBy";
@@ -221,10 +161,10 @@ const prepareTempKeys$1 = traverseData(
   (attribute) => attribute.type === "component" && attribute.repeatable || attribute.type === "dynamiczone",
   (data) => {
     if (Array.isArray(data) && data.length > 0) {
-      const keys = fractionalIndexing.generateNKeysBetween(void 0, void 0, data.length);
-      return data.map((datum, index2) => ({
+      const keys = generateNKeysBetween(void 0, void 0, data.length);
+      return data.map((datum, index) => ({
         ...datum,
-        __temp_key__: keys[index2]
+        __temp_key__: keys[index]
       }));
     }
     return data;
@@ -245,7 +185,7 @@ const removeNullValues = (schema, components = {}) => traverseData(
   () => void 0
 )(schema, components);
 const transformDocument = (schema, components = {}) => (document2) => {
-  const transformations = pipe__default.default(
+  const transformations = pipe$1(
     removeFieldsThatDontExistOnSchema(schema),
     removeProhibitedFields(["password"])(schema, components),
     removeNullValues(schema, components),
@@ -267,7 +207,7 @@ const getItemInitialValue = (initialValue, item) => {
 };
 const collectInvisibleAttributes = (data, schema, components, path = []) => {
   if (!schema?.attributes) return [];
-  const rulesEngine2 = admin.createRulesEngine();
+  const rulesEngine2 = createRulesEngine();
   const removedPaths = [];
   const evaluatedData = {};
   for (const [attrName, attrDef] of Object.entries(schema.attributes)) {
@@ -438,7 +378,7 @@ const createDefaultForm = (contentType, components = {}) => {
   };
   return traverseSchema(contentType.attributes);
 };
-const contentManagerApi = admin.adminApi.enhanceEndpoints({
+const contentManagerApi = adminApi.enhanceEndpoints({
   addTagTypes: [
     "ComponentConfiguration",
     "ContentTypesConfiguration",
@@ -455,9 +395,9 @@ const contentManagerApi = admin.adminApi.enhanceEndpoints({
     "AILocalizationJobs"
   ]
 });
-react.createApi({
+createApi({
   reducerPath: "custom-content-manager-api",
-  baseQuery: react.fetchBaseQuery({ baseUrl: "/admin" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "/admin" }),
   tagTypes: [
     "ComponentConfiguration",
     "ContentTypesConfiguration",
@@ -552,17 +492,17 @@ const documentApi = contentManagerApi.injectEndpoints({
     }),
     deleteDocument: builder.mutation({
       query: ({ collectionType, model, documentId, params }) => ({
-        url: `/content-manager/${collectionType}/${model}${collectionType !== index.SINGLE_TYPES && documentId ? `/${documentId}` : ""}`,
+        url: `/content-manager/${collectionType}/${model}${collectionType !== SINGLE_TYPES && documentId ? `/${documentId}` : ""}`,
         method: "DELETE",
         config: {
           params
         }
       }),
       invalidatesTags: (_result, _error, { collectionType, model, documentId }) => [
-        { type: "Document", id: collectionType !== index.SINGLE_TYPES ? `${model}_LIST` : model },
+        { type: "Document", id: collectionType !== SINGLE_TYPES ? `${model}_LIST` : model },
         {
           type: "Document",
-          id: collectionType !== index.SINGLE_TYPES ? `${model}_${documentId}` : model
+          id: collectionType !== SINGLE_TYPES ? `${model}_${documentId}` : model
         },
         { type: "Document", id: `${model}_ALL_ITEMS` },
         "RecentDocumentList",
@@ -598,7 +538,7 @@ const documentApi = contentManagerApi.injectEndpoints({
         return [
           {
             type: "Document",
-            id: collectionType !== index.SINGLE_TYPES ? `${model}_${documentId}` : model
+            id: collectionType !== SINGLE_TYPES ? `${model}_${documentId}` : model
           },
           { type: "Document", id: `${model}_LIST` },
           "Relations",
@@ -618,7 +558,7 @@ const documentApi = contentManagerApi.injectEndpoints({
         url: `/content-manager/collection-types/${model}`,
         method: "GET",
         config: {
-          params: qs.stringify(params, { encode: true })
+          params: stringify(params, { encode: true })
         }
       }),
       providesTags: (result, _error, arg) => {
@@ -651,7 +591,7 @@ const documentApi = contentManagerApi.injectEndpoints({
             params
           }
         });
-        if (res.error && res.error.name === "NotFoundError" && collectionType === index.SINGLE_TYPES) {
+        if (res.error && res.error.name === "NotFoundError" && collectionType === SINGLE_TYPES) {
           return { data: { document: void 0 }, error: void 0 };
         }
         return res;
@@ -661,7 +601,7 @@ const documentApi = contentManagerApi.injectEndpoints({
           // we prefer the result's id because we don't fetch single-types with an ID.
           {
             type: "Document",
-            id: collectionType !== index.SINGLE_TYPES ? `${model}_${result && "documentId" in result ? result.documentId : documentId}` : model
+            id: collectionType !== SINGLE_TYPES ? `${model}_${result && "documentId" in result ? result.documentId : documentId}` : model
           },
           // Make it easy to invalidate all individual documents queries for a model
           {
@@ -697,7 +637,7 @@ const documentApi = contentManagerApi.injectEndpoints({
         return [
           {
             type: "Document",
-            id: collectionType !== index.SINGLE_TYPES ? `${model}_${documentId}` : model
+            id: collectionType !== SINGLE_TYPES ? `${model}_${documentId}` : model
           },
           { type: "Document", id: `${model}_LIST` },
           "Relations",
@@ -706,7 +646,7 @@ const documentApi = contentManagerApi.injectEndpoints({
           "UpcomingReleasesList",
           {
             type: "AILocalizationJobs",
-            id: collectionType !== index.SINGLE_TYPES ? `${model}_${documentId}` : model
+            id: collectionType !== SINGLE_TYPES ? `${model}_${documentId}` : model
           }
         ];
       }
@@ -742,7 +682,7 @@ const documentApi = contentManagerApi.injectEndpoints({
         return [
           {
             type: "Document",
-            id: collectionType !== index.SINGLE_TYPES ? `${model}_${documentId}` : model
+            id: collectionType !== SINGLE_TYPES ? `${model}_${documentId}` : model
           },
           "Relations",
           { type: "UidAvailability", id: model },
@@ -751,7 +691,7 @@ const documentApi = contentManagerApi.injectEndpoints({
           "UpcomingReleasesList",
           {
             type: "AILocalizationJobs",
-            id: collectionType !== index.SINGLE_TYPES ? `${model}_${documentId}` : model
+            id: collectionType !== SINGLE_TYPES ? `${model}_${documentId}` : model
           }
         ];
       },
@@ -793,7 +733,7 @@ const documentApi = contentManagerApi.injectEndpoints({
         return [
           {
             type: "Document",
-            id: collectionType !== index.SINGLE_TYPES ? `${model}_${documentId}` : model
+            id: collectionType !== SINGLE_TYPES ? `${model}_${documentId}` : model
           },
           "RecentDocumentList",
           "CountDocuments",
@@ -853,7 +793,7 @@ const isBaseQueryError = (error) => {
   "name" in error && typeof error.name === "string";
 };
 const arrayValidator = (attribute, options) => ({
-  message: admin.translatedErrors.required,
+  message: translatedErrors.required,
   test(value) {
     if (options.status === "draft") {
       return true;
@@ -872,7 +812,7 @@ const arrayValidator = (attribute, options) => ({
 });
 const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 const createYupSchema = (attributes = {}, components = {}, options = { status: null }) => {
-  const createModelSchema = (attributes2, removedAttributes = []) => yup__namespace.object().shape(
+  const createModelSchema = (attributes2, removedAttributes = []) => yup.object().shape(
     Object.entries(attributes2).reduce((acc, [name2, attribute]) => {
       const getNestedPathsForAttribute = (removed, attrName) => {
         const prefix = `${attrName}.`;
@@ -897,7 +837,7 @@ const createYupSchema = (attributes = {}, components = {}, options = { status: n
         addMaxValidation,
         addRegexValidation
       ].map((fn) => fn(attribute, options));
-      const transformSchema = pipe__default.default(...validations);
+      const transformSchema = pipe$1(...validations);
       switch (attribute.type) {
         case "component": {
           const { attributes: attributes3 } = components[attribute.component];
@@ -905,7 +845,7 @@ const createYupSchema = (attributes = {}, components = {}, options = { status: n
             return {
               ...acc,
               [name2]: transformSchema(
-                yup__namespace.array().of(createModelSchema(attributes3, nestedRemoved).nullable(false))
+                yup.array().of(createModelSchema(attributes3, nestedRemoved).nullable(false))
               ).test(arrayValidator(attribute, options))
             };
           } else {
@@ -919,12 +859,12 @@ const createYupSchema = (attributes = {}, components = {}, options = { status: n
           return {
             ...acc,
             [name2]: transformSchema(
-              yup__namespace.array().of(
-                yup__namespace.lazy(
+              yup.array().of(
+                yup.lazy(
                   (data) => {
                     const attributes3 = components?.[data?.__component]?.attributes;
-                    const validation = yup__namespace.object().shape({
-                      __component: yup__namespace.string().required().oneOf(Object.keys(components))
+                    const validation = yup.object().shape({
+                      __component: yup.string().required().oneOf(Object.keys(components))
                     }).nullable(false);
                     if (!attributes3) {
                       return validation;
@@ -939,19 +879,19 @@ const createYupSchema = (attributes = {}, components = {}, options = { status: n
           return {
             ...acc,
             [name2]: transformSchema(
-              yup__namespace.lazy((value) => {
+              yup.lazy((value) => {
                 if (!value) {
-                  return yup__namespace.mixed().nullable(true);
+                  return yup.mixed().nullable(true);
                 } else if (Array.isArray(value)) {
-                  return yup__namespace.array().of(
-                    yup__namespace.object().shape({
-                      id: yup__namespace.number().required()
+                  return yup.array().of(
+                    yup.object().shape({
+                      id: yup.number().required()
                     })
                   );
                 } else if (typeof value === "object") {
-                  return yup__namespace.object();
+                  return yup.object();
                 } else {
-                  return yup__namespace.mixed().test(
+                  return yup.mixed().test(
                     "type-error",
                     "Relation values must be either null, an array of objects with {id} or an object.",
                     () => false
@@ -973,11 +913,11 @@ const createYupSchema = (attributes = {}, components = {}, options = { status: n
 const createAttributeSchema = (attribute) => {
   switch (attribute.type) {
     case "biginteger":
-      return yup__namespace.string().matches(/^-?\d*$/);
+      return yup.string().matches(/^-?\d*$/);
     case "boolean":
-      return yup__namespace.boolean().nullable();
+      return yup.boolean().nullable();
     case "blocks":
-      return yup__namespace.mixed().test("isBlocks", admin.translatedErrors.json, (value) => {
+      return yup.mixed().test("isBlocks", translatedErrors.json, (value) => {
         if (!value || Array.isArray(value)) {
           return true;
         } else {
@@ -987,13 +927,13 @@ const createAttributeSchema = (attribute) => {
     case "decimal":
     case "float":
     case "integer":
-      return yup__namespace.number();
+      return yup.number();
     case "email":
-      return yup__namespace.string().email(admin.translatedErrors.email);
+      return yup.string().email(translatedErrors.email);
     case "enumeration":
-      return yup__namespace.string().oneOf([...attribute.enum, null]);
+      return yup.string().oneOf([...attribute.enum, null]);
     case "json":
-      return yup__namespace.mixed().test("isJSON", admin.translatedErrors.json, (value) => {
+      return yup.mixed().test("isJSON", translatedErrors.json, (value) => {
         if (!value || typeof value === "string" && value.length === 0) {
           return true;
         }
@@ -1013,15 +953,15 @@ const createAttributeSchema = (attribute) => {
         }
       });
     case "password":
-      return yup__namespace.string().nullable();
+      return yup.string().nullable();
     case "richtext":
     case "string":
     case "text":
-      return yup__namespace.string();
+      return yup.string();
     case "uid":
-      return yup__namespace.string().matches(attribute.regex ? new RegExp(attribute.regex) : /^[A-Za-z0-9-_.~]*$/);
+      return yup.string().matches(attribute.regex ? new RegExp(attribute.regex) : /^[A-Za-z0-9-_.~]*$/);
     default:
-      return yup__namespace.mixed();
+      return yup.mixed();
   }
 };
 const nullableSchema = (schema) => {
@@ -1040,7 +980,7 @@ const addRequiredValidation = (attribute, options) => (schema) => {
     return schema;
   }
   if (attribute.required && "required" in schema) {
-    return schema.required(admin.translatedErrors.required);
+    return schema.required(translatedErrors.required);
   }
   return schema;
 };
@@ -1050,7 +990,7 @@ const addMinLengthValidation = (attribute, options) => (schema) => {
   }
   if ("minLength" in attribute && attribute.minLength && Number.isInteger(attribute.minLength) && "min" in schema) {
     return schema.min(attribute.minLength, {
-      ...admin.translatedErrors.minLength,
+      ...translatedErrors.minLength,
       values: {
         min: attribute.minLength
       }
@@ -1061,7 +1001,7 @@ const addMinLengthValidation = (attribute, options) => (schema) => {
 const addMaxLengthValidation = (attribute) => (schema) => {
   if ("maxLength" in attribute && attribute.maxLength && Number.isInteger(attribute.maxLength) && "max" in schema) {
     return schema.max(attribute.maxLength, {
-      ...admin.translatedErrors.maxLength,
+      ...translatedErrors.maxLength,
       values: {
         max: attribute.maxLength
       }
@@ -1077,7 +1017,7 @@ const addMinValidation = (attribute, options) => (schema) => {
     const min = toInteger(attribute.min);
     if (min) {
       return schema.min(min, {
-        ...admin.translatedErrors.min,
+        ...translatedErrors.min,
         values: {
           min
         }
@@ -1091,7 +1031,7 @@ const addMaxValidation = (attribute) => (schema) => {
     const max = toInteger(attribute.max);
     if ("max" in schema && max) {
       return schema.max(max, {
-        ...admin.translatedErrors.max,
+        ...translatedErrors.max,
         values: {
           max
         }
@@ -1112,7 +1052,7 @@ const addRegexValidation = (attribute) => (schema) => {
   if ("regex" in attribute && attribute.regex && "matches" in schema) {
     return schema.matches(new RegExp(attribute.regex), {
       message: {
-        id: admin.translatedErrors.regex.id,
+        id: translatedErrors.regex.id,
         defaultMessage: "The value does not match the defined pattern."
       },
       excludeEmptyString: !attribute.required
@@ -1131,10 +1071,10 @@ const initApi = contentManagerApi.injectEndpoints({
 });
 const { useGetInitialDataQuery } = initApi;
 const useContentTypeSchema = (model) => {
-  const { toggleNotification } = admin.useNotification();
-  const { _unstableFormatAPIError: formatAPIError } = admin.useAPIErrorHandler();
+  const { toggleNotification } = useNotification();
+  const { _unstableFormatAPIError: formatAPIError } = useAPIErrorHandler();
   const { data, error, isLoading, isFetching } = useGetInitialDataQuery(void 0);
-  const { components, contentType, contentTypes } = React__namespace.useMemo(() => {
+  const { components, contentType, contentTypes } = React.useMemo(() => {
     const contentType2 = data?.contentTypes.find((ct) => ct.uid === model);
     const componentsByKey = data?.components.reduce((acc, component) => {
       acc[component.uid] = component;
@@ -1147,7 +1087,7 @@ const useContentTypeSchema = (model) => {
       contentTypes: data?.contentTypes ?? []
     };
   }, [model, data]);
-  React__namespace.useEffect(() => {
+  React.useEffect(() => {
     if (error) {
       toggleNotification({
         type: "danger",
@@ -1157,7 +1097,7 @@ const useContentTypeSchema = (model) => {
   }, [toggleNotification, error, formatAPIError]);
   return {
     // This must be memoized to avoid inifiinite re-renders where the empty object is different everytime.
-    components: React__namespace.useMemo(() => components ?? {}, [components]),
+    components: React.useMemo(() => components ?? {}, [components]),
     schema: contentType,
     schemas: contentTypes,
     isLoading: isLoading || isFetching
@@ -1264,9 +1204,9 @@ const DEFAULT_SETTINGS = {
 };
 const useDocumentLayout = (model) => {
   const { schema, components } = useDocument({ model, collectionType: "" }, { skip: true });
-  const [{ query }] = admin.useQueryParams();
-  const { toggleNotification } = admin.useNotification();
-  const { _unstableFormatAPIError: formatAPIError } = admin.useAPIErrorHandler();
+  const [{ query }] = useQueryParams();
+  const { toggleNotification } = useNotification();
+  const { _unstableFormatAPIError: formatAPIError } = useAPIErrorHandler();
   const { isLoading: isLoadingSchemas, schemas } = useContentTypeSchema();
   const {
     data,
@@ -1275,7 +1215,7 @@ const useDocumentLayout = (model) => {
     isFetching: isFetchingConfigs
   } = useGetContentTypeConfigurationQuery(model);
   const isLoading = isLoadingSchemas || isFetchingConfigs || isLoadingConfigs;
-  React__namespace.useEffect(() => {
+  React.useEffect(() => {
     if (error) {
       toggleNotification({
         type: "danger",
@@ -1283,7 +1223,7 @@ const useDocumentLayout = (model) => {
       });
     }
   }, [error, formatAPIError, toggleNotification]);
-  const editLayout = React__namespace.useMemo(
+  const editLayout = React.useMemo(
     () => data && !isLoading ? formatEditLayout(data, { schemas, schema, components }) : {
       layout: [],
       components: {},
@@ -1293,7 +1233,7 @@ const useDocumentLayout = (model) => {
     },
     [data, isLoading, schemas, schema, components]
   );
-  const listLayout = React__namespace.useMemo(() => {
+  const listLayout = React.useMemo(() => {
     return data && !isLoading ? formatListLayout(data, { schemas, schema, components }) : {
       layout: [],
       metadatas: {},
@@ -1460,9 +1400,9 @@ const convertListLayoutToFieldLayouts = (columns, attributes = {}, metadatas, co
   }).filter((field) => field !== null);
 };
 const useDocument = (args, opts) => {
-  const { toggleNotification } = admin.useNotification();
-  const { _unstableFormatAPIError: formatAPIError } = admin.useAPIErrorHandler();
-  const { formatMessage } = reactIntl.useIntl();
+  const { toggleNotification } = useNotification();
+  const { _unstableFormatAPIError: formatAPIError } = useAPIErrorHandler();
+  const { formatMessage } = useIntl();
   const {
     currentData: data,
     isLoading: isLoadingDocument,
@@ -1471,7 +1411,7 @@ const useDocument = (args, opts) => {
     refetch
   } = useGetDocumentQuery(args, {
     ...opts,
-    skip: !args.documentId && args.collectionType !== index.SINGLE_TYPES || opts?.skip
+    skip: !args.documentId && args.collectionType !== SINGLE_TYPES || opts?.skip
   });
   const document2 = data?.data;
   const meta = data?.meta;
@@ -1494,7 +1434,7 @@ const useDocument = (args, opts) => {
       defaultMessage: "Untitled"
     });
   };
-  React__namespace.useEffect(() => {
+  React.useEffect(() => {
     if (error) {
       toggleNotification({
         type: "danger",
@@ -1502,13 +1442,13 @@ const useDocument = (args, opts) => {
       });
     }
   }, [toggleNotification, error, formatAPIError, args.collectionType]);
-  const validationSchema = React__namespace.useMemo(() => {
+  const validationSchema = React.useMemo(() => {
     if (!schema) {
       return null;
     }
     return createYupSchema(schema.attributes, components);
   }, [schema, components]);
-  const validate = React__namespace.useCallback(
+  const validate = React.useCallback(
     (document22) => {
       if (!validationSchema) {
         throw new Error(
@@ -1519,15 +1459,15 @@ const useDocument = (args, opts) => {
         validationSchema.validateSync(document22, { abortEarly: false, strict: true });
         return null;
       } catch (error2) {
-        if (error2 instanceof yup.ValidationError) {
-          return admin.getYupValidationErrors(error2);
+        if (error2 instanceof ValidationError) {
+          return getYupValidationErrors(error2);
         }
         throw error2;
       }
     },
     [validationSchema]
   );
-  const getInitialFormValues = React__namespace.useCallback(
+  const getInitialFormValues = React.useCallback(
     (isCreatingDocument = false) => {
       if (!document2 && !isCreatingDocument && !isSingleType || !schema) {
         return void 0;
@@ -1554,9 +1494,9 @@ const useDocument = (args, opts) => {
   };
 };
 const useDoc = () => {
-  const { id, slug, collectionType, origin } = reactRouterDom.useParams();
-  const [{ query }] = admin.useQueryParams();
-  const params = React__namespace.useMemo(() => buildValidParams(query), [query]);
+  const { id, slug, collectionType, origin } = useParams();
+  const [{ query }] = useQueryParams();
+  const params = React.useMemo(() => buildValidParams(query), [query]);
   if (!collectionType) {
     throw new Error("Could not find collectionType in url params");
   }
@@ -1566,7 +1506,7 @@ const useDoc = () => {
   const document2 = useDocument(
     { documentId: origin || id, model: slug, collectionType, params },
     {
-      skip: id === "create" || !origin && !id && collectionType !== index.SINGLE_TYPES
+      skip: id === "create" || !origin && !id && collectionType !== SINGLE_TYPES
     }
   );
   const returnId = origin || id === "create" ? void 0 : id;
@@ -1579,19 +1519,19 @@ const useDoc = () => {
 };
 const componentStore = /* @__PURE__ */ new Map();
 const useLazyComponents = (componentUids = []) => {
-  const [lazyComponentStore, setLazyComponentStore] = React.useState(Object.fromEntries(componentStore));
+  const [lazyComponentStore, setLazyComponentStore] = useState(Object.fromEntries(componentStore));
   const newUids = componentUids.filter((uid) => !componentStore.get(uid));
-  const [loading, setLoading] = React.useState(() => !!newUids.length);
-  const getCustomField = admin.useStrapiApp("useLazyComponents", (state) => state.customFields.get);
-  React.useEffect(() => {
+  const [loading, setLoading] = useState(() => !!newUids.length);
+  const getCustomField = useStrapiApp("useLazyComponents", (state) => state.customFields.get);
+  useEffect(() => {
     const setStore = (store) => {
       setLazyComponentStore(store);
       setLoading(false);
     };
     const lazyLoadComponents = async (uids, components) => {
       const modules = await Promise.all(components);
-      uids.forEach((uid, index2) => {
-        componentStore.set(uid, modules[index2].default);
+      uids.forEach((uid, index) => {
+        componentStore.set(uid, modules[index].default);
       });
       setStore(Object.fromEntries(componentStore));
     };
@@ -1609,23 +1549,23 @@ const useLazyComponents = (componentUids = []) => {
       }
     }
   }, [newUids, getCustomField]);
-  const cleanup = React.useCallback(() => {
+  const cleanup = useCallback(() => {
     componentStore.clear();
     setLazyComponentStore({});
   }, []);
   return { isLazyLoading: loading, lazyComponentStore, cleanup };
 };
-const useOnce = (effect) => React__namespace.useEffect(effect, emptyDeps);
+const useOnce = (effect) => React.useEffect(effect, emptyDeps);
 const emptyDeps = [];
 const Blocker = () => {
-  const resetForm = admin.useForm("Blocker", (state) => state.resetForm);
-  return /* @__PURE__ */ jsxRuntime.jsx(admin.Blocker, { onProceed: resetForm });
+  const resetForm = useForm("Blocker", (state) => state.resetForm);
+  return /* @__PURE__ */ jsx(Blocker$1, { onProceed: resetForm });
 };
 const intervals = ["years", "months", "days", "hours", "minutes", "seconds"];
-React__namespace.forwardRef(
+React.forwardRef(
   ({ timestamp, customIntervals = [], ...restProps }, forwardedRef) => {
-    const { formatRelativeTime, formatDate: formatDate2, formatTime } = reactIntl.useIntl();
-    const interval = dateFns.intervalToDuration({
+    const { formatRelativeTime, formatDate: formatDate2, formatTime } = useIntl();
+    const interval = intervalToDuration({
       start: timestamp,
       end: Date.now()
       // see https://github.com/date-fns/date-fns/issues/2891 – No idea why it's all partial it returns it every time.
@@ -1633,12 +1573,12 @@ React__namespace.forwardRef(
     const unit = intervals.find((intervalUnit) => {
       return interval[intervalUnit] > 0 && Object.keys(interval).includes(intervalUnit);
     }) ?? "seconds";
-    const relativeTime = dateFns.isPast(timestamp) ? -interval[unit] : interval[unit];
+    const relativeTime = isPast(timestamp) ? -interval[unit] : interval[unit];
     const customInterval = customIntervals.find(
       (custom) => interval[custom.unit] < custom.threshold
     );
     const displayText = customInterval ? customInterval.text : formatRelativeTime(relativeTime, unit, { numeric: "auto" });
-    return /* @__PURE__ */ jsxRuntime.jsx(
+    return /* @__PURE__ */ jsx(
       "time",
       {
         ref: forwardedRef,
@@ -1654,13 +1594,13 @@ React__namespace.forwardRef(
 const capitalise = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 const DocumentStatus = ({ status = "draft", size = "S", ...restProps }) => {
   const statusVariant = status === "draft" ? "secondary" : status === "published" ? "success" : "alternative";
-  const { formatMessage } = reactIntl.useIntl();
-  return /* @__PURE__ */ jsxRuntime.jsx(designSystem.Status, { ...restProps, size, variant: statusVariant, role: "status", "aria-label": status, children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { tag: "span", variant: "omega", fontWeight: "bold", children: formatMessage({
+  const { formatMessage } = useIntl();
+  return /* @__PURE__ */ jsx(Status, { ...restProps, size, variant: statusVariant, role: "status", "aria-label": status, children: /* @__PURE__ */ jsx(Typography, { tag: "span", variant: "omega", fontWeight: "bold", children: formatMessage({
     id: `content-manager.containers.List.${status}`,
     defaultMessage: capitalise(status)
   }) }) });
 };
-const [DocumentRBACProvider, useDocumentRBAC] = admin.createContext(
+const [DocumentRBACProvider, useDocumentRBAC] = createContext(
   "DocumentRBAC",
   {
     canCreate: false,
@@ -1676,14 +1616,14 @@ const [DocumentRBACProvider, useDocumentRBAC] = admin.createContext(
   }
 );
 const DocumentRBAC = ({ children, permissions, model }) => {
-  const { slug } = reactRouterDom.useParams();
+  const { slug } = useParams();
   if (!slug && !model) {
     throw new Error("Cannot find the slug param in the URL or the model prop is not provided.");
   }
   const contentTypeUid = model ?? slug;
-  const [{ rawQuery }] = admin.useQueryParams();
-  const userPermissions = admin.useAuth("DocumentRBAC", (state) => state.permissions);
-  const contentTypePermissions = React__namespace.useMemo(() => {
+  const [{ rawQuery }] = useQueryParams();
+  const userPermissions = useAuth("DocumentRBAC", (state) => state.permissions);
+  const contentTypePermissions = React.useMemo(() => {
     const contentTypePermissions2 = userPermissions.filter(
       (permission) => permission.subject === contentTypeUid
     );
@@ -1693,7 +1633,7 @@ const DocumentRBAC = ({ children, permissions, model }) => {
     }, {});
   }, [contentTypeUid, userPermissions]);
   const contentTypePermissionsList = Object.values(contentTypePermissions).flat();
-  const { isLoading, allowedActions } = admin.useRBAC(
+  const { isLoading, allowedActions } = useRBAC(
     contentTypePermissionsList,
     permissions ?? void 0,
     // TODO: (Strapi Developers) useRBAC context should be typed and built differently
@@ -1704,7 +1644,7 @@ const DocumentRBAC = ({ children, permissions, model }) => {
   const canCreateFields = !isLoading && allowedActions.canCreate ? extractAndDedupeFields(contentTypePermissions.create) : [];
   const canReadFields = !isLoading && allowedActions.canRead ? extractAndDedupeFields(contentTypePermissions.read) : [];
   const canUpdateFields = !isLoading && allowedActions.canUpdate ? extractAndDedupeFields(contentTypePermissions.update) : [];
-  const canUserAction = React__namespace.useCallback(
+  const canUserAction = React.useCallback(
     (fieldName, fieldsUserCanAction, fieldType) => {
       const name2 = removeNumericalStrings(fieldName.split("."));
       const componentFieldNames = fieldsUserCanAction.filter((field) => field.split(".").length > 1);
@@ -1721,9 +1661,9 @@ const DocumentRBAC = ({ children, permissions, model }) => {
     []
   );
   if (isLoading) {
-    return /* @__PURE__ */ jsxRuntime.jsx(admin.Page.Loading, {});
+    return /* @__PURE__ */ jsx(Page.Loading, {});
   }
-  return /* @__PURE__ */ jsxRuntime.jsx(
+  return /* @__PURE__ */ jsx(
     DocumentRBACProvider,
     {
       isLoading,
@@ -1737,7 +1677,7 @@ const DocumentRBAC = ({ children, permissions, model }) => {
   );
 };
 const extractAndDedupeFields = (permissions = []) => permissions.flatMap((permission) => permission.properties?.fields).filter(
-  (field, index2, arr) => arr.indexOf(field) === index2 && typeof field === "string"
+  (field, index, arr) => arr.indexOf(field) === index && typeof field === "string"
 );
 const removeNumericalStrings = (arr) => arr.filter((item) => isNaN(Number(item)));
 const previewScript = (config) => {
@@ -1877,24 +1817,24 @@ const previewScript = (config) => {
     const focusedHighlights = [];
     const pendingClicks = /* @__PURE__ */ new Map();
     let focusedField = null;
-    const drawHighlight = (target, highlight) => {
-      if (!highlight) return;
+    const drawHighlight = (target, highlight2) => {
+      if (!highlight2) return;
       const rect = target.getBoundingClientRect();
-      highlight.style.width = `${rect.width + HIGHLIGHT_PADDING * 2}px`;
-      highlight.style.height = `${rect.height + HIGHLIGHT_PADDING * 2}px`;
-      highlight.style.transform = `translate(${rect.left - HIGHLIGHT_PADDING}px, ${rect.top - HIGHLIGHT_PADDING}px)`;
+      highlight2.style.width = `${rect.width + HIGHLIGHT_PADDING * 2}px`;
+      highlight2.style.height = `${rect.height + HIGHLIGHT_PADDING * 2}px`;
+      highlight2.style.transform = `translate(${rect.left - HIGHLIGHT_PADDING}px, ${rect.top - HIGHLIGHT_PADDING}px)`;
     };
     const updateAllHighlights = () => {
-      elementsToHighlight.forEach((highlight, element) => {
-        drawHighlight(element, highlight);
+      elementsToHighlight.forEach((highlight2, element) => {
+        drawHighlight(element, highlight2);
       });
     };
     const createHighlightForElement = (element) => {
       if (elementsToHighlight.has(element)) {
         return;
       }
-      const highlight = document.createElement("div");
-      highlight.className = "strapi-highlight";
+      const highlight2 = document.createElement("div");
+      highlight2.className = "strapi-highlight";
       const clickHandler = (event) => {
         if (event.__strapi_redispatched) {
           return;
@@ -1957,36 +1897,36 @@ const previewScript = (config) => {
           event.preventDefault();
         }
       };
-      highlight.addEventListener("click", clickHandler);
-      highlight.addEventListener("dblclick", doubleClickHandler);
-      highlight.addEventListener("mousedown", mouseDownHandler);
+      highlight2.addEventListener("click", clickHandler);
+      highlight2.addEventListener("dblclick", doubleClickHandler);
+      highlight2.addEventListener("mousedown", mouseDownHandler);
       eventListeners.push(
-        { element: highlight, type: "click", handler: clickHandler },
-        { element: highlight, type: "dblclick", handler: doubleClickHandler },
-        { element: highlight, type: "mousedown", handler: mouseDownHandler }
+        { element: highlight2, type: "click", handler: clickHandler },
+        { element: highlight2, type: "dblclick", handler: doubleClickHandler },
+        { element: highlight2, type: "mousedown", handler: mouseDownHandler }
       );
-      elementsToHighlight.set(element, highlight);
-      overlay.appendChild(highlight);
-      drawHighlight(element, highlight);
+      elementsToHighlight.set(element, highlight2);
+      overlay.appendChild(highlight2);
+      drawHighlight(element, highlight2);
     };
     const removeHighlightForElement = (element) => {
-      const highlight = elementsToHighlight.get(element);
-      if (!highlight) return;
+      const highlight2 = elementsToHighlight.get(element);
+      if (!highlight2) return;
       const pendingTimeout = pendingClicks.get(element);
       if (pendingTimeout) {
         window.clearTimeout(pendingTimeout);
         pendingClicks.delete(element);
       }
-      highlight.remove();
+      highlight2.remove();
       elementsToHighlight.delete(element);
-      const listenersToRemove = eventListeners.filter((listener) => listener.element === highlight);
+      const listenersToRemove = eventListeners.filter((listener) => listener.element === highlight2);
       listenersToRemove.forEach(({ element: element2, type, handler }) => {
         element2.removeEventListener(type, handler);
       });
       eventListeners.splice(
         0,
         eventListeners.length,
-        ...eventListeners.filter((listener) => listener.element !== highlight)
+        ...eventListeners.filter((listener) => listener.element !== highlight2)
       );
     };
     const initialElements = window.document.querySelectorAll(`[${SOURCE_ATTRIBUTE}]`);
@@ -2129,19 +2069,19 @@ const previewScript = (config) => {
       if (event.data.type === INTERNAL_EVENTS2.STRAPI_FIELD_FOCUS) {
         const { field } = event.data.payload;
         if (!field) return;
-        highlightManager.focusedHighlights.forEach((highlight) => {
-          highlight.classList.remove("strapi-highlight-focused");
+        highlightManager.focusedHighlights.forEach((highlight2) => {
+          highlight2.classList.remove("strapi-highlight-focused");
         });
         highlightManager.focusedHighlights.length = 0;
         highlightManager.setFocusedField(field);
-        getElementsByPath(field).forEach((element, index2) => {
-          if (index2 === 0) {
+        getElementsByPath(field).forEach((element, index) => {
+          if (index === 0) {
             element.scrollIntoView({ behavior: "smooth", block: "center" });
           }
-          const highlight = highlightManager.highlights[Array.from(highlightManager.elements).indexOf(element)];
-          if (highlight) {
-            highlight.classList.add("strapi-highlight-focused");
-            highlightManager.focusedHighlights.push(highlight);
+          const highlight2 = highlightManager.highlights[Array.from(highlightManager.elements).indexOf(element)];
+          if (highlight2) {
+            highlight2.classList.add("strapi-highlight-focused");
+            highlightManager.focusedHighlights.push(highlight2);
           }
         });
         return;
@@ -2149,8 +2089,8 @@ const previewScript = (config) => {
       if (event.data.type === INTERNAL_EVENTS2.STRAPI_FIELD_BLUR) {
         const { field } = event.data.payload;
         if (field !== highlightManager.getFocusedField()) return;
-        highlightManager.focusedHighlights.forEach((highlight) => {
-          highlight.classList.remove("strapi-highlight-focused");
+        highlightManager.focusedHighlights.forEach((highlight2) => {
+          highlight2.classList.remove("strapi-highlight-focused");
         });
         highlightManager.focusedHighlights.length = 0;
         highlightManager.setFocusedField(null);
@@ -2197,14 +2137,14 @@ const PREVIEW_HIGHLIGHT_COLORS = {
 };
 const scriptResponse = previewScript({ shouldRun: false, colors: PREVIEW_HIGHLIGHT_COLORS });
 const INTERNAL_EVENTS = scriptResponse.INTERNAL_EVENTS;
-const [InputPopoverProvider, useInputPopoverContext] = admin.createContext("InputPopover");
+const [InputPopoverProvider, useInputPopoverContext] = createContext("InputPopover");
 function useHasInputPopoverParent() {
   const context = useInputPopoverContext("useHasInputPopoverParent", () => true, false);
   return context !== void 0;
 }
 const DocumentActionButton = ({ buttonType = "button", ...action }) => {
-  const [dialogId, setDialogId] = React__namespace.useState(null);
-  const { toggleNotification } = admin.useNotification();
+  const [dialogId, setDialogId] = React.useState(null);
+  const { toggleNotification } = useNotification();
   const handleClick = (action2) => async (e) => {
     const { onClick = () => false, dialog, id } = action2;
     const muteDialog = await onClick(e);
@@ -2229,9 +2169,9 @@ const DocumentActionButton = ({ buttonType = "button", ...action }) => {
   const handleClose = () => {
     setDialogId(null);
   };
-  return /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-    /* @__PURE__ */ jsxRuntime.jsx(
-      designSystem.Button,
+  return /* @__PURE__ */ jsxs(Fragment, { children: [
+    /* @__PURE__ */ jsx(
+      Button,
       {
         flex: "auto",
         startIcon: action.icon,
@@ -2246,7 +2186,7 @@ const DocumentActionButton = ({ buttonType = "button", ...action }) => {
         children: action.label
       }
     ),
-    action.dialog?.type === "dialog" ? /* @__PURE__ */ jsxRuntime.jsx(
+    action.dialog?.type === "dialog" ? /* @__PURE__ */ jsx(
       DocumentActionConfirmDialog$1,
       {
         ...action.dialog,
@@ -2255,7 +2195,7 @@ const DocumentActionButton = ({ buttonType = "button", ...action }) => {
         onClose: handleClose
       }
     ) : null,
-    action.dialog?.type === "modal" ? /* @__PURE__ */ jsxRuntime.jsx(
+    action.dialog?.type === "modal" ? /* @__PURE__ */ jsx(
       DocumentActionModal,
       {
         ...action.dialog,
@@ -2275,7 +2215,7 @@ const DocumentActionConfirmDialog$1 = ({
   variant = "secondary",
   loading
 }) => {
-  const { formatMessage } = reactIntl.useIntl();
+  const { formatMessage } = useIntl();
   const handleClose = async () => {
     if (onCancel) {
       await onCancel();
@@ -2288,12 +2228,12 @@ const DocumentActionConfirmDialog$1 = ({
     }
     onClose();
   };
-  return /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Root, { open: isOpen, onOpenChange: handleClose, children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Dialog.Content, { children: [
-    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Header, { children: title }),
-    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Body, { children: content }),
-    /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Dialog.Footer, { children: [
-      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Cancel, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { variant: "tertiary", fullWidth: true, children: "Cancel" }) }),
-      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { onClick: handleConfirm, variant, fullWidth: true, loading, children: "Confirm" })
+  return /* @__PURE__ */ jsx(Dialog.Root, { open: isOpen, onOpenChange: handleClose, children: /* @__PURE__ */ jsxs(Dialog.Content, { children: [
+    /* @__PURE__ */ jsx(Dialog.Header, { children: title }),
+    /* @__PURE__ */ jsx(Dialog.Body, { children: content }),
+    /* @__PURE__ */ jsxs(Dialog.Footer, { children: [
+      /* @__PURE__ */ jsx(Dialog.Cancel, { children: /* @__PURE__ */ jsx(Button, { variant: "tertiary", fullWidth: true, children: "Cancel" }) }),
+      /* @__PURE__ */ jsx(Button, { onClick: handleConfirm, variant, fullWidth: true, loading, children: "Confirm" })
     ] })
   ] }) });
 };
@@ -2311,21 +2251,21 @@ const DocumentActionModal = ({
     }
     onModalClose();
   };
-  return /* @__PURE__ */ jsxRuntime.jsx(designSystem.Modal.Root, { open: isOpen, onOpenChange: handleClose, children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Modal.Content, { children: [
-    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Modal.Header, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Modal.Title, { children: title }) }),
-    typeof Content === "function" ? /* @__PURE__ */ jsxRuntime.jsx(Content, { onClose: handleClose }) : /* @__PURE__ */ jsxRuntime.jsx(designSystem.Modal.Body, { children: Content }),
-    typeof Footer === "function" ? /* @__PURE__ */ jsxRuntime.jsx(Footer, { onClose: handleClose }) : Footer
+  return /* @__PURE__ */ jsx(Modal.Root, { open: isOpen, onOpenChange: handleClose, children: /* @__PURE__ */ jsxs(Modal.Content, { children: [
+    /* @__PURE__ */ jsx(Modal.Header, { children: /* @__PURE__ */ jsx(Modal.Title, { children: title }) }),
+    typeof Content === "function" ? /* @__PURE__ */ jsx(Content, { onClose: handleClose }) : /* @__PURE__ */ jsx(Modal.Body, { children: Content }),
+    typeof Footer === "function" ? /* @__PURE__ */ jsx(Footer, { onClose: handleClose }) : Footer
   ] }) });
 };
-styledComponents.styled(designSystem.Typography)`
+styled(Typography)`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 `;
-styledComponents.styled(designSystem.Tabs.Trigger)`
+styled(Tabs.Trigger)`
   text-transform: uppercase;
 `;
-styledComponents.styled(designSystem.Flex)`
+styled(Flex)`
   border-right: 1px solid ${({ theme }) => theme.colors.neutral150};
 `;
 const previewApi = contentManagerApi.injectEndpoints({
@@ -2357,8 +2297,8 @@ function getSendMessage(iframe) {
     );
   };
 }
-const [PreviewProvider, usePreviewContext] = admin.createContext("PreviewPage");
-styledComponents.styled(Icons.ArrowLineLeft)`
+const [PreviewProvider, usePreviewContext] = createContext("PreviewPage");
+styled(ArrowLineLeft)`
   will-change: transform;
   rotate: ${(props) => props.$isSideEditorOpen ? "0deg" : "180deg"};
   transition: rotate 0.2s ease-in-out;
@@ -2368,16 +2308,16 @@ const DEFAULT_UNEXPECTED_ERROR_MSG = {
   defaultMessage: "An error occurred, please try again"
 };
 const useDocumentActions = () => {
-  const { toggleNotification } = admin.useNotification();
-  const { formatMessage } = reactIntl.useIntl();
-  const { _unstableFormatAPIError: formatAPIError } = admin.useAPIErrorHandler();
-  const navigate = reactRouterDom.useNavigate();
+  const { toggleNotification } = useNotification();
+  const { formatMessage } = useIntl();
+  const { _unstableFormatAPIError: formatAPIError } = useAPIErrorHandler();
+  const navigate = useNavigate();
   const previewContext = usePreviewContext("useDocumentActions", () => true, false);
   const relationContext = useRelationModal("useDocumentActions", () => true, false);
   const fromPreview = previewContext != void 0;
   const fromRelationModal = relationContext != void 0;
   const [deleteDocument, { isLoading: isDeleting }] = useDeleteDocumentMutation();
-  const _delete = React__namespace.useCallback(
+  const _delete = React.useCallback(
     async ({ collectionType, model, documentId, params }) => {
       try {
         const res = await deleteDocument({
@@ -2396,7 +2336,7 @@ const useDocumentActions = () => {
         toggleNotification({
           type: "success",
           message: formatMessage({
-            id: index.getTranslation("success.record.delete"),
+            id: getTranslation("success.record.delete"),
             defaultMessage: "Deleted document"
           })
         });
@@ -2412,7 +2352,7 @@ const useDocumentActions = () => {
     [deleteDocument, formatAPIError, formatMessage, toggleNotification]
   );
   const [deleteManyDocuments, { isLoading: isDeletingMany }] = useDeleteManyDocumentsMutation();
-  const deleteMany = React__namespace.useCallback(
+  const deleteMany = React.useCallback(
     async ({ model, documentIds, params }) => {
       try {
         const res = await deleteManyDocuments({
@@ -2430,7 +2370,7 @@ const useDocumentActions = () => {
         toggleNotification({
           type: "success",
           title: formatMessage({
-            id: index.getTranslation("success.records.delete"),
+            id: getTranslation("success.records.delete"),
             defaultMessage: "Successfully deleted."
           }),
           message: ""
@@ -2447,7 +2387,7 @@ const useDocumentActions = () => {
     [deleteManyDocuments, formatAPIError, formatMessage, toggleNotification]
   );
   const [discardDocument, { isLoading: isDiscardingDocument }] = useDiscardDocumentMutation();
-  const discard = React__namespace.useCallback(
+  const discard = React.useCallback(
     async ({ collectionType, model, documentId, params }) => {
       try {
         const res = await discardDocument({
@@ -2482,7 +2422,7 @@ const useDocumentActions = () => {
     [discardDocument, formatAPIError, formatMessage, toggleNotification]
   );
   const [publishDocument, { isLoading: isPublishing }] = usePublishDocumentMutation();
-  const publish = React__namespace.useCallback(
+  const publish = React.useCallback(
     async ({ collectionType, model, documentId, params }, data) => {
       try {
         const res = await publishDocument({
@@ -2499,7 +2439,7 @@ const useDocumentActions = () => {
         toggleNotification({
           type: "success",
           message: formatMessage({
-            id: index.getTranslation("success.record.publish"),
+            id: getTranslation("success.record.publish"),
             defaultMessage: "Published document"
           })
         });
@@ -2522,7 +2462,7 @@ const useDocumentActions = () => {
     ]
   );
   const [publishManyDocuments, { isLoading: isPublishingMany }] = usePublishManyDocumentsMutation();
-  const publishMany = React__namespace.useCallback(
+  const publishMany = React.useCallback(
     async ({ model, documentIds, params }) => {
       try {
         const res = await publishManyDocuments({
@@ -2537,7 +2477,7 @@ const useDocumentActions = () => {
         toggleNotification({
           type: "success",
           message: formatMessage({
-            id: index.getTranslation("success.record.publish"),
+            id: getTranslation("success.record.publish"),
             defaultMessage: "Published document"
           })
         });
@@ -2553,7 +2493,7 @@ const useDocumentActions = () => {
     [publishManyDocuments, formatMessage, formatAPIError, toggleNotification]
   );
   const [updateDocument, { isLoading: isUpdating }] = useUpdateDocumentMutation();
-  const update = React__namespace.useCallback(
+  const update = React.useCallback(
     async ({ collectionType, model, documentId, params }, data) => {
       try {
         const res = await updateDocument({
@@ -2570,7 +2510,7 @@ const useDocumentActions = () => {
         toggleNotification({
           type: "success",
           message: formatMessage({
-            id: index.getTranslation("success.record.save"),
+            id: getTranslation("success.record.save"),
             defaultMessage: "Saved document"
           })
         });
@@ -2586,7 +2526,7 @@ const useDocumentActions = () => {
     [updateDocument, formatMessage, formatAPIError, toggleNotification]
   );
   const [unpublishDocument] = useUnpublishDocumentMutation();
-  const unpublish = React__namespace.useCallback(
+  const unpublish = React.useCallback(
     async ({ collectionType, model, documentId, params }, discardDraft = false) => {
       try {
         const res = await unpublishDocument({
@@ -2605,7 +2545,7 @@ const useDocumentActions = () => {
         toggleNotification({
           type: "success",
           message: formatMessage({
-            id: index.getTranslation("success.record.unpublish"),
+            id: getTranslation("success.record.unpublish"),
             defaultMessage: "Unpublished document"
           })
         });
@@ -2621,7 +2561,7 @@ const useDocumentActions = () => {
     [unpublishDocument, formatMessage, formatAPIError, toggleNotification]
   );
   const [unpublishManyDocuments, { isLoading: isUnpublishingMany }] = useUnpublishManyDocumentsMutation();
-  const unpublishMany = React__namespace.useCallback(
+  const unpublishMany = React.useCallback(
     async ({ model, documentIds, params }) => {
       try {
         const res = await unpublishManyDocuments({
@@ -2636,7 +2576,7 @@ const useDocumentActions = () => {
         toggleNotification({
           type: "success",
           title: formatMessage({
-            id: index.getTranslation("success.records.unpublish"),
+            id: getTranslation("success.records.unpublish"),
             defaultMessage: "Successfully unpublished."
           }),
           message: ""
@@ -2653,7 +2593,7 @@ const useDocumentActions = () => {
     [unpublishManyDocuments, formatMessage, formatAPIError, toggleNotification]
   );
   const [createDocument] = useCreateDocumentMutation();
-  const create = React__namespace.useCallback(
+  const create = React.useCallback(
     async ({ model, params }, data) => {
       try {
         const res = await createDocument({
@@ -2668,7 +2608,7 @@ const useDocumentActions = () => {
         toggleNotification({
           type: "success",
           message: formatMessage({
-            id: index.getTranslation("success.record.save"),
+            id: getTranslation("success.record.save"),
             defaultMessage: "Saved document"
           })
         });
@@ -2684,7 +2624,7 @@ const useDocumentActions = () => {
     [createDocument, formatMessage, formatAPIError, toggleNotification]
   );
   const [autoCloneDocument] = useAutoCloneDocumentMutation();
-  const autoClone = React__namespace.useCallback(
+  const autoClone = React.useCallback(
     async ({ model, sourceId, locale }) => {
       try {
         const res = await autoCloneDocument({
@@ -2698,7 +2638,7 @@ const useDocumentActions = () => {
         toggleNotification({
           type: "success",
           message: formatMessage({
-            id: index.getTranslation("success.record.clone"),
+            id: getTranslation("success.record.clone"),
             defaultMessage: "Cloned document"
           })
         });
@@ -2714,7 +2654,7 @@ const useDocumentActions = () => {
     [autoCloneDocument, formatMessage, toggleNotification]
   );
   const [cloneDocument] = useCloneDocumentMutation();
-  const clone = React__namespace.useCallback(
+  const clone = React.useCallback(
     async ({ model, documentId, params }, body) => {
       try {
         const { id: _id, documentId: _documentId, ...restBody } = body;
@@ -2731,7 +2671,7 @@ const useDocumentActions = () => {
         toggleNotification({
           type: "success",
           message: formatMessage({
-            id: index.getTranslation("success.record.clone"),
+            id: getTranslation("success.record.clone"),
             defaultMessage: "Cloned document"
           })
         });
@@ -2748,7 +2688,7 @@ const useDocumentActions = () => {
     [cloneDocument, toggleNotification, formatMessage, formatAPIError, navigate]
   );
   const [getDoc] = useLazyGetDocumentQuery();
-  const getDocument = React__namespace.useCallback(
+  const getDocument = React.useCallback(
     async (args) => {
       const { data } = await getDoc(args);
       return data;
@@ -2771,25 +2711,25 @@ const useDocumentActions = () => {
     update
   };
 };
-const [ComponentProvider, useComponent] = admin.createContext("ComponentContext", {
+const [ComponentProvider, useComponent] = createContext("ComponentContext", {
   id: void 0,
   level: -1,
   uid: void 0,
   type: void 0
 });
 function getCollectionType(url) {
-  const regex = new RegExp(`(${index.COLLECTION_TYPES}|${index.SINGLE_TYPES})`);
+  const regex = new RegExp(`(${COLLECTION_TYPES}|${SINGLE_TYPES})`);
   const match = url.match(regex);
   return match ? match[1] : void 0;
 }
-const StyledModalContent = styledComponents.styled(designSystem.Modal.Content)`
+const StyledModalContent = styled(Modal.Content)`
   width: 90%;
   max-width: 100%;
   height: 90%;
   max-height: 100%;
 `;
 const getFullPageUrl = (currentDocumentMeta) => {
-  const isSingleType = currentDocumentMeta.collectionType === index.SINGLE_TYPES;
+  const isSingleType = currentDocumentMeta.collectionType === SINGLE_TYPES;
   const queryParams = currentDocumentMeta.params?.locale ? `?plugins[i18n][locale]=${currentDocumentMeta.params.locale}` : "";
   return `/content-manager/${currentDocumentMeta.collectionType}/${currentDocumentMeta.model}${isSingleType ? "" : "/" + currentDocumentMeta.documentId}${queryParams}`;
 };
@@ -2870,13 +2810,13 @@ function reducer(state, action) {
       return state;
   }
 }
-const [RelationModalProvider, useRelationModal] = admin.createContext("RelationModal");
+const [RelationModalProvider, useRelationModal] = createContext("RelationModal");
 function isRenderProp(children) {
   return typeof children === "function";
 }
 const RootRelationRenderer = (props) => {
   const { children } = props;
-  const [state, dispatch] = React__namespace.useReducer(reducer, {
+  const [state, dispatch] = React.useReducer(reducer, {
     documentHistory: [],
     confirmDialogIntent: null,
     isModalOpen: false,
@@ -2884,8 +2824,8 @@ const RootRelationRenderer = (props) => {
     fieldToConnect: void 0
   });
   const rootDocument = useDoc();
-  const [{ query }] = admin.useQueryParams();
-  const params = React__namespace.useMemo(() => buildValidParams(query ?? {}), [query]);
+  const [{ query }] = useQueryParams();
+  const params = React.useMemo(() => buildValidParams(query ?? {}), [query]);
   const rootDocumentMeta = {
     documentId: rootDocument.document?.documentId || "",
     model: rootDocument.model,
@@ -2894,9 +2834,9 @@ const RootRelationRenderer = (props) => {
   };
   const currentDocumentMeta = state.documentHistory.at(-1) ?? rootDocumentMeta;
   const currentDocument = useDocument(currentDocumentMeta);
-  const isSingleType = currentDocumentMeta.collectionType === index.SINGLE_TYPES;
+  const isSingleType = currentDocumentMeta.collectionType === SINGLE_TYPES;
   const isCreating = !currentDocumentMeta.documentId && !isSingleType;
-  return /* @__PURE__ */ jsxRuntime.jsx(
+  return /* @__PURE__ */ jsx(
     RelationModalProvider,
     {
       state,
@@ -2905,9 +2845,9 @@ const RootRelationRenderer = (props) => {
       currentDocumentMeta,
       currentDocument,
       isCreating,
-      children: /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-        /* @__PURE__ */ jsxRuntime.jsx(RelationModal, { children: isRenderProp(children) ? children({ dispatch }) : props.relation && /* @__PURE__ */ jsxRuntime.jsx(RelationModalTrigger, { relation: props.relation, children }) }),
-        /* @__PURE__ */ jsxRuntime.jsx(RelationModalConfirmDialog, {})
+      children: /* @__PURE__ */ jsxs(Fragment, { children: [
+        /* @__PURE__ */ jsx(RelationModal, { children: isRenderProp(children) ? children({ dispatch }) : props.relation && /* @__PURE__ */ jsx(RelationModalTrigger, { relation: props.relation, children }) }),
+        /* @__PURE__ */ jsx(RelationModalConfirmDialog, {})
       ] })
     }
   );
@@ -2915,18 +2855,18 @@ const RootRelationRenderer = (props) => {
 const NestedRelationRenderer = (props) => {
   const { children } = props;
   const dispatch = useRelationModal("NestedRelation", (state) => state.dispatch);
-  return isRenderProp(children) ? children({ dispatch }) : props.relation && /* @__PURE__ */ jsxRuntime.jsx(RelationModalTrigger, { relation: props.relation, children });
+  return isRenderProp(children) ? children({ dispatch }) : props.relation && /* @__PURE__ */ jsx(RelationModalTrigger, { relation: props.relation, children });
 };
 const RelationModalRenderer = (props) => {
   const isNested = useRelationModal("RelationContextWrapper", (state) => state != void 0, false);
-  return isNested ? /* @__PURE__ */ jsxRuntime.jsx(NestedRelationRenderer, { ...props }) : /* @__PURE__ */ jsxRuntime.jsx(RootRelationRenderer, { ...props });
+  return isNested ? /* @__PURE__ */ jsx(NestedRelationRenderer, { ...props }) : /* @__PURE__ */ jsx(RootRelationRenderer, { ...props });
 };
 const generateCreateUrl = (currentDocumentMeta) => {
   return `/content-manager/${currentDocumentMeta.collectionType}/${currentDocumentMeta.model}/create${currentDocumentMeta.params?.locale ? `?plugins[i18n][locale]=${currentDocumentMeta.params.locale}` : ""}`;
 };
 const RelationModal = ({ children }) => {
-  const { formatMessage } = reactIntl.useIntl();
-  const navigate = reactRouterDom.useNavigate();
+  const { formatMessage } = useIntl();
+  const navigate = useNavigate();
   const state = useRelationModal("RelationModalForm", (state2) => state2.state);
   const dispatch = useRelationModal("RelationModalForm", (state2) => state2.dispatch);
   const currentDocumentMeta = useRelationModal(
@@ -2935,8 +2875,8 @@ const RelationModal = ({ children }) => {
   );
   const currentDocument = useRelationModal("RelationModalForm", (state2) => state2.currentDocument);
   const isCreating = useRelationModal("RelationModalForm", (state2) => state2.isCreating);
-  return /* @__PURE__ */ jsxRuntime.jsx(ComponentProvider, { id: void 0, level: -1, uid: void 0, type: void 0, children: /* @__PURE__ */ jsxRuntime.jsxs(
-    designSystem.Modal.Root,
+  return /* @__PURE__ */ jsx(ComponentProvider, { id: void 0, level: -1, uid: void 0, type: void 0, children: /* @__PURE__ */ jsxs(
+    Modal.Root,
     {
       open: state.isModalOpen,
       onOpenChange: (open) => {
@@ -2949,11 +2889,11 @@ const RelationModal = ({ children }) => {
       },
       children: [
         children,
-        /* @__PURE__ */ jsxRuntime.jsxs(StyledModalContent, { children: [
-          /* @__PURE__ */ jsxRuntime.jsx(designSystem.Modal.Header, { gap: 2, children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { justifyContent: "space-between", alignItems: "center", width: "100%", children: [
-            /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { gap: 2, children: [
-              /* @__PURE__ */ jsxRuntime.jsx(
-                designSystem.IconButton,
+        /* @__PURE__ */ jsxs(StyledModalContent, { children: [
+          /* @__PURE__ */ jsx(Modal.Header, { gap: 2, children: /* @__PURE__ */ jsxs(Flex, { justifyContent: "space-between", alignItems: "center", width: "100%", children: [
+            /* @__PURE__ */ jsxs(Flex, { gap: 2, children: [
+              /* @__PURE__ */ jsx(
+                IconButton,
                 {
                   withTooltip: false,
                   label: formatMessage({ id: "global.back", defaultMessage: "Back" }),
@@ -2966,10 +2906,10 @@ const RelationModal = ({ children }) => {
                     });
                   },
                   marginRight: 1,
-                  children: /* @__PURE__ */ jsxRuntime.jsx(Icons.ArrowLeft, {})
+                  children: /* @__PURE__ */ jsx(ArrowLeft, {})
                 }
               ),
-              /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { tag: "span", fontWeight: 600, children: isCreating ? formatMessage({
+              /* @__PURE__ */ jsx(Typography, { tag: "span", fontWeight: 600, children: isCreating ? formatMessage({
                 id: "content-manager.relation.create",
                 defaultMessage: "Create a relation"
               }) : formatMessage({
@@ -2977,8 +2917,8 @@ const RelationModal = ({ children }) => {
                 defaultMessage: "Edit a relation"
               }) })
             ] }),
-            /* @__PURE__ */ jsxRuntime.jsx(
-              designSystem.IconButton,
+            /* @__PURE__ */ jsx(
+              IconButton,
               {
                 onClick: () => {
                   dispatch({
@@ -2997,12 +2937,12 @@ const RelationModal = ({ children }) => {
                   id: "content-manager.components.RelationInputModal.button-fullpage",
                   defaultMessage: "Go to entry"
                 }),
-                children: /* @__PURE__ */ jsxRuntime.jsx(Icons.ArrowsOut, {})
+                children: /* @__PURE__ */ jsx(ArrowsOut, {})
               }
             )
           ] }) }),
-          /* @__PURE__ */ jsxRuntime.jsx(designSystem.Modal.Body, { children: /* @__PURE__ */ jsxRuntime.jsx(
-            admin.Form,
+          /* @__PURE__ */ jsx(Modal.Body, { children: /* @__PURE__ */ jsx(
+            Form,
             {
               method: isCreating ? "POST" : "PUT",
               initialValues: currentDocument.getInitialFormValues(isCreating),
@@ -3017,7 +2957,7 @@ const RelationModal = ({ children }) => {
                 );
                 return yupSchema.validate(values, { abortEarly: false });
               },
-              children: /* @__PURE__ */ jsxRuntime.jsx(RelationModalBody, {})
+              children: /* @__PURE__ */ jsx(RelationModalBody, {})
             }
           ) })
         ] })
@@ -3027,18 +2967,18 @@ const RelationModal = ({ children }) => {
 };
 const RelationModalBody = () => {
   const dispatch = useRelationModal("RelationModalForm", (state) => state.dispatch);
-  const modified = admin.useForm("FormWatcher", (state) => state.modified);
-  const isSubmitting = admin.useForm("FormWatcher", (state) => state.isSubmitting);
+  const modified = useForm("FormWatcher", (state) => state.modified);
+  const isSubmitting = useForm("FormWatcher", (state) => state.isSubmitting);
   const hasUnsavedChanges = modified && !isSubmitting;
-  React__namespace.useEffect(() => {
+  React.useEffect(() => {
     dispatch({ type: "SET_HAS_UNSAVED_CHANGES", payload: { hasUnsavedChanges } });
   }, [hasUnsavedChanges, dispatch]);
-  return /* @__PURE__ */ jsxRuntime.jsx(RelationModalForm, {});
+  return /* @__PURE__ */ jsx(RelationModalForm, {});
 };
 const RelationModalConfirmDialog = () => {
-  const navigate = reactRouterDom.useNavigate();
-  const { pathname, search } = reactRouterDom.useLocation();
-  const { formatMessage } = reactIntl.useIntl();
+  const navigate = useNavigate();
+  const { pathname, search } = useLocation();
+  const { formatMessage } = useIntl();
   const [triggerRefetchDocument] = useLazyGetDocumentQuery();
   const state = useRelationModal("RelationModalConfirmDialog", (state2) => state2.state);
   const dispatch = useRelationModal("RelationModalConfirmDialog", (state2) => state2.dispatch);
@@ -3091,8 +3031,8 @@ const RelationModalConfirmDialog = () => {
   if (state.confirmDialogIntent === null) {
     return null;
   }
-  return /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Root, { open: true, children: /* @__PURE__ */ jsxRuntime.jsx(
-    admin.ConfirmDialog,
+  return /* @__PURE__ */ jsx(Dialog.Root, { open: true, children: /* @__PURE__ */ jsx(
+    ConfirmDialog,
     {
       onConfirm: () => handleConfirm(),
       onCancel: () => dispatch({ type: "CANCEL_CONFIRM_DIALOG" }),
@@ -3109,14 +3049,14 @@ const RelationModalTrigger = ({
   relation
 }) => {
   useRelationModal("ModalTrigger", (state) => state.dispatch);
-  return /* @__PURE__ */ jsxRuntime.jsx(
+  return /* @__PURE__ */ jsx(
     StyledTextButton,
     {
       children
     }
   );
 };
-const StyledTextButton = styledComponents.styled(designSystem.TextButton)`
+const StyledTextButton = styled(TextButton)`
   max-width: 100%;
   & > span {
     font-size: ${({ theme }) => theme.fontSizes[2]};
@@ -3127,7 +3067,7 @@ const StyledTextButton = styledComponents.styled(designSystem.TextButton)`
   }
 `;
 const RelationModalForm = () => {
-  const { formatMessage } = reactIntl.useIntl();
+  const { formatMessage } = useIntl();
   const currentDocumentMeta = useRelationModal(
     "RelationModalForm",
     (state) => state.currentDocumentMeta
@@ -3135,21 +3075,21 @@ const RelationModalForm = () => {
   const isCreating = useRelationModal("RelationModalForm", (state) => state.isCreating);
   const currentDocument = useRelationModal("RelationModalForm", (state) => state.currentDocument);
   const documentLayoutResponse = useDocumentLayout(currentDocumentMeta.model);
-  const plugins = admin.useStrapiApp("RelationModalForm", (state) => state.plugins);
+  const plugins = useStrapiApp("RelationModalForm", (state) => state.plugins);
   const initialValues = isCreating ? currentDocument.getInitialFormValues(isCreating) : currentDocument.getInitialFormValues();
   const permissions = null;
   const isLoading = documentLayoutResponse.isLoading || currentDocument.isLoading;
   if (isLoading && !currentDocument.document?.documentId) {
-    return /* @__PURE__ */ jsxRuntime.jsx(designSystem.Loader, { small: true, children: formatMessage({
+    return /* @__PURE__ */ jsx(Loader, { small: true, children: formatMessage({
       id: "content-manager.ListViewTable.relation-loading",
       defaultMessage: "Relations are loading"
     }) });
   }
   if (!currentDocumentMeta.model || documentLayoutResponse.error || !isCreating && !currentDocument.document || !isCreating && !currentDocument.meta || !currentDocument.schema || !initialValues) {
-    return /* @__PURE__ */ jsxRuntime.jsx(designSystem.Flex, { alignItems: "center", height: "100%", justifyContent: "center", children: /* @__PURE__ */ jsxRuntime.jsx(
-      designSystem.EmptyStateLayout,
+    return /* @__PURE__ */ jsx(Flex, { alignItems: "center", height: "100%", justifyContent: "center", children: /* @__PURE__ */ jsx(
+      EmptyStateLayout,
       {
-        icon: /* @__PURE__ */ jsxRuntime.jsx(Icons.WarningCircle, { width: "16rem" }),
+        icon: /* @__PURE__ */ jsx(WarningCircle, { width: "16rem" }),
         content: formatMessage({
           id: "anErrorOccurred",
           defaultMessage: "Whoops! Something went wrong. Please, try again."
@@ -3167,12 +3107,12 @@ const RelationModalForm = () => {
     document: currentDocument.document,
     meta: currentDocument.meta
   };
-  return /* @__PURE__ */ jsxRuntime.jsxs(DocumentRBAC, { permissions, model: currentDocumentMeta.model, children: [
-    /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { alignItems: "flex-start", direction: "column", gap: 2, children: [
-      /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { width: "100%", justifyContent: "space-between", gap: 2, children: [
-        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { tag: "h2", variant: "alpha", children: documentTitle }),
-        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Flex, { gap: 2, children: /* @__PURE__ */ jsxRuntime.jsx(
-          admin.DescriptionComponentRenderer,
+  return /* @__PURE__ */ jsxs(DocumentRBAC, { permissions, model: currentDocumentMeta.model, children: [
+    /* @__PURE__ */ jsxs(Flex, { alignItems: "flex-start", direction: "column", gap: 2, children: [
+      /* @__PURE__ */ jsxs(Flex, { width: "100%", justifyContent: "space-between", gap: 2, children: [
+        /* @__PURE__ */ jsx(Typography, { tag: "h2", variant: "alpha", children: documentTitle }),
+        /* @__PURE__ */ jsx(Flex, { gap: 2, children: /* @__PURE__ */ jsx(
+          DescriptionComponentRenderer,
           {
             props,
             descriptions: plugins["content-manager"].apis.getDocumentActions("relation-modal"),
@@ -3183,15 +3123,15 @@ const RelationModalForm = () => {
               const [primaryAction, secondaryAction] = filteredActions;
               if (!primaryAction && !secondaryAction) return null;
               if (primaryAction && secondaryAction) {
-                return /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-                  /* @__PURE__ */ jsxRuntime.jsx(
+                return /* @__PURE__ */ jsxs(Fragment, { children: [
+                  /* @__PURE__ */ jsx(
                     DocumentActionButton,
                     {
                       ...secondaryAction,
                       variant: secondaryAction.variant || "secondary"
                     }
                   ),
-                  /* @__PURE__ */ jsxRuntime.jsx(
+                  /* @__PURE__ */ jsx(
                     DocumentActionButton,
                     {
                       ...primaryAction,
@@ -3200,7 +3140,7 @@ const RelationModalForm = () => {
                   )
                 ] });
               }
-              return /* @__PURE__ */ jsxRuntime.jsx(
+              return /* @__PURE__ */ jsx(
                 DocumentActionButton,
                 {
                   ...primaryAction,
@@ -3211,9 +3151,9 @@ const RelationModalForm = () => {
           }
         ) })
       ] }),
-      hasDraftAndPublished ? /* @__PURE__ */ jsxRuntime.jsx(designSystem.Box, { children: /* @__PURE__ */ jsxRuntime.jsx(DocumentStatus, { status: currentDocument.document?.status }) }) : null
+      hasDraftAndPublished ? /* @__PURE__ */ jsx(Box, { children: /* @__PURE__ */ jsx(DocumentStatus, { status: currentDocument.document?.status }) }) : null
     ] }),
-    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Flex, { flex: 1, overflow: "auto", alignItems: "stretch", paddingTop: 7, children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Box, { overflow: "auto", flex: 1, children: /* @__PURE__ */ jsxRuntime.jsx(
+    /* @__PURE__ */ jsx(Flex, { flex: 1, overflow: "auto", alignItems: "stretch", paddingTop: 7, children: /* @__PURE__ */ jsx(Box, { overflow: "auto", flex: 1, children: /* @__PURE__ */ jsx(
       FormLayout,
       {
         layout: documentLayoutResponse.edit.layout,
@@ -3235,8 +3175,8 @@ function useDocumentContext(consumerName) {
     false
   );
   const { collectionType, model, id: documentId } = useDoc();
-  const [{ query }] = admin.useQueryParams();
-  const params = React__namespace.useMemo(() => buildValidParams(query ?? {}), [query]);
+  const [{ query }] = useQueryParams();
+  const params = React.useMemo(() => buildValidParams(query ?? {}), [query]);
   const urlDocumentMeta = { collectionType, model, documentId, params };
   const urlDocument = useDocument(urlDocumentMeta);
   return {
@@ -3252,9 +3192,9 @@ function usePreviewInputManager(name2, attribute) {
     false
   );
   const hasInputPopoverParent = useHasInputPopoverParent();
-  const { value } = admin.useField(name2);
+  const { value } = useField(name2);
   const { type } = attribute;
-  React__namespace.useEffect(() => {
+  React.useEffect(() => {
     if (!iframe || !type) {
       return;
     }
@@ -3495,22 +3435,22 @@ const codeLanguages = [
   }
 ];
 const baseHandleConvert = (editor, attributesToSet) => {
-  const [_, lastNodePath] = slate.Editor.last(editor, []);
-  slate.Transforms.unwrapNodes(editor, {
-    match: (node) => !slate.Editor.isEditor(node) && node.type === "list",
+  const [_, lastNodePath] = Editor$1.last(editor, []);
+  Transforms.unwrapNodes(editor, {
+    match: (node) => !Editor$1.isEditor(node) && node.type === "list",
     split: true,
     at: editor.selection ?? lastNodePath
   });
-  const [, updatedLastNodePath] = slate.Editor.last(editor, []);
-  const entry = slate.Editor.above(editor, {
-    match: (node) => !slate.Editor.isEditor(node) && node.type !== "text" && node.type !== "link",
+  const [, updatedLastNodePath] = Editor$1.last(editor, []);
+  const entry = Editor$1.above(editor, {
+    match: (node) => !Editor$1.isEditor(node) && node.type !== "text" && node.type !== "link",
     at: editor.selection ?? updatedLastNodePath
   });
-  if (!entry || slate.Editor.isEditor(entry[0])) {
+  if (!entry || Editor$1.isEditor(entry[0])) {
     return;
   }
   const [element, elementPath] = entry;
-  slate.Transforms.setNodes(
+  Transforms.setNodes(
     editor,
     {
       ...getAttributesToClear(element),
@@ -3529,42 +3469,42 @@ const getAttributesToClear = (element) => {
   return attributesToClear;
 };
 const isText$2 = (node) => {
-  return slate.Node.isNode(node) && !slate.Editor.isEditor(node) && node.type === "text";
+  return Node$1.isNode(node) && !Editor$1.isEditor(node) && node.type === "text";
 };
 const pressEnterTwiceToExit = (editor) => {
-  const nodeEntry = slate.Editor.above(editor, {
-    match: (node2) => !slate.Editor.isEditor(node2) && !["link", "text"].includes(node2.type)
+  const nodeEntry = Editor$1.above(editor, {
+    match: (node2) => !Editor$1.isEditor(node2) && !["link", "text"].includes(node2.type)
   });
   if (!nodeEntry || !editor.selection) {
     return;
   }
   const [node, nodePath] = nodeEntry;
-  const isNodeEnd = slate.Editor.isEnd(editor, editor.selection.anchor, nodePath);
+  const isNodeEnd = Editor$1.isEnd(editor, editor.selection.anchor, nodePath);
   const lastTextNode = node.children.at(-1);
   const isEmptyLine = isText$2(lastTextNode) && lastTextNode.text.endsWith("\n");
   if (isNodeEnd && isEmptyLine) {
-    slate.Transforms.delete(editor, { distance: 1, unit: "character", reverse: true });
-    slate.Transforms.insertNodes(editor, {
+    Transforms.delete(editor, { distance: 1, unit: "character", reverse: true });
+    Transforms.insertNodes(editor, {
       type: "paragraph",
       children: [{ type: "text", text: "" }]
     });
     return;
   }
-  slate.Transforms.insertText(editor, "\n");
+  Transforms.insertText(editor, "\n");
   if (isNodeEnd) {
     ["bold", "italic", "underline", "strikethrough", "code"].forEach((modifier) => {
-      slate.Editor.removeMark(editor, modifier);
+      Editor$1.removeMark(editor, modifier);
     });
   }
 };
 const decorateCode = ([node, path]) => {
   const ranges = [];
-  if (!slate.Element.isElement(node) || node.type !== "code") return ranges;
-  const text = slate.Node.string(node);
+  if (!Element.isElement(node) || node.type !== "code") return ranges;
+  const text = Node$1.string(node);
   const language = codeLanguages.find((lang) => lang.value === node.language);
   const decorateKey = language?.decorate ?? language?.value;
-  const selectedLanguage = Prism__namespace.languages[decorateKey || "plaintext"];
-  const tokens = Prism__namespace.tokenize(text, selectedLanguage);
+  const selectedLanguage = Prism.languages[decorateKey || "plaintext"];
+  const tokens = Prism.tokenize(text, selectedLanguage);
   let start = 0;
   for (const token of tokens) {
     const length = token.length;
@@ -3580,7 +3520,7 @@ const decorateCode = ([node, path]) => {
   }
   return ranges;
 };
-const CodeBlock = styledComponents.styled.pre`
+const CodeBlock = styled.pre`
   border-radius: ${({ theme }) => theme.borderRadius};
   background-color: ${({ theme }) => theme.colors.neutral100};
   max-width: 100%;
@@ -3598,15 +3538,15 @@ const CodeBlock = styledComponents.styled.pre`
 `;
 const CodeEditor = (props) => {
   const { editor } = useBlocksEditorContext("ImageDialog");
-  const editorIsFocused = slateReact.useFocused();
-  const imageIsSelected = slateReact.useSelected();
-  const { formatMessage } = reactIntl.useIntl();
-  const [isSelectOpen, setIsSelectOpen] = React__namespace.useState(false);
+  const editorIsFocused = useFocused();
+  const imageIsSelected = useSelected();
+  const { formatMessage } = useIntl();
+  const [isSelectOpen, setIsSelectOpen] = React.useState(false);
   const shouldDisplayLanguageSelect = editorIsFocused && imageIsSelected || isSelectOpen;
-  return /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Box, { position: "relative", width: "100%", children: [
-    /* @__PURE__ */ jsxRuntime.jsx(CodeBlock, { ...props.attributes, children: /* @__PURE__ */ jsxRuntime.jsx("code", { children: props.children }) }),
-    shouldDisplayLanguageSelect && /* @__PURE__ */ jsxRuntime.jsx(
-      designSystem.Box,
+  return /* @__PURE__ */ jsxs(Box, { position: "relative", width: "100%", children: [
+    /* @__PURE__ */ jsx(CodeBlock, { ...props.attributes, children: /* @__PURE__ */ jsx("code", { children: props.children }) }),
+    shouldDisplayLanguageSelect && /* @__PURE__ */ jsx(
+      Box,
       {
         position: "absolute",
         background: "neutral0",
@@ -3619,21 +3559,21 @@ const CodeEditor = (props) => {
         right: 0,
         padding: 1,
         hasRadius: true,
-        children: /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.SingleSelect,
+        children: /* @__PURE__ */ jsx(
+          SingleSelect,
           {
             onChange: (open) => {
-              slate.Transforms.setNodes(
+              Transforms.setNodes(
                 editor,
                 { language: open.toString() },
-                { match: (node) => !slate.Editor.isEditor(node) && node.type === "code" }
+                { match: (node) => !Editor$1.isEditor(node) && node.type === "code" }
               );
             },
             value: props.element.type === "code" && props.element.language || "plaintext",
             onOpenChange: (open) => {
               setIsSelectOpen(open);
               if (!open) {
-                slateReact.ReactEditor.focus(editor);
+                ReactEditor.focus(editor);
               }
             },
             onCloseAutoFocus: (e) => e.preventDefault(),
@@ -3641,7 +3581,7 @@ const CodeEditor = (props) => {
               id: "components.Blocks.blocks.code.languageLabel",
               defaultMessage: "Select a language"
             }),
-            children: codeLanguages.map(({ value, label }) => /* @__PURE__ */ jsxRuntime.jsx(designSystem.SingleSelectOption, { value, children: label }, value))
+            children: codeLanguages.map(({ value, label }) => /* @__PURE__ */ jsx(SingleSelectOption, { value, children: label }, value))
           }
         )
       }
@@ -3650,8 +3590,8 @@ const CodeEditor = (props) => {
 };
 const codeBlocks = {
   code: {
-    renderElement: (props) => /* @__PURE__ */ jsxRuntime.jsx(CodeEditor, { ...props }),
-    icon: Icons.CodeBlock,
+    renderElement: (props) => /* @__PURE__ */ jsx(CodeEditor, { ...props }),
+    icon: CodeBlock$1,
     label: {
       id: "components.Blocks.blocks.code",
       defaultMessage: "Code block"
@@ -3667,27 +3607,27 @@ const codeBlocks = {
     snippets: ["```"]
   }
 };
-const H1 = styledComponents.styled(designSystem.Typography).attrs({ tag: "h1" })`
+const H1 = styled(Typography).attrs({ tag: "h1" })`
   font-size: 4.2rem;
   line-height: ${({ theme }) => theme.lineHeights[1]};
 `;
-const H2 = styledComponents.styled(designSystem.Typography).attrs({ tag: "h2" })`
+const H2 = styled(Typography).attrs({ tag: "h2" })`
   font-size: 3.5rem;
   line-height: ${({ theme }) => theme.lineHeights[1]};
 `;
-const H3 = styledComponents.styled(designSystem.Typography).attrs({ tag: "h3" })`
+const H3 = styled(Typography).attrs({ tag: "h3" })`
   font-size: 2.9rem;
   line-height: ${({ theme }) => theme.lineHeights[1]};
 `;
-const H4 = styledComponents.styled(designSystem.Typography).attrs({ tag: "h4" })`
+const H4 = styled(Typography).attrs({ tag: "h4" })`
   font-size: 2.4rem;
   line-height: ${({ theme }) => theme.lineHeights[1]};
 `;
-const H5 = styledComponents.styled(designSystem.Typography).attrs({ tag: "h5" })`
+const H5 = styled(Typography).attrs({ tag: "h5" })`
   font-size: 2rem;
   line-height: ${({ theme }) => theme.lineHeights[1]};
 `;
-const H6 = styledComponents.styled(designSystem.Typography).attrs({ tag: "h6" })`
+const H6 = styled(Typography).attrs({ tag: "h6" })`
   font-size: 1.6rem;
   line-height: ${({ theme }) => theme.lineHeights[1]};
 `;
@@ -3696,8 +3636,8 @@ const handleConvertToHeading = (editor, level) => {
 };
 const headingBlocks = {
   "heading-one": {
-    renderElement: (props) => /* @__PURE__ */ jsxRuntime.jsx(H1, { ...props.attributes, children: props.children }),
-    icon: Icons.HeadingOne,
+    renderElement: (props) => /* @__PURE__ */ jsx(H1, { ...props.attributes, children: props.children }),
+    icon: HeadingOne,
     label: {
       id: "components.Blocks.blocks.heading1",
       defaultMessage: "Heading 1"
@@ -3709,8 +3649,8 @@ const headingBlocks = {
     dragHandleTopMargin: "14px"
   },
   "heading-two": {
-    renderElement: (props) => /* @__PURE__ */ jsxRuntime.jsx(H2, { ...props.attributes, children: props.children }),
-    icon: Icons.HeadingTwo,
+    renderElement: (props) => /* @__PURE__ */ jsx(H2, { ...props.attributes, children: props.children }),
+    icon: HeadingTwo,
     label: {
       id: "components.Blocks.blocks.heading2",
       defaultMessage: "Heading 2"
@@ -3722,8 +3662,8 @@ const headingBlocks = {
     dragHandleTopMargin: "10px"
   },
   "heading-three": {
-    renderElement: (props) => /* @__PURE__ */ jsxRuntime.jsx(H3, { ...props.attributes, children: props.children }),
-    icon: Icons.HeadingThree,
+    renderElement: (props) => /* @__PURE__ */ jsx(H3, { ...props.attributes, children: props.children }),
+    icon: HeadingThree,
     label: {
       id: "components.Blocks.blocks.heading3",
       defaultMessage: "Heading 3"
@@ -3735,8 +3675,8 @@ const headingBlocks = {
     dragHandleTopMargin: "7px"
   },
   "heading-four": {
-    renderElement: (props) => /* @__PURE__ */ jsxRuntime.jsx(H4, { ...props.attributes, children: props.children }),
-    icon: Icons.HeadingFour,
+    renderElement: (props) => /* @__PURE__ */ jsx(H4, { ...props.attributes, children: props.children }),
+    icon: HeadingFour,
     label: {
       id: "components.Blocks.blocks.heading4",
       defaultMessage: "Heading 4"
@@ -3748,8 +3688,8 @@ const headingBlocks = {
     dragHandleTopMargin: "4px"
   },
   "heading-five": {
-    renderElement: (props) => /* @__PURE__ */ jsxRuntime.jsx(H5, { ...props.attributes, children: props.children }),
-    icon: Icons.HeadingFive,
+    renderElement: (props) => /* @__PURE__ */ jsx(H5, { ...props.attributes, children: props.children }),
+    icon: HeadingFive,
     label: {
       id: "components.Blocks.blocks.heading5",
       defaultMessage: "Heading 5"
@@ -3760,8 +3700,8 @@ const headingBlocks = {
     snippets: ["#####"]
   },
   "heading-six": {
-    renderElement: (props) => /* @__PURE__ */ jsxRuntime.jsx(H6, { ...props.attributes, children: props.children }),
-    icon: Icons.HeadingSix,
+    renderElement: (props) => /* @__PURE__ */ jsx(H6, { ...props.attributes, children: props.children }),
+    icon: HeadingSix,
     label: {
       id: "components.Blocks.blocks.heading6",
       defaultMessage: "Heading 6"
@@ -3776,10 +3716,10 @@ const headingBlocks = {
 const prefixFileUrlWithBackendUrl = (fileURL) => {
   return !!fileURL && fileURL.startsWith("/") ? `${window.strapi.backendURL}${fileURL}` : fileURL;
 };
-const ImageWrapper = styledComponents.styled(designSystem.Flex)`
+const ImageWrapper = styled(Flex)`
   transition-property: box-shadow;
   transition-duration: 0.2s;
-  ${(props) => props.$isFocused && styledComponents.css`
+  ${(props) => props.$isFocused && css`
       box-shadow: ${props.theme.colors.primary600} 0px 0px 0px 3px;
     `}
 
@@ -3817,15 +3757,15 @@ const isImage = (element) => {
   return element.type === "image";
 };
 const Image = ({ attributes, children, element }) => {
-  const editorIsFocused = slateReact.useFocused();
-  const imageIsSelected = slateReact.useSelected();
+  const editorIsFocused = useFocused();
+  const imageIsSelected = useSelected();
   if (!isImage(element)) {
     return null;
   }
   const { url, alternativeText, width, height } = element.image;
-  return /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Box, { ...attributes, children: [
+  return /* @__PURE__ */ jsxs(Box, { ...attributes, children: [
     children,
-    /* @__PURE__ */ jsxRuntime.jsx(
+    /* @__PURE__ */ jsx(
       ImageWrapper,
       {
         background: "neutral100",
@@ -3833,32 +3773,32 @@ const Image = ({ attributes, children, element }) => {
         justifyContent: "center",
         $isFocused: editorIsFocused && imageIsSelected,
         hasRadius: true,
-        children: /* @__PURE__ */ jsxRuntime.jsx("img", { src: url, alt: alternativeText, width, height })
+        children: /* @__PURE__ */ jsx("img", { src: url, alt: alternativeText, width, height })
       }
     )
   ] });
 };
 const ImageDialog = () => {
-  const [isOpen, setIsOpen] = React__namespace.useState(true);
+  const [isOpen, setIsOpen] = React.useState(true);
   const { editor } = useBlocksEditorContext("ImageDialog");
-  const components = admin.useStrapiApp("ImageDialog", (state) => state.components);
+  const components = useStrapiApp("ImageDialog", (state) => state.components);
   if (!components || !isOpen) return null;
   const MediaLibraryDialog = components["media-library"];
   const insertImages = (images) => {
-    slate.Transforms.unwrapNodes(editor, {
-      match: (node) => !slate.Editor.isEditor(node) && node.type === "list",
+    Transforms.unwrapNodes(editor, {
+      match: (node) => !Editor$1.isEditor(node) && node.type === "list",
       split: true
     });
-    const nodeEntryBeingReplaced = slate.Editor.above(editor, {
+    const nodeEntryBeingReplaced = Editor$1.above(editor, {
       match(node) {
-        if (slate.Editor.isEditor(node)) return false;
+        if (Editor$1.isEditor(node)) return false;
         const isInlineNode = ["text", "link"].includes(node.type);
         return !isInlineNode;
       }
     });
     if (!nodeEntryBeingReplaced) return;
     const [, pathToInsert] = nodeEntryBeingReplaced;
-    slate.Transforms.removeNodes(editor);
+    Transforms.removeNodes(editor);
     const nodesToInsert = images.map((image) => {
       const imageNode = {
         type: "image",
@@ -3867,8 +3807,8 @@ const ImageDialog = () => {
       };
       return imageNode;
     });
-    slate.Transforms.insertNodes(editor, nodesToInsert, { at: pathToInsert });
-    slate.Transforms.select(editor, pathToInsert);
+    Transforms.insertNodes(editor, nodesToInsert, { at: pathToInsert });
+    Transforms.select(editor, pathToInsert);
   };
   const handleSelectAssets = (images) => {
     const formattedImages = images.map((image) => {
@@ -3883,7 +3823,7 @@ const ImageDialog = () => {
     insertImages(formattedImages);
     setIsOpen(false);
   };
-  return /* @__PURE__ */ jsxRuntime.jsx(
+  return /* @__PURE__ */ jsx(
     MediaLibraryDialog,
     {
       allowedTypes: ["images"],
@@ -3894,8 +3834,8 @@ const ImageDialog = () => {
 };
 const imageBlocks = {
   image: {
-    renderElement: (props) => /* @__PURE__ */ jsxRuntime.jsx(Image, { ...props }),
-    icon: Icons.Image,
+    renderElement: (props) => /* @__PURE__ */ jsx(Image, { ...props }),
+    icon: Image$1,
     label: {
       id: "components.Blocks.blocks.image",
       defaultMessage: "Image"
@@ -3904,45 +3844,45 @@ const imageBlocks = {
     isInBlocksSelector: true,
     handleBackspaceKey(editor) {
       if (editor.children.length === 1) {
-        slate.Transforms.setNodes(editor, {
+        Transforms.setNodes(editor, {
           type: "paragraph",
           // @ts-expect-error we're only setting image as null so that Slate deletes it
           image: null,
           children: [{ type: "text", text: "" }]
         });
       } else {
-        slate.Transforms.removeNodes(editor);
+        Transforms.removeNodes(editor);
       }
     },
     handleEnterKey(editor) {
-      slate.Transforms.insertNodes(editor, {
+      Transforms.insertNodes(editor, {
         type: "paragraph",
         children: [{ type: "text", text: "" }]
       });
     },
     handleConvert: () => {
-      return () => /* @__PURE__ */ jsxRuntime.jsx(ImageDialog, {});
+      return () => /* @__PURE__ */ jsx(ImageDialog, {});
     },
     snippets: ["!["]
   }
 };
 const removeLink = (editor) => {
-  slate.Transforms.unwrapNodes(editor, {
-    match: (node) => !slate.Editor.isEditor(node) && slate.Element.isElement(node) && node.type === "link"
+  Transforms.unwrapNodes(editor, {
+    match: (node) => !Editor$1.isEditor(node) && Element.isElement(node) && node.type === "link"
   });
 };
 const insertLink = (editor, { url }) => {
   if (editor.selection) {
     const linkNodes = Array.from(
-      slate.Editor.nodes(editor, {
+      Editor$1.nodes(editor, {
         at: editor.selection,
-        match: (node) => !slate.Editor.isEditor(node) && node.type === "link"
+        match: (node) => !Editor$1.isEditor(node) && node.type === "link"
       })
     );
     linkNodes.forEach(([, path]) => {
-      slate.Transforms.unwrapNodes(editor, { at: path });
+      Transforms.unwrapNodes(editor, { at: path });
     });
-    if (slate.Range.isCollapsed(editor.selection)) {
+    if (Range.isCollapsed(editor.selection)) {
       const link = {
         type: "link",
         url: url ?? "",
@@ -3950,9 +3890,9 @@ const insertLink = (editor, { url }) => {
         rel: "",
         target: ""
       };
-      slate.Transforms.insertNodes(editor, link);
+      Transforms.insertNodes(editor, link);
     } else {
-      slate.Transforms.wrapNodes(editor, { type: "link", url: url ?? "" }, {
+      Transforms.wrapNodes(editor, { type: "link", url: url ?? "" }, {
         split: true
       });
     }
@@ -3963,18 +3903,18 @@ const editLink = (editor, link) => {
   if (!editor.selection) {
     return;
   }
-  const linkEntry = slate.Editor.above(editor, {
-    match: (node) => !slate.Editor.isEditor(node) && node.type === "link"
+  const linkEntry = Editor$1.above(editor, {
+    match: (node) => !Editor$1.isEditor(node) && node.type === "link"
   });
   if (linkEntry) {
     const [, linkPath] = linkEntry;
-    slate.Transforms.setNodes(editor, { url, rel, target }, { at: linkPath });
-    if (text !== "" && text !== slate.Editor.string(editor, linkPath)) {
-      const linkNodeChildrens = Array.from(slate.Node.children(editor, linkPath, { reverse: true }));
+    Transforms.setNodes(editor, { url, rel, target }, { at: linkPath });
+    if (text !== "" && text !== Editor$1.string(editor, linkPath)) {
+      const linkNodeChildrens = Array.from(Node$1.children(editor, linkPath, { reverse: true }));
       linkNodeChildrens.forEach(([, childPath]) => {
-        slate.Transforms.removeNodes(editor, { at: childPath });
+        Transforms.removeNodes(editor, { at: childPath });
       });
-      slate.Transforms.insertNodes(editor, [{ type: "text", text }], { at: linkPath.concat(0) });
+      Transforms.insertNodes(editor, [{ type: "text", text }], { at: linkPath.concat(0) });
     }
   }
 };
@@ -3986,28 +3926,28 @@ const isLinkNode = (element) => {
 const isListNode$1 = (element) => {
   return element.type === "list";
 };
-const StyledLink = styledComponents.styled(designSystem.Box)`
+const StyledLink = styled(Box)`
   text-decoration: none;
 `;
-const RemoveButton = styledComponents.styled(designSystem.Button)`
+const RemoveButton = styled(Button)`
   visibility: ${(props) => props.$visible ? "visible" : "hidden"};
 `;
-const LinkContent = React__namespace.forwardRef(
+const LinkContent = React.forwardRef(
   ({ link, children, attributes }, forwardedRef) => {
-    const { formatMessage } = reactIntl.useIntl();
+    const { formatMessage } = useIntl();
     const { editor } = useBlocksEditorContext("Link");
-    const path = slateReact.ReactEditor.findPath(editor, link);
-    const [popoverOpen, setPopoverOpen] = React__namespace.useState(
-      editor.lastInsertedLinkPath ? slate.Path.equals(path, editor.lastInsertedLinkPath) : false
+    const path = ReactEditor.findPath(editor, link);
+    const [popoverOpen, setPopoverOpen] = React.useState(
+      editor.lastInsertedLinkPath ? Path.equals(path, editor.lastInsertedLinkPath) : false
     );
     const elementText = link.children.map((child) => child.text).join("");
-    const [linkText, setLinkText] = React__namespace.useState(elementText);
-    const [linkUrl, setLinkUrl] = React__namespace.useState(link.url);
-    const [linkRel, setLinRel] = React__namespace.useState(link.rel);
-    const [linkTarget, setLinkTarget] = React__namespace.useState(link.target);
-    const linkInputRef = React__namespace.useRef(null);
-    const isLastInsertedLink = editor.lastInsertedLinkPath ? !slate.Path.equals(path, editor.lastInsertedLinkPath) : true;
-    const [isSaveDisabled, setIsSaveDisabled] = React__namespace.useState(false);
+    const [linkText, setLinkText] = React.useState(elementText);
+    const [linkUrl, setLinkUrl] = React.useState(link.url);
+    const [linkRel, setLinRel] = React.useState(link.rel);
+    const [linkTarget, setLinkTarget] = React.useState(link.target);
+    const linkInputRef = React.useRef(null);
+    const isLastInsertedLink = editor.lastInsertedLinkPath ? !Path.equals(path, editor.lastInsertedLinkPath) : true;
+    const [isSaveDisabled, setIsSaveDisabled] = React.useState(false);
     const onLinkChange = (e) => {
       setIsSaveDisabled(false);
       setLinkUrl(e.target.value);
@@ -4029,28 +3969,28 @@ const LinkContent = React__namespace.forwardRef(
     };
     const handleSave = (e) => {
       e.stopPropagation();
-      if (editor.selection && slate.Range.isCollapsed(editor.selection)) {
-        const [, parentPath] = slate.Editor.parent(editor, editor.selection.focus?.path);
-        slate.Transforms.select(editor, parentPath);
+      if (editor.selection && Range.isCollapsed(editor.selection)) {
+        const [, parentPath] = Editor$1.parent(editor, editor.selection.focus?.path);
+        Transforms.select(editor, parentPath);
       }
       editLink(editor, { url: linkUrl, text: linkText, rel: linkRel, target: linkTarget });
       setPopoverOpen(false);
       editor.lastInsertedLinkPath = null;
-      slateReact.ReactEditor.focus(editor);
+      ReactEditor.focus(editor);
     };
     const handleClose = () => {
       if (link.url === "") {
         removeLink(editor);
       }
       setPopoverOpen(false);
-      slateReact.ReactEditor.focus(editor);
+      ReactEditor.focus(editor);
     };
-    React__namespace.useEffect(() => {
+    React.useEffect(() => {
       if (popoverOpen) linkInputRef.current?.focus();
     }, [popoverOpen]);
     const inputNotDirty = !linkText || !linkUrl || link.url && link.url === linkUrl && elementText && elementText === linkText && link.rel === linkRel && link.target === linkTarget;
-    return /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Popover.Root, { open: popoverOpen, children: [
-      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Popover.Trigger, { children: /* @__PURE__ */ jsxRuntime.jsx(
+    return /* @__PURE__ */ jsxs(Popover.Root, { open: popoverOpen, children: [
+      /* @__PURE__ */ jsx(Popover.Trigger, { children: /* @__PURE__ */ jsx(
         StyledLink,
         {
           ...attributes,
@@ -4064,14 +4004,14 @@ const LinkContent = React__namespace.forwardRef(
           children
         }
       ) }),
-      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Popover.Content, { onPointerDownOutside: handleClose, children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { padding: 4, direction: "column", gap: 4, children: [
-        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Root, { width: "368px", children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { direction: "column", gap: 1, alignItems: "stretch", children: [
-          /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Label, { children: formatMessage({
+      /* @__PURE__ */ jsx(Popover.Content, { onPointerDownOutside: handleClose, children: /* @__PURE__ */ jsxs(Flex, { padding: 4, direction: "column", gap: 4, children: [
+        /* @__PURE__ */ jsx(Field.Root, { width: "368px", children: /* @__PURE__ */ jsxs(Flex, { direction: "column", gap: 1, alignItems: "stretch", children: [
+          /* @__PURE__ */ jsx(Field.Label, { children: formatMessage({
             id: "components.Blocks.popover.text",
             defaultMessage: "Text"
           }) }),
-          /* @__PURE__ */ jsxRuntime.jsx(
-            designSystem.Field.Input,
+          /* @__PURE__ */ jsx(
+            Field.Input,
             {
               name: "text",
               placeholder: formatMessage({
@@ -4085,13 +4025,13 @@ const LinkContent = React__namespace.forwardRef(
             }
           )
         ] }) }),
-        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Root, { width: "368px", children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { direction: "column", gap: 1, alignItems: "stretch", children: [
-          /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Label, { children: formatMessage({
+        /* @__PURE__ */ jsx(Field.Root, { width: "368px", children: /* @__PURE__ */ jsxs(Flex, { direction: "column", gap: 1, alignItems: "stretch", children: [
+          /* @__PURE__ */ jsx(Field.Label, { children: formatMessage({
             id: "components.Blocks.popover.link",
             defaultMessage: "Link"
           }) }),
-          /* @__PURE__ */ jsxRuntime.jsx(
-            designSystem.Field.Input,
+          /* @__PURE__ */ jsx(
+            Field.Input,
             {
               ref: linkInputRef,
               name: "url",
@@ -4104,13 +4044,13 @@ const LinkContent = React__namespace.forwardRef(
             }
           )
         ] }) }),
-        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Root, { width: "368px", children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { direction: "column", gap: 1, alignItems: "stretch", children: [
-          /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Label, { children: formatMessage({
+        /* @__PURE__ */ jsx(Field.Root, { width: "368px", children: /* @__PURE__ */ jsxs(Flex, { direction: "column", gap: 1, alignItems: "stretch", children: [
+          /* @__PURE__ */ jsx(Field.Label, { children: formatMessage({
             id: "components.Blocks.popover.link.rel",
             defaultMessage: "Rel (optional)"
           }) }),
-          /* @__PURE__ */ jsxRuntime.jsx(
-            designSystem.Field.Input,
+          /* @__PURE__ */ jsx(
+            Field.Input,
             {
               name: "rel",
               placeholder: formatMessage({
@@ -4122,13 +4062,13 @@ const LinkContent = React__namespace.forwardRef(
             }
           )
         ] }) }),
-        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Root, { width: "368px", children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { direction: "column", gap: 1, alignItems: "stretch", children: [
-          /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Label, { children: formatMessage({
+        /* @__PURE__ */ jsx(Field.Root, { width: "368px", children: /* @__PURE__ */ jsxs(Flex, { direction: "column", gap: 1, alignItems: "stretch", children: [
+          /* @__PURE__ */ jsx(Field.Label, { children: formatMessage({
             id: "components.Blocks.popover.link.target",
             defaultMessage: "Target (optional)"
           }) }),
-          /* @__PURE__ */ jsxRuntime.jsx(
-            designSystem.Field.Input,
+          /* @__PURE__ */ jsx(
+            Field.Input,
             {
               name: "target",
               placeholder: formatMessage({
@@ -4140,8 +4080,8 @@ const LinkContent = React__namespace.forwardRef(
             }
           )
         ] }) }),
-        /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { justifyContent: "space-between", width: "100%", children: [
-          /* @__PURE__ */ jsxRuntime.jsx(
+        /* @__PURE__ */ jsxs(Flex, { justifyContent: "space-between", width: "100%", children: [
+          /* @__PURE__ */ jsx(
             RemoveButton,
             {
               variant: "danger-light",
@@ -4153,12 +4093,12 @@ const LinkContent = React__namespace.forwardRef(
               })
             }
           ),
-          /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { gap: 2, children: [
-            /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { variant: "tertiary", onClick: handleClose, children: formatMessage({
+          /* @__PURE__ */ jsxs(Flex, { gap: 2, children: [
+            /* @__PURE__ */ jsx(Button, { variant: "tertiary", onClick: handleClose, children: formatMessage({
               id: "global.cancel",
               defaultMessage: "Cancel"
             }) }),
-            /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { disabled: Boolean(inputNotDirty) || isSaveDisabled, onClick: handleSave, children: formatMessage({
+            /* @__PURE__ */ jsx(Button, { disabled: Boolean(inputNotDirty) || isSaveDisabled, onClick: handleSave, children: formatMessage({
               id: "global.save",
               defaultMessage: "Save"
             }) })
@@ -4168,21 +4108,21 @@ const LinkContent = React__namespace.forwardRef(
     ] });
   }
 );
-const Link = React__namespace.forwardRef((props, forwardedRef) => {
+const Link = React.forwardRef((props, forwardedRef) => {
   if (!isLinkNode(props.element)) {
     return null;
   }
-  return /* @__PURE__ */ jsxRuntime.jsx(LinkContent, { ...props, link: props.element, ref: forwardedRef });
+  return /* @__PURE__ */ jsx(LinkContent, { ...props, link: props.element, ref: forwardedRef });
 });
 const linkBlocks = {
   link: {
-    renderElement: (props) => /* @__PURE__ */ jsxRuntime.jsx(Link, { element: props.element, attributes: props.attributes, children: props.children }),
+    renderElement: (props) => /* @__PURE__ */ jsx(Link, { element: props.element, attributes: props.attributes, children: props.children }),
     // No handleConvert here, links are created via the link button in the toolbar
     matchNode: (node) => node.type === "link",
     isInBlocksSelector: false
   }
 };
-const listStyle = styledComponents.css`
+const listStyle = css`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spaces[2]};
@@ -4200,11 +4140,11 @@ const listStyle = styledComponents.css`
     margin-inline-start: ${({ theme }) => theme.spaces[3]};
   }
 `;
-const Orderedlist = styledComponents.styled.ol`
+const Orderedlist = styled.ol`
   list-style-type: ${(props) => props.$listStyleType};
   ${listStyle}
 `;
-const Unorderedlist = styledComponents.styled.ul`
+const Unorderedlist = styled.ul`
   list-style-type: ${(props) => props.$listStyleType};
   ${listStyle}
 `;
@@ -4218,14 +4158,14 @@ const List = ({ attributes, children, element }) => {
   const nextIndex = (element.indentLevel || 0) % listStyles.length;
   const listStyleType = listStyles[nextIndex];
   if (element.format === "ordered") {
-    return /* @__PURE__ */ jsxRuntime.jsx(Orderedlist, { $listStyleType: listStyleType, ...attributes, children });
+    return /* @__PURE__ */ jsx(Orderedlist, { $listStyleType: listStyleType, ...attributes, children });
   }
-  return /* @__PURE__ */ jsxRuntime.jsx(Unorderedlist, { $listStyleType: listStyleType, ...attributes, children });
+  return /* @__PURE__ */ jsx(Unorderedlist, { $listStyleType: listStyleType, ...attributes, children });
 };
 const replaceListWithEmptyBlock = (editor, currentListPath) => {
-  slate.Transforms.removeNodes(editor, { at: currentListPath });
+  Transforms.removeNodes(editor, { at: currentListPath });
   if (currentListPath[0] === 0) {
-    slate.Transforms.insertNodes(
+    Transforms.insertNodes(
       editor,
       {
         type: "paragraph",
@@ -4233,50 +4173,50 @@ const replaceListWithEmptyBlock = (editor, currentListPath) => {
       },
       { at: currentListPath }
     );
-    slate.Transforms.select(editor, currentListPath);
+    Transforms.select(editor, currentListPath);
   }
 };
 const isText$1 = (node) => {
-  return slate.Node.isNode(node) && !slate.Editor.isEditor(node) && node.type === "text";
+  return Node$1.isNode(node) && !Editor$1.isEditor(node) && node.type === "text";
 };
 const handleBackspaceKeyOnList = (editor, event) => {
   if (!editor.selection) return;
-  const [currentListItem, currentListItemPath] = slate.Editor.parent(editor, editor.selection.anchor);
-  const [currentList, currentListPath] = slate.Editor.parent(editor, currentListItemPath);
+  const [currentListItem, currentListItemPath] = Editor$1.parent(editor, editor.selection.anchor);
+  const [currentList, currentListPath] = Editor$1.parent(editor, currentListItemPath);
   const isListEmpty = currentList.children.length === 1 && isText$1(currentListItem.children[0]) && currentListItem.children[0].text === "";
   const isListItemEmpty = currentListItem.children.length === 1 && isText$1(currentListItem.children[0]) && currentListItem.children[0].text === "";
   const isFocusAtTheBeginningOfAChild = editor.selection.focus.offset === 0 && editor.selection.focus.path.at(-2) === 0;
   if (isListEmpty) {
-    const parentListEntry = slate.Editor.above(editor, {
+    const parentListEntry = Editor$1.above(editor, {
       at: currentListPath,
-      match: (node) => !slate.Editor.isEditor(node) && node.type === "list"
+      match: (node) => !Editor$1.isEditor(node) && node.type === "list"
     });
     if (!parentListEntry) {
       event.preventDefault();
       replaceListWithEmptyBlock(editor, currentListPath);
     }
   } else if (isFocusAtTheBeginningOfAChild) {
-    slate.Transforms.liftNodes(editor, {
-      match: (node) => !slate.Editor.isEditor(node) && node.type === "list-item"
+    Transforms.liftNodes(editor, {
+      match: (node) => !Editor$1.isEditor(node) && node.type === "list-item"
     });
-    slate.Transforms.setNodes(editor, { type: "paragraph" });
+    Transforms.setNodes(editor, { type: "paragraph" });
   } else if (isListItemEmpty) {
-    const previousEntry = slate.Editor.previous(editor, {
+    const previousEntry = Editor$1.previous(editor, {
       at: currentListItemPath
     });
-    const nextEntry = slate.Editor.next(editor, {
+    const nextEntry = Editor$1.next(editor, {
       at: currentListItemPath
     });
     if (previousEntry && nextEntry) {
       event.preventDefault();
-      slate.Transforms.removeNodes(editor, {
+      Transforms.removeNodes(editor, {
         at: currentListItemPath
       });
       const [previousList] = previousEntry;
       const [nextList] = nextEntry;
-      if (!slate.Editor.isEditor(previousList) && !isText$1(previousList) && isListNode$1(previousList) && !slate.Editor.isEditor(nextList) && !isText$1(nextList) && isListNode$1(nextList)) {
+      if (!Editor$1.isEditor(previousList) && !isText$1(previousList) && isListNode$1(previousList) && !Editor$1.isEditor(nextList) && !isText$1(nextList) && isListNode$1(nextList)) {
         if (previousList.type === "list" && nextList.type === "list" && previousList.format === nextList.format && previousList.indentLevel === nextList.indentLevel) {
-          slate.Transforms.mergeNodes(editor, {
+          Transforms.mergeNodes(editor, {
             at: currentListItemPath
           });
         }
@@ -4285,51 +4225,51 @@ const handleBackspaceKeyOnList = (editor, event) => {
   }
 };
 const handleEnterKeyOnList = (editor) => {
-  const currentListItemEntry = slate.Editor.above(editor, {
-    match: (node) => !slate.Editor.isEditor(node) && node.type === "list-item"
+  const currentListItemEntry = Editor$1.above(editor, {
+    match: (node) => !Editor$1.isEditor(node) && node.type === "list-item"
   });
   if (!currentListItemEntry || !editor.selection) {
     return;
   }
   const [currentListItem, currentListItemPath] = currentListItemEntry;
-  const [currentList, currentListPath] = slate.Editor.parent(editor, currentListItemPath);
+  const [currentList, currentListPath] = Editor$1.parent(editor, currentListItemPath);
   const isListEmpty = currentList.children.length === 1 && isText$1(currentListItem.children[0]) && currentListItem.children[0].text === "";
   const isListItemEmpty = currentListItem.children.length === 1 && isText$1(currentListItem.children[0]) && currentListItem.children[0].text === "";
   const isFocusAtTheBeginningOfAChild = editor.selection.focus.offset === 0 && editor.selection.focus.path.at(-1) === 0;
   if (isListEmpty) {
     replaceListWithEmptyBlock(editor, currentListPath);
   } else if (isFocusAtTheBeginningOfAChild && !isListItemEmpty) {
-    const currentNode = slate.Editor.above(editor, { at: editor.selection.anchor });
-    slate.Transforms.insertNodes(editor, { type: "list-item", children: [{ type: "text", text: "" }] });
+    const currentNode = Editor$1.above(editor, { at: editor.selection.anchor });
+    Transforms.insertNodes(editor, { type: "list-item", children: [{ type: "text", text: "" }] });
     if (currentNode) {
       const path = currentNode[1];
       const updatedPath = [...path.slice(0, -1), path[path.length - 1] + 1];
-      slate.Transforms.select(editor, {
+      Transforms.select(editor, {
         anchor: { path: updatedPath.concat(0), offset: 0 },
         focus: { path: updatedPath.concat(0), offset: 0 }
       });
     }
   } else if (isListItemEmpty) {
-    if (!slate.Editor.isEditor(currentList) && isListNode$1(currentList) && currentList?.indentLevel && currentList.indentLevel > 0) {
+    if (!Editor$1.isEditor(currentList) && isListNode$1(currentList) && currentList?.indentLevel && currentList.indentLevel > 0) {
       const previousIndentLevel = currentList.indentLevel - 1;
-      const parentListNodeEntry = slate.Editor.above(editor, {
-        match: (node) => !slate.Editor.isEditor(node) && node.type === "list" && (node.indentLevel || 0) === previousIndentLevel
+      const parentListNodeEntry = Editor$1.above(editor, {
+        match: (node) => !Editor$1.isEditor(node) && node.type === "list" && (node.indentLevel || 0) === previousIndentLevel
       });
       if (parentListNodeEntry) {
         const modifiedPath = currentListItemPath.slice(0, -1);
         if (modifiedPath.length > 0) {
           modifiedPath[modifiedPath.length - 1] += 1;
         }
-        slate.Transforms.moveNodes(editor, {
+        Transforms.moveNodes(editor, {
           at: currentListItemPath,
           to: modifiedPath
         });
         return;
       }
     }
-    slate.Transforms.removeNodes(editor, { at: currentListItemPath });
-    const createdParagraphPath = slate.Path.next(currentListPath);
-    slate.Transforms.insertNodes(
+    Transforms.removeNodes(editor, { at: currentListItemPath });
+    const createdParagraphPath = Path.next(currentListPath);
+    Transforms.insertNodes(
       editor,
       {
         type: "paragraph",
@@ -4337,44 +4277,44 @@ const handleEnterKeyOnList = (editor) => {
       },
       { at: createdParagraphPath }
     );
-    slate.Transforms.select(editor, createdParagraphPath);
+    Transforms.select(editor, createdParagraphPath);
   } else {
-    const isNodeEnd = slate.Editor.isEnd(editor, editor.selection.anchor, currentListItemPath);
+    const isNodeEnd = Editor$1.isEnd(editor, editor.selection.anchor, currentListItemPath);
     if (isNodeEnd) {
-      slate.Transforms.insertNodes(editor, { type: "list-item", children: [{ type: "text", text: "" }] });
+      Transforms.insertNodes(editor, { type: "list-item", children: [{ type: "text", text: "" }] });
     } else {
-      slate.Transforms.splitNodes(editor);
+      Transforms.splitNodes(editor);
     }
   }
 };
 const handleConvertToList = (editor, format) => {
   const convertedPath = baseHandleConvert(editor, { type: "list-item" });
   if (!convertedPath) return;
-  slate.Transforms.wrapNodes(editor, { type: "list", format, children: [] }, { at: convertedPath });
+  Transforms.wrapNodes(editor, { type: "list", format, children: [] }, { at: convertedPath });
 };
 const handleTabOnList = (editor) => {
-  const currentListItemEntry = slate.Editor.above(editor, {
-    match: (node) => !slate.Editor.isEditor(node) && node.type === "list-item"
+  const currentListItemEntry = Editor$1.above(editor, {
+    match: (node) => !Editor$1.isEditor(node) && node.type === "list-item"
   });
   if (!currentListItemEntry || !editor.selection) {
     return;
   }
   const [currentListItem, currentListItemPath] = currentListItemEntry;
-  const [currentList] = slate.Editor.parent(editor, currentListItemPath);
+  const [currentList] = Editor$1.parent(editor, currentListItemPath);
   if (currentListItem === currentList.children[0]) return;
   const currentListItemIndex = currentList.children.findIndex((item) => item === currentListItem);
   const previousNode = currentList.children[currentListItemIndex - 1];
   if (previousNode.type === "list") {
-    const nodePath = slateReact.ReactEditor.findPath(editor, previousNode);
+    const nodePath = ReactEditor.findPath(editor, previousNode);
     const insertAtPath = previousNode.children.length;
-    slate.Transforms.moveNodes(editor, {
+    Transforms.moveNodes(editor, {
       at: currentListItemPath,
       to: nodePath.concat(insertAtPath)
     });
     return;
   }
-  if (!slate.Editor.isEditor(currentList) && isListNode$1(currentList)) {
-    slate.Transforms.wrapNodes(editor, {
+  if (!Editor$1.isEditor(currentList) && isListNode$1(currentList)) {
+    Transforms.wrapNodes(editor, {
       type: "list",
       format: currentList.format,
       indentLevel: (currentList.indentLevel || 0) + 1,
@@ -4384,12 +4324,12 @@ const handleTabOnList = (editor) => {
 };
 const listBlocks = {
   "list-ordered": {
-    renderElement: (props) => /* @__PURE__ */ jsxRuntime.jsx(List, { ...props }),
+    renderElement: (props) => /* @__PURE__ */ jsx(List, { ...props }),
     label: {
       id: "components.Blocks.blocks.orderedList",
       defaultMessage: "Numbered list"
     },
-    icon: Icons.NumberList,
+    icon: NumberList,
     matchNode: (node) => node.type === "list" && node.format === "ordered",
     isInBlocksSelector: true,
     handleConvert: (editor) => handleConvertToList(editor, "ordered"),
@@ -4399,12 +4339,12 @@ const listBlocks = {
     snippets: ["1."]
   },
   "list-unordered": {
-    renderElement: (props) => /* @__PURE__ */ jsxRuntime.jsx(List, { ...props }),
+    renderElement: (props) => /* @__PURE__ */ jsx(List, { ...props }),
     label: {
       id: "components.Blocks.blocks.unorderedList",
       defaultMessage: "Bulleted list"
     },
-    icon: Icons.BulletList,
+    icon: BulletList,
     matchNode: (node) => node.type === "list" && node.format === "unordered",
     isInBlocksSelector: true,
     handleConvert: (editor) => handleConvertToList(editor, "unordered"),
@@ -4414,7 +4354,7 @@ const listBlocks = {
     snippets: ["-", "*", "+"]
   },
   "list-item": {
-    renderElement: (props) => /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { tag: "li", ...props.attributes, children: props.children }),
+    renderElement: (props) => /* @__PURE__ */ jsx(Typography, { tag: "li", ...props.attributes, children: props.children }),
     // No handleConvert, list items are created when converting to the parent list
     matchNode: (node) => node.type === "list-item",
     isInBlocksSelector: false,
@@ -4423,8 +4363,8 @@ const listBlocks = {
 };
 const paragraphBlocks = {
   paragraph: {
-    renderElement: (props) => /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { tag: "p", variant: "omega", ...props.attributes, children: props.children }),
-    icon: Icons.Paragraph,
+    renderElement: (props) => /* @__PURE__ */ jsx(Typography, { tag: "p", variant: "omega", ...props.attributes, children: props.children }),
+    icon: Paragraph,
     label: {
       id: "components.Blocks.blocks.text",
       defaultMessage: "Text"
@@ -4440,23 +4380,23 @@ const paragraphBlocks = {
         return;
       }
       const anchorPathInitialPosition = editor.selection.anchor.path;
-      slate.Transforms.splitNodes(editor, {
+      Transforms.splitNodes(editor, {
         // Makes sure we always create a new node,
         // even if there's nothing to the right of the cursor in the node.
         always: true
       });
-      const parentBlockEntry = slate.Editor.above(editor, {
-        match: (node) => !slate.Editor.isEditor(node) && node.type !== "text"
+      const parentBlockEntry = Editor$1.above(editor, {
+        match: (node) => !Editor$1.isEditor(node) && node.type !== "text"
       });
       if (!parentBlockEntry) {
         return;
       }
       const [, parentBlockPath] = parentBlockEntry;
-      const isNodeEnd = slate.Editor.isEnd(editor, editor.selection.anchor, parentBlockPath);
-      const [fragmentedNode] = slate.Editor.parent(editor, editor.selection.anchor.path);
-      slate.Transforms.removeNodes(editor);
+      const isNodeEnd = Editor$1.isEnd(editor, editor.selection.anchor, parentBlockPath);
+      const [fragmentedNode] = Editor$1.parent(editor, editor.selection.anchor.path);
+      Transforms.removeNodes(editor);
       const hasNextNode = editor.children.length - anchorPathInitialPosition[0] > 1;
-      slate.Transforms.insertNodes(
+      Transforms.insertNodes(
         editor,
         {
           type: "paragraph",
@@ -4467,11 +4407,11 @@ const paragraphBlocks = {
           at: hasNextNode ? [anchorPathInitialPosition[0] + 1] : [editor.children.length]
         }
       );
-      slate.Transforms.select(editor, editor.start([anchorPathInitialPosition[0] + 1]));
+      Transforms.select(editor, editor.start([anchorPathInitialPosition[0] + 1]));
     }
   }
 };
-const Blockquote = styledComponents.styled.blockquote.attrs({ role: "blockquote" })`
+const Blockquote = styled.blockquote.attrs({ role: "blockquote" })`
   font-weight: ${({ theme }) => theme.fontWeights.regular};
   border-left: ${({ theme }) => `${theme.spaces[1]} solid ${theme.colors.neutral200}`};
   padding: ${({ theme }) => theme.spaces[2]} ${({ theme }) => theme.spaces[4]};
@@ -4482,9 +4422,9 @@ const quoteBlocks = {
     renderElement: (props) => (
       // The div is needed to make sure the padding bottom from BlocksContent is applied properly
       // when the quote is the last block in the editor
-      /* @__PURE__ */ jsxRuntime.jsx("div", { children: /* @__PURE__ */ jsxRuntime.jsx(Blockquote, { ...props.attributes, children: props.children }) })
+      /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(Blockquote, { ...props.attributes, children: props.children }) })
     ),
-    icon: Icons.Quotes,
+    icon: Quotes,
     label: {
       id: "components.Blocks.blocks.quote",
       defaultMessage: "Quote"
@@ -4506,29 +4446,29 @@ const ItemTypes = {
   RELATION: "relation",
   BLOCKS: "blocks"
 };
-const useKeyboardDragAndDrop = (active, index2, { onCancel, onDropItem, onGrabItem, onMoveItem }) => {
-  const [isSelected, setIsSelected] = React__namespace.useState(false);
+const useKeyboardDragAndDrop = (active, index, { onCancel, onDropItem, onGrabItem, onMoveItem }) => {
+  const [isSelected, setIsSelected] = React.useState(false);
   const handleMove = (movement) => {
     if (!isSelected) {
       return;
     }
-    if (typeof index2 === "number" && onMoveItem) {
+    if (typeof index === "number" && onMoveItem) {
       if (movement === "UP") {
-        onMoveItem(index2 - 1, index2);
+        onMoveItem(index - 1, index);
       } else if (movement === "DOWN") {
-        onMoveItem(index2 + 1, index2);
+        onMoveItem(index + 1, index);
       }
     }
   };
   const handleDragClick = () => {
     if (isSelected) {
       if (onDropItem) {
-        onDropItem(index2);
+        onDropItem(index);
       }
       setIsSelected(false);
     } else {
       if (onGrabItem) {
-        onGrabItem(index2);
+        onGrabItem(index);
       }
       setIsSelected(true);
     }
@@ -4537,7 +4477,7 @@ const useKeyboardDragAndDrop = (active, index2, { onCancel, onDropItem, onGrabIt
     if (isSelected) {
       setIsSelected(false);
       if (onCancel) {
-        onCancel(index2);
+        onCancel(index);
       }
     }
   };
@@ -4578,7 +4518,7 @@ const DROP_SENSITIVITY = {
 };
 const useDragAndDrop = (active, {
   type = "STRAPI_DND",
-  index: index2,
+  index,
   item,
   onStart,
   onEnd,
@@ -4588,8 +4528,8 @@ const useDragAndDrop = (active, {
   onMoveItem,
   dropSensitivity = DROP_SENSITIVITY.REGULAR
 }) => {
-  const objectRef = React__namespace.useRef(null);
-  const [{ handlerId, isOver }, dropRef] = reactDnd.useDrop({
+  const objectRef = React.useRef(null);
+  const [{ handlerId, isOver }, dropRef] = useDrop({
     accept: type,
     collect(monitor) {
       return {
@@ -4599,7 +4539,7 @@ const useDragAndDrop = (active, {
     },
     drop(item2) {
       const draggedIndex = item2.index;
-      const newIndex = index2;
+      const newIndex = index;
       if (isOver && onDropItem) {
         onDropItem(draggedIndex, newIndex);
       }
@@ -4609,7 +4549,7 @@ const useDragAndDrop = (active, {
         return;
       }
       const dragIndex = item2.index;
-      const newIndex = index2;
+      const newIndex = index;
       const hoverBoundingRect = objectRef.current?.getBoundingClientRect();
       const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
       const clientOffset = monitor.getClientOffset();
@@ -4672,14 +4612,14 @@ const useDragAndDrop = (active, {
     }
     return null;
   };
-  const [{ isDragging, direction }, dragRef, dragPreviewRef] = reactDnd.useDrag({
+  const [{ isDragging, direction }, dragRef, dragPreviewRef] = useDrag({
     type,
     item() {
       if (onStart) {
         onStart();
       }
       const { width } = objectRef.current?.getBoundingClientRect() ?? {};
-      return { index: index2, width, ...item };
+      return { index, width, ...item };
     },
     end() {
       if (onEnd) {
@@ -4702,7 +4642,7 @@ const useDragAndDrop = (active, {
       direction: getDragDirection(monitor)
     })
   });
-  const handleKeyDown = useKeyboardDragAndDrop(active, index2, {
+  const handleKeyDown = useKeyboardDragAndDrop(active, index, {
     onGrabItem,
     onDropItem,
     onCancel,
@@ -4717,22 +4657,22 @@ const useDragAndDrop = (active, {
   ];
 };
 const ObservedToolbarComponent = ({
-  index: index2,
+  index,
   lastVisibleIndex,
   setLastVisibleIndex,
   rootRef,
   children
 }) => {
-  const isVisible = index2 <= lastVisibleIndex;
-  const containerRef = admin.useElementOnScreen(
+  const isVisible = index <= lastVisibleIndex;
+  const containerRef = useElementOnScreen(
     (isVisible2) => {
       if (isVisible2) {
-        setLastVisibleIndex((prev) => Math.max(prev, index2));
+        setLastVisibleIndex((prev) => Math.max(prev, index));
       }
     },
     { threshold: 1, root: rootRef.current }
   );
-  return /* @__PURE__ */ jsxRuntime.jsx(
+  return /* @__PURE__ */ jsx(
     "div",
     {
       ref: containerRef,
@@ -4753,16 +4693,16 @@ const EditorToolbarObserver = ({
   observedComponents,
   menuTriggerVariant = "ghost"
 }) => {
-  const { formatMessage } = reactIntl.useIntl();
-  const toolbarRef = React__namespace.useRef(null);
-  const [lastVisibleIndex, setLastVisibleIndex] = React__namespace.useState(
+  const { formatMessage } = useIntl();
+  const toolbarRef = React.useRef(null);
+  const [lastVisibleIndex, setLastVisibleIndex] = React.useState(
     observedComponents.length - 1
   );
   const hasHiddenItems = lastVisibleIndex < observedComponents.length - 1;
   const menuIndex = lastVisibleIndex + 1;
-  const [open, setOpen] = React__namespace.useState(false);
+  const [open, setOpen] = React.useState(false);
   const isMenuOpenWithContent = open && hasHiddenItems;
-  const menuTriggerRef = admin.useElementOnScreen(
+  const menuTriggerRef = useElementOnScreen(
     (isVisible) => {
       if (!isVisible) {
         setLastVisibleIndex((prev) => prev - 1);
@@ -4771,11 +4711,11 @@ const EditorToolbarObserver = ({
     },
     { threshold: 1, root: toolbarRef.current }
   );
-  return observedComponents.map((component, index2) => {
-    return /* @__PURE__ */ jsxRuntime.jsx(
+  return observedComponents.map((component, index) => {
+    return /* @__PURE__ */ jsx(
       ObservedToolbarComponent,
       {
-        index: index2,
+        index,
         lastVisibleIndex,
         setLastVisibleIndex,
         rootRef: toolbarRef,
@@ -4786,15 +4726,15 @@ const EditorToolbarObserver = ({
   }).toSpliced(
     menuIndex,
     0,
-    /* @__PURE__ */ jsxRuntime.jsxs(
-      designSystem.Menu.Root,
+    /* @__PURE__ */ jsxs(
+      Menu.Root,
       {
         defaultOpen: false,
         open: isMenuOpenWithContent,
         onOpenChange: setOpen,
         children: [
-          /* @__PURE__ */ jsxRuntime.jsx(
-            designSystem.Menu.Trigger,
+          /* @__PURE__ */ jsx(
+            Menu.Trigger,
             {
               paddingLeft: 0,
               paddingRight: 0,
@@ -4802,19 +4742,19 @@ const EditorToolbarObserver = ({
               variant: menuTriggerVariant,
               style: { visibility: hasHiddenItems ? "visible" : "hidden" },
               label: formatMessage({ id: "global.more", defaultMessage: "More" }),
-              tag: designSystem.IconButton,
-              icon: /* @__PURE__ */ jsxRuntime.jsx(Icons.More, {})
+              tag: IconButton,
+              icon: /* @__PURE__ */ jsx(More, {})
             }
           ),
-          /* @__PURE__ */ jsxRuntime.jsx(
-            designSystem.Menu.Content,
+          /* @__PURE__ */ jsx(
+            Menu.Content,
             {
               onCloseAutoFocus: (e) => e.preventDefault(),
               maxHeight: "100%",
               minWidth: "256px",
               popoverPlacement: "bottom-end",
               zIndex: 2,
-              children: observedComponents.slice(menuIndex).map((component) => /* @__PURE__ */ jsxRuntime.jsx(React__namespace.Fragment, { children: component.menu }, component.key))
+              children: observedComponents.slice(menuIndex).map((component) => /* @__PURE__ */ jsx(React.Fragment, { children: component.menu }, component.key))
             }
           )
         ]
@@ -4823,20 +4763,20 @@ const EditorToolbarObserver = ({
     )
   );
 };
-const ToolbarWrapper = styledComponents.styled(designSystem.Flex)`
+const ToolbarWrapper = styled(Flex)`
   &[aria-disabled='true'] {
     cursor: not-allowed;
     background: ${({ theme }) => theme.colors.neutral150};
   }
 `;
-const ToolbarSeparator = styledComponents.styled(Toolbar__namespace.Separator)`
+const ToolbarSeparator = styled(Toolbar.Separator)`
   background: ${({ theme }) => theme.colors.neutral150};
   width: 1px;
   height: 2.4rem;
   margin-left: 0.8rem;
   margin-right: 0.8rem;
 `;
-const FlexButton = styledComponents.styled(designSystem.Flex)`
+const FlexButton = styled(Flex)`
   // Inherit the not-allowed cursor from ToolbarWrapper when disabled
   &[aria-disabled] {
     cursor: not-allowed;
@@ -4851,7 +4791,7 @@ const FlexButton = styledComponents.styled(designSystem.Flex)`
     }
   }
 `;
-const SelectWrapper = styledComponents.styled(designSystem.Box)`
+const SelectWrapper = styled(Box)`
   // Styling changes to SingleSelect component don't work, so adding wrapper to target SingleSelect
   div[role='combobox'] {
     border: none;
@@ -4877,10 +4817,10 @@ const SelectWrapper = styledComponents.styled(designSystem.Box)`
   }
 `;
 function useConversionModal() {
-  const [modalElement, setModalComponent] = React__namespace.useState(null);
+  const [modalElement, setModalComponent] = React.useState(null);
   const handleConversionResult = (renderModal) => {
     if (renderModal) {
-      setModalComponent(React__namespace.cloneElement(renderModal(), { key: Date.now() }));
+      setModalComponent(React.cloneElement(renderModal(), { key: Date.now() }));
     }
   };
   return { modalElement, handleConversionResult };
@@ -4894,24 +4834,24 @@ const ToolbarButton = ({
   handleClick
 }) => {
   const { editor } = useBlocksEditorContext("ToolbarButton");
-  const { formatMessage } = reactIntl.useIntl();
+  const { formatMessage } = useIntl();
   const labelMessage = formatMessage(label);
   const enabledColor = isActive ? "primary600" : "neutral600";
-  return /* @__PURE__ */ jsxRuntime.jsx(designSystem.Tooltip, { label: labelMessage, children: /* @__PURE__ */ jsxRuntime.jsx(
-    Toolbar__namespace.ToggleItem,
+  return /* @__PURE__ */ jsx(Tooltip, { label: labelMessage, children: /* @__PURE__ */ jsx(
+    Toolbar.ToggleItem,
     {
       value: name2,
       "data-state": isActive ? "on" : "off",
       onMouseDown: (e) => {
         e.preventDefault();
         handleClick();
-        slateReact.ReactEditor.focus(editor);
+        ReactEditor.focus(editor);
       },
       "aria-disabled": disabled,
       disabled,
       "aria-label": labelMessage,
       asChild: true,
-      children: /* @__PURE__ */ jsxRuntime.jsx(
+      children: /* @__PURE__ */ jsx(
         FlexButton,
         {
           tag: "button",
@@ -4922,7 +4862,7 @@ const ToolbarButton = ({
           height: 7,
           hasRadius: true,
           type: "button",
-          children: /* @__PURE__ */ jsxRuntime.jsx(Icon, { fill: disabled ? "neutral300" : enabledColor })
+          children: /* @__PURE__ */ jsx(Icon, { fill: disabled ? "neutral300" : enabledColor })
         }
       )
     }
@@ -4930,20 +4870,20 @@ const ToolbarButton = ({
 };
 const BlocksDropdown = () => {
   const { editor, blocks, disabled } = useBlocksEditorContext("BlocksDropdown");
-  const { formatMessage } = reactIntl.useIntl();
+  const { formatMessage } = useIntl();
   const { modalElement, handleConversionResult } = useConversionModal();
   const blockKeysToInclude = getEntries(blocks).reduce((currentKeys, entry) => {
     const [key, block] = entry;
     return block.isInBlocksSelector ? [...currentKeys, key] : currentKeys;
   }, []);
-  const [blockSelected, setBlockSelected] = React__namespace.useState("paragraph");
+  const [blockSelected, setBlockSelected] = React.useState("paragraph");
   const handleSelect = (optionKey) => {
     if (!isSelectorBlockKey(optionKey)) {
       return;
     }
-    const editorIsEmpty = editor.children.length === 1 && slate.Editor.isEmpty(editor, editor.children[0]);
+    const editorIsEmpty = editor.children.length === 1 && Editor$1.isEmpty(editor, editor.children[0]);
     if (!editor.selection && !editorIsEmpty) {
-      slate.Transforms.insertNodes(
+      Transforms.insertNodes(
         editor,
         {
           type: "quote",
@@ -4955,17 +4895,17 @@ const BlocksDropdown = () => {
         }
       );
     } else if (!editor.selection && editorIsEmpty) {
-      slate.Transforms.select(editor, slate.Editor.start(editor, [0, 0]));
+      Transforms.select(editor, Editor$1.start(editor, [0, 0]));
     }
-    const currentListEntry = slate.Editor.above(editor, {
-      match: (node) => !slate.Editor.isEditor(node) && node.type === "list"
+    const currentListEntry = Editor$1.above(editor, {
+      match: (node) => !Editor$1.isEditor(node) && node.type === "list"
     });
     if (currentListEntry && ["list-ordered", "list-unordered"].includes(optionKey)) {
       const [currentList, currentListPath] = currentListEntry;
       const format = optionKey === "list-ordered" ? "ordered" : "unordered";
-      if (!slate.Editor.isEditor(currentList) && isListNode(currentList)) {
+      if (!Editor$1.isEditor(currentList) && isListNode(currentList)) {
         if (currentList.format !== format) {
-          slate.Transforms.setNodes(editor, { format }, { at: currentListPath });
+          Transforms.setNodes(editor, { format }, { at: currentListPath });
         }
       }
       return;
@@ -4973,33 +4913,33 @@ const BlocksDropdown = () => {
     const maybeRenderModal = blocks[optionKey].handleConvert?.(editor);
     handleConversionResult(maybeRenderModal);
     setBlockSelected(optionKey);
-    slateReact.ReactEditor.focus(editor);
+    ReactEditor.focus(editor);
   };
   const preventSelectFocus = (e) => e.preventDefault();
-  React__namespace.useEffect(() => {
+  React.useEffect(() => {
     if (editor.selection) {
       let selectedNode;
-      const currentListEntry = slate.Editor.above(editor, {
-        match: (node) => !slate.Editor.isEditor(node) && node.type === "list",
+      const currentListEntry = Editor$1.above(editor, {
+        match: (node) => !Editor$1.isEditor(node) && node.type === "list",
         at: editor.selection.anchor
       });
       if (currentListEntry) {
         const [currentList] = currentListEntry;
         selectedNode = currentList;
       } else {
-        const [anchorNode] = slate.Editor.parent(editor, editor.selection.anchor, {
+        const [anchorNode] = Editor$1.parent(editor, editor.selection.anchor, {
           edge: "start",
           depth: 2
         });
         if (anchorNode.type === "list-item") {
-          slate.Transforms.setNodes(editor, { type: "paragraph" });
+          Transforms.setNodes(editor, { type: "paragraph" });
           selectedNode = { ...anchorNode, type: "paragraph" };
         } else {
           selectedNode = anchorNode;
         }
       }
       const anchorBlockKey = getKeys(blocks).find(
-        (blockKey) => !slate.Editor.isEditor(selectedNode) && blocks[blockKey].matchNode(selectedNode)
+        (blockKey) => !Editor$1.isEditor(selectedNode) && blocks[blockKey].matchNode(selectedNode)
       );
       if (anchorBlockKey && anchorBlockKey !== blockSelected) {
         setBlockSelected(anchorBlockKey);
@@ -5007,11 +4947,11 @@ const BlocksDropdown = () => {
     }
   }, [editor.selection, editor, blocks, blockSelected]);
   const Icon = blocks[blockSelected].icon;
-  return /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-    /* @__PURE__ */ jsxRuntime.jsx(SelectWrapper, { children: /* @__PURE__ */ jsxRuntime.jsx(
-      designSystem.SingleSelect,
+  return /* @__PURE__ */ jsxs(Fragment, { children: [
+    /* @__PURE__ */ jsx(SelectWrapper, { children: /* @__PURE__ */ jsx(
+      SingleSelect,
       {
-        startIcon: /* @__PURE__ */ jsxRuntime.jsx(Icon, {}),
+        startIcon: /* @__PURE__ */ jsx(Icon, {}),
         onChange: handleSelect,
         placeholder: formatMessage(blocks[blockSelected].label),
         value: blockSelected,
@@ -5021,7 +4961,7 @@ const BlocksDropdown = () => {
           defaultMessage: "Select a block"
         }),
         disabled,
-        children: blockKeysToInclude.map((key) => /* @__PURE__ */ jsxRuntime.jsx(
+        children: blockKeysToInclude.map((key) => /* @__PURE__ */ jsx(
           BlockOption,
           {
             value: key,
@@ -5037,32 +4977,32 @@ const BlocksDropdown = () => {
   ] });
 };
 const BlockOption = ({ value, icon: Icon, label, blockSelected }) => {
-  const { formatMessage } = reactIntl.useIntl();
+  const { formatMessage } = useIntl();
   const isSelected = value === blockSelected;
-  return /* @__PURE__ */ jsxRuntime.jsx(
-    designSystem.SingleSelectOption,
+  return /* @__PURE__ */ jsx(
+    SingleSelectOption,
     {
-      startIcon: /* @__PURE__ */ jsxRuntime.jsx(Icon, { fill: isSelected ? "primary600" : "neutral500" }),
+      startIcon: /* @__PURE__ */ jsx(Icon, { fill: isSelected ? "primary600" : "neutral500" }),
       value,
       children: formatMessage(label)
     }
   );
 };
 const isListNode = (node) => {
-  return slate.Node.isNode(node) && !slate.Editor.isEditor(node) && node.type === "list";
+  return Node$1.isNode(node) && !Editor$1.isEditor(node) && node.type === "list";
 };
 const ListButton = ({ block, format, location = "toolbar" }) => {
-  const { formatMessage } = reactIntl.useIntl();
+  const { formatMessage } = useIntl();
   const { editor, disabled, blocks } = useBlocksEditorContext("ListButton");
   const isListActive = () => {
     if (!editor.selection) return false;
-    const currentListEntry = slate.Editor.above(editor, {
-      match: (node) => !slate.Editor.isEditor(node) && node.type === "list",
+    const currentListEntry = Editor$1.above(editor, {
+      match: (node) => !Editor$1.isEditor(node) && node.type === "list",
       at: editor.selection.anchor
     });
     if (currentListEntry) {
       const [currentList] = currentListEntry;
-      if (!slate.Editor.isEditor(currentList) && isListNode(currentList) && currentList.format === format)
+      if (!Editor$1.isEditor(currentList) && isListNode(currentList) && currentList.format === format)
         return true;
     }
     return false;
@@ -5074,13 +5014,13 @@ const ListButton = ({ block, format, location = "toolbar" }) => {
     if (!editor.selection) {
       return false;
     }
-    const anchorNodeEntry = slate.Editor.above(editor, {
+    const anchorNodeEntry = Editor$1.above(editor, {
       at: editor.selection.anchor,
-      match: (node) => !slate.Editor.isEditor(node) && node.type !== "text"
+      match: (node) => !Editor$1.isEditor(node) && node.type !== "text"
     });
-    const focusNodeEntry = slate.Editor.above(editor, {
+    const focusNodeEntry = Editor$1.above(editor, {
       at: editor.selection.focus,
-      match: (node) => !slate.Editor.isEditor(node) && node.type !== "text"
+      match: (node) => !Editor$1.isEditor(node) && node.type !== "text"
     });
     if (!anchorNodeEntry || !focusNodeEntry) {
       return false;
@@ -5090,13 +5030,13 @@ const ListButton = ({ block, format, location = "toolbar" }) => {
   const toggleList = (format2) => {
     let currentListEntry;
     if (editor.selection) {
-      currentListEntry = slate.Editor.above(editor, {
-        match: (node) => !slate.Editor.isEditor(node) && node.type === "list"
+      currentListEntry = Editor$1.above(editor, {
+        match: (node) => !Editor$1.isEditor(node) && node.type === "list"
       });
     } else {
-      const [_, lastNodePath] = slate.Editor.last(editor, []);
-      currentListEntry = slate.Editor.above(editor, {
-        match: (node) => !slate.Editor.isEditor(node) && node.type === "list",
+      const [_, lastNodePath] = Editor$1.last(editor, []);
+      currentListEntry = Editor$1.above(editor, {
+        match: (node) => !Editor$1.isEditor(node) && node.type === "list",
         at: lastNodePath
       });
     }
@@ -5105,9 +5045,9 @@ const ListButton = ({ block, format, location = "toolbar" }) => {
       return;
     }
     const [currentList, currentListPath] = currentListEntry;
-    if (!slate.Editor.isEditor(currentList) && isListNode(currentList)) {
+    if (!Editor$1.isEditor(currentList) && isListNode(currentList)) {
       if (currentList.format !== format2) {
-        slate.Transforms.setNodes(editor, { format: format2 }, { at: currentListPath });
+        Transforms.setNodes(editor, { format: format2 }, { at: currentListPath });
       } else {
         blocks["paragraph"].handleConvert(editor);
       }
@@ -5115,10 +5055,10 @@ const ListButton = ({ block, format, location = "toolbar" }) => {
   };
   if (location === "menu") {
     const Icon = block.icon;
-    return /* @__PURE__ */ jsxRuntime.jsx(
+    return /* @__PURE__ */ jsx(
       StyledMenuItem,
       {
-        startIcon: /* @__PURE__ */ jsxRuntime.jsx(Icon, {}),
+        startIcon: /* @__PURE__ */ jsx(Icon, {}),
         onSelect: () => toggleList(format),
         isActive: isListActive(),
         disabled: isListDisabled(),
@@ -5126,7 +5066,7 @@ const ListButton = ({ block, format, location = "toolbar" }) => {
       }
     );
   }
-  return /* @__PURE__ */ jsxRuntime.jsx(
+  return /* @__PURE__ */ jsx(
     ToolbarButton,
     {
       icon: block.icon,
@@ -5143,14 +5083,14 @@ const LinkButton = ({
   location = "toolbar"
 }) => {
   const { editor } = useBlocksEditorContext("LinkButton");
-  const { formatMessage } = reactIntl.useIntl();
+  const { formatMessage } = useIntl();
   const isLinkActive = () => {
     const { selection } = editor;
     if (!selection) return false;
     const [match] = Array.from(
-      slate.Editor.nodes(editor, {
-        at: slate.Editor.unhangRange(editor, selection),
-        match: (node) => slate.Element.isElement(node) && node.type === "link"
+      Editor$1.nodes(editor, {
+        at: Editor$1.unhangRange(editor, selection),
+        match: (node) => Element.isElement(node) && node.type === "link"
       })
     );
     return Boolean(match);
@@ -5162,13 +5102,13 @@ const LinkButton = ({
     if (!editor.selection) {
       return false;
     }
-    const anchorNodeEntry = slate.Editor.above(editor, {
+    const anchorNodeEntry = Editor$1.above(editor, {
       at: editor.selection.anchor,
-      match: (node) => !slate.Editor.isEditor(node) && node.type !== "text"
+      match: (node) => !Editor$1.isEditor(node) && node.type !== "text"
     });
-    const focusNodeEntry = slate.Editor.above(editor, {
+    const focusNodeEntry = Editor$1.above(editor, {
       at: editor.selection.focus,
-      match: (node) => !slate.Editor.isEditor(node) && node.type !== "text"
+      match: (node) => !Editor$1.isEditor(node) && node.type !== "text"
     });
     if (!anchorNodeEntry || !focusNodeEntry) {
       return false;
@@ -5184,10 +5124,10 @@ const LinkButton = ({
     defaultMessage: "Link"
   };
   if (location === "menu") {
-    return /* @__PURE__ */ jsxRuntime.jsx(
+    return /* @__PURE__ */ jsx(
       StyledMenuItem,
       {
-        startIcon: /* @__PURE__ */ jsxRuntime.jsx(Icons.Link, {}),
+        startIcon: /* @__PURE__ */ jsx(Link$1, {}),
         onSelect: addLink,
         isActive: isLinkActive(),
         disabled: isLinkDisabled(),
@@ -5195,10 +5135,10 @@ const LinkButton = ({
       }
     );
   }
-  return /* @__PURE__ */ jsxRuntime.jsx(
+  return /* @__PURE__ */ jsx(
     ToolbarButton,
     {
-      icon: Icons.Link,
+      icon: Link$1,
       name: "link",
       label,
       isActive: isLinkActive(),
@@ -5207,8 +5147,8 @@ const LinkButton = ({
     }
   );
 };
-const StyledMenuItem = styledComponents.styled(designSystem.Menu.Item)`
-  ${(props) => props.isActive && styledComponents.css`
+const StyledMenuItem = styled(Menu.Item)`
+  ${(props) => props.isActive && css`
       color: ${({ theme }) => theme.colors.primary600};
       font-weight: 600;
     `}
@@ -5219,7 +5159,7 @@ const StyledMenuItem = styledComponents.styled(designSystem.Menu.Item)`
 `;
 const BlocksToolbar = () => {
   const { editor, blocks, modifiers: modifiers2, disabled } = useBlocksEditorContext("BlocksToolbar");
-  const { formatMessage } = reactIntl.useIntl();
+  const { formatMessage } = useIntl();
   const checkButtonDisabled = () => {
     if (disabled) {
       return true;
@@ -5241,7 +5181,7 @@ const BlocksToolbar = () => {
       const isActive = modifier.checkIsActive(editor);
       const handleSelect = () => modifier.handleToggle(editor);
       return {
-        toolbar: /* @__PURE__ */ jsxRuntime.jsx(
+        toolbar: /* @__PURE__ */ jsx(
           ToolbarButton,
           {
             name: name2,
@@ -5253,39 +5193,39 @@ const BlocksToolbar = () => {
           },
           name2
         ),
-        menu: /* @__PURE__ */ jsxRuntime.jsx(StyledMenuItem, { startIcon: /* @__PURE__ */ jsxRuntime.jsx(Icon, {}), onSelect: handleSelect, isActive, children: formatMessage(modifier.label) }),
+        menu: /* @__PURE__ */ jsx(StyledMenuItem, { startIcon: /* @__PURE__ */ jsx(Icon, {}), onSelect: handleSelect, isActive, children: formatMessage(modifier.label) }),
         key: `modifier.${name2}`
       };
     }),
     {
-      toolbar: /* @__PURE__ */ jsxRuntime.jsx(LinkButton, { disabled: isButtonDisabled, location: "toolbar" }),
-      menu: /* @__PURE__ */ jsxRuntime.jsx(LinkButton, { disabled: isButtonDisabled, location: "menu" }),
+      toolbar: /* @__PURE__ */ jsx(LinkButton, { disabled: isButtonDisabled, location: "toolbar" }),
+      menu: /* @__PURE__ */ jsx(LinkButton, { disabled: isButtonDisabled, location: "menu" }),
       key: "block.link"
     },
     {
       // List buttons can only be rendered together when in the toolbar
-      toolbar: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { direction: "row", children: [
-        /* @__PURE__ */ jsxRuntime.jsx(ToolbarSeparator, { style: { marginLeft: "0.4rem" } }),
-        /* @__PURE__ */ jsxRuntime.jsx(Toolbar__namespace.ToggleGroup, { type: "single", asChild: true, children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { gap: 1, children: [
-          /* @__PURE__ */ jsxRuntime.jsx(ListButton, { block: blocks["list-unordered"], format: "unordered", location: "toolbar" }),
-          /* @__PURE__ */ jsxRuntime.jsx(ListButton, { block: blocks["list-ordered"], format: "ordered", location: "toolbar" })
+      toolbar: /* @__PURE__ */ jsxs(Flex, { direction: "row", children: [
+        /* @__PURE__ */ jsx(ToolbarSeparator, { style: { marginLeft: "0.4rem" } }),
+        /* @__PURE__ */ jsx(Toolbar.ToggleGroup, { type: "single", asChild: true, children: /* @__PURE__ */ jsxs(Flex, { gap: 1, children: [
+          /* @__PURE__ */ jsx(ListButton, { block: blocks["list-unordered"], format: "unordered", location: "toolbar" }),
+          /* @__PURE__ */ jsx(ListButton, { block: blocks["list-ordered"], format: "ordered", location: "toolbar" })
         ] }) })
       ] }),
-      menu: /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Menu.Separator, {}),
-        /* @__PURE__ */ jsxRuntime.jsx(ListButton, { block: blocks["list-unordered"], format: "unordered", location: "menu" }),
-        /* @__PURE__ */ jsxRuntime.jsx(ListButton, { block: blocks["list-ordered"], format: "ordered", location: "menu" })
+      menu: /* @__PURE__ */ jsxs(Fragment, { children: [
+        /* @__PURE__ */ jsx(Menu.Separator, {}),
+        /* @__PURE__ */ jsx(ListButton, { block: blocks["list-unordered"], format: "unordered", location: "menu" }),
+        /* @__PURE__ */ jsx(ListButton, { block: blocks["list-ordered"], format: "ordered", location: "menu" })
       ] }),
       key: "block.list"
     }
   ];
-  return /* @__PURE__ */ jsxRuntime.jsx(Toolbar__namespace.Root, { "aria-disabled": disabled, asChild: true, children: /* @__PURE__ */ jsxRuntime.jsxs(ToolbarWrapper, { padding: 2, width: "100%", children: [
-    /* @__PURE__ */ jsxRuntime.jsx(BlocksDropdown, {}),
-    /* @__PURE__ */ jsxRuntime.jsx(ToolbarSeparator, {}),
-    /* @__PURE__ */ jsxRuntime.jsx(Toolbar__namespace.ToggleGroup, { type: "multiple", asChild: true, children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Flex, { direction: "row", gap: 1, grow: 1, overflow: "hidden", children: /* @__PURE__ */ jsxRuntime.jsx(EditorToolbarObserver, { observedComponents }) }) })
+  return /* @__PURE__ */ jsx(Toolbar.Root, { "aria-disabled": disabled, asChild: true, children: /* @__PURE__ */ jsxs(ToolbarWrapper, { padding: 2, width: "100%", children: [
+    /* @__PURE__ */ jsx(BlocksDropdown, {}),
+    /* @__PURE__ */ jsx(ToolbarSeparator, {}),
+    /* @__PURE__ */ jsx(Toolbar.ToggleGroup, { type: "multiple", asChild: true, children: /* @__PURE__ */ jsx(Flex, { direction: "row", gap: 1, grow: 1, overflow: "hidden", children: /* @__PURE__ */ jsx(EditorToolbarObserver, { observedComponents }) }) })
   ] }) });
 };
-const StyledEditable = styledComponents.styled(slateReact.Editable)`
+const StyledEditable = styled(Editable)`
   // The outline style is set on the wrapper with :focus-within
   outline: none;
   display: flex;
@@ -5300,20 +5240,20 @@ const StyledEditable = styledComponents.styled(slateReact.Editable)`
     padding-bottom: ${({ theme }) => theme.spaces[3]};
   }
 `;
-const Wrapper$1 = styledComponents.styled(designSystem.Box)`
+const Wrapper$1 = styled(Box)`
   position: ${({ $isOverDropTarget }) => $isOverDropTarget && "relative"};
 `;
-const DropPlaceholder = styledComponents.styled(designSystem.Box)`
+const DropPlaceholder = styled(Box)`
   position: absolute;
   right: 0;
 
   // Show drop placeholder 8px above or below the drop target
-  ${({ dragDirection, theme, placeholderMargin }) => styledComponents.css`
+  ${({ dragDirection, theme, placeholderMargin }) => css`
     top: ${dragDirection === DIRECTIONS.UPWARD && `-${theme.spaces[placeholderMargin]}`};
     bottom: ${dragDirection === DIRECTIONS.DOWNWARD && `-${theme.spaces[placeholderMargin]}`};
   `}
 `;
-const DragItem = styledComponents.styled(designSystem.Flex)`
+const DragItem = styled(Flex)`
   // Style each block rendered using renderElement()
   & > [data-slate-node='element'] {
     width: 100%;
@@ -5329,7 +5269,7 @@ const DragItem = styledComponents.styled(designSystem.Flex)`
     user-drag: none;
   }
 `;
-const DragIconButton = styledComponents.styled(designSystem.IconButton)`
+const DragIconButton = styled(IconButton)`
   user-select: none;
   display: flex;
   align-items: center;
@@ -5365,17 +5305,17 @@ const DragIconButton = styledComponents.styled(designSystem.IconButton)`
 `;
 const DragAndDropElement = ({
   children,
-  index: index$1,
+  index,
   setDragDirection,
   dragDirection,
   dragHandleTopMargin
 }) => {
   const { editor, disabled, name: name2, setLiveText } = useBlocksEditorContext("drag-and-drop");
-  const { formatMessage } = reactIntl.useIntl();
-  const [dragVisibility, setDragVisibility] = React__namespace.useState("hidden");
-  const handleMoveBlock = React__namespace.useCallback(
+  const { formatMessage } = useIntl();
+  const [dragVisibility, setDragVisibility] = React.useState("hidden");
+  const handleMoveBlock = React.useCallback(
     (newIndex, currentIndex) => {
-      slate.Transforms.moveNodes(editor, {
+      Transforms.moveNodes(editor, {
         at: currentIndex,
         to: newIndex
       });
@@ -5384,7 +5324,7 @@ const DragAndDropElement = ({
       setLiveText(
         formatMessage(
           {
-            id: index.getTranslation("components.Blocks.dnd.reorder"),
+            id: getTranslation("components.Blocks.dnd.reorder"),
             defaultMessage: "{item}, moved. New position in the editor: {position}."
           },
           {
@@ -5398,26 +5338,26 @@ const DragAndDropElement = ({
   );
   const [{ handlerId, isDragging, isOverDropTarget, direction }, blockRef, dropRef, dragRef] = useDragAndDrop(!disabled, {
     type: `${ItemTypes.BLOCKS}_${name2}`,
-    index: index$1,
+    index,
     item: {
-      index: index$1,
+      index,
       displayedValue: children
     },
     onDropItem(currentIndex, newIndex) {
       if (newIndex) handleMoveBlock(newIndex, currentIndex);
     }
   });
-  const composedBoxRefs = designSystem.useComposedRefs(blockRef, dropRef);
-  React__namespace.useEffect(() => {
+  const composedBoxRefs = useComposedRefs(blockRef, dropRef);
+  React.useEffect(() => {
     if (direction) {
       setDragDirection(direction);
     }
   }, [direction, setDragDirection]);
-  React__namespace.useEffect(() => {
+  React.useEffect(() => {
     setDragVisibility("hidden");
   }, [editor.selection]);
-  return /* @__PURE__ */ jsxRuntime.jsxs(Wrapper$1, { ref: composedBoxRefs, $isOverDropTarget: isOverDropTarget, children: [
-    isOverDropTarget && /* @__PURE__ */ jsxRuntime.jsx(
+  return /* @__PURE__ */ jsxs(Wrapper$1, { ref: composedBoxRefs, $isOverDropTarget: isOverDropTarget, children: [
+    isOverDropTarget && /* @__PURE__ */ jsx(
       DropPlaceholder,
       {
         borderStyle: "solid",
@@ -5429,7 +5369,7 @@ const DragAndDropElement = ({
         placeholderMargin: children.props.as && children.props.as === "li" ? 1 : 2
       }
     ),
-    isDragging ? /* @__PURE__ */ jsxRuntime.jsx(CloneDragItem, { dragHandleTopMargin, children }) : /* @__PURE__ */ jsxRuntime.jsxs(
+    isDragging ? /* @__PURE__ */ jsx(CloneDragItem, { dragHandleTopMargin, children }) : /* @__PURE__ */ jsxs(
       DragItem,
       {
         ref: dragRef,
@@ -5456,7 +5396,7 @@ const DragAndDropElement = ({
         "aria-disabled": disabled,
         $dragVisibility: dragVisibility,
         children: [
-          /* @__PURE__ */ jsxRuntime.jsx(
+          /* @__PURE__ */ jsx(
             DragIconButton,
             {
               tag: "div",
@@ -5465,7 +5405,7 @@ const DragAndDropElement = ({
               tabIndex: 0,
               withTooltip: false,
               label: formatMessage({
-                id: index.getTranslation("components.DragHandle-label"),
+                id: getTranslation("components.DragHandle-label"),
                 defaultMessage: "Drag"
               }),
               onClick: (e) => e.stopPropagation(),
@@ -5473,7 +5413,7 @@ const DragAndDropElement = ({
               disabled,
               draggable: true,
               $dragHandleTopMargin: dragHandleTopMargin,
-              children: /* @__PURE__ */ jsxRuntime.jsx(Icons.Drag, { color: "primary500" })
+              children: /* @__PURE__ */ jsx(Drag, { color: "primary500" })
             }
           ),
           children
@@ -5483,20 +5423,20 @@ const DragAndDropElement = ({
   ] });
 };
 const CloneDragItem = ({ children, dragHandleTopMargin }) => {
-  const { formatMessage } = reactIntl.useIntl();
-  return /* @__PURE__ */ jsxRuntime.jsxs(DragItem, { gap: 2, paddingLeft: 2, alignItems: "start", $dragVisibility: "visible", children: [
-    /* @__PURE__ */ jsxRuntime.jsx(
+  const { formatMessage } = useIntl();
+  return /* @__PURE__ */ jsxs(DragItem, { gap: 2, paddingLeft: 2, alignItems: "start", $dragVisibility: "visible", children: [
+    /* @__PURE__ */ jsx(
       DragIconButton,
       {
         tag: "div",
         role: "button",
         withTooltip: false,
         label: formatMessage({
-          id: index.getTranslation("components.DragHandle-label"),
+          id: getTranslation("components.DragHandle-label"),
           defaultMessage: "Drag"
         }),
         $dragHandleTopMargin: dragHandleTopMargin,
-        children: /* @__PURE__ */ jsxRuntime.jsx(Icons.Drag, { color: "neutral600" })
+        children: /* @__PURE__ */ jsx(Drag, { color: "neutral600" })
       }
     ),
     children
@@ -5510,7 +5450,7 @@ const baseRenderLeaf = (props, modifiers2) => {
     }
     return currentChildren;
   }, props.children);
-  return /* @__PURE__ */ jsxRuntime.jsx("span", { ...props.attributes, className: props.leaf.className, children: wrappedChildren });
+  return /* @__PURE__ */ jsx("span", { ...props.attributes, className: props.leaf.className, children: wrappedChildren });
 };
 const baseRenderElement = ({
   props,
@@ -5522,11 +5462,11 @@ const baseRenderElement = ({
   const { element } = props;
   const blockMatch = Object.values(blocks).find((block2) => block2.matchNode(element));
   const block = blockMatch || blocks.paragraph;
-  const nodePath = slateReact.ReactEditor.findPath(editor, element);
+  const nodePath = ReactEditor.findPath(editor, element);
   if (isLinkNode(element) || isListNode$1(element) && element.indentLevel && element.indentLevel > 0 || element.type === "list-item") {
     return block.renderElement(props);
   }
-  return /* @__PURE__ */ jsxRuntime.jsx(
+  return /* @__PURE__ */ jsx(
     DragAndDropElement,
     {
       index: nodePath,
@@ -5540,17 +5480,17 @@ const baseRenderElement = ({
 const dragNoop = () => true;
 const BlocksContent = ({ placeholder, ariaLabelId }) => {
   const { editor, disabled, blocks, modifiers: modifiers2, setLiveText, isExpandedMode } = useBlocksEditorContext("BlocksContent");
-  const blocksRef = React__namespace.useRef(null);
-  const { formatMessage } = reactIntl.useIntl();
-  const [dragDirection, setDragDirection] = React__namespace.useState(null);
+  const blocksRef = React.useRef(null);
+  const { formatMessage } = useIntl();
+  const [dragDirection, setDragDirection] = React.useState(null);
   const { modalElement, handleConversionResult } = useConversionModal();
-  const renderLeaf = React__namespace.useCallback(
+  const renderLeaf = React.useCallback(
     (props) => baseRenderLeaf(props, modifiers2),
     [modifiers2]
   );
   const handleMoveBlocks = (editor2, event) => {
     if (!editor2.selection) return;
-    const start = slate.Range.start(editor2.selection);
+    const start = Range.start(editor2.selection);
     const currentIndex = [start.path[0]];
     let newIndexPosition = 0;
     if (event.key === "ArrowUp") {
@@ -5560,14 +5500,14 @@ const BlocksContent = ({ placeholder, ariaLabelId }) => {
     }
     const newIndex = [newIndexPosition];
     if (newIndexPosition !== currentIndex[0]) {
-      slate.Transforms.moveNodes(editor2, {
+      Transforms.moveNodes(editor2, {
         at: currentIndex,
         to: newIndex
       });
       setLiveText(
         formatMessage(
           {
-            id: index.getTranslation("components.Blocks.dnd.reorder"),
+            id: getTranslation("components.Blocks.dnd.reorder"),
             defaultMessage: "{item}, moved. New position in the editor: {position}."
           },
           {
@@ -5579,7 +5519,7 @@ const BlocksContent = ({ placeholder, ariaLabelId }) => {
       event.preventDefault();
     }
   };
-  const renderElement = React__namespace.useCallback(
+  const renderElement = React.useCallback(
     (props) => baseRenderElement({ props, blocks, editor, dragDirection, setDragDirection }),
     [blocks, editor, dragDirection, setDragDirection]
   );
@@ -5587,8 +5527,8 @@ const BlocksContent = ({ placeholder, ariaLabelId }) => {
     if (!editor.selection) {
       return;
     }
-    const [textNode, textNodePath] = slate.Editor.node(editor, editor.selection.anchor.path);
-    if (slate.Editor.isEditor(textNode) || textNode.type !== "text") {
+    const [textNode, textNodePath] = Editor$1.node(editor, editor.selection.anchor.path);
+    if (Editor$1.isEditor(textNode) || textNode.type !== "text") {
       return;
     }
     if (textNodePath.at(-1) !== 0) {
@@ -5599,7 +5539,7 @@ const BlocksContent = ({ placeholder, ariaLabelId }) => {
     });
     if (blockMatchingSnippet?.handleConvert) {
       event.preventDefault();
-      slate.Transforms.delete(editor, {
+      Transforms.delete(editor, {
         distance: textNode.text.length,
         unit: "character",
         reverse: true
@@ -5618,7 +5558,7 @@ const BlocksContent = ({ placeholder, ariaLabelId }) => {
       return;
     }
     if (event.shiftKey && selectedNode.type !== "image") {
-      slate.Transforms.insertText(editor, "\n");
+      Transforms.insertText(editor, "\n");
       return;
     }
     if (selectedBlock.handleEnterKey) {
@@ -5678,18 +5618,18 @@ const BlocksContent = ({ placeholder, ariaLabelId }) => {
       case "Tab":
         return handleTab(event);
       case "Escape":
-        return slateReact.ReactEditor.blur(editor);
+        return ReactEditor.blur(editor);
     }
     handleKeyboardShortcuts(event);
     if (event.key === " ") {
       checkSnippet(event);
     }
   };
-  const handleScrollSelectionIntoView = React__namespace.useCallback(() => {
+  const handleScrollSelectionIntoView = React.useCallback(() => {
     if (!editor.selection || !blocksRef.current) {
       return;
     }
-    const domRange = slateReact.ReactEditor.toDOMRange(editor, editor.selection);
+    const domRange = ReactEditor.toDOMRange(editor, editor.selection);
     const domRect = domRange.getBoundingClientRect();
     const editorRect = blocksRef.current.getBoundingClientRect();
     if (domRect.top < editorRect.top || domRect.bottom > editorRect.bottom) {
@@ -5700,8 +5640,8 @@ const BlocksContent = ({ placeholder, ariaLabelId }) => {
       });
     }
   }, [editor]);
-  return /* @__PURE__ */ jsxRuntime.jsxs(
-    designSystem.Box,
+  return /* @__PURE__ */ jsxs(
+    Box,
     {
       ref: blocksRef,
       grow: 1,
@@ -5715,7 +5655,7 @@ const BlocksContent = ({ placeholder, ariaLabelId }) => {
       paddingTop: 6,
       paddingBottom: 3,
       children: [
-        /* @__PURE__ */ jsxRuntime.jsx(
+        /* @__PURE__ */ jsx(
           StyledEditable,
           {
             "aria-labelledby": ariaLabelId,
@@ -5743,28 +5683,28 @@ const EditorLayout$1 = ({
   onToggleExpand,
   ariaDescriptionId
 }) => {
-  const { formatMessage } = reactIntl.useIntl();
+  const { formatMessage } = useIntl();
   const { isExpandedMode } = useBlocksEditorContext("editorLayout");
-  return /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-    isExpandedMode && /* @__PURE__ */ jsxRuntime.jsx(designSystem.Modal.Root, { open: isExpandedMode, onOpenChange: onToggleExpand, children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Modal.Content, { style: { maxWidth: "unset", width: "unset" }, children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { height: "90dvh", width: "90dvw", alignItems: "flex-start", direction: "column", children: [
+  return /* @__PURE__ */ jsxs(Fragment, { children: [
+    isExpandedMode && /* @__PURE__ */ jsx(Modal.Root, { open: isExpandedMode, onOpenChange: onToggleExpand, children: /* @__PURE__ */ jsx(Modal.Content, { style: { maxWidth: "unset", width: "unset" }, children: /* @__PURE__ */ jsxs(Flex, { height: "90dvh", width: "90dvw", alignItems: "flex-start", direction: "column", children: [
       children,
-      /* @__PURE__ */ jsxRuntime.jsx(
-        designSystem.IconButton,
+      /* @__PURE__ */ jsx(
+        IconButton,
         {
           position: "absolute",
           bottom: "1.2rem",
           right: "1.2rem",
           shadow: "filterShadow",
           label: formatMessage({
-            id: index.getTranslation("components.Blocks.collapse"),
+            id: getTranslation("components.Blocks.collapse"),
             defaultMessage: "Collapse"
           }),
           onClick: onToggleExpand,
-          children: /* @__PURE__ */ jsxRuntime.jsx(Icons.Collapse, {})
+          children: /* @__PURE__ */ jsx(Collapse, {})
         }
       )
     ] }) }) }),
-    /* @__PURE__ */ jsxRuntime.jsx(
+    /* @__PURE__ */ jsx(
       InputWrapper,
       {
         direction: "column",
@@ -5780,13 +5720,13 @@ const EditorLayout$1 = ({
     )
   ] });
 };
-const InputWrapper = styledComponents.styled(designSystem.Flex)`
+const InputWrapper = styled(Flex)`
   border: 1px solid
     ${({ theme, $hasError }) => $hasError ? theme.colors.danger600 : theme.colors.neutral200};
   border-radius: ${({ theme }) => theme.borderRadius};
   background: ${({ theme }) => theme.colors.neutral0};
 
-  ${({ theme, $hasError = false }) => styledComponents.css`
+  ${({ theme, $hasError = false }) => css`
     outline: none;
     box-shadow: 0;
     transition-property: border-color, box-shadow, fill;
@@ -5798,34 +5738,34 @@ const InputWrapper = styledComponents.styled(designSystem.Flex)`
     }
   `}
 
-  ${({ theme, $disabled }) => $disabled ? styledComponents.css`
+  ${({ theme, $disabled }) => $disabled ? css`
           color: ${theme.colors.neutral600};
           background: ${theme.colors.neutral150};
         ` : void 0}
 `;
-const stylesToInherit = styledComponents.css`
+const stylesToInherit = css`
   font-size: inherit;
   color: inherit;
   line-height: inherit;
 `;
-const BoldText = styledComponents.styled(designSystem.Typography).attrs({ fontWeight: "bold" })`
+const BoldText = styled(Typography).attrs({ fontWeight: "bold" })`
   ${stylesToInherit}
 `;
-const ItalicText = styledComponents.styled(designSystem.Typography)`
+const ItalicText = styled(Typography)`
   font-style: italic;
   ${stylesToInherit}
 `;
-const UnderlineText = styledComponents.styled(designSystem.Typography).attrs({
+const UnderlineText = styled(Typography).attrs({
   textDecoration: "underline"
 })`
   ${stylesToInherit}
 `;
-const StrikeThroughText = styledComponents.styled(designSystem.Typography).attrs({
+const StrikeThroughText = styled(Typography).attrs({
   textDecoration: "line-through"
 })`
   ${stylesToInherit}
 `;
-const InlineCode = styledComponents.styled.code`
+const InlineCode = styled.code`
   background-color: ${({ theme }) => theme.colors.neutral150};
   border-radius: ${({ theme }) => theme.borderRadius};
   padding: ${({ theme }) => `0 ${theme.spaces[2]}`};
@@ -5834,62 +5774,62 @@ const InlineCode = styledComponents.styled.code`
   color: inherit;
 `;
 const baseCheckIsActive = (editor, name2) => {
-  const marks = slate.Editor.marks(editor);
+  const marks = Editor$1.marks(editor);
   if (!marks) return false;
   return Boolean(marks[name2]);
 };
 const baseHandleToggle = (editor, name2) => {
-  const marks = slate.Editor.marks(editor);
+  const marks = Editor$1.marks(editor);
   if (!editor.selection) {
-    const endOfEditor = slate.Editor.end(editor, []);
-    slate.Transforms.select(editor, endOfEditor);
+    const endOfEditor = Editor$1.end(editor, []);
+    Transforms.select(editor, endOfEditor);
   }
   if (marks?.[name2]) {
-    slate.Editor.removeMark(editor, name2);
+    Editor$1.removeMark(editor, name2);
   } else {
-    slate.Editor.addMark(editor, name2, true);
+    Editor$1.addMark(editor, name2, true);
   }
 };
 const modifiers = {
   bold: {
-    icon: Icons.Bold,
+    icon: Bold,
     isValidEventKey: (event) => event.key === "b",
     label: { id: "components.Blocks.modifiers.bold", defaultMessage: "Bold" },
     checkIsActive: (editor) => baseCheckIsActive(editor, "bold"),
     handleToggle: (editor) => baseHandleToggle(editor, "bold"),
-    renderLeaf: (children) => /* @__PURE__ */ jsxRuntime.jsx(BoldText, { children })
+    renderLeaf: (children) => /* @__PURE__ */ jsx(BoldText, { children })
   },
   italic: {
-    icon: Icons.Italic,
+    icon: Italic,
     isValidEventKey: (event) => event.key === "i",
     label: { id: "components.Blocks.modifiers.italic", defaultMessage: "Italic" },
     checkIsActive: (editor) => baseCheckIsActive(editor, "italic"),
     handleToggle: (editor) => baseHandleToggle(editor, "italic"),
-    renderLeaf: (children) => /* @__PURE__ */ jsxRuntime.jsx(ItalicText, { children })
+    renderLeaf: (children) => /* @__PURE__ */ jsx(ItalicText, { children })
   },
   underline: {
-    icon: Icons.Underline,
+    icon: Underline,
     isValidEventKey: (event) => event.key === "u",
     label: { id: "components.Blocks.modifiers.underline", defaultMessage: "Underline" },
     checkIsActive: (editor) => baseCheckIsActive(editor, "underline"),
     handleToggle: (editor) => baseHandleToggle(editor, "underline"),
-    renderLeaf: (children) => /* @__PURE__ */ jsxRuntime.jsx(UnderlineText, { children })
+    renderLeaf: (children) => /* @__PURE__ */ jsx(UnderlineText, { children })
   },
   strikethrough: {
-    icon: Icons.StrikeThrough,
+    icon: StrikeThrough,
     isValidEventKey: (event) => event.key === "S" && event.shiftKey,
     label: { id: "components.Blocks.modifiers.strikethrough", defaultMessage: "Strikethrough" },
     checkIsActive: (editor) => baseCheckIsActive(editor, "strikethrough"),
     handleToggle: (editor) => baseHandleToggle(editor, "strikethrough"),
-    renderLeaf: (children) => /* @__PURE__ */ jsxRuntime.jsx(StrikeThroughText, { children })
+    renderLeaf: (children) => /* @__PURE__ */ jsx(StrikeThroughText, { children })
   },
   code: {
-    icon: Icons.Code,
+    icon: Code,
     isValidEventKey: (event) => event.key === "e",
     label: { id: "components.Blocks.modifiers.code", defaultMessage: "Inline code" },
     checkIsActive: (editor) => baseCheckIsActive(editor, "code"),
     handleToggle: (editor) => baseHandleToggle(editor, "code"),
-    renderLeaf: (children) => /* @__PURE__ */ jsxRuntime.jsx(InlineCode, { children })
+    renderLeaf: (children) => /* @__PURE__ */ jsx(InlineCode, { children })
   }
 };
 const withImages = (editor) => {
@@ -5907,31 +5847,31 @@ const withLinks = (editor) => {
   editor.lastInsertedLinkPath = null;
   editor.apply = (operation) => {
     if (operation.type === "insert_node") {
-      if (!slate.Editor.isEditor(operation.node) && operation.node.type === "link" && editor.shouldSaveLinkPath) {
+      if (!Editor$1.isEditor(operation.node) && operation.node.type === "link" && editor.shouldSaveLinkPath) {
         editor.lastInsertedLinkPath = operation.path;
       }
     } else if (operation.type === "move_node") {
-      if (slate.Path.hasPrevious(operation.path) && editor.lastInsertedLinkPath && editor.shouldSaveLinkPath) {
-        editor.lastInsertedLinkPath = slate.Path.transform(editor.lastInsertedLinkPath, operation);
+      if (Path.hasPrevious(operation.path) && editor.lastInsertedLinkPath && editor.shouldSaveLinkPath) {
+        editor.lastInsertedLinkPath = Path.transform(editor.lastInsertedLinkPath, operation);
       }
     }
     apply(operation);
   };
   editor.insertText = (text) => {
-    if (editor.selection && slate.Range.isCollapsed(editor.selection) && text === " ") {
+    if (editor.selection && Range.isCollapsed(editor.selection) && text === " ") {
       const linksInSelection = Array.from(
-        slate.Editor.nodes(editor, {
+        Editor$1.nodes(editor, {
           at: editor.selection,
-          match: (node) => !slate.Editor.isEditor(node) && node.type === "link"
+          match: (node) => !Editor$1.isEditor(node) && node.type === "link"
         })
       );
       const selectionIsInLink = editor.selection && linksInSelection.length > 0;
-      const selectionIsAtEndOfLink = selectionIsInLink && slate.Point.equals(editor.selection.anchor, slate.Editor.end(editor, linksInSelection[0][1]));
+      const selectionIsAtEndOfLink = selectionIsInLink && Point.equals(editor.selection.anchor, Editor$1.end(editor, linksInSelection[0][1]));
       if (selectionIsAtEndOfLink) {
-        slate.Transforms.insertNodes(
+        Transforms.insertNodes(
           editor,
           { text: " ", type: "text" },
-          { at: slate.Path.next(linksInSelection[0][1]), select: true }
+          { at: Path.next(linksInSelection[0][1]), select: true }
         );
         return;
       }
@@ -5954,14 +5894,14 @@ const withLinks = (editor) => {
   return editor;
 };
 const isText = (node) => {
-  return slate.Node.isNode(node) && !slate.Editor.isEditor(node) && node.type === "text";
+  return Node$1.isNode(node) && !Editor$1.isEditor(node) && node.type === "text";
 };
 const withStrapiSchema = (editor) => {
   const { normalizeNode } = editor;
   editor.normalizeNode = (entry) => {
     const [node, path] = entry;
-    if (!slate.Element.isElement(node) && !isText(node)) {
-      slate.Transforms.setNodes(editor, { type: "text" }, { at: path });
+    if (!Element.isElement(node) && !isText(node)) {
+      Transforms.setNodes(editor, { type: "text" }, { at: path });
       return;
     }
     normalizeNode(entry);
@@ -5985,60 +5925,60 @@ const selectorBlockKeys = [
 const isSelectorBlockKey = (key) => {
   return typeof key === "string" && selectorBlockKeys.includes(key);
 };
-const [BlocksEditorProvider, usePartialBlocksEditorContext] = admin.createContext("BlocksEditor");
+const [BlocksEditorProvider, usePartialBlocksEditorContext] = createContext("BlocksEditor");
 function useBlocksEditorContext(consumerName) {
   const context = usePartialBlocksEditorContext(consumerName, (state) => state);
-  const editor = slateReact.useSlate();
+  const editor = useSlate();
   return {
     ...context,
     editor
   };
 }
-const EditorDivider = styledComponents.styled(designSystem.Divider)`
+const EditorDivider = styled(Divider)`
   background: ${({ theme }) => theme.colors.neutral200};
 `;
 function useResetKey(value) {
-  const slateUpdatesCount = React__namespace.useRef(0);
-  const valueUpdatesCount = React__namespace.useRef(0);
-  const [key, setKey] = React__namespace.useState(0);
-  React__namespace.useEffect(() => {
+  const slateUpdatesCount = React.useRef(0);
+  const valueUpdatesCount = React.useRef(0);
+  const [key, setKey] = React.useState(0);
+  React.useEffect(() => {
     valueUpdatesCount.current += 1;
     if (valueUpdatesCount.current !== slateUpdatesCount.current) {
       setKey((previousKey) => previousKey + 1);
       slateUpdatesCount.current = valueUpdatesCount.current;
     }
   }, [value]);
-  const incrementSlateUpdatesCount = React__namespace.useCallback(() => {
+  const incrementSlateUpdatesCount = React.useCallback(() => {
     slateUpdatesCount.current += 1;
   }, []);
   return { key, incrementSlateUpdatesCount };
 }
 const pipe = (...fns) => (value) => fns.reduce((prev, fn) => fn(prev), value);
 const normalizeBlocksState = (editor, value) => {
-  const isEmpty = value.length === 1 && slate.Editor.isEmpty(editor, value[0]);
+  const isEmpty = value.length === 1 && Editor$1.isEmpty(editor, value[0]);
   return isEmpty ? null : value;
 };
-const BlocksEditor = React__namespace.forwardRef(
+const BlocksEditor = React.forwardRef(
   ({ disabled = false, name: name2, onChange, value, error, ...contentProps }, forwardedRef) => {
-    const { formatMessage } = reactIntl.useIntl();
-    const [editor] = React__namespace.useState(
-      () => pipe(slateHistory.withHistory, withImages, withStrapiSchema, slateReact.withReact, withLinks)(slate.createEditor())
+    const { formatMessage } = useIntl();
+    const [editor] = React.useState(
+      () => pipe(withHistory, withImages, withStrapiSchema, withReact, withLinks)(createEditor())
     );
-    const [liveText, setLiveText] = React__namespace.useState("");
-    const ariaDescriptionId = React__namespace.useId();
-    const [isExpandedMode, handleToggleExpand] = React__namespace.useReducer((prev) => !prev, false);
-    React__namespace.useImperativeHandle(
+    const [liveText, setLiveText] = React.useState("");
+    const ariaDescriptionId = React.useId();
+    const [isExpandedMode, handleToggleExpand] = React.useReducer((prev) => !prev, false);
+    React.useImperativeHandle(
       forwardedRef,
       () => ({
         focus() {
-          slateReact.ReactEditor.focus(editor);
+          ReactEditor.focus(editor);
         }
       }),
       [editor]
     );
     const { key, incrementSlateUpdatesCount } = useResetKey(value);
-    const debounceTimeout = React__namespace.useRef(null);
-    const handleSlateChange = React__namespace.useCallback(
+    const debounceTimeout = React.useRef(null);
+    const handleSlateChange = React.useCallback(
       (state) => {
         const isAstChange = editor.operations.some((op) => op.type !== "set_selection");
         if (isAstChange) {
@@ -6054,21 +5994,21 @@ const BlocksEditor = React__namespace.forwardRef(
       },
       [editor, incrementSlateUpdatesCount, name2, onChange]
     );
-    React__namespace.useEffect(() => {
+    React.useEffect(() => {
       return () => {
         if (debounceTimeout.current) {
           clearTimeout(debounceTimeout.current);
         }
       };
     }, []);
-    React__namespace.useEffect(() => {
+    React.useEffect(() => {
       const normalizedValue = value?.length ? value : null;
       const normalizedEditorState = normalizeBlocksState(editor, editor.children);
       if (normalizedValue && normalizedEditorState && JSON.stringify(normalizedEditorState) !== JSON.stringify(normalizedValue)) {
-        slate.Transforms.deselect(editor);
+        Transforms.deselect(editor);
       }
     }, [editor, value]);
-    const blocks = React__namespace.useMemo(
+    const blocks = React.useMemo(
       () => ({
         ...paragraphBlocks,
         ...headingBlocks,
@@ -6080,19 +6020,19 @@ const BlocksEditor = React__namespace.forwardRef(
       }),
       []
     );
-    return /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntime.jsx(designSystem.VisuallyHidden, { id: ariaDescriptionId, children: formatMessage({
-        id: index.getTranslation("components.Blocks.dnd.instruction"),
+    return /* @__PURE__ */ jsxs(Fragment, { children: [
+      /* @__PURE__ */ jsx(VisuallyHidden, { id: ariaDescriptionId, children: formatMessage({
+        id: getTranslation("components.Blocks.dnd.instruction"),
         defaultMessage: `To reorder blocks, press Command or Control along with Shift and the Up or Down arrow keys`
       }) }),
-      /* @__PURE__ */ jsxRuntime.jsx(designSystem.VisuallyHidden, { "aria-live": "assertive", children: liveText }),
-      /* @__PURE__ */ jsxRuntime.jsx(
-        slateReact.Slate,
+      /* @__PURE__ */ jsx(VisuallyHidden, { "aria-live": "assertive", children: liveText }),
+      /* @__PURE__ */ jsx(
+        Slate,
         {
           editor,
           initialValue: value?.length ? value : [{ type: "paragraph", children: [{ type: "text", text: "" }] }],
           onChange: handleSlateChange,
-          children: /* @__PURE__ */ jsxRuntime.jsx(
+          children: /* @__PURE__ */ jsx(
             BlocksEditorProvider,
             {
               blocks,
@@ -6101,7 +6041,7 @@ const BlocksEditor = React__namespace.forwardRef(
               name: name2,
               setLiveText,
               isExpandedMode,
-              children: /* @__PURE__ */ jsxRuntime.jsxs(
+              children: /* @__PURE__ */ jsxs(
                 EditorLayout$1,
                 {
                   error,
@@ -6109,22 +6049,22 @@ const BlocksEditor = React__namespace.forwardRef(
                   onToggleExpand: handleToggleExpand,
                   ariaDescriptionId,
                   children: [
-                    /* @__PURE__ */ jsxRuntime.jsx(BlocksToolbar, {}),
-                    /* @__PURE__ */ jsxRuntime.jsx(EditorDivider, { width: "100%" }),
-                    /* @__PURE__ */ jsxRuntime.jsx(BlocksContent, { ...contentProps }),
-                    !isExpandedMode && /* @__PURE__ */ jsxRuntime.jsx(
-                      designSystem.IconButton,
+                    /* @__PURE__ */ jsx(BlocksToolbar, {}),
+                    /* @__PURE__ */ jsx(EditorDivider, { width: "100%" }),
+                    /* @__PURE__ */ jsx(BlocksContent, { ...contentProps }),
+                    !isExpandedMode && /* @__PURE__ */ jsx(
+                      IconButton,
                       {
                         position: "absolute",
                         bottom: "1.2rem",
                         right: "1.2rem",
                         shadow: "filterShadow",
                         label: formatMessage({
-                          id: index.getTranslation("components.Blocks.expand"),
+                          id: getTranslation("components.Blocks.expand"),
                           defaultMessage: "Expand"
                         }),
                         onClick: handleToggleExpand,
-                        children: /* @__PURE__ */ jsxRuntime.jsx(Icons.Expand, {})
+                        children: /* @__PURE__ */ jsx(Expand, {})
                       }
                     )
                   ]
@@ -6138,13 +6078,13 @@ const BlocksEditor = React__namespace.forwardRef(
     ] });
   }
 );
-const BlocksInput = React__namespace.forwardRef(
+const BlocksInput = React.forwardRef(
   ({ label, name: name2, required = false, hint, labelAction, ...editorProps }, forwardedRef) => {
-    const id = React__namespace.useId();
-    const field = admin.useField(name2);
-    return /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Root, { id, name: name2, hint, error: field.error, required, children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { direction: "column", alignItems: "stretch", gap: 1, children: [
-      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Label, { action: labelAction, children: label }),
-      /* @__PURE__ */ jsxRuntime.jsx(
+    const id = React.useId();
+    const field = useField(name2);
+    return /* @__PURE__ */ jsx(Field.Root, { id, name: name2, hint, error: field.error, required, children: /* @__PURE__ */ jsxs(Flex, { direction: "column", alignItems: "stretch", gap: 1, children: [
+      /* @__PURE__ */ jsx(Field.Label, { action: labelAction, children: label }),
+      /* @__PURE__ */ jsx(
         BlocksEditor,
         {
           name: name2,
@@ -6156,17 +6096,17 @@ const BlocksInput = React__namespace.forwardRef(
           ...editorProps
         }
       ),
-      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Hint, {}),
-      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Error, {})
+      /* @__PURE__ */ jsx(Field.Hint, {}),
+      /* @__PURE__ */ jsx(Field.Error, {})
     ] }) });
   }
 );
-const MemoizedBlocksInput = React__namespace.memo(BlocksInput);
+const MemoizedBlocksInput = React.memo(BlocksInput);
 const Initializer = ({ disabled, name: name2, onClick }) => {
-  const { formatMessage } = reactIntl.useIntl();
-  const field = admin.useField(name2);
-  return /* @__PURE__ */ jsxRuntime.jsx(jsxRuntime.Fragment, { children: /* @__PURE__ */ jsxRuntime.jsx(
-    designSystem.Box,
+  const { formatMessage } = useIntl();
+  const field = useField(name2);
+  return /* @__PURE__ */ jsx(Fragment, { children: /* @__PURE__ */ jsx(
+    Box,
     {
       tag: "button",
       background: disabled ? "neutral150" : "neutral100",
@@ -6178,16 +6118,16 @@ const Initializer = ({ disabled, name: name2, onClick }) => {
       paddingBottom: 9,
       type: "button",
       style: { cursor: disabled ? "not-allowed" : "pointer" },
-      children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { direction: "column", gap: 2, children: [
-        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Flex, { justifyContent: "center", color: disabled ? "neutral500" : "primary600", children: /* @__PURE__ */ jsxRuntime.jsx(Icons.PlusCircle, { width: "3.2rem", height: "3.2rem" }) }),
-        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Flex, { justifyContent: "center", children: /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.Typography,
+      children: /* @__PURE__ */ jsxs(Flex, { direction: "column", gap: 2, children: [
+        /* @__PURE__ */ jsx(Flex, { justifyContent: "center", color: disabled ? "neutral500" : "primary600", children: /* @__PURE__ */ jsx(PlusCircle, { width: "3.2rem", height: "3.2rem" }) }),
+        /* @__PURE__ */ jsx(Flex, { justifyContent: "center", children: /* @__PURE__ */ jsx(
+          Typography,
           {
             textColor: disabled ? "neutral600" : "primary600",
             variant: "pi",
             fontWeight: "bold",
             children: formatMessage({
-              id: index.getTranslation("components.empty-repeatable"),
+              id: getTranslation("components.empty-repeatable"),
               defaultMessage: "No entry yet. Click to add one."
             })
           }
@@ -6202,14 +6142,14 @@ const NonRepeatableComponent = ({
   children,
   layout
 }) => {
-  const { formatMessage } = reactIntl.useIntl();
-  const { value } = admin.useField(name2);
+  const { formatMessage } = useIntl();
+  const { value } = useField(name2);
   const level = useComponent("NonRepeatableComponent", (state) => state.level);
   const isNested = level > 0;
   const { currentDocument } = useDocumentContext("NonRepeatableComponent");
-  const rulesEngine2 = admin.createRulesEngine();
-  return /* @__PURE__ */ jsxRuntime.jsx(ComponentProvider, { id: value?.id, uid: attribute.component, level: level + 1, type: "component", children: /* @__PURE__ */ jsxRuntime.jsx(
-    designSystem.Box,
+  const rulesEngine2 = createRulesEngine();
+  return /* @__PURE__ */ jsx(ComponentProvider, { id: value?.id, uid: attribute.component, level: level + 1, type: "component", children: /* @__PURE__ */ jsx(
+    Box,
     {
       background: "neutral100",
       paddingLeft: 6,
@@ -6218,7 +6158,7 @@ const NonRepeatableComponent = ({
       paddingBottom: 6,
       hasRadius: isNested,
       borderColor: isNested ? "neutral200" : void 0,
-      children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Flex, { direction: "column", alignItems: "stretch", gap: 6, children: layout.map((row, index2) => {
+      children: /* @__PURE__ */ jsx(Flex, { direction: "column", alignItems: "stretch", gap: 6, children: layout.map((row, index) => {
         const visibleFields = row.filter(({ ...field }) => {
           const condition = field.attribute.conditions?.visible;
           if (condition) {
@@ -6229,13 +6169,13 @@ const NonRepeatableComponent = ({
         if (visibleFields.length === 0) {
           return null;
         }
-        return /* @__PURE__ */ jsxRuntime.jsx(ResponsiveGridRoot, { gap: 4, children: visibleFields.map(({ size, ...field }) => {
+        return /* @__PURE__ */ jsx(ResponsiveGridRoot, { gap: 4, children: visibleFields.map(({ size, ...field }) => {
           const completeFieldName = `${name2}.${field.name}`;
           const translatedLabel = formatMessage({
             id: `content-manager.components.${attribute.component}.${field.name}`,
             defaultMessage: field.label
           });
-          return /* @__PURE__ */ jsxRuntime.jsx(
+          return /* @__PURE__ */ jsx(
             ResponsiveGridItem,
             {
               col: size,
@@ -6252,20 +6192,20 @@ const NonRepeatableComponent = ({
             },
             completeFieldName
           );
-        }) }, index2);
+        }) }, index);
       }) })
     }
   ) });
 };
 const usePrev = (value) => {
-  const ref = React.useRef();
-  React.useEffect(() => {
+  const ref = useRef();
+  useEffect(() => {
     ref.current = value;
   }, [value]);
   return ref.current;
 };
 function getIn(obj, key, def, pathStartIndex = 0) {
-  const path = toPath__default.default(key);
+  const path = toPath(key);
   while (obj && pathStartIndex < path.length) {
     obj = obj[path[pathStartIndex++]];
   }
@@ -6282,25 +6222,25 @@ const RepeatableComponent = ({
   children,
   layout
 }) => {
-  const { toggleNotification } = admin.useNotification();
-  const { formatMessage } = reactIntl.useIntl();
-  const { search: searchString } = reactRouterDom.useLocation();
-  const search = React__namespace.useMemo(() => new URLSearchParams(searchString), [searchString]);
+  const { toggleNotification } = useNotification();
+  const { formatMessage } = useIntl();
+  const { search: searchString } = useLocation();
+  const search = React.useMemo(() => new URLSearchParams(searchString), [searchString]);
   const { currentDocument } = useDocumentContext("RepeatableComponent");
   const components = currentDocument.components;
   const {
     value = [],
     error,
     rawError
-  } = admin.useField(name2);
-  const addFieldRow = admin.useForm("RepeatableComponent", (state) => state.addFieldRow);
-  const moveFieldRow = admin.useForm("RepeatableComponent", (state) => state.moveFieldRow);
-  const removeFieldRow = admin.useForm("RepeatableComponent", (state) => state.removeFieldRow);
+  } = useField(name2);
+  const addFieldRow = useForm("RepeatableComponent", (state) => state.addFieldRow);
+  const moveFieldRow = useForm("RepeatableComponent", (state) => state.moveFieldRow);
+  const removeFieldRow = useForm("RepeatableComponent", (state) => state.removeFieldRow);
   const { max = Infinity } = attribute;
-  const [collapseToOpen, setCollapseToOpen] = React__namespace.useState("");
-  const [liveText, setLiveText] = React__namespace.useState("");
-  const rulesEngine2 = admin.createRulesEngine();
-  React__namespace.useEffect(() => {
+  const [collapseToOpen, setCollapseToOpen] = React.useState("");
+  const [liveText, setLiveText] = React.useState("");
+  const rulesEngine2 = createRulesEngine();
+  React.useEffect(() => {
     const hasNestedErrors = rawError && Array.isArray(rawError) && rawError.length > 0;
     const hasNestedValue = value && Array.isArray(value) && value.length > 0;
     if (hasNestedErrors && hasNestedValue) {
@@ -6317,7 +6257,7 @@ const RepeatableComponent = ({
       }
     }
   }, [rawError, value]);
-  const componentTmpKeyWithFocussedField = React__namespace.useMemo(() => {
+  const componentTmpKeyWithFocussedField = React.useMemo(() => {
     if (search.has("field")) {
       const fieldParam = search.get("field");
       if (!fieldParam) {
@@ -6332,12 +6272,12 @@ const RepeatableComponent = ({
     return void 0;
   }, [search, name2, value]);
   const prevValue = usePrev(value);
-  React__namespace.useEffect(() => {
+  React.useEffect(() => {
     if (prevValue && prevValue.length < value.length) {
       setCollapseToOpen(value[value.length - 1].__temp_key__);
     }
   }, [value, prevValue]);
-  React__namespace.useEffect(() => {
+  React.useEffect(() => {
     if (typeof componentTmpKeyWithFocussedField === "string") {
       setCollapseToOpen(componentTmpKeyWithFocussedField);
     }
@@ -6355,7 +6295,7 @@ const RepeatableComponent = ({
       toggleNotification({
         type: "info",
         message: formatMessage({
-          id: index.getTranslation("components.notification.info.maximum-requirement")
+          id: getTranslation("components.notification.info.maximum-requirement")
         })
       });
     }
@@ -6364,7 +6304,7 @@ const RepeatableComponent = ({
     setLiveText(
       formatMessage(
         {
-          id: index.getTranslation("dnd.reorder"),
+          id: getTranslation("dnd.reorder"),
           defaultMessage: "{item}, moved. New position in list: {position}."
         },
         {
@@ -6378,60 +6318,60 @@ const RepeatableComponent = ({
   const handleValueChange = (key) => {
     setCollapseToOpen(key);
   };
-  const getItemPos = (index2) => `${index2 + 1} of ${value.length}`;
-  const handleCancel = (index$1) => {
+  const getItemPos = (index) => `${index + 1} of ${value.length}`;
+  const handleCancel = (index) => {
     setLiveText(
       formatMessage(
         {
-          id: index.getTranslation("dnd.cancel-item"),
+          id: getTranslation("dnd.cancel-item"),
           defaultMessage: "{item}, dropped. Re-order cancelled."
         },
         {
-          item: `${name2}.${index$1}`
+          item: `${name2}.${index}`
         }
       )
     );
   };
-  const handleGrabItem = (index$1) => {
+  const handleGrabItem = (index) => {
     setLiveText(
       formatMessage(
         {
-          id: index.getTranslation("dnd.grab-item"),
+          id: getTranslation("dnd.grab-item"),
           defaultMessage: `{item}, grabbed. Current position in list: {position}. Press up and down arrow to change position, Spacebar to drop, Escape to cancel.`
         },
         {
-          item: `${name2}.${index$1}`,
-          position: getItemPos(index$1)
+          item: `${name2}.${index}`,
+          position: getItemPos(index)
         }
       )
     );
   };
-  const handleDropItem = (index$1) => {
+  const handleDropItem = (index) => {
     setLiveText(
       formatMessage(
         {
-          id: index.getTranslation("dnd.drop-item"),
+          id: getTranslation("dnd.drop-item"),
           defaultMessage: `{item}, dropped. Final position in list: {position}.`
         },
         {
-          item: `${name2}.${index$1}`,
-          position: getItemPos(index$1)
+          item: `${name2}.${index}`,
+          position: getItemPos(index)
         }
       )
     );
   };
-  const ariaDescriptionId = React__namespace.useId();
+  const ariaDescriptionId = React.useId();
   const level = useComponent("RepeatableComponent", (state) => state.level);
   if (value.length === 0) {
-    return /* @__PURE__ */ jsxRuntime.jsx(Initializer, { disabled, name: name2, onClick: handleClick });
+    return /* @__PURE__ */ jsx(Initializer, { disabled, name: name2, onClick: handleClick });
   }
-  return /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Box, { hasRadius: true, children: [
-    /* @__PURE__ */ jsxRuntime.jsx(designSystem.VisuallyHidden, { id: ariaDescriptionId, children: formatMessage({
-      id: index.getTranslation("dnd.instructions"),
+  return /* @__PURE__ */ jsxs(Box, { hasRadius: true, children: [
+    /* @__PURE__ */ jsx(VisuallyHidden, { id: ariaDescriptionId, children: formatMessage({
+      id: getTranslation("dnd.instructions"),
       defaultMessage: `Press spacebar to grab and re-order`
     }) }),
-    /* @__PURE__ */ jsxRuntime.jsx(designSystem.VisuallyHidden, { "aria-live": "assertive", children: liveText }),
-    /* @__PURE__ */ jsxRuntime.jsxs(
+    /* @__PURE__ */ jsx(VisuallyHidden, { "aria-live": "assertive", children: liveText }),
+    /* @__PURE__ */ jsxs(
       AccordionRoot,
       {
         $error: error,
@@ -6439,26 +6379,26 @@ const RepeatableComponent = ({
         onValueChange: handleValueChange,
         "aria-describedby": ariaDescriptionId,
         children: [
-          value.map(({ __temp_key__: key, id, ...currentComponentValues }, index2) => {
-            const nameWithIndex = `${name2}.${index2}`;
-            return /* @__PURE__ */ jsxRuntime.jsx(
+          value.map(({ __temp_key__: key, id, ...currentComponentValues }, index) => {
+            const nameWithIndex = `${name2}.${index}`;
+            return /* @__PURE__ */ jsx(
               ComponentProvider,
               {
                 id,
                 uid: attribute.component,
                 level: level + 1,
                 type: "repeatable",
-                children: /* @__PURE__ */ jsxRuntime.jsx(
+                children: /* @__PURE__ */ jsx(
                   Component,
                   {
                     disabled,
                     name: nameWithIndex,
                     attribute,
-                    index: index2,
+                    index,
                     mainField,
                     onMoveItem: handleMoveComponentField,
                     onDeleteComponent: () => {
-                      removeFieldRow(name2, index2);
+                      removeFieldRow(name2, index);
                       toggleCollapses();
                     },
                     toggleCollapses,
@@ -6466,7 +6406,7 @@ const RepeatableComponent = ({
                     onDropItem: handleDropItem,
                     onGrabItem: handleGrabItem,
                     __temp_key__: key,
-                    children: layout.map((row, index22) => {
+                    children: layout.map((row, index2) => {
                       const visibleFields = row.filter(({ ...field }) => {
                         const condition = field.attribute.conditions?.visible;
                         if (condition) {
@@ -6477,13 +6417,13 @@ const RepeatableComponent = ({
                       if (visibleFields.length === 0) {
                         return null;
                       }
-                      return /* @__PURE__ */ jsxRuntime.jsx(ResponsiveGridRoot, { gap: 4, children: visibleFields.map(({ size, ...field }) => {
+                      return /* @__PURE__ */ jsx(ResponsiveGridRoot, { gap: 4, children: visibleFields.map(({ size, ...field }) => {
                         const completeFieldName = `${nameWithIndex}.${field.name}`;
                         const translatedLabel = formatMessage({
                           id: `content-manager.components.${attribute.component}.${field.name}`,
                           defaultMessage: field.label
                         });
-                        return /* @__PURE__ */ jsxRuntime.jsx(
+                        return /* @__PURE__ */ jsx(
                           ResponsiveGridItem,
                           {
                             col: size,
@@ -6500,7 +6440,7 @@ const RepeatableComponent = ({
                           },
                           completeFieldName
                         );
-                      }) }, index22);
+                      }) }, index2);
                     })
                   }
                 )
@@ -6508,8 +6448,8 @@ const RepeatableComponent = ({
               key
             );
           }),
-          /* @__PURE__ */ jsxRuntime.jsx(TextButtonCustom, { disabled, onClick: handleClick, startIcon: /* @__PURE__ */ jsxRuntime.jsx(Icons.Plus, {}), children: formatMessage({
-            id: index.getTranslation("containers.EditView.add.new-entry"),
+          /* @__PURE__ */ jsx(TextButtonCustom, { disabled, onClick: handleClick, startIcon: /* @__PURE__ */ jsx(Plus, {}), children: formatMessage({
+            id: getTranslation("containers.EditView.add.new-entry"),
             defaultMessage: "Add an entry"
           }) })
         ]
@@ -6517,11 +6457,11 @@ const RepeatableComponent = ({
     )
   ] });
 };
-const AccordionRoot = styledComponents.styled(designSystem.Accordion.Root)`
+const AccordionRoot = styled(Accordion.Root)`
   border: 1px solid
     ${({ theme, $error }) => $error ? theme.colors.danger600 : theme.colors.neutral200};
 `;
-const TextButtonCustom = styledComponents.styled(designSystem.TextButton)`
+const TextButtonCustom = styled(TextButton)`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -6549,7 +6489,7 @@ const TextButtonCustom = styledComponents.styled(designSystem.TextButton)`
 `;
 const Component = ({
   disabled,
-  index: index$1,
+  index,
   name: name2,
   mainField = {
     name: "id",
@@ -6561,18 +6501,18 @@ const Component = ({
   __temp_key__,
   ...dragProps
 }) => {
-  const { formatMessage } = reactIntl.useIntl();
-  const isDesktop = admin.useIsDesktop();
-  const displayValue = admin.useForm("RepeatableComponent", (state) => {
+  const { formatMessage } = useIntl();
+  const isDesktop = useIsDesktop();
+  const displayValue = useForm("RepeatableComponent", (state) => {
     return getIn(state.values, [...name2.split("."), mainField.name]);
   });
-  const accordionRef = React__namespace.useRef(null);
+  const accordionRef = React.useRef(null);
   const componentKey = name2.split(".").slice(0, -1).join(".");
   const [{ handlerId, isDragging, handleKeyDown }, boxRef, dropRef, dragRef, dragPreviewRef] = useDragAndDrop(!disabled, {
     type: `${ItemTypes.COMPONENT}_${componentKey}`,
-    index: index$1,
+    index,
     item: {
-      index: index$1,
+      index,
       displayedValue: displayValue
     },
     onStart() {
@@ -6580,33 +6520,33 @@ const Component = ({
     },
     ...dragProps
   });
-  React__namespace.useEffect(() => {
-    dragPreviewRef(reactDndHtml5Backend.getEmptyImage(), { captureDraggingState: false });
-  }, [dragPreviewRef, index$1]);
-  const composedAccordionRefs = designSystem.useComposedRefs(accordionRef, dragRef);
-  const composedBoxRefs = designSystem.useComposedRefs(
+  React.useEffect(() => {
+    dragPreviewRef(getEmptyImage(), { captureDraggingState: false });
+  }, [dragPreviewRef, index]);
+  const composedAccordionRefs = useComposedRefs(accordionRef, dragRef);
+  const composedBoxRefs = useComposedRefs(
     boxRef,
     dropRef
   );
-  return /* @__PURE__ */ jsxRuntime.jsx(jsxRuntime.Fragment, { children: isDragging ? /* @__PURE__ */ jsxRuntime.jsx(Preview$1, {}) : /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Accordion.Item, { ref: composedBoxRefs, value: __temp_key__, children: [
-    /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Accordion.Header, { children: [
-      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Accordion.Trigger, { children: displayValue }),
-      /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Accordion.Actions, { children: [
-        /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.IconButton,
+  return /* @__PURE__ */ jsx(Fragment, { children: isDragging ? /* @__PURE__ */ jsx(Preview$1, {}) : /* @__PURE__ */ jsxs(Accordion.Item, { ref: composedBoxRefs, value: __temp_key__, children: [
+    /* @__PURE__ */ jsxs(Accordion.Header, { children: [
+      /* @__PURE__ */ jsx(Accordion.Trigger, { children: displayValue }),
+      /* @__PURE__ */ jsxs(Accordion.Actions, { children: [
+        /* @__PURE__ */ jsx(
+          IconButton,
           {
             disabled,
             variant: "ghost",
             onClick: onDeleteComponent,
             label: formatMessage({
-              id: index.getTranslation("containers.Edit.delete"),
+              id: getTranslation("containers.Edit.delete"),
               defaultMessage: "Delete"
             }),
-            children: /* @__PURE__ */ jsxRuntime.jsx(Icons.Trash, {})
+            children: /* @__PURE__ */ jsx(Trash, {})
           }
         ),
-        isDesktop && /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.IconButton,
+        isDesktop && /* @__PURE__ */ jsx(
+          IconButton,
           {
             disabled,
             ref: composedAccordionRefs,
@@ -6614,17 +6554,17 @@ const Component = ({
             onClick: (e) => e.stopPropagation(),
             "data-handler-id": handlerId,
             label: formatMessage({
-              id: index.getTranslation("components.DragHandle-label"),
+              id: getTranslation("components.DragHandle-label"),
               defaultMessage: "Drag"
             }),
             onKeyDown: handleKeyDown,
-            children: /* @__PURE__ */ jsxRuntime.jsx(Icons.Drag, {})
+            children: /* @__PURE__ */ jsx(Drag, {})
           }
         )
       ] })
     ] }),
-    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Accordion.Content, { children: /* @__PURE__ */ jsxRuntime.jsx(
-      designSystem.Flex,
+    /* @__PURE__ */ jsx(Accordion.Content, { children: /* @__PURE__ */ jsx(
+      Flex,
       {
         direction: "column",
         alignItems: "stretch",
@@ -6637,9 +6577,9 @@ const Component = ({
   ] }) });
 };
 const Preview$1 = () => {
-  return /* @__PURE__ */ jsxRuntime.jsx(StyledSpan, { tag: "span", padding: 6, background: "primary100" });
+  return /* @__PURE__ */ jsx(StyledSpan, { tag: "span", padding: 6, background: "primary100" });
 };
-const StyledSpan = styledComponents.styled(designSystem.Box)`
+const StyledSpan = styled(Box)`
   display: block;
   outline: 1px dashed ${({ theme }) => theme.colors.primary500};
   outline-offset: -1px;
@@ -6653,8 +6593,8 @@ const ComponentInput = ({
   labelAction,
   ...props
 }) => {
-  const { formatMessage } = reactIntl.useIntl();
-  const field = admin.useField(name2);
+  const { formatMessage } = useIntl();
+  const field = useField(name2);
   const showResetComponent = !attribute.repeatable && field.value && !disabled;
   const {
     currentDocument: { components }
@@ -6665,38 +6605,38 @@ const ComponentInput = ({
     const data = transformDocument(schema, components)(form);
     field.onChange(name2, data);
   };
-  return /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Field.Root, { error: field.error, required, children: [
-    /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { justifyContent: "space-between", children: [
-      /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Field.Label, { action: labelAction, children: [
+  return /* @__PURE__ */ jsxs(Field.Root, { error: field.error, required, children: [
+    /* @__PURE__ */ jsxs(Flex, { justifyContent: "space-between", children: [
+      /* @__PURE__ */ jsxs(Field.Label, { action: labelAction, children: [
         label,
-        attribute.repeatable && /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
+        attribute.repeatable && /* @__PURE__ */ jsxs(Fragment, { children: [
           " (",
           Array.isArray(field.value) ? field.value.length : 0,
           ")"
         ] })
       ] }),
-      showResetComponent && /* @__PURE__ */ jsxRuntime.jsx(
-        designSystem.IconButton,
+      showResetComponent && /* @__PURE__ */ jsx(
+        IconButton,
         {
           label: formatMessage({
-            id: index.getTranslation("components.reset-entry"),
+            id: getTranslation("components.reset-entry"),
             defaultMessage: "Reset Entry"
           }),
           variant: "ghost",
           onClick: () => {
             field.onChange(name2, null);
           },
-          children: /* @__PURE__ */ jsxRuntime.jsx(Icons.Trash, {})
+          children: /* @__PURE__ */ jsx(Trash, {})
         }
       )
     ] }),
-    !attribute.repeatable && !field.value && /* @__PURE__ */ jsxRuntime.jsx(Initializer, { disabled, name: name2, onClick: handleInitialisationClick }),
-    !attribute.repeatable && field.value ? /* @__PURE__ */ jsxRuntime.jsx(NonRepeatableComponent, { attribute, name: name2, disabled, ...props, children: props.children }) : null,
-    attribute.repeatable && /* @__PURE__ */ jsxRuntime.jsx(RepeatableComponent, { attribute, name: name2, disabled, ...props, children: props.children }),
-    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Error, {})
+    !attribute.repeatable && !field.value && /* @__PURE__ */ jsx(Initializer, { disabled, name: name2, onClick: handleInitialisationClick }),
+    !attribute.repeatable && field.value ? /* @__PURE__ */ jsx(NonRepeatableComponent, { attribute, name: name2, disabled, ...props, children: props.children }) : null,
+    attribute.repeatable && /* @__PURE__ */ jsx(RepeatableComponent, { attribute, name: name2, disabled, ...props, children: props.children }),
+    /* @__PURE__ */ jsx(Field.Error, {})
   ] });
 };
-const MemoizedComponentInput = React__namespace.memo(ComponentInput);
+const MemoizedComponentInput = React.memo(ComponentInput);
 const AddComponentButton = ({
   hasError,
   isDisabled,
@@ -6704,7 +6644,7 @@ const AddComponentButton = ({
   children,
   onClick
 }) => {
-  return /* @__PURE__ */ jsxRuntime.jsx(
+  return /* @__PURE__ */ jsx(
     StyledButton,
     {
       type: "button",
@@ -6713,10 +6653,10 @@ const AddComponentButton = ({
       background: "neutral0",
       style: { cursor: isDisabled ? "not-allowed" : "pointer" },
       variant: "tertiary",
-      children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { tag: "span", gap: 2, children: [
-        /* @__PURE__ */ jsxRuntime.jsx(StyledAddIcon, { "aria-hidden": true, $isOpen: isOpen, $hasError: hasError && !isOpen }),
-        /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.Typography,
+      children: /* @__PURE__ */ jsxs(Flex, { tag: "span", gap: 2, children: [
+        /* @__PURE__ */ jsx(StyledAddIcon, { "aria-hidden": true, $isOpen: isOpen, $hasError: hasError && !isOpen }),
+        /* @__PURE__ */ jsx(
+          Typography,
           {
             variant: "pi",
             fontWeight: "bold",
@@ -6728,7 +6668,7 @@ const AddComponentButton = ({
     }
   );
 };
-const StyledAddIcon = styledComponents.styled(Icons.PlusCircle)`
+const StyledAddIcon = styled(PlusCircle)`
   height: ${({ theme }) => theme.spaces[6]};
   width: ${({ theme }) => theme.spaces[6]};
   transform: ${({ $isOpen }) => $isOpen ? "rotate(45deg)" : "rotate(0deg)"};
@@ -6740,7 +6680,7 @@ const StyledAddIcon = styledComponents.styled(Icons.PlusCircle)`
     fill: ${({ theme, $hasError }) => $hasError ? theme.colors.danger600 : theme.colors.neutral500};
   }
 `;
-const StyledButton = styledComponents.styled(designSystem.Button)`
+const StyledButton = styled(Button)`
   padding-left: ${({ theme }) => theme.spaces[3]};
   border-radius: 26px;
   box-shadow: ${({ theme }) => theme.shadows.filterShadow};
@@ -6752,8 +6692,8 @@ const ComponentIcon = ({
   ...props
 }) => {
   const Icon = COMPONENT_ICONS[icon] || COMPONENT_ICONS.dashboard;
-  return /* @__PURE__ */ jsxRuntime.jsx(
-    designSystem.Flex,
+  return /* @__PURE__ */ jsx(
+    Flex,
     {
       alignItems: "center",
       background: showBackground ? "neutral200" : void 0,
@@ -6763,139 +6703,139 @@ const ComponentIcon = ({
       color: "neutral600",
       borderRadius: showBackground ? "50%" : 0,
       ...props,
-      children: /* @__PURE__ */ jsxRuntime.jsx(Icon, { height: "2rem", width: "2rem" })
+      children: /* @__PURE__ */ jsx(Icon, { height: "2rem", width: "2rem" })
     }
   );
 };
 const COMPONENT_ICONS = {
-  alien: Icons__namespace.Alien,
-  apps: Icons__namespace.GridNine,
-  archive: Icons__namespace.Archive,
-  arrowDown: Icons__namespace.ArrowDown,
-  arrowLeft: Icons__namespace.ArrowLeft,
-  arrowRight: Icons__namespace.ArrowRight,
-  arrowUp: Icons__namespace.ArrowUp,
-  attachment: Icons__namespace.Paperclip,
-  bell: Icons__namespace.Bell,
-  bold: Icons__namespace.Bold,
-  book: Icons__namespace.Book,
-  briefcase: Icons__namespace.Briefcase,
-  brush: Icons__namespace.PaintBrush,
-  bulletList: Icons__namespace.BulletList,
-  calendar: Icons__namespace.Calendar,
-  car: Icons__namespace.Car,
-  cast: Icons__namespace.Cast,
-  chartBubble: Icons__namespace.ChartBubble,
-  chartCircle: Icons__namespace.ChartCircle,
-  chartPie: Icons__namespace.ChartPie,
-  check: Icons__namespace.Check,
-  clock: Icons__namespace.Clock,
-  cloud: Icons__namespace.Cloud,
-  code: Icons__namespace.Code,
-  cog: Icons__namespace.Cog,
-  collapse: Icons__namespace.Collapse,
-  command: Icons__namespace.Command,
-  connector: Icons__namespace.Faders,
-  crop: Icons__namespace.Crop,
-  crown: Icons__namespace.Crown,
-  cup: Icons__namespace.Coffee,
-  cursor: Icons__namespace.Cursor,
-  dashboard: Icons__namespace.SquaresFour,
-  database: Icons__namespace.Database,
-  discuss: Icons__namespace.Discuss,
-  doctor: Icons__namespace.Stethoscope,
-  earth: Icons__namespace.Earth,
-  emotionHappy: Icons__namespace.EmotionHappy,
-  emotionUnhappy: Icons__namespace.EmotionUnhappy,
-  envelop: Icons__namespace.Mail,
-  exit: Icons__namespace.SignOut,
-  expand: Icons__namespace.Expand,
-  eye: Icons__namespace.Eye,
-  feather: Icons__namespace.Feather,
-  file: Icons__namespace.File,
-  fileError: Icons__namespace.FileError,
-  filePdf: Icons__namespace.FilePdf,
-  fileXls: Icons__namespace.FileXls,
-  fileZip: Icons__namespace.FileZip,
-  fileCsv: Icons__namespace.FileCsv,
-  filter: Icons__namespace.Filter,
-  folder: Icons__namespace.Folder,
-  gate: Icons__namespace.CastleTurret,
-  gift: Icons__namespace.Gift,
-  globe: Icons__namespace.Globe,
-  grid: Icons__namespace.GridFour,
-  handHeart: Icons__namespace.HandHeart,
-  hashtag: Icons__namespace.Hashtag,
-  headphone: Icons__namespace.Headphones,
-  heart: Icons__namespace.Heart,
-  house: Icons__namespace.House,
-  information: Icons__namespace.Information,
-  italic: Icons__namespace.Italic,
-  key: Icons__namespace.Key,
-  landscape: Icons__namespace.Images,
-  layer: Icons__namespace.ListPlus,
-  layout: Icons__namespace.Layout,
-  lightbulb: Icons__namespace.Lightbulb,
-  link: Icons__namespace.Link,
-  lock: Icons__namespace.Lock,
-  magic: Icons__namespace.Magic,
-  manyToMany: Icons__namespace.ManyToMany,
-  manyToOne: Icons__namespace.ManyToOne,
-  manyWays: Icons__namespace.ManyWays,
-  medium: Symbols__namespace.Medium,
-  message: Icons__namespace.Message,
-  microphone: Icons__namespace.Microphone,
-  monitor: Icons__namespace.Monitor,
-  moon: Icons__namespace.Moon,
-  music: Icons__namespace.MusicNotes,
-  oneToMany: Icons__namespace.OneToMany,
-  oneToOne: Icons__namespace.OneToOne,
-  oneWay: Icons__namespace.OneWay,
-  paint: Icons__namespace.PaintBrush,
-  paintBrush: Icons__namespace.PaintBrush,
-  paperPlane: Icons__namespace.PaperPlane,
-  pencil: Icons__namespace.Pencil,
-  phone: Icons__namespace.Phone,
-  picture: Icons__namespace.Image,
-  pin: Icons__namespace.Pin,
-  pinMap: Icons__namespace.PinMap,
-  plane: Icons__namespace.Plane,
-  play: Icons__namespace.Play,
-  plus: Icons__namespace.Plus,
-  priceTag: Icons__namespace.PriceTag,
-  puzzle: Icons__namespace.PuzzlePiece,
-  question: Icons__namespace.Question,
-  quote: Icons__namespace.Quotes,
-  refresh: Icons__namespace.ArrowClockwise,
-  restaurant: Icons__namespace.Restaurant,
-  rocket: Icons__namespace.Rocket,
-  rotate: Icons__namespace.ArrowsCounterClockwise,
-  scissors: Icons__namespace.Scissors,
-  search: Icons__namespace.Search,
-  seed: Icons__namespace.Plant,
-  server: Icons__namespace.Server,
-  shield: Icons__namespace.Shield,
-  shirt: Icons__namespace.Shirt,
-  shoppingCart: Icons__namespace.ShoppingCart,
-  slideshow: Icons__namespace.PresentationChart,
-  stack: Icons__namespace.Stack,
-  star: Icons__namespace.Star,
-  store: Icons__namespace.Store,
-  strikeThrough: Icons__namespace.StrikeThrough,
-  sun: Icons__namespace.Sun,
-  television: Icons__namespace.Television,
-  thumbDown: Icons__namespace.ThumbDown,
-  thumbUp: Icons__namespace.ThumbUp,
-  train: Icons__namespace.Train,
-  twitter: Symbols__namespace.X,
-  typhoon: Icons__namespace.Typhoon,
-  underline: Icons__namespace.Underline,
-  user: Icons__namespace.User,
-  volumeMute: Icons__namespace.VolumeMute,
-  volumeUp: Icons__namespace.VolumeUp,
-  walk: Icons__namespace.Walk,
-  wheelchair: Icons__namespace.Wheelchair,
-  write: Icons__namespace.Feather
+  alien: Icons.Alien,
+  apps: Icons.GridNine,
+  archive: Icons.Archive,
+  arrowDown: Icons.ArrowDown,
+  arrowLeft: Icons.ArrowLeft,
+  arrowRight: Icons.ArrowRight,
+  arrowUp: Icons.ArrowUp,
+  attachment: Icons.Paperclip,
+  bell: Icons.Bell,
+  bold: Icons.Bold,
+  book: Icons.Book,
+  briefcase: Icons.Briefcase,
+  brush: Icons.PaintBrush,
+  bulletList: Icons.BulletList,
+  calendar: Icons.Calendar,
+  car: Icons.Car,
+  cast: Icons.Cast,
+  chartBubble: Icons.ChartBubble,
+  chartCircle: Icons.ChartCircle,
+  chartPie: Icons.ChartPie,
+  check: Icons.Check,
+  clock: Icons.Clock,
+  cloud: Icons.Cloud,
+  code: Icons.Code,
+  cog: Icons.Cog,
+  collapse: Icons.Collapse,
+  command: Icons.Command,
+  connector: Icons.Faders,
+  crop: Icons.Crop,
+  crown: Icons.Crown,
+  cup: Icons.Coffee,
+  cursor: Icons.Cursor,
+  dashboard: Icons.SquaresFour,
+  database: Icons.Database,
+  discuss: Icons.Discuss,
+  doctor: Icons.Stethoscope,
+  earth: Icons.Earth,
+  emotionHappy: Icons.EmotionHappy,
+  emotionUnhappy: Icons.EmotionUnhappy,
+  envelop: Icons.Mail,
+  exit: Icons.SignOut,
+  expand: Icons.Expand,
+  eye: Icons.Eye,
+  feather: Icons.Feather,
+  file: Icons.File,
+  fileError: Icons.FileError,
+  filePdf: Icons.FilePdf,
+  fileXls: Icons.FileXls,
+  fileZip: Icons.FileZip,
+  fileCsv: Icons.FileCsv,
+  filter: Icons.Filter,
+  folder: Icons.Folder,
+  gate: Icons.CastleTurret,
+  gift: Icons.Gift,
+  globe: Icons.Globe,
+  grid: Icons.GridFour,
+  handHeart: Icons.HandHeart,
+  hashtag: Icons.Hashtag,
+  headphone: Icons.Headphones,
+  heart: Icons.Heart,
+  house: Icons.House,
+  information: Icons.Information,
+  italic: Icons.Italic,
+  key: Icons.Key,
+  landscape: Icons.Images,
+  layer: Icons.ListPlus,
+  layout: Icons.Layout,
+  lightbulb: Icons.Lightbulb,
+  link: Icons.Link,
+  lock: Icons.Lock,
+  magic: Icons.Magic,
+  manyToMany: Icons.ManyToMany,
+  manyToOne: Icons.ManyToOne,
+  manyWays: Icons.ManyWays,
+  medium: Symbols.Medium,
+  message: Icons.Message,
+  microphone: Icons.Microphone,
+  monitor: Icons.Monitor,
+  moon: Icons.Moon,
+  music: Icons.MusicNotes,
+  oneToMany: Icons.OneToMany,
+  oneToOne: Icons.OneToOne,
+  oneWay: Icons.OneWay,
+  paint: Icons.PaintBrush,
+  paintBrush: Icons.PaintBrush,
+  paperPlane: Icons.PaperPlane,
+  pencil: Icons.Pencil,
+  phone: Icons.Phone,
+  picture: Icons.Image,
+  pin: Icons.Pin,
+  pinMap: Icons.PinMap,
+  plane: Icons.Plane,
+  play: Icons.Play,
+  plus: Icons.Plus,
+  priceTag: Icons.PriceTag,
+  puzzle: Icons.PuzzlePiece,
+  question: Icons.Question,
+  quote: Icons.Quotes,
+  refresh: Icons.ArrowClockwise,
+  restaurant: Icons.Restaurant,
+  rocket: Icons.Rocket,
+  rotate: Icons.ArrowsCounterClockwise,
+  scissors: Icons.Scissors,
+  search: Icons.Search,
+  seed: Icons.Plant,
+  server: Icons.Server,
+  shield: Icons.Shield,
+  shirt: Icons.Shirt,
+  shoppingCart: Icons.ShoppingCart,
+  slideshow: Icons.PresentationChart,
+  stack: Icons.Stack,
+  star: Icons.Star,
+  store: Icons.Store,
+  strikeThrough: Icons.StrikeThrough,
+  sun: Icons.Sun,
+  television: Icons.Television,
+  thumbDown: Icons.ThumbDown,
+  thumbUp: Icons.ThumbUp,
+  train: Icons.Train,
+  twitter: Symbols.X,
+  typhoon: Icons.Typhoon,
+  underline: Icons.Underline,
+  user: Icons.User,
+  volumeMute: Icons.VolumeMute,
+  volumeUp: Icons.VolumeUp,
+  walk: Icons.Walk,
+  wheelchair: Icons.Wheelchair,
+  write: Icons.Feather
 };
 const ComponentCategory = ({
   category,
@@ -6903,10 +6843,10 @@ const ComponentCategory = ({
   variant = "primary",
   onAddComponent
 }) => {
-  const { formatMessage } = reactIntl.useIntl();
-  return /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Accordion.Item, { value: category, children: [
-    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Accordion.Header, { variant, children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Accordion.Trigger, { children: formatMessage({ id: category, defaultMessage: category }) }) }),
-    /* @__PURE__ */ jsxRuntime.jsx(ResponsiveAccordionContent, { children: /* @__PURE__ */ jsxRuntime.jsx(Grid, { paddingTop: 4, paddingBottom: 4, paddingLeft: 3, paddingRight: 3, children: components.map(({ uid, displayName, icon }) => /* @__PURE__ */ jsxRuntime.jsx(
+  const { formatMessage } = useIntl();
+  return /* @__PURE__ */ jsxs(Accordion.Item, { value: category, children: [
+    /* @__PURE__ */ jsx(Accordion.Header, { variant, children: /* @__PURE__ */ jsx(Accordion.Trigger, { children: formatMessage({ id: category, defaultMessage: category }) }) }),
+    /* @__PURE__ */ jsx(ResponsiveAccordionContent, { children: /* @__PURE__ */ jsx(Grid, { paddingTop: 4, paddingBottom: 4, paddingLeft: 3, paddingRight: 3, children: components.map(({ uid, displayName, icon }) => /* @__PURE__ */ jsx(
       ComponentBox,
       {
         tag: "button",
@@ -6918,19 +6858,19 @@ const ComponentCategory = ({
         height: "8.4rem",
         shrink: 0,
         borderColor: "neutral200",
-        children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { direction: "column", gap: 1, alignItems: "center", justifyContent: "center", children: [
-          /* @__PURE__ */ jsxRuntime.jsx(ComponentIcon, { color: "currentColor", background: "primary200", icon }),
-          /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { variant: "pi", fontWeight: "bold", children: displayName })
+        children: /* @__PURE__ */ jsxs(Flex, { direction: "column", gap: 1, alignItems: "center", justifyContent: "center", children: [
+          /* @__PURE__ */ jsx(ComponentIcon, { color: "currentColor", background: "primary200", icon }),
+          /* @__PURE__ */ jsx(Typography, { variant: "pi", fontWeight: "bold", children: displayName })
         ] })
       },
       uid
     )) }) })
   ] });
 };
-const ResponsiveAccordionContent = styledComponents.styled(designSystem.Accordion.Content)`
+const ResponsiveAccordionContent = styled(Accordion.Content)`
   container-type: inline-size;
 `;
-const Grid = process.env.NODE_ENV !== "test" ? styledComponents.styled(designSystem.Box)`
+const Grid = process.env.NODE_ENV !== "test" ? styled(Box)`
         display: grid;
         grid-template-columns: repeat(auto-fill, 100%);
         grid-gap: 4px;
@@ -6938,12 +6878,12 @@ const Grid = process.env.NODE_ENV !== "test" ? styledComponents.styled(designSys
         ${({ theme }) => theme.breakpoints.medium} {
           grid-template-columns: repeat(auto-fill, 14rem);
         }
-      ` : styledComponents.styled(designSystem.Box)`
+      ` : styled(Box)`
         display: grid;
         grid-template-columns: repeat(auto-fill, 100%);
         grid-gap: 4px;
       `;
-const ComponentBox = styledComponents.styled(designSystem.Flex)`
+const ComponentBox = styled(Flex)`
   color: ${({ theme }) => theme.colors.neutral600};
   cursor: pointer;
 
@@ -6963,15 +6903,15 @@ const ComponentPicker = ({
   isOpen,
   onClickAddComponent
 }) => {
-  const { formatMessage } = reactIntl.useIntl();
+  const { formatMessage } = useIntl();
   const handleAddComponentToDz = (componentUid) => () => {
     onClickAddComponent(componentUid);
   };
   if (!isOpen) {
     return null;
   }
-  return /* @__PURE__ */ jsxRuntime.jsxs(
-    designSystem.Box,
+  return /* @__PURE__ */ jsxs(
+    Box,
     {
       paddingTop: 6,
       paddingBottom: 6,
@@ -6982,17 +6922,17 @@ const ComponentPicker = ({
       borderColor: "neutral150",
       hasRadius: true,
       children: [
-        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Flex, { justifyContent: "center", children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { fontWeight: "bold", textColor: "neutral600", children: formatMessage({
-          id: index.getTranslation("components.DynamicZone.ComponentPicker-label"),
+        /* @__PURE__ */ jsx(Flex, { justifyContent: "center", children: /* @__PURE__ */ jsx(Typography, { fontWeight: "bold", textColor: "neutral600", children: formatMessage({
+          id: getTranslation("components.DynamicZone.ComponentPicker-label"),
           defaultMessage: "Pick one component"
         }) }) }),
-        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Box, { paddingTop: 2, children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Accordion.Root, { defaultValue: Object.keys(dynamicComponentsByCategory)[0], children: Object.entries(dynamicComponentsByCategory).map(([category, components], index2) => /* @__PURE__ */ jsxRuntime.jsx(
+        /* @__PURE__ */ jsx(Box, { paddingTop: 2, children: /* @__PURE__ */ jsx(Accordion.Root, { defaultValue: Object.keys(dynamicComponentsByCategory)[0], children: Object.entries(dynamicComponentsByCategory).map(([category, components], index) => /* @__PURE__ */ jsx(
           ComponentCategory,
           {
             category,
             components,
             onAddComponent: handleAddComponentToDz,
-            variant: index2 % 2 === 1 ? "primary" : "secondary"
+            variant: index % 2 === 1 ? "primary" : "secondary"
           },
           category
         )) }) })
@@ -7003,7 +6943,7 @@ const ComponentPicker = ({
 const DynamicComponent = ({
   componentUid,
   disabled,
-  index: index$1,
+  index,
   name: name2,
   onRemoveComponentClick,
   onMoveComponent,
@@ -7014,22 +6954,22 @@ const DynamicComponent = ({
   onAddComponent,
   children
 }) => {
-  const { formatMessage } = reactIntl.useIntl();
-  const formValues = admin.useForm("DynamicComponent", (state) => state.values);
+  const { formatMessage } = useIntl();
+  const formValues = useForm("DynamicComponent", (state) => state.values);
   const { currentDocument, currentDocumentMeta } = useDocumentContext("DynamicComponent");
-  const rulesEngine2 = admin.createRulesEngine();
-  const isDesktop = admin.useIsDesktop();
+  const rulesEngine2 = createRulesEngine();
+  const isDesktop = useIsDesktop();
   const {
     edit: { components }
   } = useDocumentLayout(currentDocumentMeta.model);
-  const title = React__namespace.useMemo(() => {
+  const title = React.useMemo(() => {
     const { mainField } = components[componentUid]?.settings ?? { mainField: "id" };
-    const mainFieldValue = getIn(formValues, `${name2}.${index$1}.${mainField}`);
+    const mainFieldValue = getIn(formValues, `${name2}.${index}.${mainField}`);
     const displayedValue = mainField === "id" || !mainFieldValue ? "" : String(mainFieldValue).trim();
     const mainValue = displayedValue.length > 0 ? `- ${displayedValue}` : displayedValue;
     return mainValue;
-  }, [componentUid, components, formValues, name2, index$1]);
-  const { icon, displayName } = React__namespace.useMemo(() => {
+  }, [componentUid, components, formValues, name2, index]);
+  const { icon, displayName } = React.useMemo(() => {
     const [category] = componentUid.split(".");
     const { icon: icon2, displayName: displayName2 } = (dynamicComponentsByCategory[category] ?? []).find(
       (component) => component.uid === componentUid
@@ -7038,9 +6978,9 @@ const DynamicComponent = ({
   }, [componentUid, dynamicComponentsByCategory]);
   const [{ handlerId, isDragging, handleKeyDown }, boxRef, dropRef, dragRef, dragPreviewRef] = useDragAndDrop(!disabled, {
     type: `${ItemTypes.DYNAMIC_ZONE}_${name2}`,
-    index: index$1,
+    index,
     item: {
-      index: index$1,
+      index,
       displayedValue: `${displayName} ${title}`,
       icon
     },
@@ -7049,101 +6989,101 @@ const DynamicComponent = ({
     onGrabItem,
     onCancel
   });
-  React__namespace.useEffect(() => {
-    dragPreviewRef(reactDndHtml5Backend.getEmptyImage(), { captureDraggingState: false });
-  }, [dragPreviewRef, index$1]);
-  const accordionValue = React__namespace.useId();
-  const { value = [], rawError } = admin.useField(`${name2}.${index$1}`);
-  const [collapseToOpen, setCollapseToOpen] = React__namespace.useState("");
-  React__namespace.useEffect(() => {
+  React.useEffect(() => {
+    dragPreviewRef(getEmptyImage(), { captureDraggingState: false });
+  }, [dragPreviewRef, index]);
+  const accordionValue = React.useId();
+  const { value = [], rawError } = useField(`${name2}.${index}`);
+  const [collapseToOpen, setCollapseToOpen] = React.useState("");
+  React.useEffect(() => {
     if (rawError && value) {
       setCollapseToOpen(accordionValue);
     }
   }, [rawError, value, accordionValue]);
-  const composedBoxRefs = designSystem.useComposedRefs(boxRef, dropRef);
-  const accordionActions = disabled ? null : /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-    /* @__PURE__ */ jsxRuntime.jsx(
-      designSystem.IconButton,
+  const composedBoxRefs = useComposedRefs(boxRef, dropRef);
+  const accordionActions = disabled ? null : /* @__PURE__ */ jsxs(Fragment, { children: [
+    /* @__PURE__ */ jsx(
+      IconButton,
       {
         variant: "ghost",
         label: formatMessage(
           {
-            id: index.getTranslation("components.DynamicZone.delete-label"),
+            id: getTranslation("components.DynamicZone.delete-label"),
             defaultMessage: "Delete {name}"
           },
           { name: title }
         ),
         onClick: onRemoveComponentClick,
-        children: /* @__PURE__ */ jsxRuntime.jsx(Icons.Trash, {})
+        children: /* @__PURE__ */ jsx(Trash, {})
       }
     ),
-    isDesktop && /* @__PURE__ */ jsxRuntime.jsx(
-      designSystem.IconButton,
+    isDesktop && /* @__PURE__ */ jsx(
+      IconButton,
       {
         variant: "ghost",
         onClick: (e) => e.stopPropagation(),
         "data-handler-id": handlerId,
         ref: dragRef,
         label: formatMessage({
-          id: index.getTranslation("components.DragHandle-label"),
+          id: getTranslation("components.DragHandle-label"),
           defaultMessage: "Drag"
         }),
         onKeyDown: handleKeyDown,
-        children: /* @__PURE__ */ jsxRuntime.jsx(Icons.Drag, {})
+        children: /* @__PURE__ */ jsx(Drag, {})
       }
     ),
-    /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Menu.Root, { children: [
-      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Menu.Trigger, { size: "S", endIcon: null, paddingLeft: 0, paddingRight: 0, children: /* @__PURE__ */ jsxRuntime.jsx(
-        designSystem.IconButton,
+    /* @__PURE__ */ jsxs(Menu.Root, { children: [
+      /* @__PURE__ */ jsx(Menu.Trigger, { size: "S", endIcon: null, paddingLeft: 0, paddingRight: 0, children: /* @__PURE__ */ jsx(
+        IconButton,
         {
           variant: "ghost",
           label: formatMessage({
-            id: index.getTranslation("components.DynamicZone.more-actions"),
+            id: getTranslation("components.DynamicZone.more-actions"),
             defaultMessage: "More actions"
           }),
           tag: "span",
-          children: /* @__PURE__ */ jsxRuntime.jsx(Icons.More, { "aria-hidden": true, focusable: false })
+          children: /* @__PURE__ */ jsx(More, { "aria-hidden": true, focusable: false })
         }
       ) }),
-      /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Menu.Content, { children: [
-        /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Menu.SubRoot, { children: [
-          /* @__PURE__ */ jsxRuntime.jsx(designSystem.Menu.SubTrigger, { children: formatMessage({
-            id: index.getTranslation("components.DynamicZone.add-item-above"),
+      /* @__PURE__ */ jsxs(Menu.Content, { children: [
+        /* @__PURE__ */ jsxs(Menu.SubRoot, { children: [
+          /* @__PURE__ */ jsx(Menu.SubTrigger, { children: formatMessage({
+            id: getTranslation("components.DynamicZone.add-item-above"),
             defaultMessage: "Add component above"
           }) }),
-          /* @__PURE__ */ jsxRuntime.jsx(designSystem.Menu.SubContent, { children: Object.entries(dynamicComponentsByCategory).map(([category, components2]) => /* @__PURE__ */ jsxRuntime.jsxs(React__namespace.Fragment, { children: [
-            /* @__PURE__ */ jsxRuntime.jsx(designSystem.Menu.Label, { children: category }),
-            components2.map(({ displayName: displayName2, uid }) => /* @__PURE__ */ jsxRuntime.jsx(designSystem.Menu.Item, { onSelect: () => onAddComponent(uid, index$1), children: displayName2 }, uid))
+          /* @__PURE__ */ jsx(Menu.SubContent, { children: Object.entries(dynamicComponentsByCategory).map(([category, components2]) => /* @__PURE__ */ jsxs(React.Fragment, { children: [
+            /* @__PURE__ */ jsx(Menu.Label, { children: category }),
+            components2.map(({ displayName: displayName2, uid }) => /* @__PURE__ */ jsx(Menu.Item, { onSelect: () => onAddComponent(uid, index), children: displayName2 }, uid))
           ] }, category)) })
         ] }),
-        /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Menu.SubRoot, { children: [
-          /* @__PURE__ */ jsxRuntime.jsx(designSystem.Menu.SubTrigger, { children: formatMessage({
-            id: index.getTranslation("components.DynamicZone.add-item-below"),
+        /* @__PURE__ */ jsxs(Menu.SubRoot, { children: [
+          /* @__PURE__ */ jsx(Menu.SubTrigger, { children: formatMessage({
+            id: getTranslation("components.DynamicZone.add-item-below"),
             defaultMessage: "Add component below"
           }) }),
-          /* @__PURE__ */ jsxRuntime.jsx(designSystem.Menu.SubContent, { children: Object.entries(dynamicComponentsByCategory).map(([category, components2]) => /* @__PURE__ */ jsxRuntime.jsxs(React__namespace.Fragment, { children: [
-            /* @__PURE__ */ jsxRuntime.jsx(designSystem.Menu.Label, { children: category }),
-            components2.map(({ displayName: displayName2, uid }) => /* @__PURE__ */ jsxRuntime.jsx(designSystem.Menu.Item, { onSelect: () => onAddComponent(uid, index$1 + 1), children: displayName2 }, uid))
+          /* @__PURE__ */ jsx(Menu.SubContent, { children: Object.entries(dynamicComponentsByCategory).map(([category, components2]) => /* @__PURE__ */ jsxs(React.Fragment, { children: [
+            /* @__PURE__ */ jsx(Menu.Label, { children: category }),
+            components2.map(({ displayName: displayName2, uid }) => /* @__PURE__ */ jsx(Menu.Item, { onSelect: () => onAddComponent(uid, index + 1), children: displayName2 }, uid))
           ] }, category)) })
         ] })
       ] })
     ] })
   ] });
   const accordionTitle = title ? `${displayName} ${title}` : displayName;
-  return /* @__PURE__ */ jsxRuntime.jsxs(ComponentContainer, { tag: "li", width: "100%", children: [
-    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Flex, { justifyContent: "center", children: /* @__PURE__ */ jsxRuntime.jsx(Rectangle, { background: "neutral200" }) }),
-    /* @__PURE__ */ jsxRuntime.jsx(StyledBox, { ref: composedBoxRefs, hasRadius: true, children: isDragging ? /* @__PURE__ */ jsxRuntime.jsx(Preview, {}) : /* @__PURE__ */ jsxRuntime.jsx(designSystem.Accordion.Root, { value: collapseToOpen, onValueChange: setCollapseToOpen, children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Accordion.Item, { value: accordionValue, children: [
-      /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Accordion.Header, { children: [
-        /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.Accordion.Trigger,
+  return /* @__PURE__ */ jsxs(ComponentContainer, { tag: "li", width: "100%", children: [
+    /* @__PURE__ */ jsx(Flex, { justifyContent: "center", children: /* @__PURE__ */ jsx(Rectangle, { background: "neutral200" }) }),
+    /* @__PURE__ */ jsx(StyledBox, { ref: composedBoxRefs, hasRadius: true, children: isDragging ? /* @__PURE__ */ jsx(Preview, {}) : /* @__PURE__ */ jsx(Accordion.Root, { value: collapseToOpen, onValueChange: setCollapseToOpen, children: /* @__PURE__ */ jsxs(Accordion.Item, { value: accordionValue, children: [
+      /* @__PURE__ */ jsxs(Accordion.Header, { children: [
+        /* @__PURE__ */ jsx(
+          Accordion.Trigger,
           {
             icon: icon && COMPONENT_ICONS[icon] ? COMPONENT_ICONS[icon] : COMPONENT_ICONS.dashboard,
             children: accordionTitle
           }
         ),
-        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Accordion.Actions, { children: accordionActions })
+        /* @__PURE__ */ jsx(Accordion.Actions, { children: accordionActions })
       ] }),
-      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Accordion.Content, { children: /* @__PURE__ */ jsxRuntime.jsx(AccordionContentRadius, { background: "neutral0", children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Box, { paddingLeft: 6, paddingRight: 6, paddingTop: 6, paddingBottom: 6, children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Grid.Root, { gap: 4, children: components[componentUid]?.layout?.map((row, rowInd) => {
+      /* @__PURE__ */ jsx(Accordion.Content, { children: /* @__PURE__ */ jsx(AccordionContentRadius, { background: "neutral0", children: /* @__PURE__ */ jsx(Box, { paddingLeft: 6, paddingRight: 6, paddingTop: 6, paddingBottom: 6, children: /* @__PURE__ */ jsx(Grid$1.Root, { gap: 4, children: components[componentUid]?.layout?.map((row, rowInd) => {
         const visibleFields = row.filter(({ ...field }) => {
           const condition = field.attribute.conditions?.visible;
           if (condition) {
@@ -7154,15 +7094,15 @@ const DynamicComponent = ({
         if (visibleFields.length === 0) {
           return null;
         }
-        return /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.Grid.Item,
+        return /* @__PURE__ */ jsx(
+          Grid$1.Item,
           {
             col: 12,
             xs: 12,
             direction: "column",
             alignItems: "stretch",
-            children: /* @__PURE__ */ jsxRuntime.jsx(ResponsiveGridRoot, { gap: 4, children: visibleFields.map(({ size, ...field }) => {
-              const fieldName = `${name2}.${index$1}.${field.name}`;
+            children: /* @__PURE__ */ jsx(ResponsiveGridRoot, { gap: 4, children: visibleFields.map(({ size, ...field }) => {
+              const fieldName = `${name2}.${index}.${field.name}`;
               const fieldWithTranslatedLabel = {
                 ...field,
                 label: formatMessage({
@@ -7170,7 +7110,7 @@ const DynamicComponent = ({
                   defaultMessage: field.label
                 })
               };
-              return /* @__PURE__ */ jsxRuntime.jsx(
+              return /* @__PURE__ */ jsx(
                 ResponsiveGridItem,
                 {
                   col: size,
@@ -7182,7 +7122,7 @@ const DynamicComponent = ({
                     ...fieldWithTranslatedLabel,
                     document: currentDocument,
                     name: fieldName
-                  }) : /* @__PURE__ */ jsxRuntime.jsx(
+                  }) : /* @__PURE__ */ jsx(
                     MemoizedInputRenderer,
                     {
                       ...fieldWithTranslatedLabel,
@@ -7201,26 +7141,26 @@ const DynamicComponent = ({
     ] }) }) })
   ] });
 };
-const StyledBox = styledComponents.styled(designSystem.Box)`
+const StyledBox = styled(Box)`
   > div:first-child {
     box-shadow: ${({ theme }) => theme.shadows.tableShadow};
   }
 `;
-const AccordionContentRadius = styledComponents.styled(designSystem.Box)`
+const AccordionContentRadius = styled(Box)`
   border-radius: 0 0 ${({ theme }) => theme.spaces[1]} ${({ theme }) => theme.spaces[1]};
 `;
-const Rectangle = styledComponents.styled(designSystem.Box)`
+const Rectangle = styled(Box)`
   width: ${({ theme }) => theme.spaces[2]};
   height: ${({ theme }) => theme.spaces[4]};
 `;
-const Preview = styledComponents.styled.span`
+const Preview = styled.span`
   display: block;
   background-color: ${({ theme }) => theme.colors.primary100};
   outline: 1px dashed ${({ theme }) => theme.colors.primary500};
   outline-offset: -1px;
   padding: ${({ theme }) => theme.spaces[6]};
 `;
-const ComponentContainer = styledComponents.styled(designSystem.Box)`
+const ComponentContainer = styled(Box)`
   list-style: none;
   padding: 0;
   margin: 0;
@@ -7233,8 +7173,8 @@ const DynamicZoneLabel = ({
   numberOfComponents = 0,
   required
 }) => {
-  return /* @__PURE__ */ jsxRuntime.jsx(designSystem.Flex, { justifyContent: "center", children: /* @__PURE__ */ jsxRuntime.jsx(
-    designSystem.Box,
+  return /* @__PURE__ */ jsx(Flex, { justifyContent: "center", children: /* @__PURE__ */ jsx(
+    Box,
     {
       paddingTop: 3,
       paddingBottom: 3,
@@ -7244,26 +7184,26 @@ const DynamicZoneLabel = ({
       background: "neutral0",
       shadow: "filterShadow",
       color: "neutral500",
-      children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { direction: "column", justifyContent: "center", children: [
-        /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { maxWidth: "35.6rem", children: [
-          /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Typography, { variant: "pi", textColor: "neutral600", fontWeight: "bold", ellipsis: true, children: [
+      children: /* @__PURE__ */ jsxs(Flex, { direction: "column", justifyContent: "center", children: [
+        /* @__PURE__ */ jsxs(Flex, { maxWidth: "35.6rem", children: [
+          /* @__PURE__ */ jsxs(Typography, { variant: "pi", textColor: "neutral600", fontWeight: "bold", ellipsis: true, children: [
             label || name2,
             " "
           ] }),
-          /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Typography, { variant: "pi", textColor: "neutral600", fontWeight: "bold", children: [
+          /* @__PURE__ */ jsxs(Typography, { variant: "pi", textColor: "neutral600", fontWeight: "bold", children: [
             "(",
             numberOfComponents,
             ")"
           ] }),
-          required && /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { textColor: "danger600", children: "*" }),
-          labelAction && /* @__PURE__ */ jsxRuntime.jsx(designSystem.Box, { paddingLeft: 1, children: labelAction })
+          required && /* @__PURE__ */ jsx(Typography, { textColor: "danger600", children: "*" }),
+          labelAction && /* @__PURE__ */ jsx(Box, { paddingLeft: 1, children: labelAction })
         ] }),
-        hint && /* @__PURE__ */ jsxRuntime.jsx(designSystem.Box, { paddingTop: 1, maxWidth: "35.6rem", children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { variant: "pi", textColor: "neutral600", ellipsis: true, children: hint }) })
+        hint && /* @__PURE__ */ jsx(Box, { paddingTop: 1, maxWidth: "35.6rem", children: /* @__PURE__ */ jsx(Typography, { variant: "pi", textColor: "neutral600", ellipsis: true, children: hint }) })
       ] })
     }
   ) });
 };
-const [DynamicZoneProvider, useDynamicZone] = admin.createContext(
+const [DynamicZoneProvider, useDynamicZone] = createContext(
   "DynamicZone",
   {
     isInDynamicZone: false
@@ -7280,13 +7220,13 @@ const DynamicZone = ({
   children
 }) => {
   const { max = Infinity, min = -Infinity } = attribute ?? {};
-  const [addComponentIsOpen, setAddComponentIsOpen] = React__namespace.useState(false);
-  const [liveText, setLiveText] = React__namespace.useState("");
+  const [addComponentIsOpen, setAddComponentIsOpen] = React.useState(false);
+  const [liveText, setLiveText] = React.useState("");
   const {
     currentDocument: { components, isLoading }
   } = useDocumentContext("DynamicZone");
   const disabled = disabledProp || isLoading;
-  const { addFieldRow, removeFieldRow, moveFieldRow } = admin.useForm(
+  const { addFieldRow, removeFieldRow, moveFieldRow } = useForm(
     "DynamicZone",
     ({ addFieldRow: addFieldRow2, removeFieldRow: removeFieldRow2, moveFieldRow: moveFieldRow2 }) => ({
       addFieldRow: addFieldRow2,
@@ -7294,8 +7234,8 @@ const DynamicZone = ({
       moveFieldRow: moveFieldRow2
     })
   );
-  const { value = [], error } = admin.useField(name2);
-  const dynamicComponentsByCategory = React__namespace.useMemo(() => {
+  const { value = [], error } = useField(name2);
+  const dynamicComponentsByCategory = React.useMemo(() => {
     return attribute.components.reduce((acc, componentUid) => {
       const { category, info } = components[componentUid] ?? { info: {} };
       const component = { uid: componentUid, displayName: info.displayName, icon: info.icon };
@@ -7306,14 +7246,14 @@ const DynamicZone = ({
       return acc;
     }, {});
   }, [attribute.components, components]);
-  const { formatMessage } = reactIntl.useIntl();
-  const { toggleNotification } = admin.useNotification();
+  const { formatMessage } = useIntl();
+  const { toggleNotification } = useNotification();
   const dynamicDisplayedComponentsLength = value.length;
   const handleAddComponent = (uid, position) => {
     setAddComponentIsOpen(false);
     const schema = components[uid];
     const form = createDefaultForm(schema, components);
-    const transformations = pipe__default.default(transformDocument(schema, components), (data2) => ({
+    const transformations = pipe$1(transformDocument(schema, components), (data2) => ({
       ...data2,
       __component: uid
     }));
@@ -7327,7 +7267,7 @@ const DynamicZone = ({
       toggleNotification({
         type: "info",
         message: formatMessage({
-          id: index.getTranslation("components.notification.info.maximum-requirement")
+          id: getTranslation("components.notification.info.maximum-requirement")
         })
       });
     }
@@ -7336,7 +7276,7 @@ const DynamicZone = ({
     setLiveText(
       formatMessage(
         {
-          id: index.getTranslation("dnd.reorder"),
+          id: getTranslation("dnd.reorder"),
           defaultMessage: "{item}, moved. New position in list: {position}."
         },
         {
@@ -7347,44 +7287,44 @@ const DynamicZone = ({
     );
     moveFieldRow(name2, currentIndex, newIndex);
   };
-  const getItemPos = (index2) => `${index2 + 1} of ${value.length}`;
-  const handleCancel = (index$1) => {
+  const getItemPos = (index) => `${index + 1} of ${value.length}`;
+  const handleCancel = (index) => {
     setLiveText(
       formatMessage(
         {
-          id: index.getTranslation("dnd.cancel-item"),
+          id: getTranslation("dnd.cancel-item"),
           defaultMessage: "{item}, dropped. Re-order cancelled."
         },
         {
-          item: `${name2}.${index$1}`
+          item: `${name2}.${index}`
         }
       )
     );
   };
-  const handleGrabItem = (index$1) => {
+  const handleGrabItem = (index) => {
     setLiveText(
       formatMessage(
         {
-          id: index.getTranslation("dnd.grab-item"),
+          id: getTranslation("dnd.grab-item"),
           defaultMessage: `{item}, grabbed. Current position in list: {position}. Press up and down arrow to change position, Spacebar to drop, Escape to cancel.`
         },
         {
-          item: `${name2}.${index$1}`,
-          position: getItemPos(index$1)
+          item: `${name2}.${index}`,
+          position: getItemPos(index)
         }
       )
     );
   };
-  const handleDropItem = (index$1) => {
+  const handleDropItem = (index) => {
     setLiveText(
       formatMessage(
         {
-          id: index.getTranslation("dnd.drop-item"),
+          id: getTranslation("dnd.drop-item"),
           defaultMessage: `{item}, dropped. Final position in list: {position}.`
         },
         {
-          item: `${name2}.${index$1}`,
-          position: getItemPos(index$1)
+          item: `${name2}.${index}`,
+          position: getItemPos(index)
         }
       )
     );
@@ -7400,7 +7340,7 @@ const DynamicZone = ({
     if (hasError && dynamicDisplayedComponentsLength > max) {
       return formatMessage(
         {
-          id: index.getTranslation(`components.DynamicZone.extra-components`),
+          id: getTranslation(`components.DynamicZone.extra-components`),
           defaultMessage: "There {number, plural, =0 {are # extra components} one {is # extra component} other {are # extra components}}"
         },
         {
@@ -7411,7 +7351,7 @@ const DynamicZone = ({
     if (hasError && dynamicDisplayedComponentsLength < min) {
       return formatMessage(
         {
-          id: index.getTranslation(`components.DynamicZone.missing-components`),
+          id: getTranslation(`components.DynamicZone.missing-components`),
           defaultMessage: "There {number, plural, =0 {are # missing components} one {is # missing component} other {are # missing components}}"
         },
         { number: min - dynamicDisplayedComponentsLength }
@@ -7419,17 +7359,17 @@ const DynamicZone = ({
     }
     return formatMessage(
       {
-        id: index.getTranslation("components.DynamicZone.add-component"),
+        id: getTranslation("components.DynamicZone.add-component"),
         defaultMessage: "Add a component to {componentName}"
       },
       { componentName: label || name2 }
     );
   };
   const level = useComponent("DynamicZone", (state) => state.level);
-  const ariaDescriptionId = React__namespace.useId();
-  return /* @__PURE__ */ jsxRuntime.jsx(DynamicZoneProvider, { isInDynamicZone: true, children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { direction: "column", alignItems: "stretch", gap: 6, children: [
-    dynamicDisplayedComponentsLength > 0 && /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Box, { children: [
-      /* @__PURE__ */ jsxRuntime.jsx(
+  const ariaDescriptionId = React.useId();
+  return /* @__PURE__ */ jsx(DynamicZoneProvider, { isInDynamicZone: true, children: /* @__PURE__ */ jsxs(Flex, { direction: "column", alignItems: "stretch", gap: 6, children: [
+    dynamicDisplayedComponentsLength > 0 && /* @__PURE__ */ jsxs(Box, { children: [
+      /* @__PURE__ */ jsx(
         DynamicZoneLabel,
         {
           hint,
@@ -7440,27 +7380,27 @@ const DynamicZone = ({
           required
         }
       ),
-      /* @__PURE__ */ jsxRuntime.jsx(designSystem.VisuallyHidden, { id: ariaDescriptionId, children: formatMessage({
-        id: index.getTranslation("dnd.instructions"),
+      /* @__PURE__ */ jsx(VisuallyHidden, { id: ariaDescriptionId, children: formatMessage({
+        id: getTranslation("dnd.instructions"),
         defaultMessage: `Press spacebar to grab and re-order`
       }) }),
-      /* @__PURE__ */ jsxRuntime.jsx(designSystem.VisuallyHidden, { "aria-live": "assertive", children: liveText }),
-      /* @__PURE__ */ jsxRuntime.jsx("ol", { "aria-describedby": ariaDescriptionId, children: value.map((field, index2) => /* @__PURE__ */ jsxRuntime.jsx(
+      /* @__PURE__ */ jsx(VisuallyHidden, { "aria-live": "assertive", children: liveText }),
+      /* @__PURE__ */ jsx("ol", { "aria-describedby": ariaDescriptionId, children: value.map((field, index) => /* @__PURE__ */ jsx(
         ComponentProvider,
         {
           level: level + 1,
           uid: field.__component,
           id: field.id,
           type: "dynamiczone",
-          children: /* @__PURE__ */ jsxRuntime.jsx(
+          children: /* @__PURE__ */ jsx(
             DynamicComponent,
             {
               disabled,
               name: name2,
-              index: index2,
+              index,
               componentUid: field.__component,
               onMoveComponent: handleMoveComponent,
-              onRemoveComponentClick: handleRemoveComponent(name2, index2),
+              onRemoveComponentClick: handleRemoveComponent(name2, index),
               onCancel: handleCancel,
               onDropItem: handleDropItem,
               onGrabItem: handleGrabItem,
@@ -7473,7 +7413,7 @@ const DynamicZone = ({
         field.__temp_key__
       )) })
     ] }),
-    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Flex, { justifyContent: "center", children: /* @__PURE__ */ jsxRuntime.jsx(
+    /* @__PURE__ */ jsx(Flex, { justifyContent: "center", children: /* @__PURE__ */ jsx(
       AddComponentButton,
       {
         hasError,
@@ -7483,7 +7423,7 @@ const DynamicZone = ({
         children: renderButtonLabel()
       }
     ) }),
-    /* @__PURE__ */ jsxRuntime.jsx(
+    /* @__PURE__ */ jsx(
       ComponentPicker,
       {
         dynamicComponentsByCategory,
@@ -7494,8 +7434,8 @@ const DynamicZone = ({
   ] }) });
 };
 function useDebounce(value, delay) {
-  const [debouncedValue, setDebouncedValue] = React.useState(value);
-  React.useEffect(() => {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+  useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedValue(value);
     }, delay);
@@ -7617,10 +7557,10 @@ const relationsApi = contentManagerApi.injectEndpoints({
 });
 const prepareTempKeys = (relations, existingRelations = []) => {
   const [firstItem] = existingRelations.slice(0);
-  const keys = fractionalIndexing.generateNKeysBetween(null, firstItem?.__temp_key__ ?? null, relations.length);
-  return relations.map((datum, index2) => ({
+  const keys = generateNKeysBetween(null, firstItem?.__temp_key__ ?? null, relations.length);
+  return relations.map((datum, index) => ({
     ...datum,
-    __temp_key__: keys[index2]
+    __temp_key__: keys[index]
   }));
 };
 const { useGetRelationsQuery, useLazySearchRelationsQuery, useSearchRelationsQuery } = relationsApi;
@@ -7632,9 +7572,9 @@ const getRelationLabel = (relation, mainField) => {
   return relation.documentId;
 };
 function useHandleDisconnect(fieldName, consumerName) {
-  const field = admin.useField(fieldName);
-  const removeFieldRow = admin.useForm(consumerName, (state) => state.removeFieldRow);
-  const addFieldRow = admin.useForm(consumerName, (state) => state.addFieldRow);
+  const field = useField(fieldName);
+  const removeFieldRow = useForm(consumerName, (state) => state.removeFieldRow);
+  const addFieldRow = useForm(consumerName, (state) => state.addFieldRow);
   const handleDisconnect = (relation) => {
     if (field.value && field.value.connect) {
       const indexOfRelationInConnectArray = field.value.connect.findIndex(
@@ -7658,20 +7598,20 @@ function useHandleDisconnect(fieldName, consumerName) {
 }
 const RELATIONS_TO_DISPLAY = 50;
 const ONE_WAY_RELATIONS = ["oneWay", "oneToOne", "manyToOne", "oneToManyMorph", "oneToOneMorph"];
-const RelationsField = React__namespace.forwardRef(
+const RelationsField = React.forwardRef(
   ({ disabled, label, ...props }, ref) => {
     const { currentDocument, currentDocumentMeta } = useDocumentContext("RelationsField");
-    const [currentPage, setCurrentPage] = React__namespace.useState(1);
+    const [currentPage, setCurrentPage] = React.useState(1);
     const documentId = currentDocument.document?.documentId;
-    const { formatMessage } = reactIntl.useIntl();
+    const { formatMessage } = useIntl();
     const isMorph = props.attribute.relation.toLowerCase().includes("morph");
     const isDisabled = isMorph || disabled;
     const { componentId, componentUID } = useComponent("RelationsField", ({ uid, id: id2 }) => ({
       componentId: id2,
       componentUID: uid
     }));
-    const isSubmitting = admin.useForm("RelationsList", (state) => state.isSubmitting);
-    React__namespace.useEffect(() => {
+    const isSubmitting = useForm("RelationsList", (state) => state.isSubmitting);
+    React.useEffect(() => {
       setCurrentPage(1);
     }, [isSubmitting]);
     const component = componentUID && currentDocument.components[componentUID];
@@ -7711,7 +7651,7 @@ const RelationsField = React__namespace.forwardRef(
     const handleLoadMore = () => {
       setCurrentPage((prev) => prev + 1);
     };
-    const field = admin.useField(props.name);
+    const field = useField(props.name);
     const isFetchingMoreRelations = isLoading || isFetching;
     const realServerRelationsCount = "pagination" in data && data.pagination ? data.pagination.total : 0;
     const relationsConnected = (field.value?.connect ?? []).filter(
@@ -7719,14 +7659,14 @@ const RelationsField = React__namespace.forwardRef(
     ).length ?? 0;
     const relationsDisconnected = field.value?.disconnect?.length ?? 0;
     const relationsCount = realServerRelationsCount + relationsConnected - relationsDisconnected;
-    const relations = React__namespace.useMemo(() => {
+    const relations = React.useMemo(() => {
       const ctx = {
         field: field.value,
         // @ts-expect-error – targetModel does exist on the attribute. But it's not typed.
-        href: `../${index.COLLECTION_TYPES}/${props.attribute.targetModel}`,
+        href: `../${COLLECTION_TYPES}/${props.attribute.targetModel}`,
         mainField: props.mainField
       };
-      const transformations = pipe__default.default(
+      const transformations = pipe$1(
         removeConnected(ctx),
         removeDisconnected(ctx),
         addLabelAndHref(ctx)
@@ -7759,12 +7699,12 @@ const RelationsField = React__namespace.forwardRef(
         /**
          * If there's a last item, that's the first key we use to generate out next one.
          */
-        __temp_key__: fractionalIndexing.generateNKeysBetween(lastItemInList?.__temp_key__ ?? null, null, 1)[0],
+        __temp_key__: generateNKeysBetween(lastItemInList?.__temp_key__ ?? null, null, 1)[0],
         // Fallback to `id` if there is no `mainField` value, which will overwrite the above `id` property with the exact same data.
         [props.mainField?.name ?? "documentId"]: relation[props.mainField?.name ?? "documentId"],
         label: getRelationLabel(relation, props.mainField),
         // @ts-expect-error – targetModel does exist on the attribute, but it's not typed.
-        href: `../${index.COLLECTION_TYPES}/${props.attribute.targetModel}/${relation.documentId}?${relation.locale ? `plugins[i18n][locale]=${relation.locale}` : ""}`
+        href: `../${COLLECTION_TYPES}/${props.attribute.targetModel}/${relation.documentId}?${relation.locale ? `plugins[i18n][locale]=${relation.locale}` : ""}`
       };
       if (ONE_WAY_RELATIONS.includes(props.attribute.relation)) {
         field.value?.connect?.forEach(handleDisconnect);
@@ -7774,8 +7714,8 @@ const RelationsField = React__namespace.forwardRef(
         field.onChange(`${props.name}.connect`, [...field.value?.connect ?? [], item]);
       }
     };
-    return /* @__PURE__ */ jsxRuntime.jsxs(
-      designSystem.Flex,
+    return /* @__PURE__ */ jsxs(
+      Flex,
       {
         ref,
         direction: "column",
@@ -7784,8 +7724,8 @@ const RelationsField = React__namespace.forwardRef(
         alignItems: "stretch",
         wrap: "wrap",
         children: [
-          /* @__PURE__ */ jsxRuntime.jsxs(StyledFlex, { direction: "column", alignItems: "start", gap: 2, width: "100%", children: [
-            /* @__PURE__ */ jsxRuntime.jsx(
+          /* @__PURE__ */ jsxs(StyledFlex, { direction: "column", alignItems: "start", gap: 2, width: "100%", children: [
+            /* @__PURE__ */ jsx(
               RelationsInput,
               {
                 disabled: isDisabled,
@@ -7797,22 +7737,22 @@ const RelationsField = React__namespace.forwardRef(
                 ...props
               }
             ),
-            "pagination" in data && data.pagination && data.pagination.pageCount > data.pagination.page ? /* @__PURE__ */ jsxRuntime.jsx(
-              designSystem.TextButton,
+            "pagination" in data && data.pagination && data.pagination.pageCount > data.pagination.page ? /* @__PURE__ */ jsx(
+              TextButton,
               {
                 disabled: isFetchingMoreRelations,
                 onClick: handleLoadMore,
                 loading: isFetchingMoreRelations,
-                startIcon: /* @__PURE__ */ jsxRuntime.jsx(Icons.ArrowClockwise, {}),
+                startIcon: /* @__PURE__ */ jsx(ArrowClockwise, {}),
                 shrink: 0,
                 children: formatMessage({
-                  id: index.getTranslation("relation.loadMore"),
+                  id: getTranslation("relation.loadMore"),
                   defaultMessage: "Load More"
                 })
               }
             ) : null
           ] }),
-          /* @__PURE__ */ jsxRuntime.jsx(
+          /* @__PURE__ */ jsx(
             RelationsList,
             {
               data: relations,
@@ -7830,7 +7770,7 @@ const RelationsField = React__namespace.forwardRef(
     );
   }
 );
-const StyledFlex = styledComponents.styled(designSystem.Flex)`
+const StyledFlex = styled(Flex)`
   & > div {
     width: 100%;
   }
@@ -7870,18 +7810,18 @@ const RelationsInput = ({
   isRelatedToCurrentDocument,
   ...props
 }) => {
-  const [searchParams, setSearchParams] = React__namespace.useState({
+  const [searchParams, setSearchParams] = React.useState({
     _q: "",
     page: 1
   });
-  const { toggleNotification } = admin.useNotification();
+  const { toggleNotification } = useNotification();
   const { currentDocumentMeta } = useDocumentContext("RelationsInput");
-  const { formatMessage } = reactIntl.useIntl();
-  const field = admin.useField(name2);
+  const { formatMessage } = useIntl();
+  const field = useField(name2);
   const searchParamsDebounced = useDebounce(searchParams, 300);
   const [searchForTrigger, { data, isLoading }] = useLazySearchRelationsQuery();
   const [targetField] = name2.split(".").slice(-1);
-  React__namespace.useEffect(() => {
+  React.useEffect(() => {
     if (!isRelatedToCurrentDocument) return;
     searchForTrigger({
       model,
@@ -7919,7 +7859,7 @@ const RelationsInput = ({
       );
       toggleNotification({
         message: formatMessage({
-          id: index.getTranslation("relation.error-adding-relation"),
+          id: getTranslation("relation.error-adding-relation"),
           defaultMessage: "An error occurred while trying to add the relation."
         }),
         type: "danger"
@@ -7929,7 +7869,7 @@ const RelationsInput = ({
     onChange(relation2);
   };
   const relation = {
-    collectionType: index.COLLECTION_TYPES,
+    collectionType: COLLECTION_TYPES,
     // @ts-expect-error – targetModel does exist on the attribute. But it's not typed.
     model: props.attribute.targetModel,
     documentId: "",
@@ -7937,9 +7877,9 @@ const RelationsInput = ({
   };
   const permissions = null;
   const isLoadingPermissions = false;
-  return /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Field.Root, { error: field.error, hint, name: name2, required, children: [
-    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Label, { action: labelAction, children: label }),
-    /* @__PURE__ */ jsxRuntime.jsx(DocumentRBAC, { permissions, model: relation.model, children: /* @__PURE__ */ jsxRuntime.jsx(
+  return /* @__PURE__ */ jsxs(Field.Root, { error: field.error, hint, name: name2, required, children: [
+    /* @__PURE__ */ jsx(Field.Label, { action: labelAction, children: label }),
+    /* @__PURE__ */ jsx(DocumentRBAC, { permissions, model: relation.model, children: /* @__PURE__ */ jsx(
       RelationModalWithContext,
       {
         relation,
@@ -7956,11 +7896,11 @@ const RelationsInput = ({
         ...props
       }
     ) }),
-    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Error, {}),
-    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Hint, {})
+    /* @__PURE__ */ jsx(Field.Error, {}),
+    /* @__PURE__ */ jsx(Field.Hint, {})
   ] });
 };
-const ComboboxDropdownOverride = styledComponents.createGlobalStyle`
+const ComboboxDropdownOverride = createGlobalStyle`
   /* Increase max-height from 15 to 40rem*/
   div[role="listbox"] {
     max-height: 40rem !important;
@@ -7980,10 +7920,10 @@ const RelationModalWithContext = ({
   data,
   ...props
 }) => {
-  const [textValue, setTextValue] = React__namespace.useState("");
-  const { formatMessage } = reactIntl.useIntl();
+  const [textValue, setTextValue] = React.useState("");
+  const { formatMessage } = useIntl();
   useDocumentRBAC("RelationModalWrapper", (state) => state.canCreate);
-  const fieldRef = admin.useFocusInputField(name2);
+  const fieldRef = useFocusInputField(name2);
   const { componentUID } = useComponent("RelationsField", ({ uid }) => ({
     componentUID: uid
   }));
@@ -7995,22 +7935,22 @@ const RelationModalWithContext = ({
     }
   };
   const options = data?.results ?? [];
-  React__namespace.useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     setTextValue("");
   }, [fieldValue]);
   const handleSearch = async (search) => {
     setSearchParams((s) => ({ ...s, _q: search, page: 1 }));
   };
-  return /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-    /* @__PURE__ */ jsxRuntime.jsx(ComboboxDropdownOverride, {}),
-    /* @__PURE__ */ jsxRuntime.jsx(RelationModalRenderer, { children: ({ dispatch }) => /* @__PURE__ */ jsxRuntime.jsx(
-      designSystem.Combobox,
+  return /* @__PURE__ */ jsxs(Fragment, { children: [
+    /* @__PURE__ */ jsx(ComboboxDropdownOverride, {}),
+    /* @__PURE__ */ jsx(RelationModalRenderer, { children: ({ dispatch }) => /* @__PURE__ */ jsx(
+      Combobox,
       {
         ref: fieldRef,
         name: name2,
         autocomplete: { type: "list", filter: "contains" },
         placeholder: placeholder || formatMessage({
-          id: index.getTranslation("relation.add"),
+          id: getTranslation("relation.add"),
           defaultMessage: "Add relation"
         }),
         hasMoreItems: hasNextPage,
@@ -8019,11 +7959,11 @@ const RelationModalWithContext = ({
           handleSearch(textValue ?? "");
         },
         noOptionsMessage: () => formatMessage({
-          id: index.getTranslation("relation.notAvailable"),
+          id: getTranslation("relation.notAvailable"),
           defaultMessage: "No relations available"
         }),
         loadingMessage: formatMessage({
-          id: index.getTranslation("relation.isLoading"),
+          id: getTranslation("relation.isLoading"),
           defaultMessage: "Relations are loading"
         }),
         onLoadMore: handleLoadMore,
@@ -8038,12 +7978,12 @@ const RelationModalWithContext = ({
         ...props,
         children: options?.map((opt) => {
           const textValue2 = getRelationLabel(opt, mainField);
-          return /* @__PURE__ */ jsxRuntime.jsx(designSystem.ComboboxOption, { value: opt.id.toString(), textValue: textValue2, children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { gap: 2, justifyContent: "space-between", children: [
-            /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { gap: 2, children: [
-              /* @__PURE__ */ jsxRuntime.jsx(Icons.Link, { fill: "neutral500" }),
-              /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { ellipsis: true, children: textValue2 })
+          return /* @__PURE__ */ jsx(ComboboxOption, { value: opt.id.toString(), textValue: textValue2, children: /* @__PURE__ */ jsxs(Flex, { gap: 2, justifyContent: "space-between", children: [
+            /* @__PURE__ */ jsxs(Flex, { gap: 2, children: [
+              /* @__PURE__ */ jsx(Link$1, { fill: "neutral500" }),
+              /* @__PURE__ */ jsx(Typography, { ellipsis: true, children: textValue2 })
             ] }),
-            opt.status ? /* @__PURE__ */ jsxRuntime.jsx(DocumentStatus, { status: opt.status }) : null
+            opt.status ? /* @__PURE__ */ jsx(DocumentStatus, { status: opt.status }) : null
           ] }) }, opt.id);
         })
       }
@@ -8062,14 +8002,14 @@ const RelationsList = ({
   targetModel,
   mainField
 }) => {
-  const ariaDescriptionId = React__namespace.useId();
-  const { formatMessage } = reactIntl.useIntl();
-  const listRef = React__namespace.useRef(null);
-  const outerListRef = React__namespace.useRef(null);
-  const [overflow, setOverflow] = React__namespace.useState();
-  const [liveText, setLiveText] = React__namespace.useState("");
-  const field = admin.useField(name2);
-  React__namespace.useEffect(() => {
+  const ariaDescriptionId = React.useId();
+  const { formatMessage } = useIntl();
+  const listRef = React.useRef(null);
+  const outerListRef = React.useRef(null);
+  const [overflow, setOverflow] = React.useState();
+  const [liveText, setLiveText] = React.useState("");
+  const field = useField(name2);
+  React.useEffect(() => {
     if (data.length <= RELATIONS_TO_DISPLAY) {
       return setOverflow(void 0);
     }
@@ -8095,13 +8035,13 @@ const RelationsList = ({
       }
     };
   }, [isLoading, data.length]);
-  const getItemPos = (index2) => `${index2 + 1} of ${data.length}`;
+  const getItemPos = (index) => `${index + 1} of ${data.length}`;
   const handleMoveItem = (newIndex, oldIndex) => {
     const item = data[oldIndex];
     setLiveText(
       formatMessage(
         {
-          id: index.getTranslation("dnd.reorder"),
+          id: getTranslation("dnd.reorder"),
           defaultMessage: "{item}, moved. New position in list: {position}."
         },
         {
@@ -8114,7 +8054,7 @@ const RelationsList = ({
     const currentRow = data[oldIndex];
     const startKey = oldIndex > newIndex ? newData[newIndex - 1]?.__temp_key__ : newData[newIndex]?.__temp_key__;
     const endKey = oldIndex > newIndex ? newData[newIndex]?.__temp_key__ : newData[newIndex + 1]?.__temp_key__;
-    const [newKey] = fractionalIndexing.generateNKeysBetween(startKey, endKey, 1);
+    const [newKey] = generateNKeysBetween(startKey, endKey, 1);
     newData.splice(oldIndex, 1);
     newData.splice(newIndex, 0, { ...currentRow, __temp_key__: newKey });
     const connectedRelations = newData.reduce((acc, relation, currentIndex, array) => {
@@ -8144,42 +8084,42 @@ const RelationsList = ({
     }, []).toReversed();
     field.onChange(`${name2}.connect`, connectedRelations);
   };
-  const handleGrabItem = (index$1) => {
-    const item = data[index$1];
+  const handleGrabItem = (index) => {
+    const item = data[index];
     setLiveText(
       formatMessage(
         {
-          id: index.getTranslation("dnd.grab-item"),
+          id: getTranslation("dnd.grab-item"),
           defaultMessage: `{item}, grabbed. Current position in list: {position}. Press up and down arrow to change position, Spacebar to drop, Escape to cancel.`
         },
         {
           item: item.label ?? item.documentId,
-          position: getItemPos(index$1)
+          position: getItemPos(index)
         }
       )
     );
   };
-  const handleDropItem = (index$1) => {
-    const { href: _href, label, ...item } = data[index$1];
+  const handleDropItem = (index) => {
+    const { href: _href, label, ...item } = data[index];
     setLiveText(
       formatMessage(
         {
-          id: index.getTranslation("dnd.drop-item"),
+          id: getTranslation("dnd.drop-item"),
           defaultMessage: `{item}, dropped. Final position in list: {position}.`
         },
         {
           item: label ?? item.documentId,
-          position: getItemPos(index$1)
+          position: getItemPos(index)
         }
       )
     );
   };
-  const handleCancel = (index$1) => {
-    const item = data[index$1];
+  const handleCancel = (index) => {
+    const item = data[index];
     setLiveText(
       formatMessage(
         {
-          id: index.getTranslation("dnd.cancel-item"),
+          id: getTranslation("dnd.cancel-item"),
           defaultMessage: "{item}, dropped. Re-order cancelled."
         },
         {
@@ -8191,14 +8131,14 @@ const RelationsList = ({
   const handleDisconnect = useHandleDisconnect(name2, "RelationsList");
   const canReorder = !ONE_WAY_RELATIONS.includes(relationType);
   const dynamicListHeight = data.length > RELATIONS_TO_DISPLAY ? Math.min(data.length, RELATIONS_TO_DISPLAY) * (RELATION_ITEM_HEIGHT + RELATION_GUTTER) + RELATION_ITEM_HEIGHT / 2 : Math.min(data.length, RELATIONS_TO_DISPLAY) * (RELATION_ITEM_HEIGHT + RELATION_GUTTER);
-  return /* @__PURE__ */ jsxRuntime.jsxs(ShadowBox, { $overflowDirection: overflow, children: [
-    /* @__PURE__ */ jsxRuntime.jsx(designSystem.VisuallyHidden, { id: ariaDescriptionId, children: formatMessage({
-      id: index.getTranslation("dnd.instructions"),
+  return /* @__PURE__ */ jsxs(ShadowBox, { $overflowDirection: overflow, children: [
+    /* @__PURE__ */ jsx(VisuallyHidden, { id: ariaDescriptionId, children: formatMessage({
+      id: getTranslation("dnd.instructions"),
       defaultMessage: `Press spacebar to grab and re-order`
     }) }),
-    /* @__PURE__ */ jsxRuntime.jsx(designSystem.VisuallyHidden, { "aria-live": "assertive", children: liveText }),
-    /* @__PURE__ */ jsxRuntime.jsx(
-      reactWindow.FixedSizeList,
+    /* @__PURE__ */ jsx(VisuallyHidden, { "aria-live": "assertive", children: liveText }),
+    /* @__PURE__ */ jsx(
+      FixedSizeList,
       {
         height: dynamicListHeight,
         ref: listRef,
@@ -8219,14 +8159,14 @@ const RelationsList = ({
           targetModel,
           mainField
         },
-        itemKey: (index2) => data[index2].id,
+        itemKey: (index) => data[index].id,
         innerElementType: "ol",
         children: ListItem
       }
     )
   ] });
 };
-const ShadowBox = styledComponents.styled(designSystem.Box)`
+const ShadowBox = styled(Box)`
   position: relative;
   overflow: hidden;
   flex: 1;
@@ -8257,7 +8197,7 @@ const ShadowBox = styledComponents.styled(designSystem.Box)`
     transition: opacity 0.2s ease-in-out;
   }
 `;
-const ListItem = ({ data, index: index$1, style }) => {
+const ListItem = ({ data, index, style }) => {
   const {
     ariaDescribedBy,
     canDrag = false,
@@ -8272,9 +8212,9 @@ const ListItem = ({ data, index: index$1, style }) => {
     targetModel,
     mainField
   } = data;
-  const isDesktop = admin.useIsDesktop();
+  const isDesktop = useIsDesktop();
   const { currentDocumentMeta } = useDocumentContext("RelationsField");
-  const { formatMessage } = reactIntl.useIntl();
+  const { formatMessage } = useIntl();
   const {
     href,
     id,
@@ -8283,7 +8223,7 @@ const ListItem = ({ data, index: index$1, style }) => {
     documentId,
     apiData,
     locale
-  } = relations[index$1];
+  } = relations[index];
   const collectionType = getCollectionType(href);
   const isTemporary = apiData?.isTemporary ?? false;
   const { document: document2 } = useDocument(
@@ -8301,12 +8241,12 @@ const ListItem = ({ data, index: index$1, style }) => {
     canDrag && !disabled,
     {
       type: `${ItemTypes.RELATION}_${name2}`,
-      index: index$1,
+      index,
       item: {
         displayedValue: label,
         status,
         id,
-        index: index$1
+        index
       },
       onMoveItem: handleMoveItem,
       onDropItem: handleDropItem,
@@ -8315,13 +8255,13 @@ const ListItem = ({ data, index: index$1, style }) => {
       dropSensitivity: DROP_SENSITIVITY.REGULAR
     }
   );
-  const composedRefs = designSystem.useComposedRefs(relationRef, dragRef);
-  React__namespace.useEffect(() => {
-    dragPreviewRef(reactDndHtml5Backend.getEmptyImage());
+  const composedRefs = useComposedRefs(relationRef, dragRef);
+  React.useEffect(() => {
+    dragPreviewRef(getEmptyImage());
   }, [dragPreviewRef]);
   const safeDocumentId = documentId ?? apiData?.documentId;
   const safeLocale = locale ?? apiData?.locale ?? null;
-  const documentMeta = React__namespace.useMemo(
+  const documentMeta = React.useMemo(
     () => ({
       documentId: safeDocumentId,
       model: targetModel,
@@ -8332,16 +8272,16 @@ const ListItem = ({ data, index: index$1, style }) => {
     }),
     [safeDocumentId, href, safeLocale, targetModel]
   );
-  return /* @__PURE__ */ jsxRuntime.jsx(
-    designSystem.Box,
+  return /* @__PURE__ */ jsx(
+    Box,
     {
       style,
       tag: "li",
       ref: dropRef,
       "aria-describedby": ariaDescribedBy,
       cursor: canDrag ? "all-scroll" : "default",
-      children: isDragging ? /* @__PURE__ */ jsxRuntime.jsx(RelationItemPlaceholder, {}) : /* @__PURE__ */ jsxRuntime.jsxs(
-        designSystem.Flex,
+      children: isDragging ? /* @__PURE__ */ jsx(RelationItemPlaceholder, {}) : /* @__PURE__ */ jsxs(
+        Flex,
         {
           paddingTop: 2,
           paddingBottom: 2,
@@ -8354,41 +8294,41 @@ const ListItem = ({ data, index: index$1, style }) => {
           ref: composedRefs,
           "data-handler-id": handlerId,
           children: [
-            /* @__PURE__ */ jsxRuntime.jsxs(FlexWrapper, { gap: 1, children: [
-              canDrag && isDesktop ? /* @__PURE__ */ jsxRuntime.jsx(
-                designSystem.IconButton,
+            /* @__PURE__ */ jsxs(FlexWrapper, { gap: 1, children: [
+              canDrag && isDesktop ? /* @__PURE__ */ jsx(
+                IconButton,
                 {
                   tag: "div",
                   role: "button",
                   tabIndex: 0,
                   withTooltip: false,
                   label: formatMessage({
-                    id: index.getTranslation("components.RelationInput.icon-button-aria-label"),
+                    id: getTranslation("components.RelationInput.icon-button-aria-label"),
                     defaultMessage: "Drag"
                   }),
                   variant: "ghost",
                   onKeyDown: handleKeyDown,
                   disabled,
-                  children: /* @__PURE__ */ jsxRuntime.jsx(Icons.Drag, {})
+                  children: /* @__PURE__ */ jsx(Drag, {})
                 }
               ) : null,
-              /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { width: "100%", minWidth: 0, gap: 4, justifyContent: "space-between", children: [
-                /* @__PURE__ */ jsxRuntime.jsx(designSystem.Box, { flex: 1, minWidth: 0, paddingTop: 1, paddingBottom: 1, children: /* @__PURE__ */ jsxRuntime.jsx(RelationModalRenderer, { relation: documentMeta, children: label }) }),
-                status ? /* @__PURE__ */ jsxRuntime.jsx(DocumentStatus, { status }) : null
+              /* @__PURE__ */ jsxs(Flex, { width: "100%", minWidth: 0, gap: 4, justifyContent: "space-between", children: [
+                /* @__PURE__ */ jsx(Box, { flex: 1, minWidth: 0, paddingTop: 1, paddingBottom: 1, children: /* @__PURE__ */ jsx(RelationModalRenderer, { relation: documentMeta, children: label }) }),
+                status ? /* @__PURE__ */ jsx(DocumentStatus, { status }) : null
               ] })
             ] }),
-            /* @__PURE__ */ jsxRuntime.jsx(designSystem.Box, { paddingLeft: 4, children: /* @__PURE__ */ jsxRuntime.jsx(
-              designSystem.IconButton,
+            /* @__PURE__ */ jsx(Box, { paddingLeft: 4, children: /* @__PURE__ */ jsx(
+              IconButton,
               {
-                onClick: () => handleDisconnect(relations[index$1]),
+                onClick: () => handleDisconnect(relations[index]),
                 disabled,
                 label: formatMessage({
-                  id: index.getTranslation("relation.disconnect"),
+                  id: getTranslation("relation.disconnect"),
                   defaultMessage: "Remove"
                 }),
                 variant: "ghost",
                 size: "S",
-                children: /* @__PURE__ */ jsxRuntime.jsx(Icons.Cross, {})
+                children: /* @__PURE__ */ jsx(Cross, {})
               }
             ) })
           ]
@@ -8397,7 +8337,7 @@ const ListItem = ({ data, index: index$1, style }) => {
     }
   );
 };
-const FlexWrapper = styledComponents.styled(designSystem.Flex)`
+const FlexWrapper = styled(Flex)`
   width: 100%;
   /* Used to prevent endAction to be pushed out of container */
   min-width: 0;
@@ -8406,7 +8346,7 @@ const FlexWrapper = styledComponents.styled(designSystem.Flex)`
     cursor: all-scroll;
   }
 `;
-styledComponents.styled.button`
+styled.button`
   svg path {
     fill: ${({ theme, disabled }) => disabled ? theme.colors.neutral600 : theme.colors.neutral500};
   }
@@ -8416,7 +8356,7 @@ styledComponents.styled.button`
     fill: ${({ theme, disabled }) => !disabled && theme.colors.neutral600};
   }
 `;
-styledComponents.styled(designSystem.Link)`
+styled(Link$2)`
   display: block;
 
   & > span {
@@ -8426,8 +8366,8 @@ styledComponents.styled(designSystem.Link)`
     display: block;
   }
 `;
-const RelationItemPlaceholder = () => /* @__PURE__ */ jsxRuntime.jsx(
-  designSystem.Box,
+const RelationItemPlaceholder = () => /* @__PURE__ */ jsx(
+  Box,
   {
     paddingTop: 2,
     paddingBottom: 2,
@@ -8441,7 +8381,7 @@ const RelationItemPlaceholder = () => /* @__PURE__ */ jsxRuntime.jsx(
     height: `calc(100% - ${RELATION_GUTTER}px)`
   }
 );
-const MemoizedRelationsField = React__namespace.memo(RelationsField);
+const MemoizedRelationsField = React.memo(RelationsField);
 const uidApi = contentManagerApi.injectEndpoints({
   endpoints: (builder) => ({
     getDefaultUID: builder.query({
@@ -8485,21 +8425,21 @@ const uidApi = contentManagerApi.injectEndpoints({
 });
 const { useGenerateUIDMutation, useGetDefaultUIDQuery, useGetAvailabilityQuery } = uidApi;
 const UID_REGEX = /^[A-Za-z0-9-_.~]*$/;
-const UIDInput = React__namespace.forwardRef(
+const UIDInput = React.forwardRef(
   ({ hint, label, labelAction, name: name2, required, attribute = {}, ...props }, ref) => {
     const { currentDocumentMeta } = useDocumentContext("UIDInput");
-    const allFormValues = admin.useForm("InputUID", (form) => form.values);
-    const [availability, setAvailability] = React__namespace.useState();
-    const [showRegenerate, setShowRegenerate] = React__namespace.useState(false);
-    const isCloning = reactRouterDom.useMatch(index.CLONE_PATH) !== null;
-    const field = admin.useField(name2);
+    const allFormValues = useForm("InputUID", (form) => form.values);
+    const [availability, setAvailability] = React.useState();
+    const [showRegenerate, setShowRegenerate] = React.useState(false);
+    const isCloning = useMatch(CLONE_PATH) !== null;
+    const field = useField(name2);
     const debouncedValue = useDebounce(field.value, 300);
     const hasChanged = debouncedValue !== field.initialValue;
-    const { toggleNotification } = admin.useNotification();
-    const { _unstableFormatAPIError: formatAPIError } = admin.useAPIErrorHandler();
-    const { formatMessage } = reactIntl.useIntl();
-    const [{ query }] = admin.useQueryParams();
-    const params = React__namespace.useMemo(() => buildValidParams(query), [query]);
+    const { toggleNotification } = useNotification();
+    const { _unstableFormatAPIError: formatAPIError } = useAPIErrorHandler();
+    const { formatMessage } = useIntl();
+    const [{ query }] = useQueryParams();
+    const params = React.useMemo(() => buildValidParams(query), [query]);
     const { regex } = attribute;
     const validationRegExp = regex ? new RegExp(regex) : UID_REGEX;
     const {
@@ -8520,7 +8460,7 @@ const UIDInput = React__namespace.forwardRef(
         skip: field.value || !required
       }
     );
-    React__namespace.useEffect(() => {
+    React.useEffect(() => {
       if (apiError) {
         toggleNotification({
           type: "warning",
@@ -8528,7 +8468,7 @@ const UIDInput = React__namespace.forwardRef(
         });
       }
     }, [apiError, formatAPIError, toggleNotification]);
-    React__namespace.useEffect(() => {
+    React.useEffect(() => {
       if (defaultGeneratedUID && field.value === void 0) {
         field.onChange(name2, defaultGeneratedUID);
       }
@@ -8578,7 +8518,7 @@ const UIDInput = React__namespace.forwardRef(
         )
       }
     );
-    React__namespace.useEffect(() => {
+    React.useEffect(() => {
       if (availabilityError) {
         toggleNotification({
           type: "warning",
@@ -8586,7 +8526,7 @@ const UIDInput = React__namespace.forwardRef(
         });
       }
     }, [availabilityError, formatAPIError, toggleNotification]);
-    React__namespace.useEffect(() => {
+    React.useEffect(() => {
       setAvailability(availabilityData);
       let timer;
       if (availabilityData?.isAvailable) {
@@ -8601,18 +8541,18 @@ const UIDInput = React__namespace.forwardRef(
       };
     }, [availabilityData]);
     const isLoading = isGeneratingDefaultUID || isGeneratingUID || isCheckingAvailability;
-    const fieldRef = admin.useFocusInputField(name2);
-    const composedRefs = designSystem.useComposedRefs(ref, fieldRef);
+    const fieldRef = useFocusInputField(name2);
+    const composedRefs = useComposedRefs(ref, fieldRef);
     const shouldShowAvailability = (hasChanged || isCloning) && debouncedValue != null && availability && !showRegenerate;
-    return /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Field.Root, { hint, name: name2, error: field.error, required, children: [
-      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Label, { action: labelAction, children: label }),
-      /* @__PURE__ */ jsxRuntime.jsx(
-        designSystem.TextInput,
+    return /* @__PURE__ */ jsxs(Field.Root, { hint, name: name2, error: field.error, required, children: [
+      /* @__PURE__ */ jsx(Field.Label, { action: labelAction, children: label }),
+      /* @__PURE__ */ jsx(
+        TextInput,
         {
           ref: composedRefs,
           disabled: props.disabled,
-          endAction: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { position: "relative", gap: 1, children: [
-            shouldShowAvailability && /* @__PURE__ */ jsxRuntime.jsxs(
+          endAction: /* @__PURE__ */ jsxs(Flex, { position: "relative", gap: 1, children: [
+            shouldShowAvailability && /* @__PURE__ */ jsxs(
               TextValidation,
               {
                 alignItems: "center",
@@ -8625,9 +8565,9 @@ const UIDInput = React__namespace.forwardRef(
                 right: 6,
                 width: "100px",
                 children: [
-                  availability?.isAvailable ? /* @__PURE__ */ jsxRuntime.jsx(Icons.CheckCircle, {}) : /* @__PURE__ */ jsxRuntime.jsx(Icons.WarningCircle, {}),
-                  /* @__PURE__ */ jsxRuntime.jsx(
-                    designSystem.Typography,
+                  availability?.isAvailable ? /* @__PURE__ */ jsx(CheckCircle, {}) : /* @__PURE__ */ jsx(WarningCircle, {}),
+                  /* @__PURE__ */ jsx(
+                    Typography,
                     {
                       textColor: availability.isAvailable ? "success600" : "danger600",
                       variant: "pi",
@@ -8645,12 +8585,12 @@ const UIDInput = React__namespace.forwardRef(
                 ]
               }
             ),
-            !props.disabled && /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-              showRegenerate && /* @__PURE__ */ jsxRuntime.jsx(TextValidation, { alignItems: "center", justifyContent: "flex-end", gap: 1, children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { textColor: "primary600", variant: "pi", children: formatMessage({
+            !props.disabled && /* @__PURE__ */ jsxs(Fragment, { children: [
+              showRegenerate && /* @__PURE__ */ jsx(TextValidation, { alignItems: "center", justifyContent: "flex-end", gap: 1, children: /* @__PURE__ */ jsx(Typography, { textColor: "primary600", variant: "pi", children: formatMessage({
                 id: "content-manager.components.uid.regenerate",
                 defaultMessage: "Regenerate"
               }) }) }),
-              /* @__PURE__ */ jsxRuntime.jsx(
+              /* @__PURE__ */ jsx(
                 FieldActionWrapper,
                 {
                   onClick: handleRegenerateClick,
@@ -8660,7 +8600,7 @@ const UIDInput = React__namespace.forwardRef(
                   }),
                   onMouseEnter: () => setShowRegenerate(true),
                   onMouseLeave: () => setShowRegenerate(false),
-                  children: isLoading ? /* @__PURE__ */ jsxRuntime.jsx(LoadingWrapper, { "data-testid": "loading-wrapper", children: /* @__PURE__ */ jsxRuntime.jsx(Icons.Loader, {}) }) : /* @__PURE__ */ jsxRuntime.jsx(Icons.ArrowClockwise, {})
+                  children: isLoading ? /* @__PURE__ */ jsx(LoadingWrapper, { "data-testid": "loading-wrapper", children: /* @__PURE__ */ jsx(Loader$1, {}) }) : /* @__PURE__ */ jsx(ArrowClockwise, {})
                 }
               )
             ] })
@@ -8671,12 +8611,12 @@ const UIDInput = React__namespace.forwardRef(
           type: "text"
         }
       ),
-      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Error, {}),
-      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Hint, {})
+      /* @__PURE__ */ jsx(Field.Error, {}),
+      /* @__PURE__ */ jsx(Field.Hint, {})
     ] });
   }
 );
-const FieldActionWrapper = styledComponents.styled(designSystem.Field.Action)`
+const FieldActionWrapper = styled(Field.Action)`
   width: 1.6rem;
 
   svg {
@@ -8693,7 +8633,7 @@ const FieldActionWrapper = styledComponents.styled(designSystem.Field.Action)`
     }
   }
 `;
-const TextValidation = styledComponents.styled(designSystem.Flex)`
+const TextValidation = styled(Flex)`
   svg {
     height: 1.2rem;
     width: 1.2rem;
@@ -8703,7 +8643,7 @@ const TextValidation = styledComponents.styled(designSystem.Flex)`
     }
   }
 `;
-const rotation = styledComponents.keyframes`
+const rotation = keyframes`
   from {
     transform: rotate(0deg);
   }
@@ -8711,11 +8651,11 @@ const rotation = styledComponents.keyframes`
     transform: rotate(359deg);
   }
 `;
-const LoadingWrapper = styledComponents.styled(designSystem.Flex)`
+const LoadingWrapper = styled(Flex)`
   animation: ${rotation} 2s infinite linear;
 `;
-const MemoizedUIDInput = React__namespace.memo(UIDInput);
-const md = new Markdown__default.default({
+const MemoizedUIDInput = React.memo(UIDInput);
+const md = new Markdown({
   html: true,
   // Enable HTML tags in source
   xhtmlOut: false,
@@ -8725,16 +8665,16 @@ const md = new Markdown__default.default({
   typographer: true,
   // Code from: https://github.com/markdown-it/markdown-it/blob/master/support/demo_template/index.js#L83
   highlight(str, lang) {
-    if (lang && lang !== "auto" && highlight_js.getLanguage(lang)) {
-      return '<pre class="hljs language-' + md.utils.escapeHtml(lang.toLowerCase()) + '"><code>' + highlight_js.highlight(lang, str, true).value + "</code></pre>";
+    if (lang && lang !== "auto" && getLanguage(lang)) {
+      return '<pre class="hljs language-' + md.utils.escapeHtml(lang.toLowerCase()) + '"><code>' + highlight(lang, str, true).value + "</code></pre>";
     }
     if (lang === "auto") {
-      const result = highlight_js.highlightAuto(str);
+      const result = highlightAuto(str);
       return '<pre class="hljs language-' + md.utils.escapeHtml(result.language) + '"><code>' + result.value + "</code></pre>";
     }
     return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + "</code></pre>";
   }
-}).use(abbr__default.default).use(container__default.default, "warning").use(container__default.default, "tip").use(deflist__default.default).use(emoji__default.default).use(footnote__default.default).use(ins__default.default).use(mark__default.default).use(sub__default.default).use(sup__default.default);
+}).use(abbr).use(container, "warning").use(container, "tip").use(deflist).use(emoji).use(footnote).use(ins).use(mark).use(sub).use(sup);
 md.renderer.rules.footnote_ref = (tokens, idx, options, env, slf) => {
   const caption = slf.rules.footnote_caption?.(tokens, idx, options, env, slf);
   return '<sup class="footnote-ref"><span>' + caption + "</span></sup>";
@@ -8743,9 +8683,9 @@ md.renderer.rules.footnote_anchor = () => {
   return ' <span class="footnote-backref">↩︎</span>';
 };
 const PreviewWysiwyg = ({ data = "" }) => {
-  const html = React__namespace.useMemo(
-    () => sanitizeHtml__default.default(md.render(data.replaceAll("\\n", "\n") || ""), {
-      ...sanitizeHtml__default.default.defaults,
+  const html = React.useMemo(
+    () => sanitizeHtml(md.render(data.replaceAll("\\n", "\n") || ""), {
+      ...sanitizeHtml.defaults,
       allowedTags: false,
       allowedAttributes: {
         "*": ["href", "align", "alt", "center", "width", "height", "type", "controls", "target"],
@@ -8755,9 +8695,9 @@ const PreviewWysiwyg = ({ data = "" }) => {
     }),
     [data]
   );
-  return /* @__PURE__ */ jsxRuntime.jsx(Wrapper, { children: /* @__PURE__ */ jsxRuntime.jsx("div", { dangerouslySetInnerHTML: { __html: html } }) });
+  return /* @__PURE__ */ jsx(Wrapper, { children: /* @__PURE__ */ jsx("div", { dangerouslySetInnerHTML: { __html: html } }) });
 };
-const Wrapper = styledComponents.styled.div`
+const Wrapper = styled.div`
   position: absolute;
   top: 0;
   width: 100%;
@@ -8902,7 +8842,7 @@ const Wrapper = styledComponents.styled.div`
 `;
 var listRE = /^(\s*)(>[> ]*|[*+-] \[[x ]\]\s|[*+-]\s|(\d+)([.)]))(\s*)/, emptyListRE = /^(\s*)(>[> ]*|[*+-] \[[x ]\]|[*+-]|(\d+)[.)])(\s*)$/, unorderedListRE = /[*+-]\s/;
 function newlineAndIndentContinueMarkdownList(cm) {
-  if (cm.getOption("disableInput")) return CodeMirror__default.default.Pass;
+  if (cm.getOption("disableInput")) return CodeMirror.Pass;
   var ranges = cm.listSelections(), replacements = [];
   for (var i = 0; i < ranges.length; i++) {
     var pos = ranges[i].head;
@@ -8975,7 +8915,7 @@ function incrementRemainingMarkdownListNumbers(cm, pos) {
     }
   } while (nextItem);
 }
-const Editor = React__namespace.forwardRef(
+const Editor = React.forwardRef(
   ({
     disabled,
     editorRef,
@@ -8988,12 +8928,12 @@ const Editor = React__namespace.forwardRef(
     textareaRef,
     value
   }, forwardedRef) => {
-    const onChangeRef = React__namespace.useRef(onChange);
-    React__namespace.useEffect(() => {
+    const onChangeRef = React.useRef(onChange);
+    React.useEffect(() => {
       if (editorRef.current) {
         editorRef.current.toTextArea();
       }
-      editorRef.current = CodeMirror__default.default.fromTextArea(textareaRef.current, {
+      editorRef.current = CodeMirror.fromTextArea(textareaRef.current, {
         lineWrapping: true,
         extraKeys: {
           Enter: "newlineAndIndentContinueMarkdownList",
@@ -9006,31 +8946,31 @@ const Editor = React__namespace.forwardRef(
         spellcheck: true,
         inputStyle: "contenteditable"
       });
-      CodeMirror__default.default.commands.newlineAndIndentContinueMarkdownList = newlineAndIndentContinueMarkdownList;
+      CodeMirror.commands.newlineAndIndentContinueMarkdownList = newlineAndIndentContinueMarkdownList;
       editorRef.current.on("change", (doc) => {
         onChangeRef.current(name2, doc.getValue());
       });
     }, [editorRef, textareaRef, name2, placeholder]);
-    React__namespace.useEffect(() => {
+    React.useEffect(() => {
       if (value && !editorRef.current.hasFocus()) {
         editorRef.current.setValue(value);
       }
     }, [editorRef, value]);
-    React__namespace.useEffect(() => {
+    React.useEffect(() => {
       if (isPreviewMode || disabled) {
         editorRef.current.setOption("readOnly", "nocursor");
       } else {
         editorRef.current.setOption("readOnly", false);
       }
     }, [disabled, isPreviewMode, editorRef]);
-    React__namespace.useEffect(() => {
+    React.useEffect(() => {
       if (error) {
         editorRef.current.setOption("screenReaderLabel", error);
       } else {
         editorRef.current.setOption("screenReaderLabel", "Editor");
       }
     }, [editorRef, error]);
-    React__namespace.useImperativeHandle(
+    React.useImperativeHandle(
       forwardedRef,
       () => ({
         focus() {
@@ -9042,17 +8982,17 @@ const Editor = React__namespace.forwardRef(
       }),
       [editorRef]
     );
-    return /* @__PURE__ */ jsxRuntime.jsxs(EditorAndPreviewWrapper, { children: [
-      /* @__PURE__ */ jsxRuntime.jsx(EditorStylesContainer, { $isExpandMode: isExpandMode, $disabled: disabled || isPreviewMode, children: /* @__PURE__ */ jsxRuntime.jsx("textarea", { ref: textareaRef }) }),
-      isPreviewMode && /* @__PURE__ */ jsxRuntime.jsx(PreviewWysiwyg, { data: value })
+    return /* @__PURE__ */ jsxs(EditorAndPreviewWrapper, { children: [
+      /* @__PURE__ */ jsx(EditorStylesContainer, { $isExpandMode: isExpandMode, $disabled: disabled || isPreviewMode, children: /* @__PURE__ */ jsx("textarea", { ref: textareaRef }) }),
+      isPreviewMode && /* @__PURE__ */ jsx(PreviewWysiwyg, { data: value })
     ] });
   }
 );
-const EditorAndPreviewWrapper = styledComponents.styled.div`
+const EditorAndPreviewWrapper = styled.div`
   position: relative;
   height: calc(100% - 48px);
 `;
-const EditorStylesContainer = styledComponents.styled.div`
+const EditorStylesContainer = styled.div`
   cursor: ${({ $disabled }) => $disabled ? "not-allowed !important" : "auto"};
   height: 100%;
   /* BASICS */
@@ -9399,34 +9339,34 @@ const EditorLayout = ({
   previewContent = "",
   onCollapse
 }) => {
-  const { formatMessage } = reactIntl.useIntl();
+  const { formatMessage } = useIntl();
   if (isExpandMode) {
-    return /* @__PURE__ */ jsxRuntime.jsx(designSystem.Modal.Root, { open: isExpandMode, onOpenChange: onCollapse, children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Modal.Content, { style: { maxWidth: "unset", width: "unset" }, children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { height: "90dvh", width: "90dvw", alignItems: "flex-start", children: [
-      /* @__PURE__ */ jsxRuntime.jsx(BoxWithBorder, { flex: "1", height: "100%", children }),
-      /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { alignItems: "start", direction: "column", flex: 1, height: "100%", width: "100%", children: [
-        /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.Flex,
+    return /* @__PURE__ */ jsx(Modal.Root, { open: isExpandMode, onOpenChange: onCollapse, children: /* @__PURE__ */ jsx(Modal.Content, { style: { maxWidth: "unset", width: "unset" }, children: /* @__PURE__ */ jsxs(Flex, { height: "90dvh", width: "90dvw", alignItems: "flex-start", children: [
+      /* @__PURE__ */ jsx(BoxWithBorder, { flex: "1", height: "100%", children }),
+      /* @__PURE__ */ jsxs(Flex, { alignItems: "start", direction: "column", flex: 1, height: "100%", width: "100%", children: [
+        /* @__PURE__ */ jsx(
+          Flex,
           {
             height: "4.8rem",
             background: "neutral100",
             justifyContent: "flex-end",
             shrink: 0,
             width: "100%",
-            children: /* @__PURE__ */ jsxRuntime.jsxs(ExpandButton$1, { onClick: onCollapse, variant: "tertiary", size: "M", children: [
-              /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { children: formatMessage({
+            children: /* @__PURE__ */ jsxs(ExpandButton$1, { onClick: onCollapse, variant: "tertiary", size: "M", children: [
+              /* @__PURE__ */ jsx(Typography, { children: formatMessage({
                 id: "components.Wysiwyg.collapse",
                 defaultMessage: "Collapse"
               }) }),
-              /* @__PURE__ */ jsxRuntime.jsx(Icons.Collapse, {})
+              /* @__PURE__ */ jsx(Collapse, {})
             ] })
           }
         ),
-        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Box, { position: "relative", height: "100%", width: "100%", children: /* @__PURE__ */ jsxRuntime.jsx(PreviewWysiwyg, { data: previewContent }) })
+        /* @__PURE__ */ jsx(Box, { position: "relative", height: "100%", width: "100%", children: /* @__PURE__ */ jsx(PreviewWysiwyg, { data: previewContent }) })
       ] })
     ] }) }) });
   }
-  return /* @__PURE__ */ jsxRuntime.jsx(
-    designSystem.Flex,
+  return /* @__PURE__ */ jsx(
+    Flex,
     {
       borderColor: error ? "danger600" : "neutral200",
       borderStyle: "solid",
@@ -9438,10 +9378,10 @@ const EditorLayout = ({
     }
   );
 };
-const BoxWithBorder = styledComponents.styled(designSystem.Box)`
+const BoxWithBorder = styled(Box)`
   border-right: 1px solid ${({ theme }) => theme.colors.neutral200};
 `;
-const ExpandButton$1 = styledComponents.styled(designSystem.Button)`
+const ExpandButton$1 = styled(Button)`
   background-color: transparent;
   border: none;
   align-items: center;
@@ -9720,16 +9660,16 @@ const quoteAndCodeHandler = (editor, markdownType) => {
     insertWithoutTextToEdit(editor, markdownType, line, contentLength);
   }
 };
-styledComponents.styled(designSystem.IconButtonGroup)`
+styled(IconButtonGroup)`
   margin-left: ${({ theme }) => theme.spaces[4]};
 `;
-styledComponents.styled(designSystem.IconButton)`
+styled(IconButton)`
   margin: ${({ theme }) => `0 ${theme.spaces[2]}`};
 `;
-styledComponents.styled(designSystem.IconButtonGroup)`
+styled(IconButtonGroup)`
   margin-right: ${({ theme }) => `${theme.spaces[2]}`};
 `;
-const ExpandButton = styledComponents.styled(designSystem.Button)`
+const ExpandButton = styled(Button)`
   background-color: transparent;
   border: none;
   align-items: center;
@@ -9752,13 +9692,13 @@ const ExpandButton = styledComponents.styled(designSystem.Button)`
   }
 `;
 const WysiwygFooter = ({ onToggleExpand }) => {
-  const { formatMessage } = reactIntl.useIntl();
-  return /* @__PURE__ */ jsxRuntime.jsx(designSystem.Box, { padding: 2, background: "neutral100", borderRadius: `0 0 0.4rem 0.4rem`, children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Flex, { justifyContent: "flex-end", alignItems: "flex-end", children: /* @__PURE__ */ jsxRuntime.jsxs(ExpandButton, { id: "expand", onClick: onToggleExpand, variant: "tertiary", size: "M", children: [
-    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { textColor: "neutral800", children: formatMessage({
+  const { formatMessage } = useIntl();
+  return /* @__PURE__ */ jsx(Box, { padding: 2, background: "neutral100", borderRadius: `0 0 0.4rem 0.4rem`, children: /* @__PURE__ */ jsx(Flex, { justifyContent: "flex-end", alignItems: "flex-end", children: /* @__PURE__ */ jsxs(ExpandButton, { id: "expand", onClick: onToggleExpand, variant: "tertiary", size: "M", children: [
+    /* @__PURE__ */ jsx(Typography, { textColor: "neutral800", children: formatMessage({
       id: "components.WysiwygBottomControls.fullscreen",
       defaultMessage: "Expand"
     }) }),
-    /* @__PURE__ */ jsxRuntime.jsx(Icons.Expand, {})
+    /* @__PURE__ */ jsx(Expand, {})
   ] }) }) });
 };
 const WysiwygNav = ({
@@ -9768,7 +9708,7 @@ const WysiwygNav = ({
   onToggleMediaLib,
   onTogglePreviewMode
 }) => {
-  const { formatMessage } = reactIntl.useIntl();
+  const { formatMessage } = useIntl();
   const isDisabled = disabled || isPreviewMode;
   const handleActionClick = (value, currentEditorRef) => {
     switch (value) {
@@ -9806,9 +9746,9 @@ const WysiwygNav = ({
   };
   const observedComponents = [
     {
-      toolbar: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.IconButtonGroup, { children: [
-        /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.IconButton,
+      toolbar: /* @__PURE__ */ jsxs(IconButtonGroup, { children: [
+        /* @__PURE__ */ jsx(
+          IconButton,
           {
             disabled: isDisabled,
             onClick: () => handleActionClick("Bold", editorRef),
@@ -9820,11 +9760,11 @@ const WysiwygNav = ({
               id: "components.Blocks.modifiers.bold",
               defaultMessage: "Bold"
             }),
-            children: /* @__PURE__ */ jsxRuntime.jsx(Icons.Bold, {})
+            children: /* @__PURE__ */ jsx(Bold, {})
           }
         ),
-        /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.IconButton,
+        /* @__PURE__ */ jsx(
+          IconButton,
           {
             disabled: isDisabled,
             onClick: () => handleActionClick("Italic", editorRef),
@@ -9836,11 +9776,11 @@ const WysiwygNav = ({
               id: "components.Blocks.modifiers.italic",
               defaultMessage: "Italic"
             }),
-            children: /* @__PURE__ */ jsxRuntime.jsx(Icons.Italic, {})
+            children: /* @__PURE__ */ jsx(Italic, {})
           }
         ),
-        /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.IconButton,
+        /* @__PURE__ */ jsx(
+          IconButton,
           {
             disabled: isDisabled,
             onClick: () => handleActionClick("Underline", editorRef),
@@ -9852,11 +9792,11 @@ const WysiwygNav = ({
               id: "components.Blocks.modifiers.underline",
               defaultMessage: "Underline"
             }),
-            children: /* @__PURE__ */ jsxRuntime.jsx(Icons.Underline, {})
+            children: /* @__PURE__ */ jsx(Underline, {})
           }
         ),
-        /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.IconButton,
+        /* @__PURE__ */ jsx(
+          IconButton,
           {
             disabled: isDisabled,
             onClick: () => handleActionClick("Strikethrough", editorRef),
@@ -9868,55 +9808,55 @@ const WysiwygNav = ({
               id: "components.Blocks.modifiers.strikethrough",
               defaultMessage: "Strikethrough"
             }),
-            children: /* @__PURE__ */ jsxRuntime.jsx(Icons.StrikeThrough, {})
+            children: /* @__PURE__ */ jsx(StrikeThrough, {})
           }
         )
       ] }),
-      menu: /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Menu.Separator, {}),
-        /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.Menu.Item,
+      menu: /* @__PURE__ */ jsxs(Fragment, { children: [
+        /* @__PURE__ */ jsx(Menu.Separator, {}),
+        /* @__PURE__ */ jsx(
+          Menu.Item,
           {
-            startIcon: /* @__PURE__ */ jsxRuntime.jsx(Icons.Bold, { fill: "neutral500" }),
+            startIcon: /* @__PURE__ */ jsx(Bold, { fill: "neutral500" }),
             onSelect: () => handleActionClick("Bold", editorRef),
             disabled: isDisabled,
-            children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Flex, { tag: "span", gap: 2, children: formatMessage({
+            children: /* @__PURE__ */ jsx(Flex, { tag: "span", gap: 2, children: formatMessage({
               id: "components.Blocks.modifiers.bold",
               defaultMessage: "Bold"
             }) })
           }
         ),
-        /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.Menu.Item,
+        /* @__PURE__ */ jsx(
+          Menu.Item,
           {
-            startIcon: /* @__PURE__ */ jsxRuntime.jsx(Icons.Italic, { fill: "neutral500" }),
+            startIcon: /* @__PURE__ */ jsx(Italic, { fill: "neutral500" }),
             onSelect: () => handleActionClick("Italic", editorRef),
             disabled: isDisabled,
-            children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Flex, { tag: "span", gap: 2, children: formatMessage({
+            children: /* @__PURE__ */ jsx(Flex, { tag: "span", gap: 2, children: formatMessage({
               id: "components.Blocks.modifiers.italic",
               defaultMessage: "Italic"
             }) })
           }
         ),
-        /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.Menu.Item,
+        /* @__PURE__ */ jsx(
+          Menu.Item,
           {
-            startIcon: /* @__PURE__ */ jsxRuntime.jsx(Icons.Underline, { fill: "neutral500" }),
+            startIcon: /* @__PURE__ */ jsx(Underline, { fill: "neutral500" }),
             onSelect: () => handleActionClick("Underline", editorRef),
             disabled: isDisabled,
-            children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Flex, { tag: "span", gap: 2, children: formatMessage({
+            children: /* @__PURE__ */ jsx(Flex, { tag: "span", gap: 2, children: formatMessage({
               id: "components.Blocks.modifiers.underline",
               defaultMessage: "Underline"
             }) })
           }
         ),
-        /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.Menu.Item,
+        /* @__PURE__ */ jsx(
+          Menu.Item,
           {
-            startIcon: /* @__PURE__ */ jsxRuntime.jsx(Icons.StrikeThrough, { fill: "neutral500" }),
+            startIcon: /* @__PURE__ */ jsx(StrikeThrough, { fill: "neutral500" }),
             onSelect: () => handleActionClick("Strikethrough", editorRef),
             disabled: isDisabled,
-            children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Flex, { tag: "span", gap: 2, children: formatMessage({
+            children: /* @__PURE__ */ jsx(Flex, { tag: "span", gap: 2, children: formatMessage({
               id: "components.Blocks.modifiers.strikethrough",
               defaultMessage: "Strikethrough"
             }) })
@@ -9926,9 +9866,9 @@ const WysiwygNav = ({
       key: "formatting-group-1"
     },
     {
-      toolbar: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.IconButtonGroup, { children: [
-        /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.IconButton,
+      toolbar: /* @__PURE__ */ jsxs(IconButtonGroup, { children: [
+        /* @__PURE__ */ jsx(
+          IconButton,
           {
             disabled: isDisabled,
             onClick: () => handleActionClick("BulletList", editorRef),
@@ -9940,11 +9880,11 @@ const WysiwygNav = ({
               id: "components.Blocks.blocks.bulletList",
               defaultMessage: "Bulleted list"
             }),
-            children: /* @__PURE__ */ jsxRuntime.jsx(Icons.BulletList, {})
+            children: /* @__PURE__ */ jsx(BulletList, {})
           }
         ),
-        /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.IconButton,
+        /* @__PURE__ */ jsx(
+          IconButton,
           {
             disabled: isDisabled,
             onClick: () => handleActionClick("NumberList", editorRef),
@@ -9956,31 +9896,31 @@ const WysiwygNav = ({
               id: "components.Blocks.blocks.numberList",
               defaultMessage: "Numbered list"
             }),
-            children: /* @__PURE__ */ jsxRuntime.jsx(Icons.NumberList, {})
+            children: /* @__PURE__ */ jsx(NumberList, {})
           }
         )
       ] }),
-      menu: /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Menu.Separator, {}),
-        /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.Menu.Item,
+      menu: /* @__PURE__ */ jsxs(Fragment, { children: [
+        /* @__PURE__ */ jsx(Menu.Separator, {}),
+        /* @__PURE__ */ jsx(
+          Menu.Item,
           {
-            startIcon: /* @__PURE__ */ jsxRuntime.jsx(Icons.BulletList, { fill: "neutral500" }),
+            startIcon: /* @__PURE__ */ jsx(BulletList, { fill: "neutral500" }),
             onSelect: () => handleActionClick("BulletList", editorRef),
             disabled: isDisabled,
-            children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Flex, { tag: "span", gap: 2, children: formatMessage({
+            children: /* @__PURE__ */ jsx(Flex, { tag: "span", gap: 2, children: formatMessage({
               id: "components.Blocks.blocks.unorderedList",
               defaultMessage: "Bulleted list"
             }) })
           }
         ),
-        /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.Menu.Item,
+        /* @__PURE__ */ jsx(
+          Menu.Item,
           {
-            startIcon: /* @__PURE__ */ jsxRuntime.jsx(Icons.NumberList, { fill: "neutral500" }),
+            startIcon: /* @__PURE__ */ jsx(NumberList, { fill: "neutral500" }),
             onSelect: () => handleActionClick("NumberList", editorRef),
             disabled: isDisabled,
-            children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Flex, { tag: "span", gap: 2, children: formatMessage({
+            children: /* @__PURE__ */ jsx(Flex, { tag: "span", gap: 2, children: formatMessage({
               id: "components.Blocks.blocks.orderedList",
               defaultMessage: "Numbered list"
             }) })
@@ -9990,9 +9930,9 @@ const WysiwygNav = ({
       key: "formatting-group-2"
     },
     {
-      toolbar: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.IconButtonGroup, { children: [
-        /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.IconButton,
+      toolbar: /* @__PURE__ */ jsxs(IconButtonGroup, { children: [
+        /* @__PURE__ */ jsx(
+          IconButton,
           {
             disabled: isDisabled,
             onClick: () => handleActionClick("Code", editorRef),
@@ -10004,11 +9944,11 @@ const WysiwygNav = ({
               id: "components.Wysiwyg.blocks.code",
               defaultMessage: "Code"
             }),
-            children: /* @__PURE__ */ jsxRuntime.jsx(Icons.Code, {})
+            children: /* @__PURE__ */ jsx(Code, {})
           }
         ),
-        /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.IconButton,
+        /* @__PURE__ */ jsx(
+          IconButton,
           {
             disabled: isDisabled,
             onClick: () => {
@@ -10022,11 +9962,11 @@ const WysiwygNav = ({
               id: "components.Blocks.blocks.image",
               defaultMessage: "Image"
             }),
-            children: /* @__PURE__ */ jsxRuntime.jsx(Icons.Image, {})
+            children: /* @__PURE__ */ jsx(Image$1, {})
           }
         ),
-        /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.IconButton,
+        /* @__PURE__ */ jsx(
+          IconButton,
           {
             disabled: isDisabled,
             onClick: () => handleActionClick("Link", editorRef),
@@ -10038,11 +9978,11 @@ const WysiwygNav = ({
               id: "components.Blocks.popover.link",
               defaultMessage: "Link"
             }),
-            children: /* @__PURE__ */ jsxRuntime.jsx(Icons.Link, {})
+            children: /* @__PURE__ */ jsx(Link$1, {})
           }
         ),
-        /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.IconButton,
+        /* @__PURE__ */ jsx(
+          IconButton,
           {
             disabled: isDisabled,
             onClick: () => handleActionClick("Quote", editorRef),
@@ -10054,57 +9994,57 @@ const WysiwygNav = ({
               id: "components.Blocks.blocks.quote",
               defaultMessage: "Quote"
             }),
-            children: /* @__PURE__ */ jsxRuntime.jsx(Icons.Quotes, {})
+            children: /* @__PURE__ */ jsx(Quotes, {})
           }
         )
       ] }),
-      menu: /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Menu.Separator, {}),
-        /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.Menu.Item,
+      menu: /* @__PURE__ */ jsxs(Fragment, { children: [
+        /* @__PURE__ */ jsx(Menu.Separator, {}),
+        /* @__PURE__ */ jsx(
+          Menu.Item,
           {
-            startIcon: /* @__PURE__ */ jsxRuntime.jsx(Icons.Code, { fill: "neutral500" }),
+            startIcon: /* @__PURE__ */ jsx(Code, { fill: "neutral500" }),
             onSelect: () => handleActionClick("Code", editorRef),
             disabled: isDisabled,
-            children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Flex, { tag: "span", gap: 2, children: formatMessage({
+            children: /* @__PURE__ */ jsx(Flex, { tag: "span", gap: 2, children: formatMessage({
               id: "components.Wysiwyg.blocks.code",
               defaultMessage: "Code"
             }) })
           }
         ),
-        /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.Menu.Item,
+        /* @__PURE__ */ jsx(
+          Menu.Item,
           {
-            startIcon: /* @__PURE__ */ jsxRuntime.jsx(Icons.Image, { fill: "neutral500" }),
+            startIcon: /* @__PURE__ */ jsx(Image$1, { fill: "neutral500" }),
             onSelect: () => {
               onToggleMediaLib();
             },
             disabled: isDisabled,
-            children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Flex, { tag: "span", gap: 2, children: formatMessage({
+            children: /* @__PURE__ */ jsx(Flex, { tag: "span", gap: 2, children: formatMessage({
               id: "components.Blocks.blocks.image",
               defaultMessage: "Image"
             }) })
           }
         ),
-        /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.Menu.Item,
+        /* @__PURE__ */ jsx(
+          Menu.Item,
           {
-            startIcon: /* @__PURE__ */ jsxRuntime.jsx(Icons.Link, { fill: "neutral500" }),
+            startIcon: /* @__PURE__ */ jsx(Link$1, { fill: "neutral500" }),
             onSelect: () => handleActionClick("Link", editorRef),
             disabled: isDisabled,
-            children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Flex, { tag: "span", gap: 2, children: formatMessage({
+            children: /* @__PURE__ */ jsx(Flex, { tag: "span", gap: 2, children: formatMessage({
               id: "components.Blocks.popover.link",
               defaultMessage: "Link"
             }) })
           }
         ),
-        /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.Menu.Item,
+        /* @__PURE__ */ jsx(
+          Menu.Item,
           {
-            startIcon: /* @__PURE__ */ jsxRuntime.jsx(Icons.Quotes, { fill: "neutral500" }),
+            startIcon: /* @__PURE__ */ jsx(Quotes, { fill: "neutral500" }),
             onSelect: () => handleActionClick("Quote", editorRef),
             disabled: isDisabled,
-            children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Flex, { tag: "span", gap: 2, children: formatMessage({
+            children: /* @__PURE__ */ jsx(Flex, { tag: "span", gap: 2, children: formatMessage({
               id: "components.Blocks.blocks.quote",
               defaultMessage: "Quote"
             }) })
@@ -10114,8 +10054,8 @@ const WysiwygNav = ({
       key: "formatting-group-3"
     }
   ];
-  return /* @__PURE__ */ jsxRuntime.jsxs(
-    designSystem.Flex,
+  return /* @__PURE__ */ jsxs(
+    Flex,
     {
       padding: 2,
       background: "neutral100",
@@ -10124,8 +10064,8 @@ const WysiwygNav = ({
       width: "100%",
       gap: 4,
       children: [
-        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Root, { children: /* @__PURE__ */ jsxRuntime.jsxs(
-          designSystem.SingleSelect,
+        /* @__PURE__ */ jsx(Field.Root, { children: /* @__PURE__ */ jsxs(
+          SingleSelect,
           {
             disabled: isDisabled,
             placeholder: formatMessage({
@@ -10139,42 +10079,42 @@ const WysiwygNav = ({
             onChange: (value) => handleActionClick(value, editorRef),
             size: "S",
             children: [
-              /* @__PURE__ */ jsxRuntime.jsx(designSystem.SingleSelectOption, { value: "h1", startIcon: /* @__PURE__ */ jsxRuntime.jsx(Icons.HeadingOne, { fill: "neutral500" }), children: formatMessage({
+              /* @__PURE__ */ jsx(SingleSelectOption, { value: "h1", startIcon: /* @__PURE__ */ jsx(HeadingOne, { fill: "neutral500" }), children: formatMessage({
                 id: "components.Wysiwyg.selectOptions.H1",
                 defaultMessage: "Heading 1"
               }) }),
-              /* @__PURE__ */ jsxRuntime.jsx(designSystem.SingleSelectOption, { value: "h2", startIcon: /* @__PURE__ */ jsxRuntime.jsx(Icons.HeadingTwo, { fill: "neutral500" }), children: formatMessage({
+              /* @__PURE__ */ jsx(SingleSelectOption, { value: "h2", startIcon: /* @__PURE__ */ jsx(HeadingTwo, { fill: "neutral500" }), children: formatMessage({
                 id: "components.Wysiwyg.selectOptions.H2",
                 defaultMessage: "Heading 2"
               }) }),
-              /* @__PURE__ */ jsxRuntime.jsx(designSystem.SingleSelectOption, { value: "h3", startIcon: /* @__PURE__ */ jsxRuntime.jsx(Icons.HeadingThree, { fill: "neutral500" }), children: formatMessage({
+              /* @__PURE__ */ jsx(SingleSelectOption, { value: "h3", startIcon: /* @__PURE__ */ jsx(HeadingThree, { fill: "neutral500" }), children: formatMessage({
                 id: "components.Wysiwyg.selectOptions.H3",
                 defaultMessage: "Heading 3"
               }) }),
-              /* @__PURE__ */ jsxRuntime.jsx(designSystem.SingleSelectOption, { value: "h4", startIcon: /* @__PURE__ */ jsxRuntime.jsx(Icons.HeadingFour, { fill: "neutral500" }), children: formatMessage({
+              /* @__PURE__ */ jsx(SingleSelectOption, { value: "h4", startIcon: /* @__PURE__ */ jsx(HeadingFour, { fill: "neutral500" }), children: formatMessage({
                 id: "components.Wysiwyg.selectOptions.H4",
                 defaultMessage: "Heading 4"
               }) }),
-              /* @__PURE__ */ jsxRuntime.jsx(designSystem.SingleSelectOption, { value: "h5", startIcon: /* @__PURE__ */ jsxRuntime.jsx(Icons.HeadingFive, { fill: "neutral500" }), children: formatMessage({
+              /* @__PURE__ */ jsx(SingleSelectOption, { value: "h5", startIcon: /* @__PURE__ */ jsx(HeadingFive, { fill: "neutral500" }), children: formatMessage({
                 id: "components.Wysiwyg.selectOptions.H5",
                 defaultMessage: "Heading 5"
               }) }),
-              /* @__PURE__ */ jsxRuntime.jsx(designSystem.SingleSelectOption, { value: "h6", startIcon: /* @__PURE__ */ jsxRuntime.jsx(Icons.HeadingSix, { fill: "neutral500" }), children: formatMessage({
+              /* @__PURE__ */ jsx(SingleSelectOption, { value: "h6", startIcon: /* @__PURE__ */ jsx(HeadingSix, { fill: "neutral500" }), children: formatMessage({
                 id: "components.Wysiwyg.selectOptions.H6",
                 defaultMessage: "Heading 6"
               }) })
             ]
           }
         ) }),
-        /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { width: "100%", justifyContent: "space-between", overflow: "hidden", children: [
-          /* @__PURE__ */ jsxRuntime.jsx(designSystem.Flex, { gap: 2, overflow: "hidden", width: "100%", children: /* @__PURE__ */ jsxRuntime.jsx(
+        /* @__PURE__ */ jsxs(Flex, { width: "100%", justifyContent: "space-between", overflow: "hidden", children: [
+          /* @__PURE__ */ jsx(Flex, { gap: 2, overflow: "hidden", width: "100%", children: /* @__PURE__ */ jsx(
             EditorToolbarObserver,
             {
               menuTriggerVariant: "tertiary",
               observedComponents
             }
           ) }),
-          onTogglePreviewMode && /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { onClick: onTogglePreviewMode, variant: "tertiary", minWidth: "132px", children: isPreviewMode ? formatMessage({
+          onTogglePreviewMode && /* @__PURE__ */ jsx(Button, { onClick: onTogglePreviewMode, variant: "tertiary", minWidth: "132px", children: isPreviewMode ? formatMessage({
             id: "components.Wysiwyg.ToggleMode.markdown-mode",
             defaultMessage: "Markdown mode"
           }) : formatMessage({
@@ -10186,17 +10126,17 @@ const WysiwygNav = ({
     }
   );
 };
-const Wysiwyg = React__namespace.forwardRef(
+const Wysiwyg = React.forwardRef(
   ({ hint, disabled, label, name: name2, placeholder, required, labelAction }, forwardedRef) => {
-    const field = admin.useField(name2);
-    const textareaRef = React__namespace.useRef(null);
-    const editorRef = React__namespace.useRef(
+    const field = useField(name2);
+    const textareaRef = React.useRef(null);
+    const editorRef = React.useRef(
       null
     );
-    const [isPreviewMode, setIsPreviewMode] = React__namespace.useState(false);
-    const [mediaLibVisible, setMediaLibVisible] = React__namespace.useState(false);
-    const [isExpandMode, setIsExpandMode] = React__namespace.useState(false);
-    const components = admin.useStrapiApp("ImageDialog", (state) => state.components);
+    const [isPreviewMode, setIsPreviewMode] = React.useState(false);
+    const [mediaLibVisible, setMediaLibVisible] = React.useState(false);
+    const [isExpandMode, setIsExpandMode] = React.useState(false);
+    const components = useStrapiApp("ImageDialog", (state) => state.components);
     const MediaLibraryDialog = components["media-library"];
     const handleToggleMediaLib = () => setMediaLibVisible((prev) => !prev);
     const handleTogglePreviewMode = () => setIsPreviewMode((prev) => !prev);
@@ -10213,10 +10153,10 @@ const Wysiwyg = React__namespace.forwardRef(
       insertFile(editorRef, formattedFiles);
       setMediaLibVisible(false);
     };
-    return /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Field.Root, { name: name2, hint, error: field.error, required, children: [
-      /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { direction: "column", alignItems: "stretch", gap: 1, children: [
-        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Label, { action: labelAction, children: label }),
-        /* @__PURE__ */ jsxRuntime.jsxs(
+    return /* @__PURE__ */ jsxs(Field.Root, { name: name2, hint, error: field.error, required, children: [
+      /* @__PURE__ */ jsxs(Flex, { direction: "column", alignItems: "stretch", gap: 1, children: [
+        /* @__PURE__ */ jsx(Field.Label, { action: labelAction, children: label }),
+        /* @__PURE__ */ jsxs(
           EditorLayout,
           {
             isExpandMode,
@@ -10224,7 +10164,7 @@ const Wysiwyg = React__namespace.forwardRef(
             previewContent: field.value,
             onCollapse: handleToggleExpand,
             children: [
-              /* @__PURE__ */ jsxRuntime.jsx(
+              /* @__PURE__ */ jsx(
                 WysiwygNav,
                 {
                   isExpandMode,
@@ -10235,7 +10175,7 @@ const Wysiwyg = React__namespace.forwardRef(
                   disabled
                 }
               ),
-              /* @__PURE__ */ jsxRuntime.jsx(
+              /* @__PURE__ */ jsx(
                 Editor,
                 {
                   disabled,
@@ -10251,19 +10191,19 @@ const Wysiwyg = React__namespace.forwardRef(
                   ref: forwardedRef
                 }
               ),
-              !isExpandMode && /* @__PURE__ */ jsxRuntime.jsx(WysiwygFooter, { onToggleExpand: handleToggleExpand })
+              !isExpandMode && /* @__PURE__ */ jsx(WysiwygFooter, { onToggleExpand: handleToggleExpand })
             ]
           }
         ),
-        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Hint, {}),
-        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Error, {})
+        /* @__PURE__ */ jsx(Field.Hint, {}),
+        /* @__PURE__ */ jsx(Field.Error, {})
       ] }),
       mediaLibVisible && // @ts-expect-error – TODO: fix this way of injecting because it's not really typeable without a registry.
-      /* @__PURE__ */ jsxRuntime.jsx(MediaLibraryDialog, { onClose: handleToggleMediaLib, onSelectAssets: handleSelectAssets })
+      /* @__PURE__ */ jsx(MediaLibraryDialog, { onClose: handleToggleMediaLib, onSelectAssets: handleSelectAssets })
     ] });
   }
 );
-const MemoizedWysiwyg = React__namespace.memo(Wysiwyg);
+const MemoizedWysiwyg = React.memo(Wysiwyg);
 const BaseInputRenderer = ({
   visible,
   hint: providedHint,
@@ -10278,19 +10218,19 @@ const BaseInputRenderer = ({
   const collectionType = document2.schema?.kind === "collectionType" ? "collection-types" : "single-types";
   useDynamicZone("isInDynamicZone", (state) => state.isInDynamicZone);
   useHasInputPopoverParent();
-  const isFormDisabled = admin.useForm("InputRenderer", (state) => state.disabled);
+  const isFormDisabled = useForm("InputRenderer", (state) => state.disabled);
   document2.document?.documentId;
-  if (collectionType === index.SINGLE_TYPES) {
+  if (collectionType === SINGLE_TYPES) {
     document2?.document?.documentId;
   }
   const previewProps = usePreviewInputManager(inputProps.name, inputProps.attribute);
   const props = { ...inputProps, ...previewProps };
-  const fields = admin.useStrapiApp("InputRenderer", (app) => app.fields);
+  const fields = useStrapiApp("InputRenderer", (app) => app.fields);
   const { lazyComponentStore } = useLazyComponents(
     attributeHasCustomFieldProperty(props.attribute) ? [props.attribute.customField] : void 0
   );
   const hint = useFieldHint(providedHint, props.attribute);
-  const field = admin.useField(props.name);
+  const field = useField(props.name);
   if (!visible) {
     return null;
   }
@@ -10298,7 +10238,7 @@ const BaseInputRenderer = ({
   if (attributeHasCustomFieldProperty(props.attribute)) {
     const CustomInput = lazyComponentStore[props.attribute.customField];
     if (CustomInput) {
-      return /* @__PURE__ */ jsxRuntime.jsx(
+      return /* @__PURE__ */ jsx(
         CustomInput,
         {
           ...props,
@@ -10308,8 +10248,8 @@ const BaseInputRenderer = ({
         }
       );
     }
-    return /* @__PURE__ */ jsxRuntime.jsx(
-      admin.InputRenderer,
+    return /* @__PURE__ */ jsx(
+      InputRenderer,
       {
         ...props,
         ...previewProps,
@@ -10323,7 +10263,7 @@ const BaseInputRenderer = ({
   const addedInputTypes = Object.keys(fields);
   if (!attributeHasCustomFieldProperty(props.attribute) && addedInputTypes.includes(props.type)) {
     const CustomInput = fields[props.type];
-    return /* @__PURE__ */ jsxRuntime.jsx(
+    return /* @__PURE__ */ jsx(
       CustomInput,
       {
         ...props,
@@ -10335,7 +10275,7 @@ const BaseInputRenderer = ({
   }
   switch (props.type) {
     case "blocks":
-      return /* @__PURE__ */ jsxRuntime.jsx(
+      return /* @__PURE__ */ jsx(
         MemoizedBlocksInput,
         {
           ...props,
@@ -10346,14 +10286,14 @@ const BaseInputRenderer = ({
         `input-${props.name}-${localeKey}`
       );
     case "component":
-      return /* @__PURE__ */ jsxRuntime.jsx(
+      return /* @__PURE__ */ jsx(
         MemoizedComponentInput,
         {
           ...props,
           hint,
           layout: components[props.attribute.component].layout,
           disabled: fieldIsDisabled,
-          children: (componentInputProps) => /* @__PURE__ */ jsxRuntime.jsx(
+          children: (componentInputProps) => /* @__PURE__ */ jsx(
             BaseInputRenderer,
             {
               ...componentInputProps
@@ -10364,7 +10304,7 @@ const BaseInputRenderer = ({
         `input-${props.name}-${localeKey}`
       );
     case "dynamiczone":
-      return /* @__PURE__ */ jsxRuntime.jsx(
+      return /* @__PURE__ */ jsx(
         DynamicZone,
         {
           ...props,
@@ -10374,7 +10314,7 @@ const BaseInputRenderer = ({
         `input-${props.name}-${localeKey}`
       );
     case "relation":
-      return /* @__PURE__ */ jsxRuntime.jsx(
+      return /* @__PURE__ */ jsx(
         MemoizedRelationsField,
         {
           ...props,
@@ -10384,7 +10324,7 @@ const BaseInputRenderer = ({
         `input-${props.name}-${localeKey}`
       );
     case "richtext":
-      return /* @__PURE__ */ jsxRuntime.jsx(
+      return /* @__PURE__ */ jsx(
         MemoizedWysiwyg,
         {
           ...props,
@@ -10396,7 +10336,7 @@ const BaseInputRenderer = ({
       );
     case "uid":
       const { unique: _uniqueUID, ...restUIDProps } = props;
-      return /* @__PURE__ */ jsxRuntime.jsx(
+      return /* @__PURE__ */ jsx(
         MemoizedUIDInput,
         {
           ...restUIDProps,
@@ -10407,8 +10347,8 @@ const BaseInputRenderer = ({
         `input-${props.name}-${localeKey}`
       );
     case "enumeration":
-      return /* @__PURE__ */ jsxRuntime.jsx(
-        admin.InputRenderer,
+      return /* @__PURE__ */ jsx(
+        InputRenderer,
         {
           ...props,
           ...previewProps,
@@ -10421,8 +10361,8 @@ const BaseInputRenderer = ({
       );
     default:
       const { unique: _unique, mainField: _mainField, ...restProps } = props;
-      return /* @__PURE__ */ jsxRuntime.jsx(
-        admin.InputRenderer,
+      return /* @__PURE__ */ jsx(
+        InputRenderer,
         {
           ...restProps,
           ...previewProps,
@@ -10434,21 +10374,21 @@ const BaseInputRenderer = ({
       );
   }
 };
-const rulesEngine = admin.createRulesEngine();
+const rulesEngine = createRulesEngine();
 const ConditionAwareInputRenderer = ({
   condition,
   ...props
 }) => {
-  const fieldValues = admin.useForm("ConditionalInputRenderer", (state) => state.values);
+  const fieldValues = useForm("ConditionalInputRenderer", (state) => state.values);
   const isVisible = rulesEngine.evaluate(condition, fieldValues);
   if (!isVisible) {
     return null;
   }
-  return /* @__PURE__ */ jsxRuntime.jsx(BaseInputRenderer, { ...props });
+  return /* @__PURE__ */ jsx(BaseInputRenderer, { ...props });
 };
 const attributeHasCustomFieldProperty = (attribute) => "customField" in attribute && typeof attribute.customField === "string";
 const useFieldHint = (hint = void 0, attribute) => {
-  const { formatMessage } = reactIntl.useIntl();
+  const { formatMessage } = useIntl();
   const { maximum, minimum } = getMinMax(attribute);
   if (!maximum && !minimum) {
     return hint;
@@ -10477,7 +10417,7 @@ const useFieldHint = (hint = void 0, attribute) => {
         id: "content-manager.form.Input.hint.minMaxDivider",
         defaultMessage: " / "
       }) : null,
-      br: /* @__PURE__ */ jsxRuntime.jsx("br", {})
+      br: /* @__PURE__ */ jsx("br", {})
     }
   );
 };
@@ -10493,14 +10433,14 @@ const getMinMax = (attribute) => {
     return { maximum: void 0, minimum: void 0 };
   }
 };
-const MemoizedInputRenderer = React__namespace.memo((props) => {
+const MemoizedInputRenderer = React.memo((props) => {
   const condition = props.attribute.conditions?.visible;
   if (condition) {
-    return /* @__PURE__ */ jsxRuntime.jsx(ConditionAwareInputRenderer, { ...props, condition });
+    return /* @__PURE__ */ jsx(ConditionAwareInputRenderer, { ...props, condition });
   }
-  return /* @__PURE__ */ jsxRuntime.jsx(BaseInputRenderer, { ...props });
+  return /* @__PURE__ */ jsx(BaseInputRenderer, { ...props });
 });
-const ResponsiveGridRoot = styledComponents.styled(designSystem.Grid.Root)`
+const ResponsiveGridRoot = styled(Grid$1.Root)`
   container-type: inline-size;
 `;
 const ResponsiveGridItem = (
@@ -10510,12 +10450,12 @@ const ResponsiveGridItem = (
    * This is a temporary workaround so that tests do not fail in the CI when jestdom throws an error
    * for failing to parse the stylesheet.
    */
-  process.env.NODE_ENV !== "test" ? styledComponents.styled(designSystem.Grid.Item)`
+  process.env.NODE_ENV !== "test" ? styled(Grid$1.Item)`
         grid-column: span 12;
         ${({ theme }) => theme.breakpoints.medium} {
           ${({ col }) => col && `grid-column: span ${col};`}
         }
-      ` : styledComponents.styled(designSystem.Grid.Item)`
+      ` : styled(Grid$1.Item)`
         grid-column: span 12;
       `
 );
@@ -10530,7 +10470,7 @@ const panelStyles = {
   shadow: "tableShadow"
 };
 const FormLayout = ({ layout, document: document2, hasBackground = true }) => {
-  const { formatMessage } = reactIntl.useIntl();
+  const { formatMessage } = useIntl();
   const modelUid = document2.schema?.uid;
   const getLabel = (name2, label) => {
     return formatMessage({
@@ -10538,8 +10478,8 @@ const FormLayout = ({ layout, document: document2, hasBackground = true }) => {
       defaultMessage: label
     });
   };
-  return /* @__PURE__ */ jsxRuntime.jsx(
-    designSystem.Flex,
+  return /* @__PURE__ */ jsx(
+    Flex,
     {
       direction: "column",
       alignItems: "stretch",
@@ -10547,11 +10487,11 @@ const FormLayout = ({ layout, document: document2, hasBackground = true }) => {
         initial: 4,
         large: 6
       },
-      children: layout.map((panel, index2) => {
+      children: layout.map((panel, index) => {
         if (panel.some((row) => row.some((field) => field.type === "dynamiczone"))) {
           const [row] = panel;
           const [field] = row;
-          return /* @__PURE__ */ jsxRuntime.jsx(designSystem.Grid.Root, { gap: 4, children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Grid.Item, { col: 12, s: 12, xs: 12, direction: "column", alignItems: "stretch", children: /* @__PURE__ */ jsxRuntime.jsx(
+          return /* @__PURE__ */ jsx(Grid$1.Root, { gap: 4, children: /* @__PURE__ */ jsx(Grid$1.Item, { col: 12, s: 12, xs: 12, direction: "column", alignItems: "stretch", children: /* @__PURE__ */ jsx(
             MemoizedInputRenderer,
             {
               ...field,
@@ -10560,8 +10500,8 @@ const FormLayout = ({ layout, document: document2, hasBackground = true }) => {
             }
           ) }) }, field.name);
         }
-        return /* @__PURE__ */ jsxRuntime.jsx(designSystem.Box, { ...hasBackground && panelStyles, children: /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.Flex,
+        return /* @__PURE__ */ jsx(Box, { ...hasBackground && panelStyles, children: /* @__PURE__ */ jsx(
+          Flex,
           {
             direction: "column",
             alignItems: "stretch",
@@ -10570,8 +10510,8 @@ const FormLayout = ({ layout, document: document2, hasBackground = true }) => {
               large: 6
             },
             children: panel.map((row, gridRowIndex) => {
-              return /* @__PURE__ */ jsxRuntime.jsx(ResponsiveGridRoot, { gap: 4, children: row.map(({ size, ...field }) => {
-                return /* @__PURE__ */ jsxRuntime.jsx(
+              return /* @__PURE__ */ jsx(ResponsiveGridRoot, { gap: 4, children: row.map(({ size, ...field }) => {
+                return /* @__PURE__ */ jsx(
                   ResponsiveGridItem,
                   {
                     col: size,
@@ -10579,7 +10519,7 @@ const FormLayout = ({ layout, document: document2, hasBackground = true }) => {
                     xs: 12,
                     direction: "column",
                     alignItems: "stretch",
-                    children: /* @__PURE__ */ jsxRuntime.jsx(
+                    children: /* @__PURE__ */ jsx(
                       MemoizedInputRenderer,
                       {
                         ...field,
@@ -10593,18 +10533,18 @@ const FormLayout = ({ layout, document: document2, hasBackground = true }) => {
               }) }, gridRowIndex);
             })
           }
-        ) }, index2);
+        ) }, index);
       })
     }
   );
 };
 const Header = ({ isCreating, status, title: documentTitle = "Untitled" }) => {
-  const { formatMessage } = reactIntl.useIntl();
-  const isCloning = reactRouterDom.useMatch(index.CLONE_PATH) !== null;
-  const params = reactRouterDom.useParams();
+  const { formatMessage } = useIntl();
+  const isCloning = useMatch(CLONE_PATH) !== null;
+  const params = useParams();
   const title = isCreating ? "Create an entry" : documentTitle;
-  return /* @__PURE__ */ jsxRuntime.jsxs(
-    designSystem.Flex,
+  return /* @__PURE__ */ jsxs(
+    Flex,
     {
       direction: "column",
       alignItems: "flex-start",
@@ -10618,14 +10558,14 @@ const Header = ({ isCreating, status, title: documentTitle = "Untitled" }) => {
       },
       gap: 2,
       children: [
-        /* @__PURE__ */ jsxRuntime.jsx(
-          admin.BackButton,
+        /* @__PURE__ */ jsx(
+          BackButton,
           {
-            fallback: params.collectionType === index.SINGLE_TYPES ? void 0 : `../${index.COLLECTION_TYPES}/${params.slug}`
+            fallback: params.collectionType === SINGLE_TYPES ? void 0 : `../${COLLECTION_TYPES}/${params.slug}`
           }
         ),
-        /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.Flex,
+        /* @__PURE__ */ jsx(
+          Flex,
           {
             width: "100%",
             justifyContent: "space-between",
@@ -10638,10 +10578,10 @@ const Header = ({ isCreating, status, title: documentTitle = "Untitled" }) => {
               initial: "column",
               medium: "row"
             },
-            children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { variant: "alpha", tag: "h1", children: title })
+            children: /* @__PURE__ */ jsx(Typography, { variant: "alpha", tag: "h1", children: title })
           }
         ),
-        status ? /* @__PURE__ */ jsxRuntime.jsx(designSystem.Box, { marginTop: 1, children: /* @__PURE__ */ jsxRuntime.jsx(DocumentStatus, { status: isCloning ? "draft" : status }) }) : null
+        status ? /* @__PURE__ */ jsx(Box, { marginTop: 1, children: /* @__PURE__ */ jsx(DocumentStatus, { status: isCloning ? "draft" : status }) }) : null
       ]
     }
   );
@@ -10654,7 +10594,7 @@ const transformData = (data) => {
     if ("apiData" in data) {
       return data.apiData;
     }
-    return mapValues__default.default(transformData)(data);
+    return mapValues(transformData)(data);
   }
   return data;
 };
@@ -10670,20 +10610,20 @@ const usePublishAction = ({
     currentDocument: { schema, components },
     currentDocumentMeta
   } = useDocumentContext("usePublishAction");
-  const navigate = reactRouterDom.useNavigate();
-  const { toggleNotification } = admin.useNotification();
-  const { _unstableFormatValidationErrors: formatValidationErrors } = admin.useAPIErrorHandler();
-  const { id } = reactRouterDom.useParams();
+  const navigate = useNavigate();
+  const { toggleNotification } = useNotification();
+  const { _unstableFormatValidationErrors: formatValidationErrors } = useAPIErrorHandler();
+  const { id } = useParams();
   const { publish, isLoading } = useDocumentActions();
   const onPreview = usePreviewContext("usePublishAction", (state) => state.onPreview, false);
-  const [{ rawQuery }] = admin.useQueryParams();
-  const modified = admin.useForm("usePublishAction", ({ modified: modified2 }) => modified2);
-  const setSubmitting = admin.useForm("usePublishAction", ({ setSubmitting: setSubmitting2 }) => setSubmitting2);
-  const isSubmitting = admin.useForm("usePublishAction", ({ isSubmitting: isSubmitting2 }) => isSubmitting2);
-  const validate = admin.useForm("usePublishAction", (state) => state.validate);
-  const setErrors = admin.useForm("usePublishAction", (state) => state.setErrors);
-  const formValues = admin.useForm("usePublishAction", ({ values }) => values);
-  const resetForm = admin.useForm("usePublishAction", ({ resetForm: resetForm2 }) => resetForm2);
+  const [{ rawQuery }] = useQueryParams();
+  const modified = useForm("usePublishAction", ({ modified: modified2 }) => modified2);
+  const setSubmitting = useForm("usePublishAction", ({ setSubmitting: setSubmitting2 }) => setSubmitting2);
+  const isSubmitting = useForm("usePublishAction", ({ isSubmitting: isSubmitting2 }) => isSubmitting2);
+  const validate = useForm("usePublishAction", (state) => state.validate);
+  const setErrors = useForm("usePublishAction", (state) => state.setErrors);
+  const formValues = useForm("usePublishAction", ({ values }) => values);
+  const resetForm = useForm("usePublishAction", ({ resetForm: resetForm2 }) => resetForm2);
   const idToPublish = currentDocumentMeta.documentId || id;
   const isDocumentPublished = (document2?.[PUBLISHED_AT_ATTRIBUTE_NAME] || meta?.availableStatus.some((doc) => doc[PUBLISHED_AT_ATTRIBUTE_NAME] !== null)) && document2?.status !== "modified";
   const performPublish = async () => {
@@ -10718,7 +10658,7 @@ const usePublishAction = ({
       if ("data" in res) {
         resetForm(formValues);
       }
-      if ("data" in res && collectionType !== index.SINGLE_TYPES) {
+      if ("data" in res && collectionType !== SINGLE_TYPES) {
         if (idToPublish === "create") {
           navigate({
             pathname: `../${collectionType}/${model}/${res.data.documentId}`,
@@ -10761,8 +10701,8 @@ const PublishButton = ({ documentId, model, collectionType, meta, document: docu
     console.error("usePublishAction returned null");
     return null;
   }
-  return /* @__PURE__ */ jsxRuntime.jsx(
-    designSystem.Button,
+  return /* @__PURE__ */ jsx(
+    Button,
     {
       flex: "auto",
       startIcon: publishAction.icon,
@@ -10779,24 +10719,24 @@ const PublishButton = ({ documentId, model, collectionType, meta, document: docu
   );
 };
 const useUpdateAction = (activeTab, documentId, model, collectionType) => {
-  const navigate = reactRouterDom.useNavigate();
-  const { toggleNotification } = admin.useNotification();
-  const { _unstableFormatValidationErrors: formatValidationErrors } = admin.useAPIErrorHandler();
+  const navigate = useNavigate();
+  const { toggleNotification } = useNotification();
+  const { _unstableFormatValidationErrors: formatValidationErrors } = useAPIErrorHandler();
   const { create, update, isLoading } = useDocumentActions();
   const {
     currentDocument: { components, schema },
     currentDocumentMeta
   } = useDocumentContext("UpdateAction");
-  const [{ rawQuery }] = admin.useQueryParams();
+  const [{ rawQuery }] = useQueryParams();
   const onPreview = usePreviewContext("UpdateAction", (state) => state.onPreview, false);
-  const isSubmitting = admin.useForm("UpdateAction", ({ isSubmitting: isSubmitting2 }) => isSubmitting2);
-  const modified = admin.useForm("UpdateAction", ({ modified: modified2 }) => modified2);
-  const setSubmitting = admin.useForm("UpdateAction", ({ setSubmitting: setSubmitting2 }) => setSubmitting2);
-  const initialValues = admin.useForm("UpdateAction", ({ initialValues: initialValues2 }) => initialValues2);
-  const document2 = admin.useForm("UpdateAction", ({ values }) => values);
-  const validate = admin.useForm("UpdateAction", (state) => state.validate);
-  const setErrors = admin.useForm("UpdateAction", (state) => state.setErrors);
-  const resetForm = admin.useForm("UpdateAction", ({ resetForm: resetForm2 }) => resetForm2);
+  const isSubmitting = useForm("UpdateAction", ({ isSubmitting: isSubmitting2 }) => isSubmitting2);
+  const modified = useForm("UpdateAction", ({ modified: modified2 }) => modified2);
+  const setSubmitting = useForm("UpdateAction", ({ setSubmitting: setSubmitting2 }) => setSubmitting2);
+  const initialValues = useForm("UpdateAction", ({ initialValues: initialValues2 }) => initialValues2);
+  const document2 = useForm("UpdateAction", ({ values }) => values);
+  const validate = useForm("UpdateAction", (state) => state.validate);
+  const setErrors = useForm("UpdateAction", (state) => state.setErrors);
+  const resetForm = useForm("UpdateAction", ({ resetForm: resetForm2 }) => resetForm2);
   const handleUpdate = async () => {
     setSubmitting(true);
     try {
@@ -10813,7 +10753,7 @@ const useUpdateAction = (activeTab, documentId, model, collectionType) => {
         });
         return;
       }
-      if (documentId || collectionType === index.SINGLE_TYPES) {
+      if (documentId || collectionType === SINGLE_TYPES) {
         const { data } = handleInvisibleAttributes(transformData(document2), {
           schema,
           initialValues,
@@ -10846,7 +10786,7 @@ const useUpdateAction = (activeTab, documentId, model, collectionType) => {
           },
           data
         );
-        if ("data" in res && collectionType !== index.SINGLE_TYPES) {
+        if ("data" in res && collectionType !== SINGLE_TYPES) {
           navigate(
             {
               pathname: `../${res.data.documentId}`,
@@ -10880,8 +10820,8 @@ const UpdateButton = ({ activeTab, documentId, model, collectionType }) => {
     console.error("useUpdateAction returned null");
     return null;
   }
-  return /* @__PURE__ */ jsxRuntime.jsx(
-    designSystem.Button,
+  return /* @__PURE__ */ jsx(
+    Button,
     {
       flex: "auto",
       startIcon: updateAction.icon,
@@ -10898,19 +10838,18 @@ const UpdateButton = ({ activeTab, documentId, model, collectionType }) => {
   );
 };
 const useDeleteAction = (documentId, model, collectionType) => {
-  const navigate = reactRouterDom.useNavigate();
-  const listViewPathMatch = reactRouterDom.useMatch(index.LIST_PATH);
+  const navigate = useNavigate();
+  const listViewPathMatch = useMatch(LIST_PATH);
   const { delete: deleteAction, isLoading } = useDocumentActions();
-  const { toggleNotification } = admin.useNotification();
-  const setSubmitting = admin.useForm("DeleteAction", (state) => state.setSubmitting);
-  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = React__namespace.useState(false);
-  console.log("listViewPathMatch", listViewPathMatch);
+  const { toggleNotification } = useNotification();
+  const setSubmitting = useForm("DeleteAction", (state) => state.setSubmitting);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = React.useState(false);
   const handleDelete = async () => {
     if (!listViewPathMatch) {
       setSubmitting(true);
     }
     try {
-      if (!documentId && collectionType !== index.SINGLE_TYPES) {
+      if (!documentId && collectionType !== SINGLE_TYPES) {
         console.error(
           "You're trying to delete a document without an id, this is likely a bug with Strapi. Please open an issue."
         );
@@ -10944,16 +10883,16 @@ const useDeleteAction = (documentId, model, collectionType) => {
   const closeDeleteDialog = () => {
     setIsDeleteDialogOpen(false);
   };
-  const deleteDialogContent = /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { direction: "column", gap: 2, children: [
-    /* @__PURE__ */ jsxRuntime.jsx(Icons.WarningCircle, { width: "24px", height: "24px", fill: "danger600" }),
-    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { tag: "p", variant: "omega", textAlign: "center", children: "Are you sure you want to delete this item? This action is irreversible." })
+  const deleteDialogContent = /* @__PURE__ */ jsxs(Flex, { direction: "column", gap: 2, children: [
+    /* @__PURE__ */ jsx(WarningCircle, { width: "24px", height: "24px", fill: "danger600" }),
+    /* @__PURE__ */ jsx(Typography, { tag: "p", variant: "omega", textAlign: "center", children: "Are you sure you want to delete this item? This action is irreversible." })
   ] });
   return {
     label: "Delete item",
     onClick: handleDelete,
     loading: isLoading,
     disabled: false,
-    icon: /* @__PURE__ */ jsxRuntime.jsx(Icons.Trash, {}),
+    icon: /* @__PURE__ */ jsx(Trash, {}),
     variant: "danger",
     dialog: {
       isOpen: isDeleteDialogOpen,
@@ -10986,12 +10925,12 @@ const DocumentActionConfirmDialog = ({
     }
     onClose();
   };
-  return /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Root, { open: isOpen, onOpenChange: handleClose, children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Dialog.Content, { children: [
-    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Header, { children: title }),
-    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Body, { children: content }),
-    /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Dialog.Footer, { children: [
-      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Cancel, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { variant: "tertiary", fullWidth: true, children: "Cancel" }) }),
-      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { onClick: handleConfirm, variant, fullWidth: true, loading, children: "Confirm" })
+  return /* @__PURE__ */ jsx(Dialog.Root, { open: isOpen, onOpenChange: handleClose, children: /* @__PURE__ */ jsxs(Dialog.Content, { children: [
+    /* @__PURE__ */ jsx(Dialog.Header, { children: title }),
+    /* @__PURE__ */ jsx(Dialog.Body, { children: content }),
+    /* @__PURE__ */ jsxs(Dialog.Footer, { children: [
+      /* @__PURE__ */ jsx(Dialog.Cancel, { children: /* @__PURE__ */ jsx(Button, { variant: "tertiary", fullWidth: true, children: "Cancel" }) }),
+      /* @__PURE__ */ jsx(Button, { onClick: handleConfirm, variant, fullWidth: true, loading, children: "Confirm" })
     ] })
   ] }) });
 };
@@ -11002,21 +10941,20 @@ const UNPUBLISH_DRAFT_OPTIONS = {
 const useUnpublishAction = (activeTab, collectionType, model, document2, documentId) => {
   const { schema } = useDoc();
   const { unpublish } = useDocumentActions();
-  const [{ query }] = admin.useQueryParams();
-  const params = React__namespace.useMemo(() => buildValidParams(query), [query]);
-  const { toggleNotification } = admin.useNotification();
-  const [shouldKeepDraft, setShouldKeepDraft] = React__namespace.useState(true);
-  const [isDialogOpen, setIsDialogOpen] = React__namespace.useState(false);
+  const [{ query }] = useQueryParams();
+  const params = React.useMemo(() => buildValidParams(query), [query]);
+  const { toggleNotification } = useNotification();
+  const [shouldKeepDraft, setShouldKeepDraft] = React.useState(true);
+  const [isDialogOpen, setIsDialogOpen] = React.useState(false);
   const isDocumentModified = document2?.status === "modified";
   const handleChange = (value) => {
     setShouldKeepDraft(value === UNPUBLISH_DRAFT_OPTIONS.KEEP);
   };
   const handleUnpublish = async () => {
-    if (!documentId && collectionType !== index.SINGLE_TYPES) {
+    if (!documentId && collectionType !== SINGLE_TYPES) {
       console.error(
         "You're trying to unpublish a document without an id, this is likely a bug with Strapi. Please open an issue."
       );
-      console.log("documentId", documentId, "collectionType", collectionType);
       toggleNotification({
         message: "An error occurred while trying to unpublish the document.",
         type: "danger"
@@ -11044,25 +10982,25 @@ const useUnpublishAction = (activeTab, collectionType, model, document2, documen
   if (!schema?.options?.draftAndPublish) {
     return null;
   }
-  const dialogContent = /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { alignItems: "flex-start", direction: "column", gap: 6, children: [
-    /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { width: "100%", direction: "column", gap: 2, children: [
-      /* @__PURE__ */ jsxRuntime.jsx(Icons.WarningCircle, { width: "24px", height: "24px", fill: "danger600" }),
-      /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Typography, { tag: "p", variant: "omega", textAlign: "center", children: [
+  const dialogContent = /* @__PURE__ */ jsxs(Flex, { alignItems: "flex-start", direction: "column", gap: 6, children: [
+    /* @__PURE__ */ jsxs(Flex, { width: "100%", direction: "column", gap: 2, children: [
+      /* @__PURE__ */ jsx(WarningCircle, { width: "24px", height: "24px", fill: "danger600" }),
+      /* @__PURE__ */ jsxs(Typography, { tag: "p", variant: "omega", textAlign: "center", children: [
         "Are you sure you want to unpublish this document?",
-        /* @__PURE__ */ jsxRuntime.jsx("br", {}),
+        /* @__PURE__ */ jsx("br", {}),
         "This draft is modified. Would you like to keep the modified draft or the version that was published?"
       ] })
     ] }),
-    /* @__PURE__ */ jsxRuntime.jsxs(
-      designSystem.Radio.Group,
+    /* @__PURE__ */ jsxs(
+      Radio.Group,
       {
         defaultValue: UNPUBLISH_DRAFT_OPTIONS.KEEP,
         name: "discard-options",
         "aria-label": "Choose an option to unpublish the document.",
         onValueChange: handleChange,
         children: [
-          /* @__PURE__ */ jsxRuntime.jsx(designSystem.Radio.Item, { checked: shouldKeepDraft, value: UNPUBLISH_DRAFT_OPTIONS.KEEP, children: "Keep modified draft" }),
-          /* @__PURE__ */ jsxRuntime.jsx(designSystem.Radio.Item, { checked: !shouldKeepDraft, value: UNPUBLISH_DRAFT_OPTIONS.DISCARD, children: "Replace draft with published version" })
+          /* @__PURE__ */ jsx(Radio.Item, { checked: shouldKeepDraft, value: UNPUBLISH_DRAFT_OPTIONS.KEEP, children: "Keep modified draft" }),
+          /* @__PURE__ */ jsx(Radio.Item, { checked: !shouldKeepDraft, value: UNPUBLISH_DRAFT_OPTIONS.DISCARD, children: "Replace draft with published version" })
         ]
       }
     )
@@ -11072,7 +11010,7 @@ const useUnpublishAction = (activeTab, collectionType, model, document2, documen
     onClick: handleUnpublish,
     loading: false,
     disabled: activeTab === "published" || document2?.status !== "published" && document2?.status !== "modified",
-    icon: /* @__PURE__ */ jsxRuntime.jsx(Icons.Cross, {}),
+    icon: /* @__PURE__ */ jsx(Cross, {}),
     variant: "danger",
     dialog: {
       isOpen: isDialogOpen,
@@ -11085,23 +11023,23 @@ const useUnpublishAction = (activeTab, collectionType, model, document2, documen
 const useDiscardAction = (activeTab, collectionType, model, document2, documentId) => {
   const { schema } = useDoc();
   const { discard, isLoading } = useDocumentActions();
-  const [isDiscardDialogOpen, setIsDiscardDialogOpen] = React__namespace.default.useState(false);
-  const [{ query }] = admin.useQueryParams();
-  const params = React__namespace.default.useMemo(() => buildValidParams(query), [query]);
+  const [isDiscardDialogOpen, setIsDiscardDialogOpen] = React__default.useState(false);
+  const [{ query }] = useQueryParams();
+  const params = React__default.useMemo(() => buildValidParams(query), [query]);
   if (!schema?.options?.draftAndPublish) {
     return null;
   }
   return {
     disabled: activeTab === "published" || document2?.status !== "modified",
     label: "Discard modifications (replace current draft with published version)",
-    icon: /* @__PURE__ */ jsxRuntime.jsx(Icons.ArrowLeft, {}),
+    icon: /* @__PURE__ */ jsx(ArrowLeft, {}),
     variant: "warning",
     loading: isLoading,
     dialog: {
       title: "Confirmation",
-      content: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { direction: "column", gap: 2, children: [
-        /* @__PURE__ */ jsxRuntime.jsx(Icons.WarningCircle, { width: "24px", height: "24px", fill: "danger600" }),
-        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { tag: "p", variant: "omega", textAlign: "center", children: "Are you sure you want to discard the changes made to this document?" })
+      content: /* @__PURE__ */ jsxs(Flex, { direction: "column", gap: 2, children: [
+        /* @__PURE__ */ jsx(WarningCircle, { width: "24px", height: "24px", fill: "danger600" }),
+        /* @__PURE__ */ jsx(Typography, { tag: "p", variant: "omega", textAlign: "center", children: "Are you sure you want to discard the changes made to this document?" })
       ] }),
       open: () => setIsDiscardDialogOpen(true),
       close: () => setIsDiscardDialogOpen(false),
@@ -11118,24 +11056,24 @@ const useDiscardAction = (activeTab, collectionType, model, document2, documentI
   };
 };
 const useHandleApplicationAction = (documentId, model) => {
-  if (model !== index.MEMBER_APPLICATION_MODEL) {
-    console.error("This hook only applies to ", index.MEMBER_APPLICATION_MODEL);
+  if (model !== MEMBER_APPLICATION_MODEL) {
+    console.error("This hook only applies to ", MEMBER_APPLICATION_MODEL);
     return null;
   }
   if (!documentId) {
     console.error("DocumentId must be string ");
     return null;
   }
-  const { toggleNotification } = admin.useNotification();
+  const { toggleNotification } = useNotification();
   const { update, isLoading } = useDocumentActions();
   const {
     currentDocument: { components, schema, document: rawDocument },
     currentDocumentMeta
   } = useDocumentContext("useHandleApplicationAction");
-  const isSubmitting = admin.useForm("useHandleApplicationAction", ({ isSubmitting: isSubmitting2 }) => isSubmitting2);
-  const setSubmitting = admin.useForm("useHandleApplicationAction", ({ setSubmitting: setSubmitting2 }) => setSubmitting2);
-  const initialValues = admin.useForm("useHandleApplicationAction", ({ initialValues: initialValues2 }) => initialValues2);
-  const document2 = admin.useForm("useHandleApplicationAction", ({ values }) => values);
+  const isSubmitting = useForm("useHandleApplicationAction", ({ isSubmitting: isSubmitting2 }) => isSubmitting2);
+  const setSubmitting = useForm("useHandleApplicationAction", ({ setSubmitting: setSubmitting2 }) => setSubmitting2);
+  const initialValues = useForm("useHandleApplicationAction", ({ initialValues: initialValues2 }) => initialValues2);
+  const document2 = useForm("useHandleApplicationAction", ({ values }) => values);
   const handleApprove = async (membershipTypeId, membershipTypeDocumentId, decision) => {
     setSubmitting(true);
     try {
@@ -11167,7 +11105,7 @@ const useHandleApplicationAction = (documentId, model) => {
           }
           const res = await update(
             {
-              collectionType: index.COLLECTION_TYPES,
+              collectionType: COLLECTION_TYPES,
               model,
               documentId,
               params: currentDocumentMeta.params
@@ -11188,7 +11126,7 @@ const useHandleApplicationAction = (documentId, model) => {
             }
           }
         } else {
-          console.error(`The field ${index.APPLICATION_STATUS} does not exist on the document data.`);
+          console.error(`The field ${APPLICATION_STATUS} does not exist on the document data.`);
         }
       }
     } finally {
@@ -11208,8 +11146,8 @@ const ApproveButton = ({ documentId, model, membershipTypeId, membershipTypeDocu
     console.error("useHandleApplicationAction returned null");
     return null;
   }
-  return /* @__PURE__ */ jsxRuntime.jsx(
-    designSystem.Button,
+  return /* @__PURE__ */ jsx(
+    Button,
     {
       flex: "auto",
       onClick: () => approveAction.onClick(membershipTypeId, membershipTypeDocumentId, "approved"),
@@ -11230,8 +11168,8 @@ const RejectButton = ({ documentId, model, membershipTypeId, membershipTypeDocum
     console.error("useHandleApplicationAction returned null");
     return null;
   }
-  return /* @__PURE__ */ jsxRuntime.jsx(
-    designSystem.Button,
+  return /* @__PURE__ */ jsx(
+    Button,
     {
       flex: "auto",
       onClick: () => applicationAction.onClick(membershipTypeId, membershipTypeDocumentId, "rejected"),
@@ -11308,9 +11246,9 @@ function extractlocationFormatted(eventFormat, physicalLocation, teamsLink) {
   }
   return locationFormatted;
 }
-React__namespace.forwardRef(({ children, title }, ref) => {
-  return /* @__PURE__ */ jsxRuntime.jsxs(
-    designSystem.Flex,
+React.forwardRef(({ children, title }, ref) => {
+  return /* @__PURE__ */ jsxs(
+    Flex,
     {
       ref,
       tag: "aside",
@@ -11328,16 +11266,16 @@ React__namespace.forwardRef(({ children, title }, ref) => {
       justifyContent: "stretch",
       alignItems: "flex-start",
       children: [
-        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { tag: "h2", variant: "sigma", textTransform: "uppercase", textColor: "neutral600", children: title }),
+        /* @__PURE__ */ jsx(Typography, { tag: "h2", variant: "sigma", textTransform: "uppercase", textColor: "neutral600", children: title }),
         children
       ]
     }
   );
 });
 const useEmailTemplates = () => {
-  const { get } = admin.useFetchClient();
+  const { get } = useFetchClient();
   const fetchTemplate = async (templateName, variables) => {
-    const query = qs__default.default.stringify({
+    const query = qs.stringify({
       filters: {
         templateName: {
           $eq: templateName
@@ -11371,38 +11309,38 @@ const useScheduledEmails = (model, documentId, sequence) => {
 };
 const ScheduledEmails = ({ model, documentId }) => {
   if (!documentId) {
-    return /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { children: "No scheduled emails as document is not saved" });
+    return /* @__PURE__ */ jsx(Typography, { children: "No scheduled emails as document is not saved" });
   }
   const { data, error, isLoading, refetch, isFetching } = useScheduledEmails(model, documentId, [1, 2, 3]);
   const handleRefresh = () => {
     refetch();
   };
   if (isLoading) {
-    return /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { children: "Loading scheduled emails..." });
+    return /* @__PURE__ */ jsx(Typography, { children: "Loading scheduled emails..." });
   } else if (error) {
-    return /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { variant: "danger", children: "Error loading scheduled emails." });
+    return /* @__PURE__ */ jsx(Typography, { variant: "danger", children: "Error loading scheduled emails." });
   } else if (Array.isArray(data?.results) && data.results.length === 0) {
-    return /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { direction: "column", gap: 2, alignItems: "start", children: [
-      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { children: "No scheduled emails found. Make sure you selected mailing lists or types of members allowed to attend" }),
-      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { onClick: handleRefresh, loading: isFetching, size: "S", variant: "secondary", children: "Refresh" })
+    return /* @__PURE__ */ jsxs(Flex, { direction: "column", gap: 2, alignItems: "start", children: [
+      /* @__PURE__ */ jsx(Typography, { children: "No scheduled emails found. Make sure you selected mailing lists or types of members allowed to attend" }),
+      /* @__PURE__ */ jsx(Button, { onClick: handleRefresh, loading: isFetching, size: "S", variant: "secondary", children: "Refresh" })
     ] });
   }
-  return /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { direction: "column", gap: 2, padding: 2, alignItems: "start", background: "neutral100", width: "100%", children: [
-    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { children: "Note you cannot disable an email that has already been sent. Disable emails using the toggles in the main form above" }),
-    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { onClick: handleRefresh, loading: isFetching, size: "S", children: "Refresh" }),
-    data && data.results.map((email) => /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { direction: "column", padding: 2, borderColor: "neutral150", borderWidth: "1px", hasRadius: true, width: "100%", alignItems: "start", children: [
-      /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Typography, { children: [
-        /* @__PURE__ */ jsxRuntime.jsx("strong", { children: "Subject:" }),
+  return /* @__PURE__ */ jsxs(Flex, { direction: "column", gap: 2, padding: 2, alignItems: "start", background: "neutral100", width: "100%", children: [
+    /* @__PURE__ */ jsx(Typography, { children: "Note you cannot disable an email that has already been sent. Disable emails using the toggles in the main form above" }),
+    /* @__PURE__ */ jsx(Button, { onClick: handleRefresh, loading: isFetching, size: "S", children: "Refresh" }),
+    data && data.results.map((email) => /* @__PURE__ */ jsxs(Flex, { direction: "column", padding: 2, borderColor: "neutral150", borderWidth: "1px", hasRadius: true, width: "100%", alignItems: "start", children: [
+      /* @__PURE__ */ jsxs(Typography, { children: [
+        /* @__PURE__ */ jsx("strong", { children: "Subject:" }),
         " ",
         email.subject
       ] }),
-      /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Typography, { children: [
-        /* @__PURE__ */ jsxRuntime.jsx("strong", { children: "Body:" }),
+      /* @__PURE__ */ jsxs(Typography, { children: [
+        /* @__PURE__ */ jsx("strong", { children: "Body:" }),
         " ",
         email.body
       ] }),
-      /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Typography, { children: [
-        /* @__PURE__ */ jsxRuntime.jsx("strong", { children: "Scheduled Date:" }),
+      /* @__PURE__ */ jsxs(Typography, { children: [
+        /* @__PURE__ */ jsx("strong", { children: "Scheduled Date:" }),
         " ",
         new Date(email.scheduledDatetime).toLocaleDateString("en-GB", {
           day: "numeric",
@@ -11413,13 +11351,13 @@ const ScheduledEmails = ({ model, documentId }) => {
           hour12: false
         })
       ] }),
-      /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Typography, { children: [
-        /* @__PURE__ */ jsxRuntime.jsx("strong", { children: "Scheduled emails:" }),
+      /* @__PURE__ */ jsxs(Typography, { children: [
+        /* @__PURE__ */ jsx("strong", { children: "Scheduled emails:" }),
         " ",
         email.emails.replace(",", ", ")
       ] }),
-      /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Typography, { children: [
-        /* @__PURE__ */ jsxRuntime.jsx("strong", { children: "Sent:" }),
+      /* @__PURE__ */ jsxs(Typography, { children: [
+        /* @__PURE__ */ jsx("strong", { children: "Sent:" }),
         " ",
         email.sent ? "Yes" : "No"
       ] })
@@ -11434,12 +11372,12 @@ const EventActionPanel = ({
   meta,
   collectionType
 }) => {
-  const onChange = admin.useForm("EventActionPanel", ({ onChange: onChange2 }) => onChange2);
-  const formValues = admin.useForm("EventActionPanel", ({ values }) => values);
+  const onChange = useForm("EventActionPanel", ({ onChange: onChange2 }) => onChange2);
+  const formValues = useForm("EventActionPanel", ({ values }) => values);
   const { fetchTemplate } = useEmailTemplates();
   const emailTemplateName = ["event-announcement-email", "event-first-reminder-email", "event-final-reminder-email"];
   const daysBefore = [7, 3, 0];
-  const [loadingTemplates, setLoadingTemplates] = React__namespace.useState(false);
+  const [loadingTemplates, setLoadingTemplates] = React.useState(false);
   const handleEmailTemplates = async () => {
     setLoadingTemplates(true);
     onChange("showDisableToggles", true);
@@ -11494,9 +11432,9 @@ const EventActionPanel = ({
       setLoadingTemplates(false);
     }
   };
-  return /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { onClick: handleEmailTemplates, loading: loadingTemplates, startIcon: /* @__PURE__ */ jsxRuntime.jsx(Icons.Mail, {}), children: "Setup email reminders" }),
-    /* @__PURE__ */ jsxRuntime.jsx(
+  return /* @__PURE__ */ jsxs(Fragment, { children: [
+    /* @__PURE__ */ jsx(Button, { onClick: handleEmailTemplates, loading: loadingTemplates, startIcon: /* @__PURE__ */ jsx(Mail, {}), children: "Setup email reminders" }),
+    /* @__PURE__ */ jsx(
       StandardActionPanel,
       {
         model,
@@ -11507,9 +11445,9 @@ const EventActionPanel = ({
         collectionType
       }
     ),
-    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Accordion.Root, { variant: "primary", children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Accordion.Item, { value: "acc-01", children: [
-      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Accordion.Header, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Accordion.Trigger, { description: "Your personal information", children: "Show scheduled and sent emails (updated after saving document and refreshing)" }) }),
-      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Accordion.Content, { padding: 2, children: /* @__PURE__ */ jsxRuntime.jsx(ScheduledEmails, { model, documentId }) })
+    /* @__PURE__ */ jsx(Accordion.Root, { variant: "primary", children: /* @__PURE__ */ jsxs(Accordion.Item, { value: "acc-01", children: [
+      /* @__PURE__ */ jsx(Accordion.Header, { children: /* @__PURE__ */ jsx(Accordion.Trigger, { description: "Your personal information", children: "Show scheduled and sent emails (updated after saving document and refreshing)" }) }),
+      /* @__PURE__ */ jsx(Accordion.Content, { padding: 2, children: /* @__PURE__ */ jsx(ScheduledEmails, { model, documentId }) })
     ] }) })
   ] });
 };
@@ -11524,10 +11462,10 @@ const StandardActionPanel = ({
   const deleteAction = useDeleteAction(documentId, model, collectionType);
   const unpublishAction = useUnpublishAction(status, collectionType, model, document2, documentId);
   const discardAction = useDiscardAction(status, collectionType, model, document2, documentId);
-  return /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-    /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { alignItems: "center", width: "100%", gap: 8, children: [
-      /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { gap: 2, justifyContent: "center", alignItems: "center", width: "50%", children: [
-        /* @__PURE__ */ jsxRuntime.jsx(
+  return /* @__PURE__ */ jsxs(Fragment, { children: [
+    /* @__PURE__ */ jsxs(Flex, { alignItems: "center", width: "100%", gap: 8, children: [
+      /* @__PURE__ */ jsxs(Flex, { gap: 2, justifyContent: "center", alignItems: "center", width: "50%", children: [
+        /* @__PURE__ */ jsx(
           PublishButton,
           {
             documentId,
@@ -11538,7 +11476,7 @@ const StandardActionPanel = ({
             document: document2
           }
         ),
-        /* @__PURE__ */ jsxRuntime.jsx(
+        /* @__PURE__ */ jsx(
           UpdateButton,
           {
             activeTab: status,
@@ -11548,9 +11486,9 @@ const StandardActionPanel = ({
           }
         )
       ] }),
-      /* @__PURE__ */ jsxRuntime.jsxs(designSystem.SimpleMenu, { label: "More actions", variant: "tertiary", children: [
-        /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.MenuItem,
+      /* @__PURE__ */ jsxs(SimpleMenu, { label: "More actions", variant: "tertiary", children: [
+        /* @__PURE__ */ jsx(
+          MenuItem,
           {
             onSelect: deleteAction.dialog?.open,
             variant: deleteAction.variant,
@@ -11558,16 +11496,16 @@ const StandardActionPanel = ({
             children: deleteAction.label
           }
         ),
-        unpublishAction && /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.MenuItem,
+        unpublishAction && /* @__PURE__ */ jsx(
+          MenuItem,
           {
             onSelect: unpublishAction.dialog?.open,
             startIcon: unpublishAction.icon,
             children: unpublishAction.label
           }
         ),
-        discardAction && /* @__PURE__ */ jsxRuntime.jsx(
-          designSystem.MenuItem,
+        discardAction && /* @__PURE__ */ jsx(
+          MenuItem,
           {
             onSelect: discardAction.dialog?.open,
             variant: discardAction.variant,
@@ -11577,7 +11515,7 @@ const StandardActionPanel = ({
         )
       ] })
     ] }),
-    deleteAction && /* @__PURE__ */ jsxRuntime.jsx(
+    deleteAction && /* @__PURE__ */ jsx(
       DocumentActionConfirmDialog,
       {
         title: "Confirmation",
@@ -11588,7 +11526,7 @@ const StandardActionPanel = ({
       },
       "delete"
     ),
-    unpublishAction && /* @__PURE__ */ jsxRuntime.jsx(
+    unpublishAction && /* @__PURE__ */ jsx(
       DocumentActionConfirmDialog,
       {
         title: "Confirmation",
@@ -11599,7 +11537,7 @@ const StandardActionPanel = ({
       },
       "unpublish"
     ),
-    discardAction && /* @__PURE__ */ jsxRuntime.jsx(
+    discardAction && /* @__PURE__ */ jsx(
       DocumentActionConfirmDialog,
       {
         title: discardAction.dialog?.title,
@@ -11613,24 +11551,24 @@ const StandardActionPanel = ({
   ] });
 };
 const Radios = ({ memberTypes, documentId, model }) => {
-  const [selectedMemberType, setSelectedMemberType] = React__namespace.useState(memberTypes[0]);
+  const [selectedMemberType, setSelectedMemberType] = React.useState(memberTypes[0]);
   const handleGroupChange = (id) => {
     const found = memberTypes.find((mt) => mt.id === id);
     if (found) {
       setSelectedMemberType(found);
     }
   };
-  return /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-    /* @__PURE__ */ jsxRuntime.jsxs(
-      designSystem.Radio.Group,
+  return /* @__PURE__ */ jsxs(Fragment, { children: [
+    /* @__PURE__ */ jsxs(
+      Radio.Group,
       {
         "aria-label": "member type",
         value: selectedMemberType.id,
         onValueChange: handleGroupChange,
         children: [
-          /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { tag: "label", variant: "pi", fontWeight: "bold", children: "Select type of new member" }),
-          memberTypes.map((item) => /* @__PURE__ */ jsxRuntime.jsx(
-            designSystem.Radio.Item,
+          /* @__PURE__ */ jsx(Typography, { tag: "label", variant: "pi", fontWeight: "bold", children: "Select type of new member" }),
+          memberTypes.map((item) => /* @__PURE__ */ jsx(
+            Radio.Item,
             {
               value: item.id,
               children: item.membershipName || "Unknown membership type"
@@ -11640,8 +11578,8 @@ const Radios = ({ memberTypes, documentId, model }) => {
         ]
       }
     ),
-    /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { gap: 2, justifyContent: "center", alignItems: "center", width: "50%", children: [
-      /* @__PURE__ */ jsxRuntime.jsx(
+    /* @__PURE__ */ jsxs(Flex, { gap: 2, justifyContent: "center", alignItems: "center", width: "50%", children: [
+      /* @__PURE__ */ jsx(
         ApproveButton,
         {
           documentId,
@@ -11650,7 +11588,7 @@ const Radios = ({ memberTypes, documentId, model }) => {
           membershipTypeDocumentId: selectedMemberType.documentId
         }
       ),
-      /* @__PURE__ */ jsxRuntime.jsx(
+      /* @__PURE__ */ jsx(
         RejectButton,
         {
           documentId,
@@ -11660,7 +11598,7 @@ const Radios = ({ memberTypes, documentId, model }) => {
         }
       )
     ] }),
-    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Flex, { alignItems: "center", width: "100%", gap: 8 })
+    /* @__PURE__ */ jsx(Flex, { alignItems: "center", width: "100%", gap: 8 })
   ] });
 };
 const MemberApplicationActionPanel = ({
@@ -11669,7 +11607,7 @@ const MemberApplicationActionPanel = ({
   document: document2
 }) => {
   const { data, error, isLoading } = useSearchRelationsQuery({
-    model: index.MEMBER_APPLICATION_MODEL,
+    model: MEMBER_APPLICATION_MODEL,
     targetField: "member_type",
     params: {
       pageSize: 100,
@@ -11677,31 +11615,31 @@ const MemberApplicationActionPanel = ({
     }
   });
   if (isLoading || !data || !data.results) {
-    return /* @__PURE__ */ jsxRuntime.jsx("div", { children: "Loading..." });
+    return /* @__PURE__ */ jsx("div", { children: "Loading..." });
   } else if (error) {
-    return /* @__PURE__ */ jsxRuntime.jsx("div", { children: "Error loading member types." });
+    return /* @__PURE__ */ jsx("div", { children: "Error loading member types." });
   }
   if (document2.applicationStatus && document2.applicationStatus !== "pending") {
-    return /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Typography, { children: [
+    return /* @__PURE__ */ jsxs(Typography, { children: [
       "No actions available. Application is already ",
       document2.applicationStatus,
       "."
     ] });
   }
-  return /* @__PURE__ */ jsxRuntime.jsx(jsxRuntime.Fragment, { children: /* @__PURE__ */ jsxRuntime.jsx(Radios, { memberTypes: data.results, model, documentId }) });
+  return /* @__PURE__ */ jsx(Fragment, { children: /* @__PURE__ */ jsx(Radios, { memberTypes: data.results, model, documentId }) });
 };
 const CustomPanel = () => {
   const [
     {
       query: { status = "draft" }
     }
-  ] = admin.useQueryParams();
+  ] = useQueryParams();
   const { model, id: documentId, document: document2, meta, collectionType } = useDoc();
   let panel;
-  if (model === index.MEMBER_APPLICATION_MODEL) {
-    panel = /* @__PURE__ */ jsxRuntime.jsx(MemberApplicationActionPanel, { documentId, model, document: document2 });
-  } else if (model === index.EVENT_MODEL) {
-    panel = /* @__PURE__ */ jsxRuntime.jsx(
+  if (model === MEMBER_APPLICATION_MODEL) {
+    panel = /* @__PURE__ */ jsx(MemberApplicationActionPanel, { documentId, model, document: document2 });
+  } else if (model === EVENT_MODEL) {
+    panel = /* @__PURE__ */ jsx(
       EventActionPanel,
       {
         model,
@@ -11713,7 +11651,7 @@ const CustomPanel = () => {
       }
     );
   } else {
-    panel = /* @__PURE__ */ jsxRuntime.jsx(
+    panel = /* @__PURE__ */ jsx(
       StandardActionPanel,
       {
         model,
@@ -11725,8 +11663,8 @@ const CustomPanel = () => {
       }
     );
   }
-  return /* @__PURE__ */ jsxRuntime.jsxs(
-    designSystem.Flex,
+  return /* @__PURE__ */ jsxs(
+    Flex,
     {
       tag: "aside",
       "aria-labelledby": "additional-information",
@@ -11743,24 +11681,24 @@ const CustomPanel = () => {
       justifyContent: "stretch",
       alignItems: "flex-start",
       children: [
-        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { tag: "h2", variant: "sigma", textTransform: "uppercase", textColor: "neutral600", children: "Actions" }),
+        /* @__PURE__ */ jsx(Typography, { tag: "h2", variant: "sigma", textTransform: "uppercase", textColor: "neutral600", children: "Actions" }),
         panel
       ]
     }
   );
 };
 const EditViewPage = () => {
-  const location = reactRouterDom.useLocation();
+  const location = useLocation();
   const [
     {
       query: { status }
     },
     setQuery
-  ] = admin.useQueryParams({
+  ] = useQueryParams({
     status: "draft"
   });
-  const { formatMessage } = reactIntl.useIntl();
-  const { toggleNotification } = admin.useNotification();
+  const { formatMessage } = useIntl();
+  const { toggleNotification } = useNotification();
   const doc = useDoc();
   const {
     document: document2,
@@ -11785,7 +11723,7 @@ const EditViewPage = () => {
       });
     }
   });
-  const isSingleType = collectionType === index.SINGLE_TYPES;
+  const isSingleType = collectionType === SINGLE_TYPES;
   const isCreatingDocument = !id && !isSingleType;
   const {
     isLoading: isLoadingLayout,
@@ -11799,10 +11737,10 @@ const EditViewPage = () => {
   const isLoading = isLoadingDocument || isLoadingLayout || isLazyLoading;
   const initialValues = getInitialFormValues(isCreatingDocument);
   if (isLoading && !document2?.documentId) {
-    return /* @__PURE__ */ jsxRuntime.jsx(admin.Page.Loading, {});
+    return /* @__PURE__ */ jsx(Page.Loading, {});
   }
   if (!initialValues || hasError) {
-    return /* @__PURE__ */ jsxRuntime.jsx(admin.Page.Error, {});
+    return /* @__PURE__ */ jsx(Page.Error, {});
   }
   const handleTabChange = (status2) => {
     if (status2 === "published" || status2 === "draft") {
@@ -11817,10 +11755,10 @@ const EditViewPage = () => {
     return yupSchema.validateSync(values, { abortEarly: false });
   };
   const isFormDisabled = hasDraftAndPublished && status === "published";
-  return /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Main, { paddingLeft: admin.RESPONSIVE_DEFAULT_SPACING, paddingRight: admin.RESPONSIVE_DEFAULT_SPACING, children: [
-    /* @__PURE__ */ jsxRuntime.jsx(admin.Page.Title, { children: pageTitle }),
-    /* @__PURE__ */ jsxRuntime.jsx(
-      admin.Form,
+  return /* @__PURE__ */ jsxs(Main, { paddingLeft: RESPONSIVE_DEFAULT_SPACING, paddingRight: RESPONSIVE_DEFAULT_SPACING, children: [
+    /* @__PURE__ */ jsx(Page.Title, { children: pageTitle }),
+    /* @__PURE__ */ jsx(
+      Form,
       {
         disabled: isFormDisabled,
         initialValues,
@@ -11839,8 +11777,8 @@ const EditViewPage = () => {
           return yupSchema.validate(cleanedValues, { abortEarly: false });
         },
         initialErrors: location?.state?.forceValidation ? validateSync(initialValues, {}) : {},
-        children: /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-          /* @__PURE__ */ jsxRuntime.jsx(
+        children: /* @__PURE__ */ jsxs(Fragment, { children: [
+          /* @__PURE__ */ jsx(
             Header,
             {
               isCreating: isCreatingDocument,
@@ -11848,14 +11786,14 @@ const EditViewPage = () => {
               title: pageTitle
             }
           ),
-          /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Tabs.Root, { variant: "simple", value: status, onValueChange: handleTabChange, children: [
-            /* @__PURE__ */ jsxRuntime.jsx(
-              designSystem.Tabs.List,
+          /* @__PURE__ */ jsxs(Tabs.Root, { variant: "simple", value: status, onValueChange: handleTabChange, children: [
+            /* @__PURE__ */ jsx(
+              Tabs.List,
               {
                 "aria-label": "Document status",
-                children: hasDraftAndPublished ? /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-                  /* @__PURE__ */ jsxRuntime.jsx(StatusTab, { value: "draft", children: "draft" }),
-                  /* @__PURE__ */ jsxRuntime.jsx(
+                children: hasDraftAndPublished ? /* @__PURE__ */ jsxs(Fragment, { children: [
+                  /* @__PURE__ */ jsx(StatusTab, { value: "draft", children: "draft" }),
+                  /* @__PURE__ */ jsx(
                     StatusTab,
                     {
                       disabled: !meta || meta.availableStatus.length === 0,
@@ -11866,8 +11804,8 @@ const EditViewPage = () => {
                 ] }) : null
               }
             ),
-            /* @__PURE__ */ jsxRuntime.jsxs(
-              designSystem.Grid.Root,
+            /* @__PURE__ */ jsxs(
+              Grid$1.Root,
               {
                 paddingTop: {
                   initial: 2,
@@ -11876,22 +11814,22 @@ const EditViewPage = () => {
                 },
                 gap: 4,
                 children: [
-                  /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Grid.Item, { col: 9, xs: 12, direction: "column", alignItems: "stretch", children: [
-                    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Tabs.Content, { value: "draft", children: /* @__PURE__ */ jsxRuntime.jsx(FormLayout, { layout, document: doc }) }),
-                    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Tabs.Content, { value: "published", children: /* @__PURE__ */ jsxRuntime.jsx(FormLayout, { layout, document: doc }) })
+                  /* @__PURE__ */ jsxs(Grid$1.Item, { col: 9, xs: 12, direction: "column", alignItems: "stretch", children: [
+                    /* @__PURE__ */ jsx(Tabs.Content, { value: "draft", children: /* @__PURE__ */ jsx(FormLayout, { layout, document: doc }) }),
+                    /* @__PURE__ */ jsx(Tabs.Content, { value: "published", children: /* @__PURE__ */ jsx(FormLayout, { layout, document: doc }) })
                   ] }),
-                  /* @__PURE__ */ jsxRuntime.jsx(designSystem.Grid.Item, { col: 9, xs: 12, direction: "column", alignItems: "stretch", children: /* @__PURE__ */ jsxRuntime.jsx(CustomPanel, {}) })
+                  /* @__PURE__ */ jsx(Grid$1.Item, { col: 9, xs: 12, direction: "column", alignItems: "stretch", children: /* @__PURE__ */ jsx(CustomPanel, {}) })
                 ]
               }
             )
           ] }),
-          /* @__PURE__ */ jsxRuntime.jsx(Blocker, {})
+          /* @__PURE__ */ jsx(Blocker, {})
         ] })
       }
     )
   ] });
 };
-const StatusTab = styledComponents.styled(designSystem.Tabs.Trigger)`
+const StatusTab = styled(Tabs.Trigger)`
   text-transform: uppercase;
 `;
 const getDocumentStatus = (document2, meta) => {
@@ -11906,11 +11844,11 @@ const getDocumentStatus = (document2, meta) => {
   return docStatus;
 };
 const ProtectedEditViewPage = () => {
-  const { slug = "" } = reactRouterDom.useParams();
+  const { slug = "" } = useParams();
   if (!slug) {
-    return /* @__PURE__ */ jsxRuntime.jsx(admin.Page.Error, {});
+    return /* @__PURE__ */ jsx(Page.Error, {});
   }
-  return /* @__PURE__ */ jsxRuntime.jsx(EditViewPage, {});
+  return /* @__PURE__ */ jsx(EditViewPage, {});
 };
 const EditViewPage$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
@@ -11918,22 +11856,24 @@ const EditViewPage$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defi
   ProtectedEditViewPage,
   getDocumentStatus
 }, Symbol.toStringTag, { value: "Module" }));
-exports.CREATOR_FIELDS = CREATOR_FIELDS;
-exports.DocumentActionConfirmDialog = DocumentActionConfirmDialog;
-exports.DocumentStatus = DocumentStatus;
-exports.EditViewPage = EditViewPage$1;
-exports.buildValidParams = buildValidParams;
-exports.checkIfAttributeIsDisplayable = checkIfAttributeIsDisplayable;
-exports.convertListLayoutToFieldLayouts = convertListLayoutToFieldLayouts;
-exports.getMainField = getMainField;
-exports.getRelationLabel = getRelationLabel;
-exports.prefixFileUrlWithBackendUrl = prefixFileUrlWithBackendUrl;
-exports.useContentTypeSchema = useContentTypeSchema;
-exports.useDebounce = useDebounce;
-exports.useDeleteAction = useDeleteAction;
-exports.useDoc = useDoc;
-exports.useDocumentLayout = useDocumentLayout;
-exports.useGetAllDocumentsQuery = useGetAllDocumentsQuery;
-exports.useGetContentTypeConfigurationQuery = useGetContentTypeConfigurationQuery;
-exports.useGetRelationsQuery = useGetRelationsQuery;
-exports.usePrev = usePrev;
+export {
+  CREATOR_FIELDS as C,
+  DocumentStatus as D,
+  EditViewPage$1 as E,
+  useDocumentLayout as a,
+  usePrev as b,
+  buildValidParams as c,
+  useGetAllDocumentsQuery as d,
+  convertListLayoutToFieldLayouts as e,
+  useDeleteAction as f,
+  DocumentActionConfirmDialog as g,
+  getRelationLabel as h,
+  useGetRelationsQuery as i,
+  checkIfAttributeIsDisplayable as j,
+  useContentTypeSchema as k,
+  useGetContentTypeConfigurationQuery as l,
+  getMainField as m,
+  useDebounce as n,
+  prefixFileUrlWithBackendUrl as p,
+  useDoc as u
+};

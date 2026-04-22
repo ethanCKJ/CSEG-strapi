@@ -5,7 +5,7 @@ import { Flex, darkTheme, DesignSystemProvider } from "@strapi/design-system";
 import "@strapi/icons";
 import { styled, useTheme, StyleSheetManager } from "styled-components";
 import "react-intl";
-import "./EditViewPage-B1oiBYhR.mjs";
+import "./EditViewPage-DeV7GvMh.mjs";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 const ActionBox = styled(Flex)`

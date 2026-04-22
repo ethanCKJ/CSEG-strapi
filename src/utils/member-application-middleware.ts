@@ -1,5 +1,4 @@
-import type {Core} from '@strapi/strapi';
-import {env} from "@strapi/utils";
+import {env, errors} from "@strapi/utils";
 import {escapeHTML} from "./helper-functions";
 
 /**
@@ -17,25 +16,39 @@ export const memberApplicationMiddleware = () => {
 
     const applicationData = context.params.data;
 
-    // Handle new member approval.
-    if (context.action === 'update' && applicationData.applicationStatus === 'approved') {
+    let previousApplicationStatus: string | undefined;
+    if (context.action === 'update' && context.params.documentId) {
       try {
-        await strapi.documents('api::member.member').create({
-          data: {
-            fullName: applicationData.fullName,
-            preferredName: applicationData.preferredName ?? '',
-            affiliations: applicationData.affiliations ?? '',
-            email: applicationData.email ?? '',
-            aboutYou: applicationData.aboutYou ?? '',
-            topics: applicationData.topics ?? '',
-            // member_type may be a relation; preserve whatever structure came from the application data
-            member_type: applicationData.member_type ?? undefined,
-          }
+        const existingApplication = await strapi.documents('api::member-application.member-application').findOne({
+          documentId: context.params.documentId,
+          fields: ['applicationStatus'],
         });
+        previousApplicationStatus = existingApplication?.applicationStatus;
+      } catch (error) {
+        strapi.log.error('Failed to read existing member application before update:', error);
+      }
+    }
 
-        try {
-          const subject = `Welcome ${escapeHTML(applicationData.preferredName)} to CSEG`;
-          const html = `Dear applicant,
+    const isApprovalUpdate =
+      context.action === 'update' &&
+      context.params.documentId &&
+      applicationData.applicationStatus === 'approved' &&
+      previousApplicationStatus !== 'approved';
+
+    if (isApprovalUpdate) {
+      let candidateEmail = applicationData.email;
+
+      if (!candidateEmail) {
+        const existingApplicationForEmail = await strapi.documents('api::member-application.member-application').findOne({
+          documentId: context.params.documentId,
+          fields: ['email'],
+        });
+        candidateEmail = candidateEmail ?? existingApplicationForEmail?.email;
+      }
+
+      try {
+        const subject = `Welcome to CSEG`;
+        const html = `Dear applicant,
           
           Congratulations! Your application to join CSEG has been approved. 
           
@@ -43,22 +56,50 @@ export const memberApplicationMiddleware = () => {
           Regards,
           CSEG Organisers`;
 
-          await strapi.plugin('email').service('email').send({
-            to: applicationData.email,
-            subject: subject,
-            html: html.replace(/\r\n|\r|\n/g, "<br/>"),
-          });
-        } catch (error) {
-          strapi.log.error('Failed to send member application notification email:', error);
-        }
+        await strapi.plugin('email').service('email').send({
+          to: candidateEmail,
+          subject: subject,
+          html: html.replace(/\r\n|\r|\n/g, "<br/>"),
+        });
       } catch (error) {
-        strapi.log.error('Failed to create member from approved application:', error);
-        // Continue with update even if member creation fails
+        strapi.log.error('Failed to send member approval email. Aborting approval update:', error);
+        throw new errors.ApplicationError('Member application was not approved because the confirmation email could not be sent.');
       }
     }
 
     // Execute the create/update operation
     const result = await next();
+
+    // Handle new member approval after successful update.
+    if (isApprovalUpdate) {
+      try {
+        const approvedApplication = await strapi.documents('api::member-application.member-application').findOne({
+          documentId: context.params.documentId,
+          populate: ['member_type'],
+        });
+
+        if (!approvedApplication) {
+          strapi.log.warn(`Approved member application ${context.params.documentId} not found after update`);
+          return result;
+        }
+
+        await strapi.documents('api::member.member').create({
+          data: {
+            fullName: approvedApplication.fullName,
+            preferredName: approvedApplication.preferredName ?? '',
+            affiliations: approvedApplication.affiliations ?? '',
+            email: approvedApplication.email ?? '',
+            aboutYou: approvedApplication.aboutYou ?? '',
+            topics: approvedApplication.topics ?? '',
+            member_type: approvedApplication.member_type ?? undefined,
+          }
+        });
+      } catch (error) {
+        strapi.log.error('Failed to create member from approved application:', error);
+        // Keep the application update successful even if member/email side effects fail.
+      }
+    }
+
     // Handle new application - send notification email after creation
     if (context.action === 'create') {
       try {
