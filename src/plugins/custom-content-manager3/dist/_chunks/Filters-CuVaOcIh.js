@@ -1,13 +1,13 @@
 "use strict";
 const jsxRuntime = require("react/jsx-runtime");
 const admin = require("@strapi/strapi/admin");
-const index = require("./index-ySPu0CBj.js");
+const index = require("./index-CQ7QKkoN.js");
 const designSystem = require("@strapi/design-system");
 const Icons = require("@strapi/icons");
 const qs = require("qs");
 const reactRouterDom = require("react-router-dom");
 const styledComponents = require("styled-components");
-const EditViewPage = require("./EditViewPage-CtZ_cEAm.js");
+const EditViewPage = require("./EditViewPage-B36HahLm.js");
 const isEmpty = require("lodash/isEmpty");
 const parseISO = require("date-fns/parseISO");
 const toString = require("lodash/toString");

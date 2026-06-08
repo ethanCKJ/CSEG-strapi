@@ -1,12 +1,12 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useStrapiApp, useQueryParams, useAuth, useAdminUsers, Filters, useField } from "@strapi/strapi/admin";
-import { P as PLUGIN_ID, g as getTranslation, b as ADMIN_HIDDEN_FIELDS } from "./index-DLmy0Bnc.mjs";
+import { P as PLUGIN_ID, g as getTranslation, b as ADMIN_HIDDEN_FIELDS } from "./index-xMIww3En.mjs";
 import { Flex, IconButton, Menu, Badge, Typography, Tooltip, Avatar, useNotifyAT, Loader, Popover, useCollator, TextButton, Checkbox, Combobox, ComboboxOption } from "@strapi/design-system";
 import { Pencil, Cog } from "@strapi/icons";
 import { stringify } from "qs";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
-import { u as useDoc, f as useDeleteAction, g as DocumentActionConfirmDialog, p as prefixFileUrlWithBackendUrl, h as getRelationLabel, i as useGetRelationsQuery, a as useDocumentLayout, j as checkIfAttributeIsDisplayable, k as useContentTypeSchema, C as CREATOR_FIELDS, l as useGetContentTypeConfigurationQuery, m as getMainField, n as useDebounce } from "./EditViewPage-DeV7GvMh.mjs";
+import { u as useDoc, f as useDeleteAction, g as DocumentActionConfirmDialog, p as prefixFileUrlWithBackendUrl, h as getRelationLabel, i as useGetRelationsQuery, a as useDocumentLayout, j as checkIfAttributeIsDisplayable, k as useContentTypeSchema, C as CREATOR_FIELDS, l as useGetContentTypeConfigurationQuery, m as getMainField, n as useDebounce } from "./EditViewPage-S3iovo30.mjs";
 import isEmpty from "lodash/isEmpty";
 import parseISO from "date-fns/parseISO";
 import toString from "lodash/toString";

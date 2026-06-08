@@ -104,12 +104,14 @@ Open terminal in `cseg-strapi`:
 ```powershell
 pg_dump -U strapiUser -d strapi-db --clean --if-exists | Out-File -Encoding utf8 strapi_backup.sql
 ```
+Password is found in the .env file under `DATABASE_PASSWORD`.
 
 #### 3.2 Copy dump to DICE through gateway
 Ask the university to give you a DICE server (I had `s2312606vm.inf.ed.ac.uk`), then replace `YOUR_UNN` and `YOUR_UNNvm` in the command below and run it in terminal from repo root:
 ```powershell
 scp -J YOUR_UNN@student.ssh.inf.ed.ac.uk strapi_backup.sql YOUR_UNN@YOUR_UNNvm.inf.ed.ac.uk:~/
 ```
+File should appear in the  `~/` (home) directory
 
 #### 3.3 Push latest code
 ```powershell
@@ -127,16 +129,42 @@ ssh -J YOUR_UNN@student.ssh.inf.ed.ac.uk YOUR_UNN@YOUR_UNNvm.inf.ed.ac.uk
 
 #### 4.2 Clone repo and install
 ```bash
-git clone YOUR_REPO_URL cseg-strapi
-cd cseg-strapi
+git clone YOUR_REPO_URL
+cd CSEG-strapi
 npm install --legacy-peer-deps
 ```
 
 #### 4.3 Build plugins + build Strapi (with memory flag if you get OOM on run build)
 ```bash
+# In the CSEG-strapi folder containing package.json
 npm run build:plugins
+# NODE_OPTIONS gives more memory to Node to prevent OOM errors
 NODE_OPTIONS="--max-old-space-size=4096" npm run build
 ```
+
+Troubleshooting:
+1. This means strapi-plugin is absent
+```bash
+[s2312606vm]s2312606: npm run build:plugins
+
+> cseg-website@0.1.0 build:plugins
+> node scripts/build-plugins.js
+
+Building plugin: contact-plugin
+
+> contact-plugin@0.0.0 build
+> strapi-plugin build
+
+sh: line 1: strapi-plugin: command not found
+✗ Failed to build contact-plugin: Command failed: npm run build
+```
+Try `npm install --legacy-peer-deps` again to ensure strapi-plugin is installed
+
+2. This error means the dist directory was deleted / not yet built so must be rebuilt. 
+```bash
+ Could not resolve "../../src/plugins/custom-content-manager3/./dist/admin/index.mjs" from        ││   ".strapi/client/app.js"  
+```
+Try `npm run build:plugins` again. 
 
 #### 4.4 Use DICE env file
 ```bash
@@ -157,9 +185,25 @@ s2312606=> ALTER ROLE s2312606 WITH password 'YOUR_POSTGRES_PASSWORD';
 \q
 # Return to terminal to load dump
 psql -h pgteach.inf.ed.ac.uk -d YOUR_UNN < ~/strapi_backup.sql
+
+# (If needed) Manually opening psql
+psql -h pgteach.inf.ed.ac.uk -d YOUR_UNN
 ```
 
 #### 4.6 Start with PM2 which auto-restarts Strapi if it crashes
+Install nvm (node version manager)
+```bash
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
+```
+Source the bashrc file before any nvm command
+Use nvm to install node 22.22
+```bash
+source ~/.bashrc
+nvm install 22.22.0
+nvm use 22.22.0
+```
+
+After using `nvm use 22.22.0`.
 ```bash
 npm install -g pm2
 PM2_HOME=/tmp/pm2_$USER pm2 start npm --name "strapi" -- run start
@@ -168,7 +212,10 @@ PM2_HOME=/tmp/pm2_$USER pm2 status
 
 #### 4.7 Extra PM2 commands
 ```bash
+# Run `nvm use 22.22.0` then enter CSEG-strapi folder containing package.json BEFORE executing this command
 PM2_HOME=/tmp/pm2_$USER pm2 start npm --name "strapi" -- run start
+
+# Can run from anywhere
 PM2_HOME=/tmp/pm2_$USER pm2 stop strapi
 PM2_HOME=/tmp/pm2_$USER pm2 restart strapi
 PM2_HOME=/tmp/pm2_$USER pm2 delete strapi
@@ -178,7 +225,7 @@ PM2_HOME=/tmp/pm2_$USER pm2 monit
 PM2_HOME=/tmp/pm2_$USER pm2 kill
 ```
 
-Cool debug server
+Cool debug server that you hit on https://groups.inf.ed.ac.uk/s2312606vm/admin/
 ```
 // server.js
 const http = require('http');
@@ -193,6 +240,39 @@ res.end(`Hello from DICE! Port ${PORT} is open.\n`);
 server.listen(PORT, '0.0.0.0', () => {
 console.log(`Server running on port ${PORT}`);
 });
+```
+
+#### 4.8 Key URLS
+If you have the same Apache settings as me 
+Admin panel: https://groups.inf.ed.ac.uk/s2312606vm/admin/
+API: https://groups.inf.ed.ac.uk/s2312606vm/api/
+
+
+### How to login to DICE after setting everything up
+#### 4.1 SSH into DICE
+```bash
+ssh -J YOUR_UNN@student.ssh.inf.ed.ac.uk YOUR_UNN@YOUR_UNNvm.inf.ed.ac.uk
+```
+
+#### 4.6 Activate the correct node environment containing pm2
+```bash
+source ~/.bashrc
+nvm use 22.22.0
+pm2
+# Result
+#usage: pm2 [options] <command>
+#
+#pm2 -h, --help             all available commands and options
+#pm2 examples               display pm2 usage examples
+#pm2 <command> -h           help on a specific command
+#
+#Access pm2 files in ~/.pm2
+```
+
+#### 4.8 Important apache commands
+```bash
+cat /etc/apache2/apache2.conf
+cat /etc/apache2/lcfg.sites.d/s2312606vm.conf
 ```
 
 ### Running on Strapi Cloud
