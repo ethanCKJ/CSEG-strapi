@@ -79,16 +79,16 @@ const NoPermissions = () => {
   ] });
 };
 const ProtectedEditViewPage = lazy(
-  () => import("./EditViewPage-S3iovo30.mjs").then((n) => n.E).then((mod) => ({ default: mod.ProtectedEditViewPage }))
+  () => import("./EditViewPage-Bx6qJM8R.mjs").then((n) => n.E).then((mod) => ({ default: mod.ProtectedEditViewPage }))
 );
 const ProtectedListViewPage = lazy(
-  () => import("./ListViewPage-C0F4ma9S.mjs").then((mod) => ({ default: mod.ProtectedListViewPage }))
+  () => import("./ListViewPage-DPvIZvAg.mjs").then((mod) => ({ default: mod.ProtectedListViewPage }))
 );
 const ProtectedListMemberApplicationPage = lazy(
-  () => import("./ListTabbedPage-CnNcAf9N.mjs").then((mod) => ({ default: mod.ProtectedListMemberApplicationPage }))
+  () => import("./ListTabbedPage-CmXGTg26.mjs").then((mod) => ({ default: mod.ProtectedListMemberApplicationPage }))
 );
 const ProtectedListContactPage = lazy(
-  () => import("./ListTabbedPage-CnNcAf9N.mjs").then((mod) => ({ default: mod.ProtectedListContactPage }))
+  () => import("./ListTabbedPage-CmXGTg26.mjs").then((mod) => ({ default: mod.ProtectedListContactPage }))
 );
 const CollectionTypePages = () => {
   const { collectionType, slug } = useParams();
@@ -278,7 +278,7 @@ const index = {
     app.router.addRoute({
       path: "plugins/custom-content-manager3/*",
       lazy: async () => {
-        const { Layout } = await import("./layout-Dl2qM0Xb.mjs");
+        const { Layout } = await import("./layout-1dKgmW9q.mjs");
         return {
           Component: Layout
         };

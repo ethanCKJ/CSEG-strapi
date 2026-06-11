@@ -4,7 +4,7 @@ import { Status, Typography, Button, Dialog, Modal, Tabs, Flex, IconButton, Text
 import { useIntl } from "react-intl";
 import { useParams, useNavigate, useLocation, useMatch } from "react-router-dom";
 import { styled, css, createGlobalStyle, keyframes } from "styled-components";
-import { S as SINGLE_TYPES, g as getTranslation, C as COLLECTION_TYPES, a as CLONE_PATH, L as LIST_PATH, M as MEMBER_APPLICATION_MODEL, A as APPLICATION_STATUS, E as EVENT_MODEL } from "./index-xMIww3En.mjs";
+import { S as SINGLE_TYPES, g as getTranslation, C as COLLECTION_TYPES, a as CLONE_PATH, L as LIST_PATH, M as MEMBER_APPLICATION_MODEL, A as APPLICATION_STATUS, E as EVENT_MODEL } from "./index-9cHGZ76g.mjs";
 import * as React from "react";
 import React__default, { useState, useEffect, useCallback, useRef } from "react";
 import * as yup from "yup";
@@ -22,7 +22,7 @@ import "lodash/merge";
 import "lodash/set";
 import { Editor as Editor$1, Transforms, Node as Node$1, Range, Element, Path, Point, createEditor } from "slate";
 import { withHistory } from "slate-history";
-import { useFocused, useSelected, ReactEditor, Editable, withReact, Slate, useSlate } from "slate-react";
+import { useFocused, useSelected, ReactEditor, Editable, Slate, withReact, useSlate } from "slate-react";
 import { useDrop, useDrag } from "react-dnd";
 import * as Toolbar from "@radix-ui/react-toolbar";
 import { getEmptyImage } from "react-dnd-html5-backend";
