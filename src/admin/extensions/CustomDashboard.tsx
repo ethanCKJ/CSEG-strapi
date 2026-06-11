@@ -64,7 +64,7 @@ export function CustomDashboard() {
     fetchData();
   }, [get])
 
-
+  const parentTheme = useTheme();
   if (loading) {
     return <Page.Loading/>
   }
@@ -73,7 +73,6 @@ export function CustomDashboard() {
     return <Box>Error loading user data</Box>
   }
 
-  const parentTheme = useTheme();
   const mergedTheme = {...parentTheme, fontSizes: darkTheme.fontSizes}
   return (
       <DesignSystemProvider theme={mergedTheme}>
