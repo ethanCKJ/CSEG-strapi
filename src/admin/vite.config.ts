@@ -36,7 +36,7 @@ export default (config: UserConfig) => {
       dedupe: DEDUPE,
     },
     server: {
-      allowedHosts: ['s2312606vm.inf.ed.ac.uk', 'groups.inf.ed.ac.uk'],
-    },
+      allowedHosts: ['groups.inf.ed.ac.uk']
+    }
   });
 };
