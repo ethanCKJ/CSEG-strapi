@@ -305,7 +305,7 @@ const ListViewPage = () => {
   return (
     <>
       <Page.Main>
-        <Page.Title>{`${contentTypeTitle}`}</Page.Title>
+        <Page.Title>{`${contentTypeTitle} I am a dummy change`}</Page.Title>
         <PageHeaderCustom contentTypeTitle={contentTypeTitle} pagination={pagination}/>
         <Layouts.Action
           startActions={
